@@ -5,7 +5,7 @@ import views.html.*;
 
 public class ApplicationController extends Controller {
 
-   public Result saludo() {
-      return ok(saludo.render());
+   public Result saludo(String nombre) {
+      return ok(saludo.render(nombre));
    }
 }

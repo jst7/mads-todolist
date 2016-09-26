@@ -1,0 +1,30 @@
+@(usuarioForm: Form[Usuario], mensaje: String)
+@main("Alta Usuario") {
+
+    @if(mensaje != "") {
+        <div class="alert alert-danger">
+            @mensaje
+        </div>
+    }    
+    
+    
+        
+        <h1>Alta Usuario</h1>
+        @helper.form(action = routes.UsuarioController.crearUsuario()) {
+            <fieldset>
+            <legend>Usuario nuevo</legend>
+            @helper.inputText(usuarioForm("login"), '_label -> "Login")
+            @helper.inputText(usuarioForm("nombre"), '_label -> "Nombre")
+            @helper.inputText(usuarioForm("apellidos"), '_label -> "Apellidos")
+            @helper.inputText(usuarioForm("eMail"), '_label -> "Correo electrónico")
+            @helper.inputText(usuarioForm("fechaNacimiento"), '_label -> "Fecha nacimiento (dd-mm-aaaa)")
+            </fieldset>
+
+            <div>
+            <input type="submit" class="btn btn-primary" value="Guardar">
+            <a class="btnbtn-primary" href="">Cancelar</a>
+            </div>
+            }
+
+        
+}

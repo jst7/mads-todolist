@@ -20,5 +20,9 @@ POST    /usuarios/nuevo             controllers.UsuarioController.crearUsuario()
 #ListarUsuario
 GET     /usuarios                   controllers.UsuarioController.listaUsuarios()
 
+#Detalle Usuario
+GET     /usuarios/:id               controllers.UsuarioController.detalleUsuario(id: String)
+
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

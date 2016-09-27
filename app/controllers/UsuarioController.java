@@ -55,11 +55,10 @@ public class UsuarioController extends Controller {
     }
 
         @Transactional
-    public Result editarUsuario(String id) {
-        
+    public Result editarUsuario(String id) {        
         Usuario user = UsuariosService.findUsuario(id);
         
-        return ok(editarUsuario.render(user));
+        return ok(editarUsuario.render(formFactory.form(Usuario.class),user));
     }
 
 }

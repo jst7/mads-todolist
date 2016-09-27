@@ -1,17 +1,24 @@
-@(user: Usuario)
+@(usuarioForm: Form[Usuario], user: Usuario)
 
-@main("Editar Usuario") {    
+@main("Editar Usuario") {
 
-    <div class="col-xs-push-1 col-xs-11">
-    <h1> Editar Usuario </h1>
-    
-    <fieldset>
-        
-    </fieldset>
-    @user.id
-    @user.nombre
-    @user.apellidos 
-    @user.eMail
-    @user.fechaNacimiento
-    </div>
+        <div class="col-xs-push-1 col-xs-11">
+        <h1>Modificar Usuario</h1>
+        @helper.form(action = routes.UsuarioController.editarUsuario(user.id)) {
+            <fieldset>
+            <legend>Usuario a Modificar</legend>
+            @helper.inputText(usuarioForm("login"), '_label -> "Login")
+            @helper.inputText(usuarioForm("nombre"), '_label -> "Nombre")
+            @helper.inputText(usuarioForm("apellidos"), '_label -> "Apellidos")
+            @helper.inputText(usuarioForm("eMail"), '_label -> "Correo electrónico")
+            @helper.inputText(usuarioForm("fechaNacimiento"), '_label -> "Fecha nacimiento (dd-mm-aaaa)")
+            </fieldset>
+
+            <div>
+            <input type="submit" class="btn btn-success btn-lg" value="Guardar">
+            <a class="btn btn-danger btn-xs" href="">Cancelar</a>
+            </div>
+            }
+
+        </div>
 }

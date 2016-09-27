@@ -1,5 +1,52 @@
-@(id: String)
+@(user: Usuario)
 
 @main("Detalle Usuario") {
-    <h1>Usuario <em>@id</em></h1>
+
+	<div class="col-xs-push-1 col-xs-9">
+    <h2>Detalle de Usuario</h2>
+    <table class="table table-inverse">
+
+    <tr>
+    <thead class="thead-inverse bg-primary">
+    	<th>
+    	Id
+    	</th>
+    	<th>
+    	Nombre
+    	</th>
+    	<th>
+    	Apellidos
+    	</th>
+    	<th>
+    	eMail
+    	</th>
+    	<th>
+    	Fecha de Nacimiento
+    	</th>
+    </thead>
+    </tr>
+    <tr>
+    	<td>
+    	@user.id
+    	</td>
+    	<td>
+    	@user.nombre
+    	</td>
+    	<td>
+    	@user.apellidos
+    	</td>
+    	<td>
+    	@user.eMail
+    	</td>
+    	<td>
+    	@user.fechaNacimiento
+    	</td>
+    </tr>
+    <tr>
+    	<td class="btn btn-warning btn-lg"> Editar</td>
+    	<td class="btn btn-success btn-lg"> Volver</td>
+    </tr>
+
+    </table>
+    </div>
 }

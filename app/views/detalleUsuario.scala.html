@@ -1,0 +1,62 @@
+@(user: Usuario)
+
+@main("Detalle Usuario") {
+
+	<div class="col-xs-push-1 col-xs-9">
+    <h2>Detalle de Usuario</h2>
+    <table class="table table-inverse">
+
+    <tr>
+    <thead class="thead-inverse bg-primary">
+    	<th>
+    	Id
+    	</th>
+    	<th>
+    	Nombre
+    	</th>
+    	<th>
+    	Apellidos
+    	</th>
+    	<th>
+    	eMail
+    	</th>
+    	<th>
+    	Fecha de Nacimiento
+    	</th>
+    </thead>
+    </tr>
+    <tr>
+    	<td>
+    	@user.id
+    	</td>
+    	<td>
+    	@user.nombre
+    	</td>
+    	<td>
+    	@user.apellidos
+    	</td>
+    	<td>
+    	@user.eMail
+    	</td>
+    	<td>
+    	@user.fechaNacimiento
+    	</td>
+    </tr>
+    <tr>
+    <td>	
+    	<a class="btn btn-warning btn-lg">Editar</a>
+    </td>
+    <td>
+    	<a class="btn btn-success btn-lg" href="@routes.UsuarioController.listaUsuarios()"> Volver</a>
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+    </tr>
+
+    </table>
+    </div>
+}

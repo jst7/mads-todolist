@@ -47,4 +47,11 @@ public class UsuarioController extends Controller {
         return ok(listarUsuarios.render(usuarios, mensaje));
     }
 
+    @Transactional
+    public Result detalleUsuario(String id) {
+        Usuario user = UsuariosService.findUsuario(id);
+        
+        return ok(detalleUsuario.render(user));
+    }
+
 }

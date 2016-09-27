@@ -33,9 +33,18 @@ public class UsuarioController extends Controller {
             Usuario usuario = user.get();
             Logger.debug("Usuario nuevo: " + usuario.toString());
             usuario = UsuariosService.crearUsuario(usuario);
-           // flash("crearUsuario", "El usuario se ha creado correctamente");
+            flash("crearUsuario", "El usuario se ha creado correctamente");
             return badRequest(crearUsuarioFormulario.render(user, "funciona bien"));        
             
     
    }
+
+    @Transactional(readOnly = true)
+    public Result listaUsuarios() {
+        // Obtenemos el mensaje flash guardado en la petición por el controller crearUsuario
+        String mensaje = flash("crearUsuario");
+        List<Usuario> usuarios = UsuariosService.findAllUsuarios();
+        return ok(listarUsuarios.render(usuarios, mensaje));
+    }
+
 }

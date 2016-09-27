@@ -23,6 +23,9 @@ GET     /usuarios                   controllers.UsuarioController.listaUsuarios(
 #Detalle Usuario
 GET     /usuarios/:id               controllers.UsuarioController.detalleUsuario(id: String)
 
+#Modificar usuario
+GET		/usuario/:id/editar 		controllers.UsuarioController.editarUsuario(id: String)
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

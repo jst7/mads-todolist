@@ -1,12 +1,19 @@
-@(usuarioForm: Form[Usuario], user: Usuario)
+@(usuarioForm: Form[Usuario], mensaje: String)
 
 @main("Editar Usuario") {
 
+    @if(mensaje != "") {
+        <div class="alert alert-danger">
+            @mensaje
+        </div>
+    }
+
         <div class="col-xs-push-1 col-xs-11">
         <h1>Modificar Usuario</h1>
-        @helper.form(action = routes.UsuarioController.editarUsuario(user.id)) {
+        @helper.form(action = routes.UsuarioController.escribirUsuarioModificado()) {
             <fieldset>
             <legend>Usuario a Modificar</legend>
+            <input type="hidden" name="id" value='@usuarioForm("id").value' >
             @helper.inputText(usuarioForm("login"), '_label -> "Login")
             @helper.inputText(usuarioForm("nombre"), '_label -> "Nombre")
             @helper.inputText(usuarioForm("apellidos"), '_label -> "Apellidos")

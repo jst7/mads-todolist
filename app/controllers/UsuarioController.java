@@ -54,11 +54,31 @@ public class UsuarioController extends Controller {
         return ok(detalleUsuario.render(user));
     }
 
-        @Transactional
+    @Transactional
     public Result editarUsuario(String id) {        
         Usuario user = UsuariosService.findUsuario(id);
-        
-        return ok(editarUsuario.render(formFactory.form(Usuario.class),user));
+        Form<Usuario> userForm = formFactory.form(Usuario.class);
+        userForm = userForm.fill(user);
+
+        return ok(editarUsuario.render(userForm,""));
     }
+
+    @Transactional
+    public Result escribirUsuarioModificado() {
+
+        Form<Usuario> user = formFactory.form(Usuario.class).bindFromRequest();
+
+        if(user.hasErrors()){
+            return badRequest(editarUsuario.render(user, "Los datos del formulario contienen errores"));
+        }
+        
+            Usuario usuario = user.get();
+            Logger.debug("Usuario modificado: " + usuario.toString());
+            usuario = UsuariosService.modificaUsuario(usuario);
+            flash("modificar", "El usuario se ha modificado correctamente");
+            return badRequest(editarUsuario.render(user, "funciona bien el modificar"));        
+            
+    
+   }
 
 }

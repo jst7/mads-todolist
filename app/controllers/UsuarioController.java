@@ -77,8 +77,16 @@ public class UsuarioController extends Controller {
             usuario = UsuariosService.modificaUsuario(usuario);
             flash("modificar", "El usuario se ha modificado correctamente");
             return badRequest(editarUsuario.render(user, "funciona bien el modificar"));        
-            
-    
    }
+
+    @Transactional
+    public Result borraUsuario(String id) {
+        boolean termina = UsuariosService.deleteUsuario(id);
+        if(termina){
+            return ok();
+        }else{
+            return badRequest();
+        }
+    }
 
 }

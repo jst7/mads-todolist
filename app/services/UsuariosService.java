@@ -28,4 +28,7 @@ public class UsuariosService {
 
         	return user;
     	}
+        public static Usuario modificaUsuario(Usuario usuario) {
+            return UsuarioDAO.update(usuario);
+        }
 }

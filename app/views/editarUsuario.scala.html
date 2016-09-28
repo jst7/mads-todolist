@@ -1,19 +1,19 @@
 @(usuarioForm: Form[Usuario], mensaje: String)
 
-@main("Alta Usuario") {
+@main("Editar Usuario") {
 
     @if(mensaje != "") {
         <div class="alert alert-danger">
             @mensaje
         </div>
-    }    
-    
-    
+    }
+
         <div class="col-xs-push-1 col-xs-11">
-        <h1>Alta Usuario</h1>
-        @helper.form(action = routes.UsuarioController.crearUsuario()) {
+        <h1>Modificar Usuario</h1>
+        @helper.form(action = routes.UsuarioController.escribirUsuarioModificado()) {
             <fieldset>
-            <legend>Usuario nuevo</legend>
+            <legend>Usuario a Modificar</legend>
+            <input type="hidden" name="id" value='@usuarioForm("id").value' >
             @helper.inputText(usuarioForm("login"), '_label -> "Login")
             @helper.inputText(usuarioForm("nombre"), '_label -> "Nombre")
             @helper.inputText(usuarioForm("apellidos"), '_label -> "Apellidos")
@@ -22,8 +22,8 @@
             </fieldset>
 
             <div>
-            <input type="submit" class="btn btn-success btn-lg" value="Guardar">
-            <a class="btn btn-danger btn-xs" href="">Cancelar</a>
+            <input type="submit" class="btn btn-success btn-lg" value="Cambiar">
+            <a class="btn btn-danger btn-xs" href="@routes.UsuarioController.listaUsuarios()">Cancelar</a>
             </div>
             }
 

@@ -31,4 +31,16 @@ public class UsuariosService {
         public static Usuario modificaUsuario(Usuario usuario) {
             return UsuarioDAO.update(usuario);
         }
+        public static boolean deleteUsuario(String id) {
+            
+            try{
+            UsuarioDAO.delete(id);
+                return true;
+            }
+            catch(Exception e){
+                return false;
+            }
+
+
+        }
 }

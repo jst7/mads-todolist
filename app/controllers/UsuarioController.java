@@ -81,7 +81,12 @@ public class UsuarioController extends Controller {
 
     @Transactional
     public Result borraUsuario(String id) {
-        return ok();
+        boolean termina = UsuariosService.deleteUsuario(id);
+        if(termina){
+            return ok();
+        }else{
+            return badRequest();
+        }
     }
 
 }

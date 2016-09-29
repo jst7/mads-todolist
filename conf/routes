@@ -17,6 +17,9 @@ GET     /saludo                     controllers.ApplicationController.saludo(nom
 GET    /usuarios/nuevo             controllers.UsuarioController.crearUsuarioFormulario()
 POST    /usuarios/nuevo             controllers.UsuarioController.crearUsuario()
 
+#Parte adicional registro y logeo de nuevos usuarios
+GET    /usuarios/inicio             controllers.UsuarioController.paginaInicio()
+
 #ListarUsuario
 GET     /usuarios                   controllers.UsuarioController.listaUsuarios()
 
@@ -33,3 +36,5 @@ DELETE  /usuarios/:id               controllers.UsuarioController.borraUsuario(i
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+	

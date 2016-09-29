@@ -89,4 +89,10 @@ public class UsuarioController extends Controller {
         }
     }
 
+    @Transactional
+    public Result paginaInicio() {    
+        Logger.debug("Llamada página de inicio");  
+        return ok(paginaInicioLR.render());
+    }
+
 }

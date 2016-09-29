@@ -1,0 +1,69 @@
+@scripts = {
+    <script type="text/javascript">
+
+    	$(document).ready(function(){
+    		$("#Rsesion").hide();
+   			$("#Isesion").hide();
+
+    		$("#Registrar").click(function(){
+        		$("#Rsesion").show();
+        		setTimeout(function(){$("#Rsesion").hide();  }, 3000)
+    		});
+    		$("#Entrar").click(function(){
+    			$("#Isesion").show();
+        		setTimeout(function(){$("#Isesion").hide();  }, 3000)
+        		
+    		});
+		});
+
+        function check(input) {
+            if (input.value != document.getElementById("passuno").value) {
+           		document.getElementById("mensPass").text = "No coinciden"
+             } else {
+            	document.getElementById("mensPass").text = "Coinciden"
+        }
+        }
+
+        function long(input){
+        	var texto = input.value.toString().length
+        	if(texto < 7){
+        		var mensaje = document.getElementById("mensLong")
+        		var longitud = 7 - input.value.toString().length 
+        		mensaje.text = "minimo 7 caracteres, faltan " + longitud
+        	}
+        	else{
+        		document.getElementById("mensLong").text = ""
+        	}
+        }
+    </script>
+}
+
+@main("Inicio",scripts) {
+
+<div class="col-xs-push-1 col-xs-12">
+    <h2>Inicio</h2>
+    
+    <div>
+        <div  >
+            <input type="text" name="Usuario" placeholder="Usuario">
+            <input type="password" name="Contraseña" placeholder="Contraseña">
+            <a class="btn btn-primary btn-md" id="Entrar">Entrar</a>
+        </div>
+        <div class="alert alert-success" id="Isesion">
+            Iniciando Sesión...
+       </div>
+    <div>
+        <h3>Registro</h3>
+        <div><input type="text" name="Usuario" placeholder="Usuario"></div>
+        <div><input type="password" name="passuno" id="passuno" placeholder="Contraseña" oninput="long(this)"> <a id="mensLong"></a></div>
+    </div>
+        <div><input type="password" name="passdos" placeholder="Repetir Contraseña" oninput="check(this)">
+        <a id="mensPass">Las contraseñas deben coincidir</a></div>
+        <div><a class="btn btn-success btn-lg" id="Registrar" >Registrar</a></div>
+    </div>
+        <div class="alert alert-success" id="Rsesion">
+            Registrando
+       </div>
+    </div>
+</div>
+}

@@ -43,4 +43,13 @@ public class UsuariosService {
 
 
         }
+        public static boolean existeUsuarioConPass(Usuario user) {
+            return UsuarioDAO.ExisteLoginConPass(user);
+        }
+        public static boolean existeLogin(Usuario user) {
+            return UsuarioDAO.ExisteLogin(user);
+        }
+        public static boolean loginUsuario(Usuario user) {
+            return UsuarioDAO.LoginUsuario(user);
+        }        
 }

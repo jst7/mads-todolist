@@ -90,9 +90,55 @@ public class UsuarioController extends Controller {
     }
 
     @Transactional
-    public Result paginaInicio() {    
+    public Result paginaInicio() {
+        Form<Usuario> user = formFactory.form(Usuario.class).bindFromRequest();  
         Logger.debug("Llamada página de inicio");  
-        return ok(paginaInicioLR.render());
+        return ok(paginaInicioLR.render(user, ""));
+    }
+
+     @Transactional
+    public Result registrarUsuario() {
+
+        Form<Usuario> user = formFactory.form(Usuario.class).bindFromRequest();
+
+        if(user.hasErrors()){
+            return badRequest();
+        }
+        Usuario usuario = user.get();
+        boolean existe = UsuariosService.existeUsuarioConPass(usuario);
+
+        if(existe){//Si existe mensaje de error
+            return badRequest(paginaInicioLR.render(user, "El usuario ya existe"));        
+        }else{//Si no existe se registra o actualiza
+            boolean estaEnBD = UsuariosService.existeLogin(usuario);
+
+            if(estaEnBD){//esta el login solo falta el pass
+                usuario = UsuariosService.modificaUsuario(usuario);
+                return badRequest(paginaInicioLR.render(user, "Actualizada la Contraseña"));
+            }
+            else{//no existen referencias al usuario
+                usuario = UsuariosService.crearUsuario(usuario);
+                return badRequest(paginaInicioLR.render(user, "El usuario no existía y ha sido creado"));  
+            }
+      
+        }
+               
+   }
+    @Transactional
+    public Result entrarLogin() {
+        Form<Usuario> user = formFactory.form(Usuario.class).bindFromRequest();  
+        Usuario usuario = user.get();
+
+        boolean entra = UsuariosService.loginUsuario(usuario);
+
+        if(entra){
+            Logger.debug(usuario.login.toString());
+            return ok(saludo.render(usuario.login.toString()));
+        }
+        else{
+            return badRequest(paginaInicioLR.render(user, "Login incorrecto"));  
+        }
+        
     }
 
 }

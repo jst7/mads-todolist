@@ -1,9 +1,15 @@
+@(usuarioForm: Form[Usuario], mensaje: String)
+
 @scripts = {
     <script type="text/javascript">
 
     	$(document).ready(function(){
     		$("#Rsesion").hide();
    			$("#Isesion").hide();
+            $("#checkuno").hide();
+            $("#checkdos").hide();
+
+            $("#caja").hide();
 
     		$("#Registrar").click(function(){
         		$("#Rsesion").show();
@@ -12,15 +18,18 @@
     		$("#Entrar").click(function(){
     			$("#Isesion").show();
         		setTimeout(function(){$("#Isesion").hide();  }, 3000)
-        		
     		});
 		});
 
         function check(input) {
             if (input.value != document.getElementById("passuno").value) {
            		document.getElementById("mensPass").text = "No coinciden"
+                $("#checkuno").hide();
+                $("#checkdos").hide();
              } else {
-            	document.getElementById("mensPass").text = "Coinciden"
+                document.getElementById("mensPass").text = ""
+            	$("#checkuno").show();
+                $("#checkdos").show();
         }
         }
 
@@ -35,35 +44,96 @@
         		document.getElementById("mensLong").text = ""
         	}
         }
+
+        function rellena() {
+            var login=document.getElementById("login_oculto").value = document.getElementById("login_visible").value.toString()
+            var password=document.getElementById("password_oculta").value = document.getElementById("passdos").value.toString()
+
+        }
+        function rellena2() {
+            var login=document.getElementById("login_oculto2").value = document.getElementById("Iusuario").value.toString()
+            var password=document.getElementById("password_oculta2").value = document.getElementById("Ipass").value.toString()
+
+        }        
+
     </script>
 }
 
 @main("Inicio",scripts) {
 
+
+    @if(mensaje != "") {
+        <div class="alert alert-danger">
+            @mensaje
+        </div>
+    }
+
+
 <div class="col-xs-push-1 col-xs-12">
     <h2>Inicio</h2>
     
     <div>
-        <div  >
-            <input type="text" name="Usuario" placeholder="Usuario">
-            <input type="password" name="Contraseña" placeholder="Contraseña">
-            <a class="btn btn-primary btn-md" id="Entrar">Entrar</a>
+        <div>
+        <table>
+            <tr>
+                <input type="text" name="Usuario" id="Iusuario" placeholder="Usuario">
+            </tr>
+            <tr>
+                <input type="password" name="Contraseña" id="Ipass" placeholder="Contraseña">
+            </tr>
+            <tr>
+            <!-- BOTON DE Iniciar, en realidad envia un formulario de User con campos login y password -->
+        @helper.form(action = routes.UsuarioController.entrarLogin()) {
+            <fieldset id="caja">
+            <input type="hidden" id="login_oculto2" name="login" value='' >
+            <input type="hidden" id="password_oculta2" name="password" value='' >
+
+            </fieldset>
+
+            
+            <input type="submit" class="btn btn-primary btn-md" id="Entrar" value="Entrar" onclick="rellena2()">
+            </tr>
+            </table>
+            }
+
+
         </div>
         <div class="alert alert-success" id="Isesion">
             Iniciando Sesión...
        </div>
     <div>
         <h3>Registro</h3>
-        <div><input type="text" name="Usuario" placeholder="Usuario"></div>
-        <div><input type="password" name="passuno" id="passuno" placeholder="Contraseña" oninput="long(this)"> <a id="mensLong"></a></div>
+        <div><input type="text" id="login_visible" name="Usuario" placeholder="Usuario"></div>
+        <div><input type="password" name="passuno" id="passuno" placeholder="Contraseña" oninput="long(this)"> <a id="mensLong"></a>
+                    <span class="glyphicon glyphicon-ok-sign" id="checkuno"></span>
+                </div> 
     </div>
-        <div><input type="password" name="passdos" placeholder="Repetir Contraseña" oninput="check(this)">
-        <a id="mensPass">Las contraseñas deben coincidir</a></div>
-        <div><a class="btn btn-success btn-lg" id="Registrar" >Registrar</a></div>
+        <div><input type="password" name="passdos" id="passdos" placeholder="Repetir Contraseña" oninput="check(this)">
+        <a id="mensPass">Las contraseñas deben coincidir</a>
+            <span class="glyphicon glyphicon-ok-sign" id="checkdos"></span>
+        </div>
+        
+
+
+
+<!-- BOTON DE REGISTRAR, en realidad envia un formulario de User con campos login y password -->
+        @helper.form(action = routes.UsuarioController.registrarUsuario()) {
+            <fieldset>
+            <input type="hidden" id="login_oculto" name="login" value='' >
+            <input type="hidden" id="password_oculta" name="password" value='' >
+
+            </fieldset>
+
+            <div>
+            <input type="submit" class="btn btn-success btn-lg" id="Registrar" value="Registrar" onclick="rellena()">
+            </div>
+            }
+            
     </div>
         <div class="alert alert-success" id="Rsesion">
             Registrando
        </div>
     </div>
-</div>
-}
+
+            }
+

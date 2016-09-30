@@ -13,23 +13,26 @@ GET     /message                    controllers.AsyncController.message
 #Añadido practica
 GET     /saludo                     controllers.ApplicationController.saludo(nombre: String)
 
+#ListarUsuario
+GET     /usuarios                   controllers.UsuarioController.listaUsuarios()
 #crearUsuario
 GET    /usuarios/nuevo             controllers.UsuarioController.crearUsuarioFormulario()
 POST    /usuarios/nuevo             controllers.UsuarioController.crearUsuario()
+POST    /usuarios/login             controllers.UsuarioController.entrarLogin()
 
-#ListarUsuario
-GET     /usuarios                   controllers.UsuarioController.listaUsuarios()
+#Parte adicional registro y logeo de nuevos usuarios
+GET    /usuarios/inicio             controllers.UsuarioController.paginaInicio()
+POST    /usuarios/registro          controllers.UsuarioController.registrarUsuario()
 
 #Detalle Usuario
 GET     /usuarios/:id               controllers.UsuarioController.detalleUsuario(id: String)
-
 #Modificar usuario
-GET		/usuarios/:id/editar 		controllers.UsuarioController.editarUsuario(id: String)
+GET     /usuarios/:id/editar          controllers.UsuarioController.editarUsuario(id: String)
 POST    /usuarios/modifica          controllers.UsuarioController.escribirUsuarioModificado()
-
 #Eliminar usuario
 DELETE  /usuarios/:id               controllers.UsuarioController.borraUsuario(id: String)
 
-
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+	

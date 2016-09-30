@@ -37,4 +37,25 @@ public class UsuarioDAO {
                   "select u from Usuario u ORDER BY id", Usuario.class);
         return query.getResultList();
     }
+    public static boolean ExisteLoginConPass(Usuario user) {
+        List<Usuario> result = (List<Usuario>) JPA.em().createQuery(
+            "select u from Usuario u WHERE login = '" 
+            + user.login + "' AND password IS NOT NULL ").getResultList();
+        return (result.size() == 1);
+    }
+    public static boolean ExisteLogin(Usuario user) {
+        List<Usuario> result = (List<Usuario>) JPA.em().createQuery(
+            "select u from Usuario u WHERE login = '" 
+            + user.login + "'").getResultList();
+        return (result.size() == 1);
+    }
+    public static boolean LoginUsuario(Usuario user) {
+        List<Usuario> result = (List<Usuario>) JPA.em().createQuery(
+            "select u from Usuario u WHERE login = '" 
+            + user.login + "' AND password ='"+ user.password + "'").getResultList();
+        return (result.size() == 1);
+    }
+
+    
+
 }

@@ -4,21 +4,11 @@
     <script type="text/javascript">
 
     	$(document).ready(function(){
-    		$("#Rsesion").hide();
-   			$("#Isesion").hide();
             $("#checkuno").hide();
             $("#checkdos").hide();
-
             $("#caja").hide();
+       		setTimeout(function(){$("#temporal").hide();  }, 3000)
 
-    		$("#Registrar").click(function(){
-        		$("#Rsesion").show();
-        		setTimeout(function(){$("#Rsesion").hide();  }, 3000)
-    		});
-    		$("#Entrar").click(function(){
-    			$("#Isesion").show();
-        		setTimeout(function(){$("#Isesion").hide();  }, 3000)
-    		});
 		});
 
         function check(input) {
@@ -62,14 +52,14 @@
 @main("Inicio",scripts) {
 
 
+
+
+<div class="col-xs-push-1 col-xs-11 well">
     @if(mensaje != "") {
-        <div class="alert alert-danger">
+        <div class="alert alert-danger" id="temporal">
             @mensaje
         </div>
     }
-
-
-<div class="col-xs-push-1 col-xs-12">
     <h2>Inicio</h2>
     
     <div>
@@ -98,9 +88,7 @@
 
 
         </div>
-        <div class="alert alert-success" id="Isesion">
-            Iniciando Sesión...
-       </div>
+
     <div>
         <h3>Registro</h3>
         <div><input type="text" id="login_visible" name="Usuario" placeholder="Usuario"></div>
@@ -130,9 +118,7 @@
             }
             
     </div>
-        <div class="alert alert-success" id="Rsesion">
-            Registrando
-       </div>
+    </div>
     </div>
 
             }

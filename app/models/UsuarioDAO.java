@@ -8,7 +8,15 @@ import java.util.List;
 import java.util.Date;
 
 public class UsuarioDAO {
-    public static Usuario create (Usuario usuario) {
+    public static boolean create (Usuario usuario) {
+
+        List<Usuario> result = (List<Usuario>) JPA.em().createQuery(
+            "select u from Usuario u WHERE login = '" 
+            + usuario.login + "'", Usuario.class).getResultList();
+        if(result.size() > 0){
+            return false;
+        }
+
         usuario.nulificaAtributos();
         JPA.em().persist(usuario);
         // Hacemos un flush y un refresh para asegurarnos de que se realiza
@@ -16,7 +24,7 @@ public class UsuarioDAO {
         JPA.em().flush();
         JPA.em().refresh(usuario);
         Logger.debug(usuario.toString());
-        return usuario;
+        return true;
     }
 
     public static Usuario find(String idUsuario) {

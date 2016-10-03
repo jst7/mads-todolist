@@ -49,11 +49,14 @@
 @main("Inicio",scripts) {
 
 <div class="col-xs-push-1 col-xs-11 well">
-    <div class="row">
-        <div class="col-xs-6">
-             <h2>Inicio</h2>
-    
-    
+
+          @if(mensaje != "") {
+                <div class="alert alert-danger" id="temporal">
+                    @mensaje
+                </div>
+            }
+
+             <h2>Inicio</h2>    
             <div>
             <table>
             @helper.form(action = routes.UsuarioController.entrarLogin()) {
@@ -64,7 +67,7 @@
                     <input type="password" id="password_oculta2" name="password" value='' placeholder="Contraseña">
                 </tr>   
                 <tr>
-                    <input type="submit" class="btn btn-primary btn-lg" id="Entrar" value="Entrar">
+                    <input type="submit" class="btn btn-primary btn-md" id="Entrar" value="Entrar">
                 </tr>
             </table>
             }
@@ -92,21 +95,7 @@
                     <input type="submit" class="btn btn-success btn-lg" id="Registrar" value="Registrar">
                 </div>
             }
-            
-        </div>
-
-        <div class="col-xs-6">
-            <div>
-            @if(mensaje != "") {
-                <div class="alert alert-danger" id="temporal">
-                    @mensaje
-                </div>
-            }
-            </div>
-        </div>
 </div>
-</div>
-   
 
-            }
+}
 

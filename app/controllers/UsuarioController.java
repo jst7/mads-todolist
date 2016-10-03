@@ -105,24 +105,22 @@ public class UsuarioController extends Controller {
             return badRequest();
         }
         Usuario usuario = user.get();
-        boolean existe = UsuariosService.existeUsuarioConPass(usuario);
+        boolean existe = UsuariosService.existeUsuarioConPass(usuario);//TIENE LOGIN Y NO PASS
 
         if(existe){//Si existe mensaje de error
             return badRequest(paginaInicioLR.render(user, "El usuario ya existe"));        
         }else{//Si no existe se registra o actualiza
-            boolean estaEnBD = UsuariosService.existeLogin(usuario);
-
-            if(estaEnBD){//esta el login solo falta el pass
+            try{//esta el login solo falta el pass
+                Usuario sUsuario = UsuariosService.existeLogin(usuario);
+                usuario.id=sUsuario.id;
                 usuario = UsuariosService.modificaUsuario(usuario);
-                return badRequest(paginaInicioLR.render(user, "Actualizada la Contraseña"));
-            }
-            else{//no existen referencias al usuario
+                return ok(paginaInicioLR.render(user, "Actualizada la Contraseña"));
+
+            }catch(Exception e){//no existen referencias al usuario
                 usuario = UsuariosService.crearUsuario(usuario);
-                return badRequest(paginaInicioLR.render(user, "El usuario no existía y ha sido creado"));  
+                return ok(paginaInicioLR.render(user, "El usuario no existía y ha sido creado"));
             }
-      
-        }
-               
+        }  
    }
     @Transactional
     public Result entrarLogin() {

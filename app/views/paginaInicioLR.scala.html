@@ -38,12 +38,6 @@
 @main("Inicio",scripts) {
 
 <div class="col-xs-push-1 col-xs-11 well">
-        @if(mensaje != "") {
-            <div class="alert alert-danger" id="temporal">
-                @mensaje
-            </div>
-        }
-
     <div class="row">
         <div class="col-xs-6">
              <h2>Inicio</h2>
@@ -92,7 +86,11 @@
 
         <div class="col-xs-6">
             <div>
-                
+            @if(mensaje != "") {
+                <div class="alert alert-danger" id="temporal">
+                    @mensaje
+                </div>
+            }
             </div>
         </div>
 </div>

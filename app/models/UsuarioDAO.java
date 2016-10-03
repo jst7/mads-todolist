@@ -37,17 +37,16 @@ public class UsuarioDAO {
                   "select u from Usuario u ORDER BY id", Usuario.class);
         return query.getResultList();
     }
-    public static boolean ExisteLoginConPass(Usuario user) {
-        List<Usuario> result = (List<Usuario>) JPA.em().createQuery(
-            "select u from Usuario u WHERE login = '" 
-            + user.login + "' AND password IS NOT NULL ", Usuario.class).getResultList();
-        return (result.size() == 1);
+    public static Usuario ExisteLoginConPass(Usuario user) {
+        TypedQuery<Usuario> result = JPA.em().createQuery(
+            "select u from Usuario u WHERE login = :login AND password IS NOT NULL ", Usuario.class);
+        
+        return result.setParameter("login", user.login).getSingleResult();
     }
-    public static boolean ExisteLogin(Usuario user) {
-        List<Usuario> result = (List<Usuario>) JPA.em().createQuery(
-            "select u from Usuario u WHERE login = '" 
-            + user.login + "'", Usuario.class).getResultList();
-        return (result.size() == 1);
+    public static Usuario ExisteLogin(Usuario user) {
+        TypedQuery<Usuario> result = JPA.em().createQuery(
+            "select u from Usuario u WHERE login = :login", Usuario.class);
+        return result.setParameter("login", user.login).getSingleResult();
     }
     public static boolean LoginUsuario(Usuario user) {
         List<Usuario> result = (List<Usuario>) JPA.em().createQuery(
@@ -56,6 +55,5 @@ public class UsuarioDAO {
         return (result.size() == 1);
     }
 
-    
 
 }

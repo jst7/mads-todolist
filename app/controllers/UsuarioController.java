@@ -113,6 +113,10 @@ public class UsuarioController extends Controller {
             try{//esta el login solo falta el pass
                 Usuario sUsuario = UsuariosService.existeLogin(usuario);
                 usuario.id=sUsuario.id;
+                usuario.nombre = sUsuario.nombre;
+                usuario.apellidos = sUsuario.apellidos;
+                usuario.eMail = sUsuario.eMail;
+                usuario.fechaNacimiento = sUsuario.fechaNacimiento;
                 usuario = UsuariosService.modificaUsuario(usuario);
                 return ok(paginaInicioLR.render(user, "Actualizada la Contraseña"));
 

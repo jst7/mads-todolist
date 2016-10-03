@@ -29,6 +29,7 @@ public class UsuariosService {
         	return user;
     	}
         public static Usuario modificaUsuario(Usuario usuario) {
+            Logger.debug(usuario.toString());
             return UsuarioDAO.update(usuario);
         }
         public static boolean deleteUsuario(String id) {
@@ -40,14 +41,20 @@ public class UsuariosService {
             catch(Exception e){
                 return false;
             }
-
-
         }
         public static boolean existeUsuarioConPass(Usuario user) {
-            return UsuarioDAO.ExisteLoginConPass(user);
+            try{
+                Usuario a=UsuarioDAO.ExisteLoginConPass(user);
+                return true;//Tiene pass
+            }
+            catch(Exception e){
+                return false;//no tiene pass
+            }
         }
-        public static boolean existeLogin(Usuario user) {
-            return UsuarioDAO.ExisteLogin(user);
+
+        public static Usuario existeLogin(Usuario user) {
+                return UsuarioDAO.ExisteLogin(user);
+
         }
         public static boolean loginUsuario(Usuario user) {
             return UsuarioDAO.LoginUsuario(user);

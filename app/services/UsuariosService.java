@@ -40,8 +40,6 @@ public class UsuariosService {
             catch(Exception e){
                 return false;
             }
-
-
         }
         public static boolean existeUsuarioConPass(Usuario user) {
             return UsuarioDAO.ExisteLoginConPass(user);

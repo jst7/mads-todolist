@@ -40,19 +40,19 @@ public class UsuarioDAO {
     public static boolean ExisteLoginConPass(Usuario user) {
         List<Usuario> result = (List<Usuario>) JPA.em().createQuery(
             "select u from Usuario u WHERE login = '" 
-            + user.login + "' AND password IS NOT NULL ").getResultList();
+            + user.login + "' AND password IS NOT NULL ", Usuario.class).getResultList();
         return (result.size() == 1);
     }
     public static boolean ExisteLogin(Usuario user) {
         List<Usuario> result = (List<Usuario>) JPA.em().createQuery(
             "select u from Usuario u WHERE login = '" 
-            + user.login + "'").getResultList();
+            + user.login + "'", Usuario.class).getResultList();
         return (result.size() == 1);
     }
     public static boolean LoginUsuario(Usuario user) {
         List<Usuario> result = (List<Usuario>) JPA.em().createQuery(
             "select u from Usuario u WHERE login = '" 
-            + user.login + "' AND password ='"+ user.password + "'").getResultList();
+            + user.login + "' AND password ='"+ user.password + "'", Usuario.class).getResultList();
         return (result.size() == 1);
     }
 

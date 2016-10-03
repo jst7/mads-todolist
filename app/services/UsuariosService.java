@@ -11,7 +11,7 @@ import models.*;
 
 public class UsuariosService {
 
-        public static Usuario crearUsuario(Usuario usuario) {
+        public static boolean crearUsuario(Usuario usuario) {
         	return UsuarioDAO.create(usuario);
         }
 

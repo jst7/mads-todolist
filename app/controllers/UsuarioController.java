@@ -32,9 +32,13 @@ public class UsuarioController extends Controller {
         
             Usuario usuario = user.get();
             Logger.debug("Usuario nuevo: " + usuario.toString());
-            usuario = UsuariosService.crearUsuario(usuario);
-            flash("crearUsuario", "El usuario se ha creado correctamente");
-            return badRequest(crearUsuarioFormulario.render(user, "funciona bien"));        
+            if(UsuariosService.crearUsuario(usuario)){
+                flash("crearUsuario", "El usuario se ha creado correctamente");
+                return ok(crearUsuarioFormulario.render(user, "usuario creado"));   
+            }
+            else{
+                return ok(crearUsuarioFormulario.render(user, "Usuario no creado, elige otro Login"));                   
+            }     
             
     
    }
@@ -123,7 +127,7 @@ public class UsuarioController extends Controller {
                 return ok(paginaInicioLR.render(user, "Actualizada la Contraseña"));
 
             }catch(Exception e){//no existen referencias al usuario
-                usuario = UsuariosService.crearUsuario(usuario);
+                UsuariosService.crearUsuario(usuario);//se ha comprobado ya si existe o no, no hace falta controlar aqui la no repeticion del login
                 return ok(paginaInicioLR.render(user, "El usuario no existía y ha sido creado"));
             }
         }  

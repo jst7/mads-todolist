@@ -80,7 +80,7 @@ public class UsuarioController extends Controller {
             Logger.debug("Usuario modificado: " + usuario.toString());
             usuario = UsuariosService.modificaUsuario(usuario);
             flash("modificar", "El usuario se ha modificado correctamente");
-            return badRequest(editarUsuario.render(user, "funciona bien el modificar"));        
+            return badRequest(editarUsuario.render(user, "Usuario Modificado"));        
    }
 
     @Transactional

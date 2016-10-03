@@ -9,7 +9,17 @@
     }
 
         <div class="col-xs-push-1 col-xs-11">
-        <h1>Modificar Usuario</h1>
+                <table>
+            <td>
+                <a class="btn btn-primary"  href="@routes.UsuarioController.listaUsuarios()">
+                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+            </td>
+            <td>
+                <h1>Modificar Usuario</h1>
+            </td>
+        </table>
+        
         @helper.form(action = routes.UsuarioController.escribirUsuarioModificado()) {
             <fieldset>
             <legend>Usuario a Modificar</legend>

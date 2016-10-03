@@ -6,7 +6,6 @@
     	$(document).ready(function(){
             $("#checkuno").hide();
             $("#checkdos").hide();
-            $("#caja").hide();
             document.getElementById("passdos").disabled = true
             document.getElementById("Registrar").type = "disable"
             document.getElementById("Registrar").value = "Completar correctamente"
@@ -61,10 +60,10 @@
             <table>
             @helper.form(action = routes.UsuarioController.entrarLogin()) {
                 <tr>
-                    <input type="text" id="login_oculto2" name="login" value='' placeholder="Usuario">
+                    <input type="text" id="login_form1" name="login" value='' placeholder="Usuario">
                 </tr>
                 <tr>
-                    <input type="password" id="password_oculta2" name="password" value='' placeholder="Contraseña">
+                    <input type="password" id="password_form1" name="password" value='' placeholder="Contraseña">
                 </tr>   
                 <tr>
                     <input type="submit" class="btn btn-primary btn-md" id="Entrar" value="Entrar">
@@ -77,7 +76,7 @@
 
            @helper.form(action = routes.UsuarioController.registrarUsuario()) {
                 <div>
-                    <input type="text" id="login_visible" name="login" value='' placeholder="Usuario">
+                    <input type="text" id="login_form2" name="login" value='' placeholder="Usuario">
                 </div>
                 <div>
                     <input type="password" id="passuno" name="password" value='' placeholder="Contraseña" oninput="long(this)"> 

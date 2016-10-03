@@ -102,9 +102,11 @@ public class UsuarioController extends Controller {
         Form<Usuario> user = formFactory.form(Usuario.class).bindFromRequest();
 
         if(user.hasErrors()){
-            return badRequest();
+            return badRequest(paginaInicioLR.render(user, "Error en los campos"));
         }
+
         Usuario usuario = user.get();
+
         boolean existe = UsuariosService.existeUsuarioConPass(usuario);//TIENE LOGIN Y NO PASS
 
         if(existe){//Si existe mensaje de error
@@ -128,18 +130,27 @@ public class UsuarioController extends Controller {
    }
     @Transactional
     public Result entrarLogin() {
+
         Form<Usuario> user = formFactory.form(Usuario.class).bindFromRequest();  
-        Usuario usuario = user.get();
 
-        boolean entra = UsuariosService.loginUsuario(usuario);
+        try{
+            Usuario usuario = user.get();
 
-        if(entra){
-            Logger.debug(usuario.login.toString());
-            return ok(saludo.render(usuario.login.toString()));
+            boolean entra = UsuariosService.loginUsuario(usuario);
+
+            if(entra){
+                Logger.debug(usuario.login.toString());
+                return ok(saludo.render(usuario.login.toString()));
+            }
+            else{
+                return badRequest(paginaInicioLR.render(user, "Login incorrecto"));  
+            }
         }
-        else{
-            return badRequest(paginaInicioLR.render(user, "Login incorrecto"));  
+        catch(Exception e){
+            return badRequest(paginaInicioLR.render(user, "Datos incorrectos, rellenar los campos"));  
         }
+
+        
         
     }
 

@@ -7,18 +7,26 @@
             $("#checkuno").hide();
             $("#checkdos").hide();
             $("#caja").hide();
+            document.getElementById("passdos").disabled = true
+            document.getElementById("Registrar").type = "disable"
+            document.getElementById("Registrar").value = "Completar correctamente"
        		setTimeout(function(){$("#temporal").hide();  }, 3000)
 		});
 
         function check(input) {
-            if (input.value != document.getElementById("passuno").value) {
+            if (input.value != document.getElementById("passuno").value || input.value == "") {
            		document.getElementById("mensPass").text = "No coinciden"
                 $("#checkuno").hide();
                 $("#checkdos").hide();
+                document.getElementById("Registrar").type = "disable"
+                document.getElementById("Registrar").value = "Completar correctamente"
+
              } else {
                 document.getElementById("mensPass").text = ""
             	$("#checkuno").show();
                 $("#checkdos").show();
+                document.getElementById("Registrar").type = "submit"
+                document.getElementById("Registrar").value = "Registrar"
             }
         }
         function long(input){
@@ -27,9 +35,12 @@
         		var mensaje = document.getElementById("mensLong")
         		var longitud = 7 - input.value.toString().length 
         		mensaje.text = "minimo 7 caracteres, faltan " + longitud
+                document.getElementById("passdos").disabled = true
+                
         	}
         	else{
         		document.getElementById("mensLong").text = ""
+                document.getElementById("passdos").disabled = false
         	}
         }     
     </script>
@@ -50,10 +61,10 @@
                     <input type="text" id="login_oculto2" name="login" value='' placeholder="Usuario">
                 </tr>
                 <tr>
-                    <input type="text" id="password_oculta2" name="password" value='' placeholder="Contraseña">
+                    <input type="password" id="password_oculta2" name="password" value='' placeholder="Contraseña">
                 </tr>   
                 <tr>
-                    <input type="submit" class="btn btn-primary btn-md" id="Entrar" value="Entrar">
+                    <input type="submit" class="btn btn-primary btn-lg" id="Entrar" value="Entrar">
                 </tr>
             </table>
             }

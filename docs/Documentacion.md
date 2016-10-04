@@ -3,7 +3,7 @@
 
 
 
-Jorge Sgovia Tormo
+Jorge Segovia Tormo
 ***
 
 # Documentación #
@@ -24,7 +24,7 @@ La primera carga la página de inicio en la que usamos javascript para comprobar
 
 `GET    /usuarios/inicio             controllers.UsuarioController.paginaInicio()`
 
-Empezamos con la peticón en el archivo *routes*. La llamada UsuarioController.paginaInicio():
+Empezamos con la petición en el archivo *routes*. La llamada UsuarioController.paginaInicio():
 
 ```java    
 @Transactional
@@ -36,7 +36,7 @@ public Result paginaInicio() {
 ```
 Aquí nos rederigimos al view con un mensaje de ok() que contiene un Form<Usuario> a rellenar en el view y un mensaje para la plantilla. En este caso pasamos un mensaje vacio "" porque no queremos notificar nada al usuario al cargar de forma inicial la view.
 
-ahora entramos en el view --> `paginadeInicioLR.scala.html`
+Ahora entramos en el view --> `paginadeInicioLR.scala.html`
 Recibe el Form<Usuario> y el mensaje creado con anterioridad.
 Siguiendo este esqueleto en scala:
 ```scala
@@ -62,8 +62,8 @@ Empezamos con la primera parte, la del javascrip dentro de @scripts = {}.
             $("#checkdos").hide();//checkuno y checkdos son elementos visuales para verificar contraseñas
             document.getElementById("passdos").disabled = true //bloquea la introduccion de texto en la comprobación de contraseña
             document.getElementById("Registrar").type = "disable" //Bloqueamos el botón de registrar 
-            document.getElementById("Registrar").value = "Completar correctamente"//Cambiamos el valor del boton Registrar
-       		setTimeout(function(){$("#temporal").hide();  }, 3000)//Establecemos un tiempo para cada vez que se cargue un mensaje al entrar en la pagina
+            document.getElementById("Registrar").value = "Completar correctamente"//Cambiamos el valor del botón Registrar
+       		setTimeout(function(){$("#temporal").hide();  }, 3000)//Establecemos un tiempo para cada vez que se cargue un mensaje al entrar en la página
 		});
 
         function check(input) {//comprueba que los input de la contraseña y la reptición sea el mismo y si lo son muestra el check y elimina el mensaje "no coinciden"
@@ -73,7 +73,7 @@ Empezamos con la primera parte, la del javascrip dentro de @scripts = {}.
                 $("#checkdos").hide();
                 document.getElementById("Registrar").type = "disable"
                 document.getElementById("Registrar").value = "Completar correctamente"
-             } else {//Si coincide cambia el valor del boton a Registrar, y desbloquea el botón poniendolo en type submit. También muestra los check
+             } else {//Si coincide cambia el valor del botón a Registrar, y desbloquea el botón poniendolo en type submit. También muestra los check
                 document.getElementById("mensPass").text = ""
             	$("#checkuno").show();
                 $("#checkdos").show();
@@ -102,7 +102,8 @@ Empezamos con la primera parte, la del javascrip dentro de @scripts = {}.
 ```html
 <div class="col-xs-push-1 col-xs-11 well">
 
-          @if(mensaje != "") { <!-- Mensaje de aviso, solo en caso de necesitar algun aviso -->
+<!-- Mensaje de aviso, solo en caso de necesitar algun aviso -->
+          @if(mensaje != "") { 
                 <div class="alert alert-danger" id="temporal">
                     @mensaje
                 </div>
@@ -111,7 +112,8 @@ Empezamos con la primera parte, la del javascrip dentro de @scripts = {}.
              <h2>Inicio</h2>    
             <div>
             <table>
-            @helper.form(action = routes.UsuarioController.entrarLogin()) { <!-- Primer form, usado para el Login y hacer el POST a entrarLogin() con el valor con name "login" y "password" -->
+            @helper.form(action = routes.UsuarioController.entrarLogin()) { 
+            <!-- Primer form, usado para el Login y hacer el POST a entrarLogin() con el valor con name "login" y "password" -->
                 <tr>
                     <input type="text" id="login_form1" name="login" value='' placeholder="Usuario">
                 </tr>
@@ -151,7 +153,7 @@ Empezamos con la primera parte, la del javascrip dentro de @scripts = {}.
 ```
 
 ##entrarLogin()##
-En el segundo simplemente se usa para comprobar que el existe la dupla Login, password, que envia desde el form1 del view visto anteriormente.
+En el segundo simplemente se usa para comprobar que el existe la dupla Login, password, que envía desde el form1 del view visto anteriormente.
 Cuando se hace la petición vista anteriormete:
 
 ```html
@@ -169,7 +171,7 @@ Cuando se hace la petición vista anteriormete:
             }
 ```
 
-Este envia en forma de POST a UsuarioController.entrarLogin() el login y pasword, en un form<Usuario>
+Este envía en forma de POST a UsuarioController.entrarLogin() el login y pasword, en un form<Usuario>
 
 En UsuarioController nos encontramos con:
 
@@ -183,7 +185,7 @@ En UsuarioController nos encontramos con:
             Usuario usuario = user.get();//Pasa de Form<Usuario> a Usuario
             boolean entra = UsuariosService.loginUsuario(usuario);//Esta llamada comprueba si el usuario contraseña es correcto y se asigna a true si lo es o false si no lo es
 
-            if(entra){//Si es correcto entra y pasa a la pagina de saludo con un mensaje ok() donde se le pasa un String del nombre del usuario que acaba de autentificarse
+            if(entra){//Si es correcto entra y pasa a la página de saludo con un mensaje ok() donde se le pasa un String del nombre del usuario que acaba de autentificarse
                 Logger.debug(usuario.login.toString());
                 return ok(saludo.render(usuario.login.toString()));
             }
@@ -191,7 +193,7 @@ En UsuarioController nos encontramos con:
                 return badRequest(paginaInicioLR.render(user, "Login incorrecto"));  
             }
         }
-        catch(Exception e){//Si captura el error significa que el formato del Usuario es incorrecto, porejemplo pasar un usuario sin Login, y recargaria la página de inicio con el mensaje de error necesario
+        catch(Exception e){//Si captura el error significa que el formato del Usuario es incorrecto, porejemplo pasar un usuario sin Login, y recargaría la página de inicio con el mensaje de error necesario
             return badRequest(paginaInicioLR.render(user, "Datos incorrectos, rellenar los campos"));  
         } 
         
@@ -253,7 +255,7 @@ Este POST sale del form2 del view visto del GET anterior. Con la petición:
             }
 ```
 
-Este envia a UsuarioController.registrarUsuario() el login y password en un form.
+Este envía a UsuarioController.registrarUsuario() el login y password en un form.
 
 En UsuarioController nos encontramos con:
 
@@ -321,7 +323,7 @@ Hace una sentencia a la base de datos donde recupera el usuario en una lista de 
 
 Volvemos al UsuarioController.registrarUsuario() en la línea:
 `boolean existe = UsuariosService.existeUsuarioConPass(usuario);`
-Con lo visto anteriormente, si es true significa que el usuario tiene contraseña. En este caso volveria a inicio con el mensaje correspondiente.
+Con lo visto anteriormente, si es true significa que el usuario tiene contraseña. En este caso volvería a inicio con el mensaje correspondiente.
 
 ```java
 if(existe){
@@ -379,7 +381,7 @@ Si existe copia todos los elementos del usuario capturado:
 ```
 Por último devuelve un ok con el mensaje de se actualiza la contraseña, que es lo que realiza al usuario recuperado.
 
-Si no existe y provoca la excepción:
+Si no existe y provoca la excepción (que lleva a crear el usuario de cero):
 
 ```java
 catch(Exception e){//no existen referencias al usuario
@@ -398,7 +400,7 @@ En este caso crea un usuario y envía el mensaje de que todo ha ido bien.
 Para iniciar sesión, registrarnos o completar el registro con un nombre de usuario ya existente, tenemos la siguiente pantalla:
 ![1](1.png "Página de Inicio")
 
-En la barra de arriba, en los recuadros de *Usuario*, *Contraseña* y boton *Entrar*. Se usa para iniciar sesión teniendo **usuario** y **contraseña**. En el caso de que algún campo sea incorrecto recibiremos el siguiente mensaje de error:
+En la barra de arriba, en los recuadros de *Usuario*, *Contraseña* y botón *Entrar*. Se usa para iniciar sesión teniendo **usuario** y **contraseña**. En el caso de que algún campo sea incorrecto recibiremos el siguiente mensaje de error:
 ![2](2.png "Mensaje de error, Iniciando sesión")
 En el caso de que no sea correcto el formato enviado:
 ![2_1](2_1.png "Mensaje de error, Iniciando sesión")
@@ -421,10 +423,10 @@ La primera casilla no tiene ningun tipo de limitación, la segunda, para la cont
 ![6](7.png "Formulario de Registro 4, Repitiendo password y coincide")
 
 Aquí pueden darse 3 casos.
-El usuario ya existe, y daria este mensaje de error:
+El usuario ya existe, y daría este mensaje de error:
 ![8](8.png "Usuario ya existe")
 
-El usuario ya existe, pero no tenia contraseña por lo que se actualizaría:
+El usuario ya existe, pero no tenía contraseña por lo que se actualizaría:
 ![9](9.png "Usuario actualizado")
 
 El usuario no existe, por lo tanto se crea de 0:

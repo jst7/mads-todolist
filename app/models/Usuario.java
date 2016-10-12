@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 public class Usuario {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    public String id;
+    public Integer id;
     @Constraints.Required
     public String login;
     public String password;

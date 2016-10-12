@@ -52,14 +52,14 @@ public class UsuarioController extends Controller {
     }
 
     @Transactional
-    public Result detalleUsuario(String id) {
+    public Result detalleUsuario(Integer id) {
         Usuario user = UsuariosService.findUsuario(id);
         
         return ok(detalleUsuario.render(user));
     }
 
     @Transactional
-    public Result editarUsuario(String id) {        
+    public Result editarUsuario(Integer id) {        
         Usuario user = UsuariosService.findUsuario(id);
         Form<Usuario> userForm = formFactory.form(Usuario.class);
         userForm = userForm.fill(user);
@@ -84,7 +84,7 @@ public class UsuarioController extends Controller {
    }
 
     @Transactional
-    public Result borraUsuario(String id) {
+    public Result borraUsuario(Integer id) {
         boolean termina = UsuariosService.deleteUsuario(id);
         if(termina){
             return ok();

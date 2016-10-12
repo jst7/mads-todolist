@@ -27,7 +27,7 @@ public class UsuarioDAO {
         return true;
     }
 
-    public static Usuario find(String idUsuario) {
+    public static Usuario find(Integer idUsuario) {
         return JPA.em().find(Usuario.class, idUsuario);
     }
 
@@ -35,7 +35,7 @@ public class UsuarioDAO {
         return JPA.em().merge(usuario);
     }
 
-    public static void delete(String idUsuario) {
+    public static void delete(Integer idUsuario) {
         Usuario usuario = JPA.em().getReference(Usuario.class, idUsuario);
         JPA.em().remove(usuario);
     }

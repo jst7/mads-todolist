@@ -22,7 +22,7 @@ public class UsuariosService {
         	return lista;
     	}
 
-    	public static Usuario findUsuario(String id) {
+    	public static Usuario findUsuario(Integer id) {
         	Usuario user = UsuarioDAO.find(id);
         	Logger.debug("Se accede al usuario: "+ user.id + " " + user.nombre);
 
@@ -32,7 +32,7 @@ public class UsuariosService {
             Logger.debug(usuario.toString());
             return UsuarioDAO.update(usuario);
         }
-        public static boolean deleteUsuario(String id) {
+        public static boolean deleteUsuario(Integer id) {
             
             try{
             UsuarioDAO.delete(id);

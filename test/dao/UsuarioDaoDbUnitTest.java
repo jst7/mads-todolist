@@ -84,4 +84,58 @@ public class UsuarioDaoDbUnitTest {
         });
     }
 
+    @Test
+    public void borrarUsuario() {
+        jpa.withTransaction(() -> {
+            UsuarioDAO.delete(1);
+        });
+
+        jpa.withTransaction(() -> {
+
+            Usuario usuario=null;
+            try{
+                usuario = UsuarioDAO.find(1);
+            }
+            catch(Exception e){
+                usuario = null;
+            }
+            assertNull(usuario);
+        });
+    }
+
+    @Test
+    public void ExisteLoginConPass() {
+            
+        jpa.withTransaction(() -> {
+            Usuario prueba = new Usuario("jorgest",null);
+            Usuario usuario = null;
+            
+            try{
+                usuario = UsuarioDAO.ExisteLoginConPass(prueba);
+            }catch(Exception e){
+                usuario = null;
+            }
+            assertThat(usuario.login, equalTo("jorgest"));
+        });
+
+    }
+
+    @Test
+    public void Autenticacion() {
+            
+        jpa.withTransaction(() -> {
+            Usuario prueba = new Usuario("jorgest","1234567");
+            boolean usuario = false;
+
+            try{
+                usuario = UsuarioDAO.LoginUsuario(prueba);
+            }catch(Exception e){
+                usuario = false;
+            }
+            assertTrue(usuario);
+        });
+
+    }
+
+
 }

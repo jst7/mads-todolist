@@ -15,4 +15,4 @@ libraryDependencies ++= Seq(
   "org.dbunit" % "dbunit" % "2.4.9",
   cache,
   javaWs
-n)
+)

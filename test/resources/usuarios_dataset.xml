@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <Usuario id="1" login="juan" nombre="Juan" apellidos="Gutierrez"
+        eMail="juan.gutierrez@gmail.com" fechaNacimiento="1993-12-10"/>
+    <Usuario id="2" login="anabel" nombre="Anabel" eMail="anabel.perez@gmail.com"/>
+</dataset>

@@ -20,6 +20,7 @@ public class Usuario {
     public String apellidos;
     public String eMail;
     @Formats.DateTime(pattern="dd-MM-yyyy")
+    @Temporal(TemporalType.DATE)
     public Date fechaNacimiento;
 
     // necesario un constructor vacío para JPA

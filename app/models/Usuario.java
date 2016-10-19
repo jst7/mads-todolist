@@ -32,6 +32,18 @@ public class Usuario {
         this.password = password;
     }
 
+
+    public Usuario copy() {
+        Usuario nuevo = new Usuario();
+        nuevo.id = this.id;
+        nuevo.login = this.login;
+        nuevo.password = this.password;
+        nuevo.apellidos = this.apellidos;
+        nuevo.eMail = this.eMail;
+        nuevo.fechaNacimiento = this.fechaNacimiento;
+        return nuevo;
+        }
+
     // Sustituye por null todas las cadenas vacías que pueda tener
     // un usuario en sus atributos
     public void nulificaAtributos() {

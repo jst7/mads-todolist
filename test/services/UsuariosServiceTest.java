@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import services.*;
+import models.*;
 
 
 
@@ -58,10 +58,23 @@ public class UsuariosServiceTest {
     }
 
     @Test
-    public void prueba() {
+    public void loginModificadoExiste() {
     	jpa.withTransaction(() -> {
-    		boolean bolea=true;
-			assertTrue(bolea);
+
+    		Usuario usuario = null;
+    		usuario = UsuariosService.findUsuario(2);
+
+            Usuario desconectado = usuario.copy();
+    		desconectado.login = "jorgest";
+
+            try{
+                UsuariosService.modificaUsuario(desconectado);
+                fail("No se ha lanzado excepción login ya existe");
+            }
+            catch(UsuariosException ex){
+                System.out.println("ERROR DE USUARIO");
+            }
+
         });
     }
 }

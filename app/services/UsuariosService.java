@@ -29,9 +29,15 @@ public class UsuariosService {
         	return user;
     	}
         public static Usuario modificaUsuario(Usuario usuario) {
-            Logger.debug(usuario.toString());
-            return UsuarioDAO.update(usuario);
+            Usuario antes = UsuarioDAO.ExisteLogin(usuario);
+
+            if (antes != null && usuario.id != antes.id){
+                throw new UsuariosException("Login ya existe: \n\n" + usuario.login);
+            }
+            UsuarioDAO.update(usuario);
+            return usuario;
         }
+
         public static boolean deleteUsuario(Integer id) {
             
             try{

@@ -77,4 +77,61 @@ public class UsuariosServiceTest {
 
         });
     }
+
+    @Test
+    public void borrarUsuarioTest(){
+        jpa.withTransaction(() -> {
+
+            boolean encontrado = UsuariosService.deleteUsuario(71);
+            assertFalse(encontrado);
+            encontrado = UsuariosService.deleteUsuario(1);
+            assertTrue(encontrado);
+
+        });
+    }
+
+    @Test
+    public void buscarUsuarioTest(){
+        jpa.withTransaction(() -> {
+
+            Usuario encontrado =  UsuariosService.findUsuario(71);
+            assertNull(encontrado);
+            encontrado =  UsuariosService.findUsuario(1);
+            assertNotNull(encontrado);
+
+        });
+    }
+
+    @Test
+    public void existeUsuarioConPassTest(){
+        jpa.withTransaction(() -> {
+            Usuario userconpass = new Usuario("jorgest",null);
+            Usuario usersinpass = new Usuario("anabel",null);
+
+            boolean existe =  UsuariosService.existeUsuarioConPass(userconpass);
+            assertTrue(existe);
+            existe = UsuariosService.existeUsuarioConPass(usersinpass);
+            assertFalse(existe);
+
+        });
+    }
+
+
+    @Test
+    public void existeLoginTest(){
+        jpa.withTransaction(() -> {
+            Usuario userExiste = new Usuario("jorgest",null);
+            Usuario userNoExiste = new Usuario("hola",null);
+
+            Usuario existe = UsuariosService.existeLogin(userExiste);
+            assertNotNull(existe);
+            try{
+            Usuario noExiste = UsuariosService.existeLogin(userNoExiste);
+            fail("no existe y no salta la excepción");
+            }
+            catch(Exception e){
+            }
+        });
+    }
+
 }

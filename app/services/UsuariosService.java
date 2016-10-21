@@ -24,15 +24,14 @@ public class UsuariosService {
 
     	public static Usuario findUsuario(Integer id) {
         	Usuario user = UsuarioDAO.find(id);
-        	Logger.debug("Se accede al usuario: "+ user.id + " " + user.nombre);
-
+            
         	return user;
     	}
         public static Usuario modificaUsuario(Usuario usuario) {
             Usuario antes = UsuarioDAO.ExisteLogin(usuario);
 
             if (antes != null && usuario.id != antes.id){
-                throw new UsuariosException("Login ya existe: \n\n" + usuario.login);
+                throw new UsuariosException("Login ya existe:" + usuario.login);
             }
             UsuarioDAO.update(usuario);
             return usuario;
@@ -41,13 +40,14 @@ public class UsuariosService {
         public static boolean deleteUsuario(Integer id) {
             
             try{
-            UsuarioDAO.delete(id);
+                UsuarioDAO.delete(id);
                 return true;
             }
             catch(Exception e){
                 return false;
             }
         }
+
         public static boolean existeUsuarioConPass(Usuario user) {
             try{
                 Usuario a=UsuarioDAO.ExisteLoginConPass(user);

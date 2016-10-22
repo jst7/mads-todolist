@@ -5,6 +5,7 @@ import javax.persistence.*;
 import play.data.validation.Constraints;
 import play.data.format.*;
 
+
 @Entity
 public class Tarea {
     @Id
@@ -53,4 +54,7 @@ public class Tarea {
         }
         return true;
     }
+    @ManyToOne
+    @JoinColumn(name="usuarioId")
+    public Usuario usuario;
 }

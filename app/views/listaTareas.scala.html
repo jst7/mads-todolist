@@ -1,0 +1,29 @@
+@(tareas: List[Tarea], usuario: Usuario)
+@main("Tareas del usuario @usuario.id", null) {
+
+<div class="col-xs-push-1 col-xs-11">
+    <h2> Listado de tareas</h2>
+
+    <h4>Usuario:  
+        <a class="btn btn-primary" href="@routes.UsuarioController.detalleUsuario(usuario.id)">@usuario.login</a>
+    </h4>
+
+<ul class="list-group">
+    <table class="table table-striped">
+        <tr>
+        <thead class="thead-inverse bg-primary">
+            <th>Id</th>
+            <th>Descripción</th>
+        </thead>
+        </tr>
+    @for(tarea <- tareas) {
+        <tr>
+            <td>@tarea.id</td>
+            <td>@tarea.descripcion</td>
+        </tr>
+      }
+  </table>
+
+</ul>
+</div>
+}

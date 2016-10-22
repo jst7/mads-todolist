@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <Usuario id="1" login="juan" nombre="Juan" apellidos="Gutierrez"
+        eMail="juan.gutierrez@gmail.com" fechaNacimiento="1993-12-10"/>
+    <Usuario id="2" login="anabel" nombre="Anabel" eMail="anabel.perez@gmail.com"/>
+    <Tarea id="1" usuarioId="1" descripcion="Preparar el trabajo del tema 1 de biología" />
+    <Tarea id="2" usuarioId="1" descripcion="Estudiar el parcial de matemáticas" />
+    <Tarea id="3" usuarioId="1" descripcion="Leer el libro de inglés" />
+    <Tarea id="4" usuarioId="2" descripcion="Salir a correr" />
+</dataset>

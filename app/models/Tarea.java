@@ -24,4 +24,33 @@ public class Tarea {
     public String toString() {
         return String.format("Tarea id: %s descripcion: %s", id, descripcion);
     }
+    public Tarea copy() {
+        Tarea nueva = new Tarea(this.descripcion);
+        nueva.id = this.id;
+        return nueva;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = prime + ((descripcion == null) ? 0 : descripcion.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (getClass() != obj.getClass()) return false;
+        Tarea other = (Tarea) obj;
+        // Si tenemos los ID, comparamos por ID
+        if (id != null && other.id != null)
+            return (id == other.id);
+        // sino comparamos por campos obligatorios
+        else {
+            if (descripcion == null) {
+                if (other.descripcion != null) return false;
+            } else if (!descripcion.equals(other.descripcion)) return false;
+        }
+        return true;
+    }
 }

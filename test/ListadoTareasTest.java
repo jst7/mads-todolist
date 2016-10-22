@@ -60,4 +60,21 @@ public class ListadoTareasTest {
             assertThat(tarea.descripcion, equalTo("Preparar el trabajo del tema 1 de biología"));
         });
     }
+
+    @Test
+    public void compararTareas() {
+        jpa.withTransaction(() -> {
+            Tarea tarea1 = TareaDAO.find(1);
+
+            // Creamos una copia de la tarea1
+            // (otro objeto con los mismos atributos)
+            Tarea tarea2 = tarea1.copy();
+            assertEquals(tarea1, tarea2);
+
+            // Creamos una tarea con la misma descripción,
+            // pero sin id
+            Tarea tarea3 = new Tarea(tarea1.descripcion);
+            assertEquals(tarea1, tarea3);
+        });
+    }
 }

@@ -79,5 +79,15 @@ public class BorrarTareasTest {
         });
     }
 
+    @Test
+    public void DeleteTareaTestService(){
+        jpa.withTransaction(() -> {
+            boolean encontrado = TareasService.deleteTarea(71);
+            assertFalse(encontrado);
+            encontrado = TareasService.deleteTarea(1);
+            assertTrue(encontrado);
+        });
+    }
+
 
 }

@@ -27,4 +27,14 @@ public class TareasService {
         TareaDAO.update(tarea);
         return tarea;
     }
+    public static boolean deleteTarea(Integer id) {
+            
+        try{
+            TareaDAO.delete(id);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
 }

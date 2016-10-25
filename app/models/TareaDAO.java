@@ -25,4 +25,9 @@ public class TareaDAO {
     public static Tarea update(Tarea tarea) {
         return JPA.em().merge(tarea);
     }
+
+    public static void delete(Integer idTarea) {
+        Tarea tarea = JPA.em().getReference(Tarea.class, idTarea);
+        JPA.em().remove(tarea);
+    }
 }

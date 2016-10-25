@@ -1,5 +1,21 @@
 @(tareas: List[Tarea], usuario: Usuario)
-@main("Tareas del usuario @usuario.id", null) {
+
+@scripts = {
+    <script type="text/javascript">
+        function del(urlBorrar) {
+            $.ajax({
+                url: urlBorrar,
+                type: 'DELETE',
+                success: function(results) {
+                    //refresh the page
+                    location.reload();
+                }
+            });
+        }
+    </script>
+}
+
+@main("Tareas del usuario @usuario.id", scripts) {
 
 <div class="col-xs-push-1 col-xs-11">
     <h2> Listado de tareas</h2>
@@ -14,12 +30,14 @@
         <thead class="thead-inverse bg-primary">
             <th>Id</th>
             <th>Descripción</th>
+            <th>Borrar</th>
         </thead>
         </tr>
     @for(tarea <- tareas) {
         <tr>
             <td>@tarea.id</td>
             <td>@tarea.descripcion</td>
+            <td><a class="btn btn-danger" onclick="del('@routes.TareasController.borraTarea(tarea.id)')"> <span class="glyphicon glyphicon-trash" aria-hidden="true"</span></a> </td>
         </tr>
       }
   </table>

@@ -1,0 +1,46 @@
+@(tareaForm: Form[Tarea], mensaje: String)
+
+@scripts = {
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            setTimeout(function(){$("#temporal").hide();  }, 3000)
+        });
+ 
+    </script>
+}
+
+@main("Editar Tarea",scripts) {
+
+    @if(mensaje != "") {
+        <div class="alert alert-danger" id="temporal">
+            @mensaje
+        </div>
+    }
+
+        <div class="col-xs-push-1 col-xs-11">
+                <table>
+            <td>
+                <a class="btn btn-primary"  href="@routes.UsuarioController.listaUsuarios()">
+                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+            </td>
+            <td>
+                <h1>Modificar Tarea</h1>
+            </td>
+        </table>
+        
+        @helper.form(action = routes.TareasController.escribirTareaModificada()) {
+            <fieldset>
+            <legend>Tarea a Modificar: @tareaForm("id").value</legend>
+            <input type="hidden" id="id" name="id" value='@tareaForm("id").value' >
+            @helper.inputText(tareaForm("descripcion"), '_label -> "Descripcion")
+            </fieldset>
+
+            <div>
+            <input type="submit" id="cambiar" class="btn btn-success btn-lg" value="Cambiar">
+            </div>
+            }
+
+        </div>
+}

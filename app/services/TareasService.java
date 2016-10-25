@@ -22,4 +22,9 @@ public class TareasService {
     public static Tarea findTarea(Integer id) {
         return TareaDAO.find(id);
     }
+
+    public static Tarea modificaTarea(Tarea tarea) {
+        TareaDAO.update(tarea);
+        return tarea;
+    }
 }

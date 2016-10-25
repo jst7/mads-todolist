@@ -58,4 +58,38 @@ public class TareasController extends Controller {
             return badRequest(crearTareaFormulario.render(formFactory.form(Tarea.class), "Tarea no añadida", usuario));  
             }
    }
+
+   @Transactional
+    public Result editarTarea(Integer id) {        
+        Tarea tarea = TareasService.findTarea(id);
+        Usuario user = tarea.usuario;
+
+        Form<Tarea> tareaForm = formFactory.form(Tarea.class);
+        tareaForm = tareaForm.fill(tarea);
+
+        return ok(editarTarea.render(tareaForm,""));
+    }
+
+    @Transactional
+    public Result escribirTareaModificada() {
+
+            Form<Tarea> task = formFactory.form(Tarea.class).bindFromRequest(); 
+
+            if(task.hasErrors()){
+                Form<Tarea> tareaFormbad = formFactory.form(Tarea.class);
+                return badRequest(editarTarea.render(task,"Necesita descripcion para ser Modificada"));
+            }
+            else{
+                int idTarea = task.get().id;
+                Tarea tareaAnterior = TareasService.findTarea(idTarea);
+                Tarea tarea = task.get();        
+                tareaAnterior.descripcion =tarea.descripcion;
+                tareaAnterior = TareasService.modificaTarea(tareaAnterior);
+                Form<Tarea> tareaForm = formFactory.form(Tarea.class);
+                tareaForm = tareaForm.fill(tareaAnterior);
+                return ok(editarTarea.render(tareaForm,"Tarea Modificada"));      
+            }
+
+
+   }
 }

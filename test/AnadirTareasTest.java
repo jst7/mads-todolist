@@ -78,6 +78,26 @@ public class AnadirTareasTest{
             });
     }
 
+    @Test
+    public void nuevaTareaTestService() {
+            jpa.withTransaction(() -> {
+
+                Usuario user = UsuariosService.findUsuario(1);
+                Tarea tarea = new Tarea("Terminar la practica 2", user);
+                tarea = TareasService.crearTarea(tarea);
+                user.tareas.add(tarea);       
+
+                assertEquals("Terminar la practica 2", TareasService.findTarea(tarea.id).descripcion);
+                assertEquals(user.tareas.size(), 5);
+
+                Tarea tarea2 = new Tarea("Terminar la practica", user);
+                tarea2 = TareaDAO.create(tarea2);
+                user.tareas.add(tarea2);
+
+                assertEquals("Terminar la practica", TareasService.findTarea(tarea2.id).descripcion);
+                assertEquals(user.tareas.size(), 6);
+            });
+    }
 
 
 }

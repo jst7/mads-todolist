@@ -22,6 +22,11 @@ public class Tarea {
         this.descripcion = descripcion;
     }
 
+    public Tarea(String descripcion, Usuario usuario) {
+        this.descripcion = descripcion;
+        this.usuario = usuario;
+    }
+
     public String toString() {
         return String.format("Tarea id: %s descripcion: %s", id, descripcion);
     }

@@ -1,0 +1,47 @@
+@(tareaForm: Form[Tarea], mensaje: String, usuario: Usuario)
+
+@scripts = {
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            setTimeout(function(){$("#temporal").hide();  }, 3000)
+        });
+
+ 
+    </script>
+}
+
+@main("Añadir Tarea",scripts) {
+
+    @if(mensaje != "") {
+        <div class="alert alert-danger" id="temporal">
+            @mensaje
+        </div>
+    }    
+    
+        <div class="col-xs-push-1 col-xs-11">
+        <table>
+            <td>
+                <a class="btn btn-primary"  href="@routes.TareasController.listaTareas(usuario.id)">
+                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+            </td>
+            <td>
+                <h1>Añadir Tarea a Usuario: @usuario.login</h1>
+            </td>
+        </table>
+
+        @helper.form(action = routes.TareasController.crearTarea(usuario.id)) {
+            <fieldset>
+            <legend>Usuario nuevo</legend>
+            @helper.inputText(tareaForm("descripcion"), '_label -> "descripcion")   
+            </fieldset>
+
+            <div>
+            <input type="submit" class="btn btn-success btn-lg" value="Guardar">
+            <a class="btn btn-danger btn-xs" href="@routes.TareasController.listaTareas(usuario.id)">Cancelar</a>
+            </div>
+            }
+
+        </div>
+}

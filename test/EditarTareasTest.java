@@ -74,4 +74,22 @@ public class EditarTareasTest {
                 assertEquals(cantidadInicial, 3); 
             });
     }
+
+    @Test
+    public void EditarTareaTestService() {
+            jpa.withTransaction(() -> {
+
+                List<Tarea> tareasUsuario = TareasService.listaTareasUsuario(1);
+                Tarea tarea = tareasUsuario.get(0);
+                int cantidadInicial = tareasUsuario.size();//Almacenamos la cantidad de tareas inicial
+
+                tarea.descripcion="cambiada Service";
+                tarea = TareasService.modificaTarea(tarea);
+
+                int cantidadFinal = TareasService.listaTareasUsuario(1).size();//Almacenamos la cantidad de tareas final para comprobar si se ha añadido otra por el camino
+
+                assertEquals("cambiada Service", TareasService.findTarea(tarea.id).descripcion);
+                assertEquals(cantidadInicial, 3); 
+            });
+    }
 }

@@ -21,4 +21,8 @@ public class TareaDAO {
         
         return tarea;
     }
+
+    public static Tarea update(Tarea tarea) {
+        return JPA.em().merge(tarea);
+    }
 }

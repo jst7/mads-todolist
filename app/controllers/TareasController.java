@@ -89,7 +89,15 @@ public class TareasController extends Controller {
                 tareaForm = tareaForm.fill(tareaAnterior);
                 return ok(editarTarea.render(tareaForm,"Tarea Modificada"));      
             }
-
-
    }
+
+    @Transactional
+    public Result borraTarea(Integer id) {
+        boolean termina = TareasService.deleteTarea(id);
+        if(termina){
+            return ok();
+        }else{
+            return badRequest();
+        }
+    }
 }

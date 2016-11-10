@@ -9,6 +9,7 @@ public class TareasService {
 
     public static List<Tarea> listaTareasUsuario(Integer usuarioId) {
         Usuario usuario = UsuarioDAO.find(usuarioId);
+         System.out.println(usuarioId + "SALTA" + "");
         if (usuario != null) {
             return usuario.tareas;
         } else {

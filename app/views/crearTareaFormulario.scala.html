@@ -7,7 +7,7 @@
             setTimeout(function(){$("#temporal").hide();  }, 3000)
         });
 
- 
+
     </script>
 }
 
@@ -17,8 +17,8 @@
         <div class="alert alert-danger" id="temporal">
             @mensaje
         </div>
-    }    
-    
+    }
+
         <div class="col-xs-push-1 col-xs-11">
         <table>
             <td>
@@ -34,7 +34,8 @@
         @helper.form(action = routes.TareasController.crearTarea(usuario.id)) {
             <fieldset>
             <legend>Usuario nuevo</legend>
-            @helper.inputText(tareaForm("descripcion"), '_label -> "descripcion")   
+            @helper.inputText(tareaForm("descripcion"), '_label -> "descripcion")
+            @helper.inputText(tareaForm("duracion"), '_label -> "duracion")  
             </fieldset>
 
             <div>

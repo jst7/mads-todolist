@@ -48,19 +48,22 @@ public class TareasController extends Controller {
         Tarea tarea = task.get();
 
             try{
-            Tarea tareaMas = new Tarea(tarea.descripcion, usuario);
+              if (tarea.duracion == null){
+                tarea.duracion = 0;
+              }
+            Tarea tareaMas = new Tarea(tarea.descripcion, usuario,tarea.duracion);
             tareaMas = TareasService.crearTarea(tareaMas);
             usuario.tareas.add(tareaMas);
 
-            return ok(crearTareaFormulario.render(formFactory.form(Tarea.class), "Tarea añadida", usuario));                   
+            return ok(crearTareaFormulario.render(formFactory.form(Tarea.class), "Tarea añadida", usuario));
             }
             catch(Exception e){
-            return badRequest(crearTareaFormulario.render(formFactory.form(Tarea.class), "Tarea no añadida", usuario));  
+            return badRequest(crearTareaFormulario.render(formFactory.form(Tarea.class), "Tarea no añadida", usuario));
             }
    }
 
    @Transactional
-    public Result editarTarea(Integer id) {        
+    public Result editarTarea(Integer id) {
         Tarea tarea = TareasService.findTarea(id);
         Usuario user = tarea.usuario;
 
@@ -73,7 +76,7 @@ public class TareasController extends Controller {
     @Transactional
     public Result escribirTareaModificada() {
 
-            Form<Tarea> task = formFactory.form(Tarea.class).bindFromRequest(); 
+            Form<Tarea> task = formFactory.form(Tarea.class).bindFromRequest();
 
             if(task.hasErrors()){
                 Form<Tarea> tareaFormbad = formFactory.form(Tarea.class);
@@ -82,12 +85,12 @@ public class TareasController extends Controller {
             else{
                 int idTarea = task.get().id;
                 Tarea tareaAnterior = TareasService.findTarea(idTarea);
-                Tarea tarea = task.get();        
+                Tarea tarea = task.get();
                 tareaAnterior.descripcion =tarea.descripcion;
                 tareaAnterior = TareasService.modificaTarea(tareaAnterior);
                 Form<Tarea> tareaForm = formFactory.form(Tarea.class);
                 tareaForm = tareaForm.fill(tareaAnterior);
-                return ok(editarTarea.render(tareaForm,"Tarea Modificada"));      
+                return ok(editarTarea.render(tareaForm,"Tarea Modificada"));
             }
    }
 

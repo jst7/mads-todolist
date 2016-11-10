@@ -95,4 +95,7 @@ public class Usuario {
     }
     @OneToMany(mappedBy="usuario")
     public List<Tarea> tareas = new ArrayList<Tarea>();
+
+    @OneToMany(mappedBy="usuario")
+    public List<Proyecto> proyectos = new ArrayList<Proyecto>();
 }

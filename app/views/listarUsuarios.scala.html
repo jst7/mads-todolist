@@ -37,6 +37,9 @@
         <th>
         Tareas
         </th>
+        <th>
+        Proyectos
+        </th>
         </thead>
     </tr>
     @for(usuario <- usuarios) {
@@ -62,6 +65,11 @@
             <td>
                 <a class="btn btn-info" href="@routes.TareasController.listaTareas(usuario.id)">
                     <span class="glyphicon glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                </a>
+            </td>
+            <td>
+                <a class="btn btn-info" href="@routes.ProyectosController.crearProyectoFormulario(usuario.id)">
+                    <span class="glyphicon glyphicon glyphicon-folder-open" aria-hidden="true"></span>
                 </a>
             </td>
         </tr>

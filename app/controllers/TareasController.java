@@ -87,6 +87,12 @@ public class TareasController extends Controller {
                 Tarea tareaAnterior = TareasService.findTarea(idTarea);
                 Tarea tarea = task.get();
                 tareaAnterior.descripcion =tarea.descripcion;
+                /*
+                if (tarea.duracion == null){
+                  tarea.duracion = 0;
+                }
+                tareaAnterior = tarea.duracion;
+                */
                 tareaAnterior = TareasService.modificaTarea(tareaAnterior);
                 Form<Tarea> tareaForm = formFactory.form(Tarea.class);
                 tareaForm = tareaForm.fill(tareaAnterior);

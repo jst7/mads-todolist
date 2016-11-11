@@ -13,8 +13,10 @@ public class Tarea {
     public Integer id;
     @Constraints.Required
     public String descripcion;
-    public Integer duracion;
 
+    public Integer duracion=0;
+    public String tamano="Sin tamaño";
+    
     // Un constructor vacío necesario para JPA
     public Tarea() {}
 
@@ -33,10 +35,11 @@ public class Tarea {
         this.usuario = usuario;
     }
 
-    public Tarea(String descripcion, Usuario usuario,int duracion) {
+    public Tarea(String descripcion, Usuario usuario,int duracion, String tamano) {
         this.descripcion = descripcion;
         this.usuario = usuario;
         this.duracion = duracion;
+        this.tamano = tamano;
     }
 
     public String toString() {

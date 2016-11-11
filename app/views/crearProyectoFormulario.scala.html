@@ -1,4 +1,4 @@
-@(ProyectoForm: Form[Proyecto], mensaje: String, usuario: Usuario)
+@(ProyectoForm: Form[Proyecto], mensaje: String)
 
 @scripts = {
     <script type="text/javascript">
@@ -27,11 +27,11 @@
                 </a>
             </td>
             <td>
-                <h1>Añadir Proyecto a usuario: @usuario.nombre</h1>
+                <h1>Añadir Proyecto nuevo</h1>
             </td>
         </table>
 
-        @helper.form(action = routes.ProyectosController.crearProyecto(usuario.id)) {
+        @helper.form(action = routes.ProyectosController.crearProyecto()) {
             <fieldset>
             <legend>Proyecto nuevo</legend>
             @helper.inputText(ProyectoForm("nombre"), '_label -> "Nombre")   

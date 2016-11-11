@@ -16,21 +16,12 @@ public class Proyecto {
     @Constraints.Required
     public String nombre;
 
-    @ManyToOne
-    @JoinColumn(name="usuarioId")
-    public Usuario usuario;
-
     // Un constructor vacío necesario para JPA
     public Proyecto() {}
 
     // El constructor principal con los campos obligatorios
     public Proyecto(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Proyecto(String nombre, Usuario usuario) {
-        this.nombre 	= nombre;
-        this.usuario 	= usuario;
     }
 
     public String toString() {

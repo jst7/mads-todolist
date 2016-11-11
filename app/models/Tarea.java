@@ -24,6 +24,11 @@ public class Tarea {
           this.descripcion = descripcion;
           this.duracion = duracion;
     }
+    public Tarea(String descripcion,int duracion, String tamano) {
+          this.descripcion = descripcion;
+          this.duracion = duracion;
+          this.tamano = tamano;
+    }
     // El constructor principal con los campos obligatorios
     public Tarea(String descripcion) {
         this.descripcion = descripcion;
@@ -46,9 +51,9 @@ public class Tarea {
         return String.format("Tarea id: %s descripcion: %s duracion %s ", id, descripcion,duracion);
     }
     public Tarea copy() {
-        Tarea nueva = new Tarea(this.descripcion,duracion);
+        Tarea nueva = new Tarea(this.descripcion,this.duracion, this.tamano);
         nueva.id = this.id;
-        nueva.duracion = this.duracion;
+        
         return nueva;
     }
 

@@ -5,6 +5,9 @@ import javax.persistence.*;
 import play.data.validation.Constraints;
 import play.data.format.*;
 
+import java.util.List;
+import java.util.ArrayList;
+
 @Entity
 public class Proyecto {
     @Id
@@ -62,4 +65,7 @@ public class Proyecto {
         }
         return true;
     }
+
+    @OneToMany(mappedBy="proyecto")
+    public List<Tarea> tareas = new ArrayList<Tarea>();
 }

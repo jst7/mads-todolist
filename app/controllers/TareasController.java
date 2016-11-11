@@ -48,10 +48,16 @@ public class TareasController extends Controller {
         Tarea tarea = task.get();
 
             try{
-              if (tarea.duracion == null){
-                tarea.duracion = 0;
-              }
-            Tarea tareaMas = new Tarea(tarea.descripcion, usuario,tarea.duracion);
+                switch(tarea.duracion){
+                    case 0: tarea.tamano ="pequeña";
+                    break;
+                    case 1: tarea.tamano ="mediana";
+                    break;
+                    case 2: tarea.tamano ="grande";
+                    break;
+                    default: tarea.tamano ="Sin tamaño";
+                }
+            Tarea tareaMas = new Tarea(tarea.descripcion, usuario,tarea.duracion, tarea.tamano);
             tareaMas = TareasService.crearTarea(tareaMas);
             usuario.tareas.add(tareaMas);
 
@@ -87,12 +93,19 @@ public class TareasController extends Controller {
                 Tarea tareaAnterior = TareasService.findTarea(idTarea);
                 Tarea tarea = task.get();
                 tareaAnterior.descripcion =tarea.descripcion;
-                /*
-                if (tarea.duracion == null){
-                  tarea.duracion = 0;
+
+                tareaAnterior.duracion = tarea.duracion;
+
+                switch(tareaAnterior.duracion){
+                    case 0: tareaAnterior.tamano ="pequeña";
+                    break;
+                    case 1: tareaAnterior.tamano ="mediana";
+                    break;
+                    case 2: tareaAnterior.tamano ="grande";
+                    break;
+                    default: tareaAnterior.tamano ="Sin tamaño";
                 }
-                tareaAnterior = tarea.duracion;
-                */
+                
                 tareaAnterior = TareasService.modificaTarea(tareaAnterior);
                 Form<Tarea> tareaForm = formFactory.form(Tarea.class);
                 tareaForm = tareaForm.fill(tareaAnterior);

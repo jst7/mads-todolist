@@ -86,4 +86,8 @@ public class Tarea {
     @ManyToOne
     @JoinColumn(name="usuarioId")
     public Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name="proyectoId")
+    public Proyecto proyecto;
 }

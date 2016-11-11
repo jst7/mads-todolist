@@ -14,12 +14,25 @@ public class Tarea {
     @Constraints.Required
     public String descripcion;
 
+    public Integer duracion=0;
+    public String tamano="Sin tamaño";
+    
     // Un constructor vacío necesario para JPA
     public Tarea() {}
 
+    public Tarea(String descripcion,int duracion) {
+          this.descripcion = descripcion;
+          this.duracion = duracion;
+    }
+    public Tarea(String descripcion,int duracion, String tamano) {
+          this.descripcion = descripcion;
+          this.duracion = duracion;
+          this.tamano = tamano;
+    }
     // El constructor principal con los campos obligatorios
     public Tarea(String descripcion) {
         this.descripcion = descripcion;
+        this.duracion = duracion;
     }
 
     public Tarea(String descripcion, Usuario usuario) {
@@ -27,12 +40,20 @@ public class Tarea {
         this.usuario = usuario;
     }
 
+    public Tarea(String descripcion, Usuario usuario,int duracion, String tamano) {
+        this.descripcion = descripcion;
+        this.usuario = usuario;
+        this.duracion = duracion;
+        this.tamano = tamano;
+    }
+
     public String toString() {
-        return String.format("Tarea id: %s descripcion: %s", id, descripcion);
+        return String.format("Tarea id: %s descripcion: %s duracion %s ", id, descripcion,duracion);
     }
     public Tarea copy() {
-        Tarea nueva = new Tarea(this.descripcion);
+        Tarea nueva = new Tarea(this.descripcion,this.duracion, this.tamano);
         nueva.id = this.id;
+        
         return nueva;
     }
 
@@ -56,6 +77,9 @@ public class Tarea {
             if (descripcion == null) {
                 if (other.descripcion != null) return false;
             } else if (!descripcion.equals(other.descripcion)) return false;
+            if (duracion == null) {
+                if (other.duracion != null) return false;
+            } else if (!duracion.equals(other.duracion)) return false;
         }
         return true;
     }

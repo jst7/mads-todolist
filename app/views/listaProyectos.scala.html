@@ -1,0 +1,55 @@
+@(proyectos: List[Proyecto])
+
+@scripts = {
+    <script type="text/javascript">
+        function del(urlBorrar) {
+            $.ajax({
+                url: urlBorrar,
+                type: 'DELETE',
+                success: function(results) {
+                    //refresh the page
+                    location.reload();
+                }
+            });
+        }
+    </script>
+}
+
+@main("Proyectos", scripts) {
+
+<div class="col-xs-push-1 col-xs-11">
+        <table>
+            <td>
+                <a class="btn btn-primary"  href="@routes.UsuarioController.listaUsuarios()">
+                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+            </td>
+            <td>
+                <h1>Listado de proyectos</h1>
+            </td>
+        </table>
+
+
+
+<ul class="list-group">
+    <table class="table table-striped">
+        <tr>
+        <thead class="thead-inverse bg-primary">
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Editar</th>
+            <th>Borrar</th>
+        </thead>
+        </tr>
+    @for(proyecto <- proyectos) {
+        <tr>
+            <td>@proyecto.id</td>
+            <td>@proyecto.nombre</td>
+        </tr>
+      }
+
+  </table>
+  <a class="btn btn-success" href="@routes.ProyectosController.crearProyectoFormulario()"> <span class="glyphicon glyphicon-plus" aria-hidden="true"</span></a>
+</ul>
+</div>
+}

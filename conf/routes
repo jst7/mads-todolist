@@ -50,3 +50,6 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 # Crear proyecto
 GET 	/proyectos/crear			controllers.ProyectosController.crearProyectoFormulario()
 POST 	/proyectos/crear 			controllers.ProyectosController.crearProyecto()
+
+# Listar Proyectos
+GET   /proyectos            controllers.ProyectosController.listaProyectos()

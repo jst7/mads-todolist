@@ -15,7 +15,7 @@ import services.*;
 import models.*;
 
 public class ProyectosController extends Controller {
-        
+
     @Inject FormFactory formFactory;
     @Transactional
     public Result crearProyectoFormulario() {
@@ -34,11 +34,19 @@ public class ProyectosController extends Controller {
                 Proyecto proyectoNew    = proyecto.get();
                 ProyectosService.crearProyecto(proyectoNew);
                 msg = "Proyecto creado correctamente";
-                return ok(crearProyectoFormulario.render(formFactory.form(Proyecto.class), msg));                   
+                return ok(crearProyectoFormulario.render(formFactory.form(Proyecto.class), msg));
             } catch (Exception e) {
                 msg = "Proyecto no creado";
                 return badRequest(crearProyectoFormulario.render(proyecto, msg));
             }
         }
+    }
+
+    @Transactional(readOnly = true)
+    public Result listaProyectos() {
+        // Obtenemos el mensaje flash guardado en la petición por el controller crearUsuario
+        String mensaje = flash("crearProyecto");
+        List<Proyecto> proyectos = ProyectosService.findAllProyectos();
+        return ok(listaProyectos.render(proyectos));
     }
 }

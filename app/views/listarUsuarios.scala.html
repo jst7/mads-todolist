@@ -17,28 +17,26 @@
 
 <div class="col-xs-push-1 col-xs-11">
     <h2> Listado de usuarios </h2>
-
-    <ul class="list-group">
     <table class="table table-striped">
-    <tr>
-    <thead class="thead-inverse bg-primary">
-        <th>
-        ID: Login
-        </th>
-        <th>
-        Borrar Usuario
-        </th>
-        <th>
-        Detalle del Usuario
-        </th>
-        <th>
-        Editar Usuario
-        </th>
-        <th>
-        Tareas
-        </th>
-        </thead>
-    </tr>
+        <tr>
+            <thead class="thead-inverse bg-primary">
+                <th>
+                    ID: Login
+                </th>
+                <th>
+                    Borrar Usuario
+                </th>
+                <th>
+                    Detalle del Usuario
+                </th>
+                <th>
+                    Editar Usuario
+                </th>
+                <th>
+                    Tareas
+                </th>
+            </thead>
+        </tr>
     @for(usuario <- usuarios) {
         <tr>
             <td>
@@ -65,12 +63,12 @@
                 </a>
             </td>
         </tr>
-      }
-      </table>
-      <a class="btn btn-success" href="@routes.UsuarioController.crearUsuarioFormulario()"> <span class="glyphicon glyphicon-plus" aria-hidden="true"</span></a>&nbsp;
-        </li>
-
-    </ul>
+    }
+    </table>
+    <a class="btn btn-success" href="@routes.UsuarioController.crearUsuarioFormulario()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+    <span>Nuevo usuario</span>
+    <a class="btn btn-success" href="@routes.ProyectosController.listaProyectos()"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a>
+    <span>Proyectos</span>
 
     @if(mensaje != null) {
         <div class="alert alert-success">

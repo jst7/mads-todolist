@@ -23,4 +23,9 @@ public class ProyectoDAO {
                   "select p from Proyecto p ORDER BY id", Proyecto.class);
         return query.getResultList();
     }
+
+    public static void delete(Integer idProyecto) {
+        Proyecto proyecto = JPA.em().getReference(Proyecto.class, idProyecto);
+        JPA.em().remove(proyecto);
+    }    
 }

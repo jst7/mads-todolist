@@ -20,6 +20,7 @@ public class TareasController extends Controller {
         if (usuario == null) {
             return notFound("Usuario no encontrado");
         } else {
+
             List<Tarea> tareas = TareasService.listaTareasUsuario(usuarioId);
             return ok(listaTareas.render(tareas, usuario));
         }
@@ -132,13 +133,15 @@ public class TareasController extends Controller {
 
     @Transactional
     public Result RealizarAsignacion(Integer idt,Integer idp){
+      Logger.info("entro");
       List<Proyecto> proyectos = ProyectosService.findAllProyectos();
       Tarea tarea= TareasService.findTarea(idt);
       Proyecto proyecto = ProyectosService.find(idp);
+
       if(TareasService.AsignarProyecto(tarea,proyecto)){
-          return ok(AsignarProyecto.render(proyectos,tarea,"Tarea asignada a proyecto"));
+          return ok();
       }else{
-          return badRequest(AsignarProyecto.render(proyectos,tarea,"Error al asignar"));
+          return badRequest();
       }
     }
 

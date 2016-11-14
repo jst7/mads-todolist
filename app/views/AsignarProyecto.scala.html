@@ -1,6 +1,21 @@
 @(proyectos: List[Proyecto],tarea: Tarea, mensaje: String)
 
-@main("Proyectos"){
+
+@scripts = {
+    <script type="text/javascript">
+        function edi(urlEditar) {
+            $.ajax({
+                url: urlEditar,
+                type: 'POST',
+                success: function(results) {
+                  
+                }
+            });
+        }
+    </script>
+}
+
+@main("Asignar Proyecto para la tarea @tarea.id", scripts){
   <div class="col-xs-push-1 col-xs-11">
           <table>
               <td>
@@ -21,8 +36,9 @@
                   <tr>
                       <td>@proyecto.id</td>
                       <td>@proyecto.nombre</td>
-                      <td><a onmouseover="" style="cursor: pointer;" href='@routes.TareasController.RealizarAsignacion(tarea.id,proyecto.id)'></a>
+                      <td><a onclick="edi('@routes.TareasController.RealizarAsignacion(tarea.id,proyecto.id)')">
                         <i class="fa fa-check fa-2x" aria-hidden="true" style="color:#8B0000"></i>
+                      </a>
                       </td>
                   </tr>
                 }

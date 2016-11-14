@@ -1,0 +1,33 @@
+@(proyectos: List[Proyecto],tarea: Tarea, mensaje: String)
+
+@main("Proyectos"){
+  <div class="col-xs-push-1 col-xs-11">
+          <table>
+              <td>
+                  <h1>Listado de proyectos disponibles</h1>
+              </td>
+          </table>
+
+          <ul class="list-group">
+              <table class="table table-striped">
+                  <tr>
+                  <thead class="thead-inverse bg-primary">
+                      <th>Id</th>
+                      <th>Nombre</th>
+                      <th>Asignar</th>
+                  </thead>
+                  </tr>
+              @for(proyecto <- proyectos) {
+                  <tr>
+                      <td>@proyecto.id</td>
+                      <td>@proyecto.nombre</td>
+                      <td><a onmouseover="" style="cursor: pointer;" href='@routes.TareasController.RealizarAsignacion(tarea.id,proyecto.id)'></a>
+                        <i class="fa fa-check fa-2x" aria-hidden="true" style="color:#8B0000"></i>
+                      </td>
+                  </tr>
+                }
+            </table>
+          </ul>
+    </div>
+
+}

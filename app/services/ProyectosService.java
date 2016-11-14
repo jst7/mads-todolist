@@ -11,12 +11,11 @@ import models.*;
 
 public class ProyectosService {
 	public static Proyecto crearProyecto(Proyecto proyecto) {
-<<<<<<< ec9c481102442f8791245bde99a62ad85f639bf0
 			return ProyectoDAO.create(proyecto);
     }
 
     public static boolean deleteProyecto(Integer id) {
-            
+
         try{
             ProyectoDAO.delete(id);
             return true;
@@ -41,10 +40,6 @@ public class ProyectosService {
         ProyectoDAO.update(proyecto);
         return proyecto;
     }
-=======
-		return ProyectoDAO.create(proyecto);
-    }
 
-		
->>>>>>> TIC-2.4 Añadido service tarea asignar proyecto
+
 }

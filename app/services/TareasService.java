@@ -39,10 +39,6 @@ public class TareasService {
         }
     }
     public static boolean AsignarProyecto(Tarea tarea, Proyecto proyecto){
-<<<<<<< HEAD
-=======
-
->>>>>>> 81e813d7b455f6a980d14bccb40197ea2247e0b0
       try{
         tarea.proyecto = proyecto;
         TareaDAO.update(tarea);

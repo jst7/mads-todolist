@@ -8,7 +8,7 @@
                 url: urlEditar,
                 type: 'POST',
                 success: function(results) {
-                  
+                  window.location.assign("@routes.TareasController.listaTareas(tarea.usuario.id)");
                 }
             });
         }
@@ -36,8 +36,8 @@
                   <tr>
                       <td>@proyecto.id</td>
                       <td>@proyecto.nombre</td>
-                      <td><a onclick="edi('@routes.TareasController.RealizarAsignacion(tarea.id,proyecto.id)')">
-                        <i class="fa fa-check fa-2x" aria-hidden="true" style="color:#8B0000"></i>
+                      <td><a style="cursor: pointer;" onclick="edi('@routes.TareasController.RealizarAsignacion(tarea.id,proyecto.id)')">
+                        <i class="fa fa-check fa-2x" aria-hidden="true" style="color:#04B431"></i>
                       </a>
                       </td>
                   </tr>

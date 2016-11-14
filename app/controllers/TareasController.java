@@ -133,7 +133,7 @@ public class TareasController extends Controller {
 
     @Transactional
     public Result RealizarAsignacion(Integer idt,Integer idp){
-      Logger.info("entro");
+  
       List<Proyecto> proyectos = ProyectosService.findAllProyectos();
       Tarea tarea= TareasService.findTarea(idt);
       Proyecto proyecto = ProyectosService.find(idp);

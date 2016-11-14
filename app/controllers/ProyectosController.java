@@ -60,6 +60,7 @@ public class ProyectosController extends Controller {
         }
     }
 
+    @Transactional
     public Result editarProyectoView(Integer idProyecto) {
         Form<Proyecto> proyectoForm = formFactory.form(Proyecto.class);
         Proyecto proyecto           = ProyectosService.find(idProyecto);
@@ -79,7 +80,7 @@ public class ProyectosController extends Controller {
             proyectoAux.nombre          = proyecto.nombre;
             proyectoAux                 = ProyectosService.modificar(proyectoAux);
             List<Proyecto> proyectos    = ProyectosService.findAllProyectos();
-            return ok(listaProyectos.render(proyectos));
+            return ok(editarProyecto.render(project, "Proyecto modificado", idProyecto));
         }
    }
 }

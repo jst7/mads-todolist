@@ -23,4 +23,12 @@ public class ProyectoDAO {
                   "select p from Proyecto p ORDER BY id", Proyecto.class);
         return query.getResultList();
     }
+
+    public static Proyecto find(Integer id) {
+        return JPA.em().find(Proyecto.class, id);
+    }
+
+    public static Proyecto update(Proyecto proyecto) {
+        return JPA.em().merge(proyecto);
+    }
 }

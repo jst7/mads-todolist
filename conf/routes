@@ -53,3 +53,7 @@ POST 	/proyectos/crear 			controllers.ProyectosController.crearProyecto()
 
 # Listar Proyectos
 GET   /proyectos            controllers.ProyectosController.listaProyectos()
+
+# Editar proyecto
+GET		/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(id: Integer)
+POST	/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(id: Integer)

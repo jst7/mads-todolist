@@ -49,4 +49,14 @@ public class ProyectosController extends Controller {
         List<Proyecto> proyectos = ProyectosService.findAllProyectos();
         return ok(listaProyectos.render(proyectos));
     }
+
+    @Transactional
+    public Result borraProyecto(Integer id) {
+        boolean termina = ProyectosService.deleteProyecto(id);
+        if(termina){
+            return ok();
+        }else{
+            return badRequest();
+        }
+    }
 }

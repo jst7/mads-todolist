@@ -19,4 +19,16 @@ public class ProyectosService {
 
 				return lista;
 		}
+
+
+    public static boolean deleteProyecto(Integer id) {
+            
+        try{
+            ProyectoDAO.delete(id);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
 }

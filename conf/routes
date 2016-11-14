@@ -53,3 +53,6 @@ POST 	/proyectos/crear 			controllers.ProyectosController.crearProyecto()
 
 # Listar Proyectos
 GET   /proyectos            controllers.ProyectosController.listaProyectos()
+
+#Borrar proyecto
+DELETE  /proyectos/:id/ProyectoBorrar               controllers.ProyectosController.borraProyecto(id: Integer)

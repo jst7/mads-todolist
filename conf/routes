@@ -56,3 +56,7 @@ GET   /proyectos            controllers.ProyectosController.listaProyectos()
 
 #Borrar proyecto
 DELETE  /proyectos/:id/ProyectoBorrar               controllers.ProyectosController.borraProyecto(id: Integer)
+
+# Editar proyecto
+GET		/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(id: Integer)
+POST	/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(id: Integer)

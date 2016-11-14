@@ -59,4 +59,28 @@ public class ProyectosController extends Controller {
             return badRequest();
         }
     }
+
+    @Transactional
+    public Result editarProyectoView(Integer idProyecto) {
+        Form<Proyecto> proyectoForm = formFactory.form(Proyecto.class);
+        Proyecto proyecto           = ProyectosService.find(idProyecto);
+        proyectoForm                = proyectoForm.fill(proyecto);
+        return ok(editarProyecto.render(proyectoForm, "", idProyecto));
+    }
+
+    @Transactional
+    public Result editarProyectoAction(Integer idProyecto) {
+        Form<Proyecto> project = formFactory.form(Proyecto.class).bindFromRequest();
+        if (project.hasErrors()) {
+            Form<Proyecto> ProyectoFormbad = formFactory.form(Proyecto.class);
+            return badRequest(editarProyecto.render(project, "Necesita nombre para ser modificado", idProyecto));
+        } else {
+            Proyecto proyectoAux        = ProyectosService.find(idProyecto);
+            Proyecto proyecto           = project.get();
+            proyectoAux.nombre          = proyecto.nombre;
+            proyectoAux                 = ProyectosService.modificar(proyectoAux);
+            List<Proyecto> proyectos    = ProyectosService.findAllProyectos();
+            return ok(editarProyecto.render(project, "Proyecto modificado", idProyecto));
+        }
+   }
 }

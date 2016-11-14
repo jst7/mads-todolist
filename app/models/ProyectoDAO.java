@@ -28,4 +28,12 @@ public class ProyectoDAO {
         Proyecto proyecto = JPA.em().getReference(Proyecto.class, idProyecto);
         JPA.em().remove(proyecto);
     }    
+
+    public static Proyecto find(Integer id) {
+        return JPA.em().find(Proyecto.class, id);
+    }
+
+    public static Proyecto update(Proyecto proyecto) {
+        return JPA.em().merge(proyecto);
+    }
 }

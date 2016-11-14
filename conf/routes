@@ -32,7 +32,7 @@ POST    /usuarios/modifica          controllers.UsuarioController.escribirUsuari
 #Eliminar usuario
 DELETE  /usuarios/:id               controllers.UsuarioController.borraUsuario(id: Integer)
 
-#Listar Tareia
+#Listar Tarea
 GET  /usuarios/:id/tareas               controllers.TareasController.listaTareas(id: Integer)
 
 GET  /usuarios/:id/anadirtareas               controllers.TareasController.crearTareaFormulario(id: Integer)
@@ -40,7 +40,8 @@ POST    /usuarios/tarea/nuevo             controllers.TareasController.crearTare
 GET     /usuarios/:id/tareaseditar          controllers.TareasController.editarTarea(id: Integer)
 POST    /usuarios/tareasmodifica          controllers.TareasController.escribirTareaModificada()
 DELETE  /usuarios/:id/tareasborrar               controllers.TareasController.borraTarea(id: Integer)
-
+GET     /Tareas/:id/Asignar                controllers.TareasController.AsignarProyecto(id: Integer)
+POST    /Tareas/:idt/Proyecto/:idp          controllers.TareasController.RealizarAsignacion(idt: Integer,idp: Integer)
 #Acerca de
 GET  /acercade               controllers.ApplicationController.AcercaDe()
 

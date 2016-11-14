@@ -20,6 +20,7 @@ public class TareasController extends Controller {
         if (usuario == null) {
             return notFound("Usuario no encontrado");
         } else {
+
             List<Tarea> tareas = TareasService.listaTareasUsuario(usuarioId);
             return ok(listaTareas.render(tareas, usuario));
         }
@@ -105,7 +106,7 @@ public class TareasController extends Controller {
                     break;
                     default: tareaAnterior.tamano ="Sin tamaño";
                 }
-                
+
                 tareaAnterior = TareasService.modificaTarea(tareaAnterior);
                 Form<Tarea> tareaForm = formFactory.form(Tarea.class);
                 tareaForm = tareaForm.fill(tareaAnterior);
@@ -122,4 +123,27 @@ public class TareasController extends Controller {
             return badRequest();
         }
     }
+
+    @Transactional
+    public Result AsignarProyecto(Integer id){
+      Tarea tarea = TareasService.findTarea(id);
+      List<Proyecto> proyectos = ProyectosService.findAllProyectos();
+      return ok(AsignarProyecto.render(proyectos,tarea,""));
+    }
+
+    @Transactional
+    public Result RealizarAsignacion(Integer idt,Integer idp){
+  
+      List<Proyecto> proyectos = ProyectosService.findAllProyectos();
+      Tarea tarea= TareasService.findTarea(idt);
+      Proyecto proyecto = ProyectosService.find(idp);
+
+      if(TareasService.AsignarProyecto(tarea,proyecto)){
+          return ok();
+      }else{
+          return badRequest();
+      }
+    }
+
+
 }

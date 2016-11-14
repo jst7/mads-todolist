@@ -8,7 +8,7 @@
             var id =  $("#usuarioId").val();
             $("#atras").attr("href","/usuarios/"+id+"/tareas");
         });
- 
+
     </script>
 }
 
@@ -31,7 +31,7 @@
                 <h1>Modificar Tarea</h1>
             </td>
         </table>
-        
+
         @helper.form(action = routes.TareasController.escribirTareaModificada()) {
             <fieldset>
             <legend>Tarea a Modificar: @tareaForm("id").value</legend>
@@ -44,7 +44,7 @@
                 <option value="1">Mediana</option>
                 <option value="2">Grande</option>
                 <option value="3">Sin tamaño</option>
-            </select> 
+            </select>
             </fieldset>
 
             <div>

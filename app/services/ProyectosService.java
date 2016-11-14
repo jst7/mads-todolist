@@ -15,7 +15,7 @@ public class ProyectosService {
     }
 
     public static boolean deleteProyecto(Integer id) {
-            
+
         try{
             ProyectoDAO.delete(id);
             return true;
@@ -40,4 +40,5 @@ public class ProyectosService {
         ProyectoDAO.update(proyecto);
         return proyecto;
     }
+
 }

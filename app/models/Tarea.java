@@ -16,7 +16,7 @@ public class Tarea {
 
     public Integer duracion=0;
     public String tamano="Sin tamaño";
-    
+
     // Un constructor vacío necesario para JPA
     public Tarea() {}
 
@@ -53,7 +53,6 @@ public class Tarea {
     public Tarea copy() {
         Tarea nueva = new Tarea(this.descripcion,this.duracion, this.tamano);
         nueva.id = this.id;
-        
         return nueva;
     }
 

@@ -18,13 +18,13 @@ public class UsuariosService {
         public static List<Usuario> findAllUsuarios() {
         	List<Usuario> lista = UsuarioDAO.findAll();
         	Logger.debug("Numero de usuarios: " + lista.size());
-        
+
         	return lista;
     	}
 
     	public static Usuario findUsuario(Integer id) {
         	Usuario user = UsuarioDAO.find(id);
-            
+
         	return user;
     	}
         public static Usuario modificaUsuario(Usuario usuario) {
@@ -38,8 +38,14 @@ public class UsuariosService {
         }
 
         public static boolean deleteUsuario(Integer id) {
-            
+
             try{
+                Usuario u = findUsuario(id);
+                if(u.tareas.size() > 0){
+                    for(int i=u.tareas.size()-1;i>-1;i--){
+                        TareasService.deleteTarea(u.tareas.get(i).id);
+                    }
+                }
                 UsuarioDAO.delete(id);
                 return true;
             }
@@ -64,5 +70,5 @@ public class UsuariosService {
         }
         public static boolean loginUsuario(Usuario user) {
             return UsuarioDAO.LoginUsuario(user);
-        }        
+        }
 }

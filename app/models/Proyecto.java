@@ -25,7 +25,8 @@ public class Proyecto {
     }
 
     public String toString() {
-        return String.format("Proyecto id: %s nombre: %s", id, nombre);
+        //return String.format("Proyecto id: %s nombre: %s", id, nombre);
+        return String.format("%s", nombre);
     }
     public Proyecto copy() {
         Proyecto nuevo 	= new Proyecto(this.nombre);

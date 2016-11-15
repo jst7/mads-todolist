@@ -7,7 +7,7 @@ import play.data.format.*;
 
 
 @Entity
-public class Tarea {
+public class Tarea implements Comparable<Tarea>{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer id;
@@ -82,6 +82,25 @@ public class Tarea {
         }
         return true;
     }
+
+    @Override
+    public int compareTo(Tarea t){
+        if(this.proyecto == null) {
+            return 1;
+        }
+        if(t.proyecto == null) {
+            return -1;
+        }
+        if(this.proyecto.id < t.proyecto.id){
+            return -1;
+        }
+        if(this.proyecto.id > t.proyecto.id){
+            return 1;
+        }
+        return 0;
+    }
+
+
     @ManyToOne
     @JoinColumn(name="usuarioId")
     public Usuario usuario;

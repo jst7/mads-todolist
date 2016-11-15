@@ -10,6 +10,7 @@ import services.*;
 import views.html.*;
 import javax.inject.*;
 import java.util.List;
+import java.util.Collections;
 
 public class TareasController extends Controller {
 
@@ -22,6 +23,7 @@ public class TareasController extends Controller {
         } else {
 
             List<Tarea> tareas = TareasService.listaTareasUsuario(usuarioId);
+            Collections.sort(tareas);
             return ok(listaTareas.render(tareas, usuario));
         }
     }
@@ -133,7 +135,7 @@ public class TareasController extends Controller {
 
     @Transactional
     public Result RealizarAsignacion(Integer idt,Integer idp){
-  
+
       List<Proyecto> proyectos = ProyectosService.findAllProyectos();
       Tarea tarea= TareasService.findTarea(idt);
       Proyecto proyecto = ProyectosService.find(idp);

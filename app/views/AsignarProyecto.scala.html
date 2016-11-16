@@ -1,4 +1,4 @@
-@(proyectos: List[Proyecto],tarea: Tarea, mensaje: String)
+@(proyectos: List[Proyecto],tarea: Tarea, nombreProyecto: String, mensaje: String)
 
 
 @scripts = {
@@ -27,8 +27,7 @@
                 <h1>Listado de proyectos disponibles</h1>
             </td>
         </table>
-        <h3> Para @tarea.descripcion</h3>
-
+        <h3> Para la tarea: @tarea.descripcion</h3>
           <ul class="list-group">
               <table class="table table-striped">
                   <tr>
@@ -43,17 +42,19 @@
                       <td>@proyecto.id</td>
                       <td>@proyecto.nombre</td>
                       <td>
-                      @if(tarea.proyecto.nombre == proyecto.nombre) {
+
+                      @if(nombreProyecto == proyecto.nombre) {
                         <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
                         <a class="btn btn-danger"  onclick="edi('')">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                         </a>
                       }
-                      @if(tarea.proyecto.nombre != proyecto.nombre){
+                      @if(nombreProyecto != proyecto.nombre){
                         <a class="btn btn-primary"  onclick="edi('@routes.TareasController.RealizarAsignacion(tarea.id,proyecto.id)')">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                         </a>
                       }
+
 
                       </td>
                   </tr>

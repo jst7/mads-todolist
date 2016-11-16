@@ -17,7 +17,8 @@ public class Proyecto {
     public String nombre;
 
     // Un constructor vacío necesario para JPA
-    public Proyecto() {}
+    public Proyecto() {
+    }
 
     // El constructor principal con los campos obligatorios
     public Proyecto(String nombre) {

@@ -129,8 +129,15 @@ public class TareasController extends Controller {
     @Transactional
     public Result AsignarProyecto(Integer id){
       Tarea tarea = TareasService.findTarea(id);
+      
+      String proyectoNombre="";
+      if(tarea.proyecto!=null){
+        proyectoNombre=tarea.proyecto.nombre;
+      }
+      
       List<Proyecto> proyectos = ProyectosService.findAllProyectos();
-      return ok(AsignarProyecto.render(proyectos,tarea,""));
+
+      return ok(AsignarProyecto.render(proyectos,tarea,proyectoNombre,""));
     }
 
     @Transactional

@@ -1,4 +1,4 @@
-@(proyectos: List[Proyecto],tarea: Tarea, mensaje: String)
+@(proyectos: List[Proyecto],tarea: Tarea, nombreProyecto: String, mensaje: String)
 
 
 @scripts = {
@@ -18,11 +18,16 @@
 @main("Asignar Proyecto para la tarea @tarea.id", scripts){
   <div class="col-xs-push-1 col-xs-11">
           <table>
-              <td>
-                  <h1>Listado de proyectos disponibles</h1>
-              </td>
-          </table>
-
+            <td>
+                <a class="btn btn-primary"  href="@routes.TareasController.listaTareas(tarea.usuario.id)">
+                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+            </td>
+            <td>
+                <h1>Listado de proyectos disponibles</h1>
+            </td>
+        </table>
+        <h3> Para la tarea: @tarea.descripcion</h3>
           <ul class="list-group">
               <table class="table table-striped">
                   <tr>
@@ -36,9 +41,21 @@
                   <tr>
                       <td>@proyecto.id</td>
                       <td>@proyecto.nombre</td>
-                      <td><a style="cursor: pointer;" onclick="edi('@routes.TareasController.RealizarAsignacion(tarea.id,proyecto.id)')">
-                        <i class="fa fa-check fa-2x" aria-hidden="true" style="color:#04B431"></i>
-                      </a>
+                      <td>
+
+                      @if(nombreProyecto == proyecto.nombre) {
+                        <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                        <a class="btn btn-danger"  onclick="edi('')">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </a>
+                      }
+                      @if(nombreProyecto != proyecto.nombre){
+                        <a class="btn btn-primary"  onclick="edi('@routes.TareasController.RealizarAsignacion(tarea.id,proyecto.id)')">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </a>
+                      }
+
+
                       </td>
                   </tr>
                 }

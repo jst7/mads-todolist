@@ -32,9 +32,14 @@ public class ProyectosController extends Controller {
         } else {
             try {
                 Proyecto proyectoNew    = proyecto.get();
-                ProyectosService.crearProyecto(proyectoNew);
-                msg = "Proyecto creado correctamente";
-                return ok(crearProyectoFormulario.render(formFactory.form(Proyecto.class), msg));
+                Proyecto pAux = ProyectosService.crearProyecto(proyectoNew);
+                if (pAux != null) {
+                    msg = "Proyecto creado correctamente";
+                    return ok(crearProyectoFormulario.render(formFactory.form(Proyecto.class), msg));
+                } else {
+                    msg = "Proyecto repetido. Por favor, introduzca otro nombre";
+                    return badRequest(crearProyectoFormulario.render(proyecto, msg));
+                }
             } catch (Exception e) {
                 msg = "Proyecto no creado";
                 return badRequest(crearProyectoFormulario.render(proyecto, msg));

@@ -41,9 +41,10 @@
                   <tr>
                       <td>@proyecto.id</td>
                       <td>@proyecto.nombre</td>
-                      <td><a style="cursor: pointer;" onclick="edi('@routes.TareasController.RealizarAsignacion(tarea.id,proyecto.id)')">
-                        <i class="fa fa-check fa-2x" aria-hidden="true" style="color:#04B431"></i>
-                      </a>
+                      <td>
+                        <a style="cursor: pointer;" onclick="edi('@routes.TareasController.RealizarAsignacion(tarea.id,proyecto.id)')">
+                          <i class="fa fa-check fa-2x" aria-hidden="true" style="color:#04B431"></i>
+                        </a>
                       </td>
                   </tr>
                 }

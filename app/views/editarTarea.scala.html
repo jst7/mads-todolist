@@ -7,6 +7,7 @@
             setTimeout(function(){$("#temporal").hide();  }, 3000)
             var id =  $("#usuarioId").val();
             $("#atras").attr("href","/usuarios/"+id+"/tareas");
+            document.getElementById('@tareaForm("duracion").value'+"select").selected="selected";
         });
 
     </script>
@@ -39,19 +40,11 @@
             <input type="hidden" id="usuarioId" name="usuario.id" value='@tareaForm("usuario.id").value' >
             @helper.inputText(tareaForm("descripcion"), '_label -> "Descripcion")
 
-            <table>
-                <td>
-                   Actual: 
-                </td> 
-                <td>
-                    @tareaForm("tamano").value
-                </td>           
-            </table>
             <select id="duracion" name="duracion" class="form-group">
-                <option value="0">Pequeña</option>
-                <option value="1">Mediana</option>
-                <option value="2">Grande</option>
-                <option value="3">Sin tamaño</option>
+                <option id="0select" value="0">Pequeña</option>
+                <option id="1select" value="1">Mediana</option>
+                <option id="2select" value="2">Grande</option>
+                <option id="3select" value="3">Sin tamaño</option>
             </select> 
             </fieldset>
 

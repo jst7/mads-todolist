@@ -18,10 +18,15 @@
 @main("Asignar Proyecto para la tarea @tarea.id", scripts){
   <div class="col-xs-push-1 col-xs-11">
           <table>
-              <td>
-                  <h1>Listado de proyectos disponibles</h1>
-              </td>
-          </table>
+            <td>
+                <a class="btn btn-primary"  href="@routes.TareasController.listaTareas(tarea.usuario.id)">
+                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+            </td>
+            <td>
+                <h1>Listado de proyectos disponibles</h1>
+            </td>
+        </table>
 
           <ul class="list-group">
               <table class="table table-striped">

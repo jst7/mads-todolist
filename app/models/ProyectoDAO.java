@@ -36,4 +36,10 @@ public class ProyectoDAO {
     public static Proyecto update(Proyecto proyecto) {
         return JPA.em().merge(proyecto);
     }
+
+    public static Proyecto findByName(Proyecto proyecto) {
+        String query = "SELECT p FROM Proyecto p WHERE nombre = :nombre";
+        TypedQuery<Proyecto> result = JPA.em().createQuery(query, Proyecto.class);
+        return result.setParameter("nombre", proyecto.nombre).getSingleResult();
+    }
 }

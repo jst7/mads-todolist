@@ -157,6 +157,10 @@ La asignacion se realiza de la siguiente manera:
       }
     }
 ```
+
+Los proyectos pueden ser editados,borrados y creados.
+
+
 ## Para el Cliente 
 
 Se han añadido las siguientes funcionalidades:
@@ -180,3 +184,9 @@ Se han creado los proyectos los cuales agrupan tareas que pueden ser asignadas a
 Se puede obtener una lista de proyectos:
 
 ![1](14.png "Lista de proyectos")
+
+Se pueden crear proyectos pulsando en el boton +:
+
+![1](15.png "Añadir proyectos")
+
+Editar pulsando en el boton de edicion y borrar con el boton de borrado.

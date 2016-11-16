@@ -64,7 +64,7 @@ public class AnadirTareasTest{
                 Usuario user = UsuarioDAO.find(1);
                 Tarea tarea = new Tarea("Terminar la practica 2", user);
                 tarea = TareaDAO.create(tarea);
-                user.tareas.add(tarea);       
+                user.tareas.add(tarea);
 
                 assertEquals("Terminar la practica 2", TareaDAO.find(tarea.id).descripcion);
                 assertEquals(user.tareas.size(), 5);
@@ -85,7 +85,7 @@ public class AnadirTareasTest{
                 Usuario user = UsuariosService.findUsuario(1);
                 Tarea tarea = new Tarea("Terminar la practica 2", user);
                 tarea = TareasService.crearTarea(tarea);
-                user.tareas.add(tarea);       
+                user.tareas.add(tarea);
 
                 assertEquals("Terminar la practica 2", TareasService.findTarea(tarea.id).descripcion);
                 assertEquals(user.tareas.size(), 5);
@@ -97,6 +97,20 @@ public class AnadirTareasTest{
                 assertEquals("Terminar la practica", TareasService.findTarea(tarea2.id).descripcion);
                 assertEquals(user.tareas.size(), 6);
             });
+    }
+
+    @Test
+    public void CrearTareaConTamaño(){
+      jpa.withTransaction(() -> {
+
+      Usuario user = UsuariosService.findUsuario(1);
+      Tarea tarea = new Tarea("Terminar la practica 2", user,0,"pequeña");
+      tarea = TareaDAO.create(tarea);
+
+      assertEquals("Terminar la practica 2", TareasService.findTarea(tarea.id).descripcion);
+      assertEquals("pequeña",  TareasService.findTarea(tarea.id).tamano);
+
+      });
     }
 
 

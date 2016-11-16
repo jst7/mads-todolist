@@ -42,6 +42,8 @@ POST    /usuarios/tareasmodifica          controllers.TareasController.escribirT
 DELETE  /usuarios/:id/tareasborrar               controllers.TareasController.borraTarea(id: Integer)
 GET     /Tareas/:id/Asignar                controllers.TareasController.AsignarProyecto(id: Integer)
 POST    /Tareas/:idt/Proyecto/:idp          controllers.TareasController.RealizarAsignacion(idt: Integer,idp: Integer)
+POST    /Tareas/:id/DesAsignar            controllers.TareasController.DesAsignarProyecto(id : Integer)
+
 #Acerca de
 GET  /acercade               controllers.ApplicationController.AcercaDe()
 

@@ -45,7 +45,7 @@
 
                       @if(nombreProyecto == proyecto.nombre) {
                         <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                        <a class="btn btn-danger"  onclick="edi('')">
+                        <a class="btn btn-danger"  onclick="edi('@routes.TareasController.DesAsignarProyecto(tarea.id)')">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                         </a>
                       }

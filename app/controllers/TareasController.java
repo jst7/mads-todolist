@@ -128,30 +128,41 @@ public class TareasController extends Controller {
 
     @Transactional
     public Result AsignarProyecto(Integer id){
-      Tarea tarea = TareasService.findTarea(id);
-      
-      String proyectoNombre="";
-      if(tarea.proyecto!=null){
-        proyectoNombre=tarea.proyecto.nombre;
-      }
-      
-      List<Proyecto> proyectos = ProyectosService.findAllProyectos();
+        Tarea tarea = TareasService.findTarea(id);
 
-      return ok(AsignarProyecto.render(proyectos,tarea,proyectoNombre,""));
+        String proyectoNombre="";
+        if(tarea.proyecto!=null){
+          proyectoNombre=tarea.proyecto.nombre;
+        }
+
+        List<Proyecto> proyectos = ProyectosService.findAllProyectos();
+
+        return ok(AsignarProyecto.render(proyectos,tarea,proyectoNombre,""));
     }
 
     @Transactional
     public Result RealizarAsignacion(Integer idt,Integer idp){
 
-      List<Proyecto> proyectos = ProyectosService.findAllProyectos();
-      Tarea tarea= TareasService.findTarea(idt);
-      Proyecto proyecto = ProyectosService.find(idp);
+        List<Proyecto> proyectos = ProyectosService.findAllProyectos();
+        Tarea tarea= TareasService.findTarea(idt);
+        Proyecto proyecto = ProyectosService.find(idp);
 
-      if(TareasService.AsignarProyecto(tarea,proyecto)){
-          return ok();
-      }else{
-          return badRequest();
-      }
+        if(TareasService.AsignarProyecto(tarea,proyecto)){
+            return ok();
+        }else{
+            return badRequest();
+        }
+    }
+
+    @Transactional
+    public Result DesAsignarProyecto(Integer idt) {
+        Tarea tarea = TareasService.findTarea(idt);
+
+        if(TareasService.DesAsignarProyecto(tarea)){
+            return ok();
+        }else {
+            return badRequest();
+        }
     }
 
 

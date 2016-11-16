@@ -38,12 +38,22 @@ public class TareasService {
         }
     }
     public static boolean AsignarProyecto(Tarea tarea, Proyecto proyecto){
-      try{
-        tarea.proyecto = proyecto;
-        TareaDAO.update(tarea);
-        return true;
-      }catch(Exception e){
-          return false;
-      }
+        try{
+            tarea.proyecto = proyecto;
+            TareaDAO.update(tarea);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+
+    public static boolean DesAsignarProyecto(Tarea tarea) {
+        try{
+            tarea.proyecto = null;
+            TareaDAO.update(tarea);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
     }
 }

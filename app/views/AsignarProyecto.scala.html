@@ -27,6 +27,7 @@
                 <h1>Listado de proyectos disponibles</h1>
             </td>
         </table>
+        <h3> Para @tarea.descripcion</h3>
 
           <ul class="list-group">
               <table class="table table-striped">
@@ -42,9 +43,18 @@
                       <td>@proyecto.id</td>
                       <td>@proyecto.nombre</td>
                       <td>
-                        <a style="cursor: pointer;" onclick="edi('@routes.TareasController.RealizarAsignacion(tarea.id,proyecto.id)')">
-                          <i class="fa fa-check fa-2x" aria-hidden="true" style="color:#04B431"></i>
+                      @if(tarea.proyecto.nombre == proyecto.nombre) {
+                        <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                        <a class="btn btn-danger"  onclick="edi('')">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                         </a>
+                      }
+                      @if(tarea.proyecto.nombre != proyecto.nombre){
+                        <a class="btn btn-primary"  onclick="edi('@routes.TareasController.RealizarAsignacion(tarea.id,proyecto.id)')">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </a>
+                      }
+
                       </td>
                   </tr>
                 }

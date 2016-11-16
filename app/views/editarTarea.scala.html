@@ -39,12 +39,20 @@
             <input type="hidden" id="usuarioId" name="usuario.id" value='@tareaForm("usuario.id").value' >
             @helper.inputText(tareaForm("descripcion"), '_label -> "Descripcion")
 
+            <table>
+                <td>
+                   Actual: 
+                </td> 
+                <td>
+                    @tareaForm("tamano").value
+                </td>           
+            </table>
             <select id="duracion" name="duracion" class="form-group">
                 <option value="0">Pequeña</option>
                 <option value="1">Mediana</option>
                 <option value="2">Grande</option>
                 <option value="3">Sin tamaño</option>
-            </select>
+            </select> 
             </fieldset>
 
             <div>

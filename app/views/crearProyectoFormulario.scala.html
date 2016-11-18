@@ -1,0 +1,47 @@
+@(ProyectoForm: Form[Proyecto], mensaje: String)
+
+@scripts = {
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            setTimeout(function(){$("#temporal").hide();  }, 3000)
+        });
+
+ 
+    </script>
+}
+
+@main("Añadir Proyecto",scripts) {
+
+    @if(mensaje != "") {
+        <div class="alert alert-danger" id="temporal">
+            @mensaje
+        </div>
+    }    
+    
+        <div class="col-xs-push-1 col-xs-11">
+        <table>
+            <td>
+                <a class="btn btn-primary"  href="@routes.ProyectosController.listaProyectos()">
+                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+            </td>
+            <td>
+                <h1>Añadir Proyecto nuevo</h1>
+            </td>
+        </table>
+
+        @helper.form(action = routes.ProyectosController.crearProyecto()) {
+            <fieldset>
+            <legend>Proyecto nuevo</legend>
+            @helper.inputText(ProyectoForm("nombre"), '_label -> "Nombre")   
+            </fieldset>
+
+            <div>
+            <input type="submit" class="btn btn-success btn-lg" value="Guardar">
+            <a class="btn btn-danger btn-xs" href="@routes.ProyectosController.listaProyectos()">Cancelar</a>
+            </div>
+            }
+
+        </div>
+}

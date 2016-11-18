@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import services.*;
 import models.*;
 
-public class AnadirTareasTest{
+public class AsignarTareasTest{
 
     static Database db;
     static JPAApi jpa;
@@ -58,60 +58,18 @@ public class AnadirTareasTest{
     }
 
     @Test
-    public void nuevaTareaTestDAO() {
+    public void AsignarTarea() {
             jpa.withTransaction(() -> {
 
                 Usuario user = UsuarioDAO.find(1);
                 Tarea tarea = new Tarea("Terminar la practica 2", user);
                 tarea = TareaDAO.create(tarea);
                 user.tareas.add(tarea);
-
-                assertEquals("Terminar la practica 2", TareaDAO.find(tarea.id).descripcion);
-                assertEquals(user.tareas.size(), 5);
-
-                Tarea tarea2 = new Tarea("Terminar la practica", user);
-                tarea2 = TareaDAO.create(tarea2);
-                user.tareas.add(tarea2);
-
-                assertEquals("Terminar la practica", TareaDAO.find(tarea2.id).descripcion);
-                assertEquals(user.tareas.size(), 6);
+                Proyecto proyecto = new Proyecto("PruebaP");
+                ProyectosService.crearProyecto(proyecto);
+                boolean prueba = TareasService.AsignarProyecto(tarea,proyecto);
+                Proyecto proyectoT = tarea.proyecto;
+                assertEquals(proyecto.nombre, proyectoT.nombre);
             });
     }
-
-    @Test
-    public void nuevaTareaTestService() {
-            jpa.withTransaction(() -> {
-
-                Usuario user = UsuariosService.findUsuario(1);
-                Tarea tarea = new Tarea("Terminar la practica 2", user);
-                tarea = TareasService.crearTarea(tarea);
-                user.tareas.add(tarea);
-
-                assertEquals("Terminar la practica 2", TareasService.findTarea(tarea.id).descripcion);
-                assertEquals(user.tareas.size(), 5);
-
-                Tarea tarea2 = new Tarea("Terminar la practica", user);
-                tarea2 = TareaDAO.create(tarea2);
-                user.tareas.add(tarea2);
-
-                assertEquals("Terminar la practica", TareasService.findTarea(tarea2.id).descripcion);
-                assertEquals(user.tareas.size(), 6);
-            });
-    }
-
-    @Test
-    public void CrearTareaConTamaño(){
-      jpa.withTransaction(() -> {
-
-      Usuario user = UsuariosService.findUsuario(1);
-      Tarea tarea = new Tarea("Terminar la practica 2", user,0,"pequeña");
-      tarea = TareaDAO.create(tarea);
-
-      assertEquals("Terminar la practica 2", TareasService.findTarea(tarea.id).descripcion);
-      assertEquals("pequeña",  TareasService.findTarea(tarea.id).tamano);
-
-      });
-    }
-
-
-}
+  }

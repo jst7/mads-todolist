@@ -143,8 +143,12 @@ public class UsuarioController extends Controller {
             boolean entra = UsuariosService.loginUsuario(usuario);
 
             if(entra){
-                Logger.debug(usuario.login.toString());
-                return ok(saludo.render(usuario.login.toString()));
+                //Recupero el usuario 
+                Usuario userRecu = UsuariosService.existeLogin(usuario);
+
+                List<Tarea> tareas = TareasService.listaTareasUsuario(userRecu.id);
+
+                return ok(listaTareas.render(tareas, userRecu));
             }
             else{
                 return badRequest(paginaInicioLR.render(user, "Login incorrecto"));  

@@ -32,7 +32,7 @@ POST    /usuarios/modifica          controllers.UsuarioController.escribirUsuari
 #Eliminar usuario
 DELETE  /usuarios/:id               controllers.UsuarioController.borraUsuario(id: Integer)
 
-#Listar Tareia
+#Listar Tarea
 GET  /usuarios/:id/tareas               controllers.TareasController.listaTareas(id: Integer)
 
 GET  /usuarios/:id/anadirtareas               controllers.TareasController.crearTareaFormulario(id: Integer)
@@ -40,6 +40,9 @@ POST    /usuarios/tarea/nuevo             controllers.TareasController.crearTare
 GET     /usuarios/:id/tareaseditar          controllers.TareasController.editarTarea(id: Integer)
 POST    /usuarios/tareasmodifica          controllers.TareasController.escribirTareaModificada()
 DELETE  /usuarios/:id/tareasborrar               controllers.TareasController.borraTarea(id: Integer)
+GET     /Tareas/:id/Asignar                controllers.TareasController.AsignarProyecto(id: Integer)
+POST    /Tareas/:idt/Proyecto/:idp          controllers.TareasController.RealizarAsignacion(idt: Integer,idp: Integer)
+POST    /Tareas/:id/DesAsignar            controllers.TareasController.DesAsignarProyecto(id : Integer)
 
 #Acerca de
 GET  /acercade               controllers.ApplicationController.AcercaDe()
@@ -47,4 +50,16 @@ GET  /acercade               controllers.ApplicationController.AcercaDe()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
-	
+# Crear proyecto
+GET 	/proyectos/crear			controllers.ProyectosController.crearProyectoFormulario()
+POST 	/proyectos/crear 			controllers.ProyectosController.crearProyecto()
+
+# Listar Proyectos
+GET   /proyectos            controllers.ProyectosController.listaProyectos()
+
+#Borrar proyecto
+DELETE  /proyectos/:id/ProyectoBorrar               controllers.ProyectosController.borraProyecto(id: Integer)
+
+# Editar proyecto
+GET		/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(id: Integer)
+POST	/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(id: Integer)

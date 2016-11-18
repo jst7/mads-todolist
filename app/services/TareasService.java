@@ -28,12 +28,31 @@ public class TareasService {
         return tarea;
     }
     public static boolean deleteTarea(Integer id) {
-            
+
         try{
             TareaDAO.delete(id);
             return true;
         }
         catch(Exception e){
+            return false;
+        }
+    }
+    public static boolean AsignarProyecto(Tarea tarea, Proyecto proyecto){
+        try{
+            tarea.proyecto = proyecto;
+            TareaDAO.update(tarea);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+
+    public static boolean DesAsignarProyecto(Tarea tarea) {
+        try{
+            tarea.proyecto = null;
+            TareaDAO.update(tarea);
+            return true;
+        }catch(Exception e){
             return false;
         }
     }

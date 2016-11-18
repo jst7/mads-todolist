@@ -68,7 +68,6 @@ public class ListadoTareasTest {
     public void compararTareas() {
         jpa.withTransaction(() -> {
             Tarea tarea1 = TareaDAO.find(1);
-
             // Creamos una copia de la tarea1
             // (otro objeto con los mismos atributos)
             Tarea tarea2 = tarea1.copy();
@@ -76,7 +75,7 @@ public class ListadoTareasTest {
 
             // Creamos una tarea con la misma descripción,
             // pero sin id
-            Tarea tarea3 = new Tarea(tarea1.descripcion);
+            Tarea tarea3 = new Tarea(tarea1.descripcion, tarea1.duracion, tarea1.tamano);
             assertEquals(tarea1, tarea3);
         });
     }

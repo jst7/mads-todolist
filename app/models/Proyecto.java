@@ -61,4 +61,8 @@ public class Proyecto {
 
     @OneToMany(mappedBy="proyecto")
     public List<Tarea> tareas = new ArrayList<Tarea>();
+
+    @ManyToOne
+    @JoinColumn(name="usuarioId")
+    public Usuario Propietario;
 }

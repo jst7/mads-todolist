@@ -162,9 +162,14 @@ public class UsuarioController extends Controller {
         
     }
 
+    @Transactional
     public Result Buscar() {
 
-        return ok(Buscar.render());
+        Usuario user = new Usuario();
+        List<Usuario> usuarios = UsuariosService.findAllUsuarios();
+
+
+        return ok(Buscar.render(usuarios, user));
     }
 
 }

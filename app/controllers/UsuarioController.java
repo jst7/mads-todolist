@@ -162,4 +162,9 @@ public class UsuarioController extends Controller {
         
     }
 
+    public Result Buscar() {
+
+        return ok(Buscar.render());
+    }
+
 }

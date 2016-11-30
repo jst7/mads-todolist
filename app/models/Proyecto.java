@@ -70,4 +70,5 @@ public class Proyecto {
     @ManyToOne
     @JoinColumn(name="propietarioId")
     public Usuario propietario;
+
 }

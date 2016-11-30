@@ -163,11 +163,10 @@ public class UsuarioController extends Controller {
     }
 
     @Transactional
-    public Result Buscar() {
+    public Result Buscar(Integer id, String busqueda) {
 
-        Usuario user = new Usuario();
-        List<Usuario> usuarios = UsuariosService.findAllUsuarios();
-
+        Usuario user = UsuariosService.findUsuario(id);
+        List<Usuario> usuarios = UsuariosService.busquedaUsuario(busqueda);
 
         return ok(Buscar.render(usuarios, user));
     }

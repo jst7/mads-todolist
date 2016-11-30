@@ -65,4 +65,4 @@ GET		/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(
 POST	/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(id: Integer)
 
 # Buscador
-GET 	/buscador			controllers.UsuarioController.Buscar()
+GET 	/buscador			controllers.UsuarioController.Buscar(id: Integer, busqueda: String)

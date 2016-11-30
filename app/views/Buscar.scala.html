@@ -1,15 +1,35 @@
 @(ListaUsers: List[Usuario], usuario: Usuario)
 
-@main("Buscador") {
+@scripts = {
+    <script type="text/javascript">
+        function search() {
+        	var termino = $("#buscar").val();
+        	var URL = "/buscador?id="+ @usuario.id+"&busqueda="+termino
+        
+            $.ajax({
+                url: URL,
+                type: 'GET',
+                success: function(results) {
+                    //refresh the page
+                    location = URL
+                    location.load()
+                    
+                }
+            });
+        }
+    </script>
+}
+
+@main("Buscador", scripts) {
 
 	<h1>Buscador</h1>
 
   <div class="row" style="background-color: #333; height: 50px">
         <div class="col-xs-8" style=" position: relative; top: 7px;">
             <div class="input-group col-xs-12">
-                <input type="text" class="form-control input-md" placeholder="Buscar" />
+                <input type="text" id="buscar" class="form-control input-md" placeholder="Buscar" />
                 <span class="input-group-btn">
-                    <button class="btn btn-success btn-md" type="button">
+                    <button class="btn btn-success btn-md" type="button" onclick="search()">
                         <i class="glyphicon glyphicon-search"></i>
                     </button>
                 </span>

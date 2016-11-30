@@ -71,4 +71,12 @@ public class UsuariosService {
         public static boolean loginUsuario(Usuario user) {
             return UsuarioDAO.LoginUsuario(user);
         }
+
+        public static List<Usuario> busquedaUsuario(String param) {
+            List<Usuario> lista = UsuarioDAO.busquedaUsuario(param);
+            
+
+            return lista;
+        }
+
 }

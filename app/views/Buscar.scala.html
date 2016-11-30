@@ -56,9 +56,13 @@
 @for(user <- ListaUsers) {
 <br>
   <div class="row">
-  	
   	<div class="col-xs-4">
-  		@user.login
+  		    <div class="col-xs-1 bg-primary">
+  				@user.id
+  			</div>
+  			<div class="col-xs-3">
+  				@user.login	
+  			</div>
   	</div>
 
   	<div class="col-xs-4">

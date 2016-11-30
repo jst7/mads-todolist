@@ -26,6 +26,12 @@ public class Usuario {
     @Temporal(TemporalType.DATE)
     public Date fechaNacimiento;
 
+    @OneToMany(mappedBy="usuario")
+    public List<Tarea> tareas = new ArrayList<Tarea>();
+
+    @OneToMany(mappedBy="usuarioFrom")
+    public List<Mensaje> mensaje = new ArrayList<Mensaje>();
+
     // necesario un constructor vacío para JPA
     public Usuario() {}
 
@@ -93,6 +99,4 @@ public class Usuario {
         }
         return true;
     }
-    @OneToMany(mappedBy="usuario")
-    public List<Tarea> tareas = new ArrayList<Tarea>();
 }

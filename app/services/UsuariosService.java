@@ -79,4 +79,15 @@ public class UsuariosService {
             return lista;
         }
 
+        public static Integer CantidadUsuariosBusqueda(String param) {
+            List<Usuario> lista = UsuarioDAO.busquedaUsuario(param);
+            
+            if (lista==null){
+                return 0;
+            }
+
+            Integer cantidad = lista.size();
+            return cantidad;
+        }
+
 }

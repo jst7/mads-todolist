@@ -167,8 +167,9 @@ public class UsuarioController extends Controller {
 
         Usuario user = UsuariosService.findUsuario(id);
         List<Usuario> usuarios = UsuariosService.busquedaUsuario(busqueda);
+        int cantidad = UsuariosService.CantidadUsuariosBusqueda(busqueda);
 
-        return ok(Buscar.render(usuarios, user));
+        return ok(Buscar.render(usuarios, user, cantidad));
     }
 
 }

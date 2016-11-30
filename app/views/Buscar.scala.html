@@ -1,4 +1,4 @@
-@(ListaUsers: List[Usuario], usuario: Usuario)
+@(ListaUsers: List[Usuario], usuario: Usuario, cantidad: Integer)
 
 @scripts = {
     <script type="text/javascript">
@@ -47,6 +47,12 @@
 		</div>		
   </div>
 
+<div class="">
+@if(ListaUsers.length > 0){
+	<div class="row bg-primary">
+	USUARIOS  Cantidad= @cantidad
+	</div>
+}
 @for(user <- ListaUsers) {
 <br>
   <div class="row">
@@ -69,5 +75,6 @@
 
   </div>
   }
+  </div>
 
 }

@@ -63,3 +63,7 @@ DELETE  /proyectos/:id/ProyectoBorrar               controllers.ProyectosControl
 # Editar proyecto
 GET		/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(id: Integer)
 POST	/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(id: Integer)
+
+# Mensajes
+GET		/mensajes/:id					controllers.MensajeController.crearMensajeFormulario(id: Integer)
+POST	/mensajes/:id 					controllers.MensajeController.enviarMensajeAction(id: Integer)

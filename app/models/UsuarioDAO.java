@@ -62,6 +62,12 @@ public class UsuarioDAO {
             + user.login + "' AND password ='"+ user.password + "'", Usuario.class).getResultList();
         return (result.size() == 1);
     }
-
+    public static List<Usuario> busquedaUsuario(String param){
+        TypedQuery<Usuario> query = JPA.em().createQuery(
+                  "select u from Usuario u where login like '%"
+                  + param 
+                  +"%' ORDER BY id", Usuario.class);
+        return query.getResultList();
+    }
 
 }

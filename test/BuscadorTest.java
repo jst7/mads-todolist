@@ -65,4 +65,13 @@ public class BuscadorTest {
         });
     }
 
+    @Test
+    public void BuscarUsuarios(){
+        jpa.withTransaction(() -> {
+          List<Usuario> a = UsuariosService.busquedaUsuario("juan");
+
+          assertEquals(a.get(0).login,"juan");
+        });
+    }
+
 }

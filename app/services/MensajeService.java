@@ -24,4 +24,47 @@ public class MensajeService {
     	Logger.debug("Numero de mensajes: " + lista.size());
     	return lista;
 	}
+
+	public static List<Mensaje> findAllReceived(Integer idUsuario) {
+		Usuario user = UsuariosService.findUsuario(idUsuario);
+    	List<Mensaje> lista = MensajeDAO.findAllReceived(user.login);
+    	Logger.debug("Numero de mensajes: " + lista.size());
+    	return lista;
+	}
+
+	public static List<Mensaje> findAllSended(Integer idUsuario) {
+		Usuario user = UsuariosService.findUsuario(idUsuario);
+    	List<Mensaje> lista = MensajeDAO.findAllSended(user.login);
+    	Logger.debug("Numero de mensajes: " + lista.size());
+    	return lista;
+	}
+
+	public static Mensaje findMensaje(Integer idMensaje) {
+    	Mensaje mensaje = MensajeDAO.find(idMensaje);
+    	return mensaje;
+	}
+
+	public static Boolean leerMensaje(Integer idMensaje) {
+		Logger.debug("mensaje service");
+		Boolean result = false;
+		Mensaje mensaje = findMensaje(idMensaje);
+		if (mensaje.body != "") {
+			mensaje.leido = !mensaje.leido;
+			mensaje = MensajeDAO.update(mensaje);	
+			result = true;
+		}
+		return result;
+	}
+
+	public static Boolean borrarMensaje(Integer idMensaje) {
+		Logger.debug("mensaje service");
+		Boolean result = false;
+		Mensaje mensaje = findMensaje(idMensaje);
+		if (mensaje.body != "") {
+			mensaje.borrado = true;
+			mensaje = MensajeDAO.update(mensaje);	
+			result = true;
+		}
+		return result;
+	}
 }

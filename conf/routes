@@ -70,4 +70,7 @@ GET 	/buscador			controllers.UsuarioController.Buscar(id: Integer, busqueda: Str
 # Mensajes
 GET		/mensaje/nuevo/:id				controllers.MensajeController.crearMensajeFormulario(id: Integer)
 POST	/mensajes/:id 					controllers.MensajeController.enviarMensajeAction(id: Integer)
-GET		/mensajes/:id					controllers.MensajeController.listarMensajes(id: Integer)
+GET		/mensajes/salida/:id			controllers.MensajeController.listarMensajesEnviados(id: Integer)
+GET		/mensajes/entrada/:id			controllers.MensajeController.listarMensajesRecibidos(id: Integer)
+PUT		/mensajes/:id/:idMensaje 		controllers.MensajeController.leerMensaje(idMensaje: Integer, id: Integer)
+DELETE	/mensajes/:id/:idMensaje		controllers.MensajeController.borrarMensaje(idMensaje: Integer, id: Integer)

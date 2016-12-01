@@ -34,6 +34,7 @@ public class Mensaje {
         this.usuarioTo      = usuarioTo;
         this.subject        = subject;
         this.body           = body;
+        this.fechaEnvio     = null;
     }
 
     public Mensaje copy() {

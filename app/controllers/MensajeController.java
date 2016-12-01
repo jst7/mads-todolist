@@ -38,7 +38,7 @@ public class MensajeController extends Controller {
         Mensaje mensaje = mensajeForm.get();
         mensaje.fechaEnvio = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new Date());
         Logger.debug("Mensaje nuevo: " + mensaje.toString());
-        if (MensajeService.crearMenaje(mensaje)) {
+        if (MensajeService.crearMensaje(mensaje)) {
             return ok(enviarMensajeView.render(mensajeForm, "Mensaje enviado", usuarios, user));   
         } else {
             return ok(enviarMensajeView.render(mensajeForm, "Mensaje no enviado", usuarios, user));                   

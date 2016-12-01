@@ -25,6 +25,11 @@ public class Proyecto {
         this.nombre = nombre;
     }
 
+    public Proyecto(String nombre,Usuario propietario) {
+        this.nombre = nombre;
+        this.propietario = propietario;
+    }
+
     public String toString() {
         //return String.format("Proyecto id: %s nombre: %s", id, nombre);
         return String.format("%s", nombre);

@@ -71,4 +71,23 @@ public class UsuariosService {
         public static boolean loginUsuario(Usuario user) {
             return UsuarioDAO.LoginUsuario(user);
         }
+
+        public static List<Usuario> busquedaUsuario(String param) {
+            List<Usuario> lista = UsuarioDAO.busquedaUsuario(param);
+            
+
+            return lista;
+        }
+
+        public static Integer CantidadUsuariosBusqueda(String param) {
+            List<Usuario> lista = UsuarioDAO.busquedaUsuario(param);
+            
+            if (lista==null){
+                return 0;
+            }
+
+            Integer cantidad = lista.size();
+            return cantidad;
+        }
+
 }

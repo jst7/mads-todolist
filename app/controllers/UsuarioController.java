@@ -162,4 +162,14 @@ public class UsuarioController extends Controller {
         
     }
 
+    @Transactional
+    public Result Buscar(Integer id, String busqueda) {
+
+        Usuario user = UsuariosService.findUsuario(id);
+        List<Usuario> usuarios = UsuariosService.busquedaUsuario(busqueda);
+        int cantidad = UsuariosService.CantidadUsuariosBusqueda(busqueda);
+
+        return ok(Buscar.render(usuarios, user, cantidad));
+    }
+
 }

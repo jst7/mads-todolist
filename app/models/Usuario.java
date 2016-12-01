@@ -106,11 +106,8 @@ public class Usuario {
     @OneToMany(mappedBy="usuario")
     public List<Tarea> tareas = new ArrayList<Tarea>();
 
-<<<<<<< 4d1e443942727647204b36d4882925090f8178c9
+
     @OneToMany(mappedBy="propietario")
     public List<Proyecto> proyectos = new ArrayList<Proyecto>();
-=======
-    @OneToMany(mappedBy="usuario")
-    public List<Proyecto> proyectosPropietario = new ArrayList<Proyecto>();
->>>>>>> Logica de asignacion dueño añadida
+
 }

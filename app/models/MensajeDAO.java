@@ -17,11 +17,4 @@ public class MensajeDAO {
         Logger.debug(mensaje.toString());
         return true;
     }
-
-    public static List<Mensaje> findAll() {
-        TypedQuery<Mensaje> query = JPA.em().createQuery(
-                  "select u from Mensaje u ORDER BY id", Mensaje.class);
-        return query.getResultList();
-    }    
-
 }

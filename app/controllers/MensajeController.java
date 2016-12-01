@@ -1,6 +1,9 @@
 package controllers;
 
 import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.inject.*;
 
 import play.*;
@@ -33,8 +36,7 @@ public class MensajeController extends Controller {
             return badRequest(enviarMensajeView.render(mensajeForm, "Los datos del formulario contienen errores", usuarios, user));
         }
         Mensaje mensaje = mensajeForm.get();
-        Logger.debug(mensaje.body);
-        //Usuario usuario = UsuarioService.findUsuario(mensajeForm.get().usuarioFromAux);
+        mensaje.fechaEnvio = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new Date());
         Logger.debug("Mensaje nuevo: " + mensaje.toString());
         if (MensajeService.crearMenaje(mensaje)) {
             return ok(enviarMensajeView.render(mensajeForm, "Mensaje enviado", usuarios, user));   

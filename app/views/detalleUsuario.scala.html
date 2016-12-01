@@ -53,7 +53,10 @@
         <a class="btn btn-primary btn-lg" href="@routes.TareasController.listaTareas(user.id)"> Tareas</a>
     </td>
     <td>
-        <a class="btn btn-warning btn-lg" href="@routes.MensajeController.listarMensajes(user.id)">Ver mensajes</a>
+        <a class="btn btn-warning btn-lg" href="@routes.MensajeController.listarMensajesRecibidos(user.id)">Bandeja de entrada</a>
+    </td>
+    <td>
+        <a class="btn btn-warning btn-lg" href="@routes.MensajeController.listarMensajesEnviados(user.id)">Bandeja de salida</a>
     </td>
     <td>
         <a class="btn btn-danger btn-lg" href="@routes.MensajeController.crearMensajeFormulario(user.id)">Nuevo mensaje</a>

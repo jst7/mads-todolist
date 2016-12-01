@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import models.*;
 
 public class MensajeService {
-	public static boolean crearMenaje(Mensaje mensaje) {
+	public static boolean crearMensaje(Mensaje mensaje) {
 		if (mensaje != null && mensaje.body != "") {
 			return MensajeDAO.create(mensaje);
 		} else {

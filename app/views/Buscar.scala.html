@@ -46,20 +46,24 @@
             if(document.getElementById("idTarea").checked==true){
               document.getElementById("usuarioZona").className="col-xs-6";
               document.getElementById("tareaZona").className="col-xs-6";
+              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success hide";
             }
             else{
               document.getElementById("usuarioZona").className="col-xs-12";
-              document.getElementById("tareaZona").className="hidden";          
+              document.getElementById("tareaZona").className="hidden";
+              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success";          
             }
           }
           else{
             if(document.getElementById("idTarea").checked==true){
               document.getElementById("usuarioZona").className="hidden";
               document.getElementById("tareaZona").className="col-xs-12";
+              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success hide";
             }
             else{
               document.getElementById("usuarioZona").className="hidden";
-              document.getElementById("tareaZona").className="hidden";             
+              document.getElementById("tareaZona").className="hidden";
+              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success";             
             }
           }
         }
@@ -70,8 +74,12 @@
 
 @main("Buscador", scripts) {
 
-	<h1>Buscador</h1>
+<br>
+<br>
+<br>
 
+<nav class="navbar navbar-fixed-top">
+  <div class="container">
   <div class="row" style="background-color: #333; height: 50px">
         <div class="col-xs-8" style=" position: relative; top: 7px;">
             <div class="input-group col-xs-12">
@@ -94,6 +102,12 @@
 			<input type="checkbox" id="idUsuario" checked onchange="BUsuario(this)"">
 		</div>		
   </div>
+  </div>
+  </nav>
+
+<div class = "col-xs-12 alert alert-success hide" id="mensajeVacio">
+<h1>Seleccione que quiere ver</h1>
+</div>
 
 <div class="col-xs-6" id="usuarioZona">
 

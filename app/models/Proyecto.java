@@ -63,6 +63,6 @@ public class Proyecto {
     public List<Tarea> tareas = new ArrayList<Tarea>();
 
     @ManyToOne
-    @JoinColumn(name="usuarioId")
-    public Usuario Propietario;
+    @JoinColumn(name="propietarioId")
+    public Usuario propietario;
 }

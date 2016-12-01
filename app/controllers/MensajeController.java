@@ -46,4 +46,11 @@ public class MensajeController extends Controller {
             return ok(enviarMensajeView.render(mensajeForm, "Mensaje no enviado", usuarios, user));                   
         }     
     }
+
+    @Transactional
+    public Result listarMensajes(Integer idUsuario) {
+        List<Mensaje> mensajes = MensajeService.findAll();
+        Usuario user = UsuariosService.findUsuario(idUsuario);
+        return ok(listarMensajes.render(mensajes, "", user));
+    }
 }

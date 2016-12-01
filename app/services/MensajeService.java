@@ -18,4 +18,10 @@ public class MensajeService {
 		}
 		
 	}
+
+	public static List<Mensaje> findAll() {
+    	List<Mensaje> lista = MensajeDAO.findAll();
+    	Logger.debug("Numero de mensajes: " + lista.size());
+    	return lista;
+	}
 }

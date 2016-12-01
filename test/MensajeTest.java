@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import services.*;
 import models.*;
 
-public class EnviarMensajeTest {
+public class MensajeTest {
 
     static Database db;
     static JPAApi jpa;
@@ -83,4 +83,12 @@ public class EnviarMensajeTest {
       });
     }
 
+    @Test
+    public void BuscarMensaje(){
+        jpa.withTransaction(() -> {
+            Mensaje msg = MensajeService.findMensaje(1);
+            String login = msg.usuarioFrom;
+            assertEquals(login, "juan");
+        });
+    }
 }

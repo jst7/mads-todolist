@@ -23,6 +23,8 @@ public class Mensaje {
     public String subject;
     public String body;
     public String fechaEnvio;
+    public Boolean leido;
+    public Boolean borrado;
     
 
     // necesario un constructor vacío para JPA
@@ -35,6 +37,8 @@ public class Mensaje {
         this.subject        = subject;
         this.body           = body;
         this.fechaEnvio     = null;
+        this.leido          = false;
+        this.borrado        = true;
     }
 
     public Mensaje copy() {
@@ -43,12 +47,14 @@ public class Mensaje {
         nuevo.subject       = this.subject;
         nuevo.body          = this.body;
         nuevo.fechaEnvio    = this.fechaEnvio;
+        nuevo.leido         = this.leido;
+        nuevo.borrado       = this.borrado;
         return nuevo;
         }
 
     public String toString() {
-        return String.format("Mensaje id: %s subject: %s body: %s fecha de envio: %s from: %s to: %s",
-                      id, subject, body, fechaEnvio, usuarioFrom, usuarioTo);
+        return String.format("Mensaje id: %s subject: %s body: %s fecha de envio: %s from: %s to: %s leido: %s borrado: %s",
+                      id, subject, body, fechaEnvio, usuarioFrom, usuarioTo, leido, borrado);
     }
 
     @Override

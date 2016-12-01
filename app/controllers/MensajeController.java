@@ -36,6 +36,8 @@ public class MensajeController extends Controller {
             return badRequest(enviarMensajeView.render(mensajeForm, "Los datos del formulario contienen errores", usuarios, user));
         }
         Mensaje mensaje = mensajeForm.get();
+        mensaje.leido = false;
+        mensaje.borrado = false;
         mensaje.fechaEnvio = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new Date());
         Logger.debug("Mensaje nuevo: " + mensaje.toString());
         if (MensajeService.crearMensaje(mensaje)) {

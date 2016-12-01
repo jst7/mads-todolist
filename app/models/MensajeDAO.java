@@ -17,4 +17,10 @@ public class MensajeDAO {
         Logger.debug(mensaje.toString());
         return true;
     }
+
+    public static List<Mensaje> findAll() {
+        TypedQuery<Mensaje> query = JPA.em().createQuery(
+                  "SELECT u FROM Mensaje u WHERE borrado = 0 ORDER BY id ASC", Mensaje.class);
+        return query.getResultList();
+    }
 }

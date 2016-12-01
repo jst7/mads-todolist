@@ -1,0 +1,84 @@
+@(mensajes: List[Mensaje], mensaje: String, usuario: Usuario)
+@scripts = {
+    <script type="text/javascript">
+        /*function del(urlBorrar) {
+            $.ajax({
+                url: urlBorrar,
+                type: 'DELETE',
+                success: function(results) {
+                    //refresh the page
+                    location.reload();
+                }
+            });
+        }*/
+    </script>
+}
+@main("Listado de mensajes", scripts) {
+
+<div class="col-xs-push-1 col-xs-11">
+    <h2> Listado de usuarios </h2>
+    <table class="table table-striped">
+        <tr>
+            <thead class="thead-inverse bg-primary">
+                <th>
+                    Id
+                </th>
+                <th>
+                    De
+                </th>
+                <th>
+                    Para
+                </th>
+                <th>
+                    Asunto
+                </th>
+                <th>
+                    Mensaje
+                </th>
+                <th>
+                    Leer
+                </th>
+                <th>
+                    Borrar
+                </th>
+            </thead>
+        </tr>
+    @for(mensaje <- mensajes) {
+        <tr>
+            <td>
+                @mensaje.id
+            </td>
+            <td>
+                @mensaje.usuarioFrom
+            </td>
+            <td>
+                @mensaje.usuarioTo
+            </td>
+            <td>
+                @mensaje.subject
+            </td>
+            <td>
+                @mensaje.body
+            </td>
+            <td>
+                <a class="btn btn-warning leerMsg" data-id="mensaje.id" href="javascript:;">
+                    <span>Marcar como leído</span>
+                </a>
+            </td>
+            <td>
+                <a class="btn btn-danger eliminarMsg" data-id="mensaje.id" href="javascript:;">
+                    <span>Eliminar mensaje</span>
+                </a>
+            </td>
+        </tr>
+    }
+    </table>
+    <a class="btn btn-success" href="@routes.UsuarioController.detalleUsuario(usuario.id)"><span>Volver</span></a>
+
+    @if(mensaje != null) {
+        <div class="alert alert-success">
+            @mensaje
+        </div>
+    }
+    </div>
+}

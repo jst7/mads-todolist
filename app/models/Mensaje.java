@@ -1,5 +1,7 @@
 package models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.*;
 import play.data.validation.Constraints;
@@ -16,26 +18,20 @@ public class Mensaje {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer id;
+    public String usuarioFrom;
+    public String usuarioTo;
     public String subject;
     public String body;
-    @Temporal(TemporalType.DATE)
-    public Date fechaEnvio;
-
-    @ManyToOne
-    @JoinColumn(name="usuarioTo")
-    public Usuario usuarioTo;
-
-    @ManyToOne
-    @JoinColumn(name="usuarioFrom")
-    public Usuario usuarioFrom;
+    public String fechaEnvio;
+    
 
     // necesario un constructor vacío para JPA
     public Mensaje() {}
 
     // El campos obligatorios del constructor
-    public Mensaje(Usuario usuarioFrom, Usuario usuarioTo, String subject, String body) {
-        //this.usuarioFrom    = usuarioFrom;
-        //this.usuarioTo      = usuarioTo;
+    public Mensaje(String usuarioFrom, String usuarioTo, String subject, String body) {
+        this.usuarioFrom    = usuarioFrom;
+        this.usuarioTo      = usuarioTo;
         this.subject        = subject;
         this.body           = body;
     }
@@ -50,13 +46,8 @@ public class Mensaje {
         }
 
     public String toString() {
-        String fechaStr = null;
-        if (fechaEnvio != null) {
-            SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
-            fechaStr = formateador.format(fechaEnvio);
-        }
-        return String.format("Mensaje id: %s subject: %s body: %s from: %s to: %s",
-                      id, subject, body, fechaStr, usuarioFrom, usuarioTo);
+        return String.format("Mensaje id: %s subject: %s body: %s fecha de envio: %s from: %s to: %s",
+                      id, subject, body, fechaEnvio, usuarioFrom, usuarioTo);
     }
 
     @Override

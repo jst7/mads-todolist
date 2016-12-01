@@ -97,5 +97,5 @@ public class Usuario {
     public List<Tarea> tareas = new ArrayList<Tarea>();
 
     @OneToMany(mappedBy="propietario")
-    public List<Proyecto> proyectosPropietario = new ArrayList<Proyecto>();
+    public List<Proyecto> proyectos = new ArrayList<Proyecto>();
 }

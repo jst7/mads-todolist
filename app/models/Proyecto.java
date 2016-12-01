@@ -71,5 +71,4 @@ public class Proyecto {
     @JoinColumn(name="propietarioId")
     public Usuario propietario;
 
-
 }

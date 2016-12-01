@@ -109,5 +109,4 @@ public class Usuario {
     @OneToMany(mappedBy="propietario")
     public List<Proyecto> proyectos = new ArrayList<Proyecto>();
 
-
 }

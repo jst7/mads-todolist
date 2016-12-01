@@ -74,4 +74,22 @@ public class BuscadorTest {
         });
     }
 
+    @Test
+    public void BuscarCantidadTareas(){
+        jpa.withTransaction(() -> {
+          int a = TareasService.CantidadTareasBusqueda("");
+
+          assertEquals(a,4);
+        });
+    }
+
+    @Test
+    public void BuscarTareas(){
+        jpa.withTransaction(() -> {
+          List<Tarea> a = TareasService.busquedaTarea("Estudiar");
+
+          assertEquals(a.get(0).descripcion,"Estudiar el parcial de matemáticas");
+        });
+    }
+
 }

@@ -166,10 +166,14 @@ public class UsuarioController extends Controller {
     public Result Buscar(Integer id, String busqueda) {
 
         Usuario user = UsuariosService.findUsuario(id);
-        List<Usuario> usuarios = UsuariosService.busquedaUsuario(busqueda);
-        int cantidad = UsuariosService.CantidadUsuariosBusqueda(busqueda);
 
-        return ok(Buscar.render(usuarios, user, cantidad));
+        List<Usuario> usuarios = UsuariosService.busquedaUsuario(busqueda);
+        List<Tarea> tareas = TareasService.busquedaTarea(busqueda);
+
+        int cantidadU = UsuariosService.CantidadUsuariosBusqueda(busqueda);
+        int cantidadT = TareasService.CantidadTareasBusqueda(busqueda);
+
+        return ok(Buscar.render(usuarios, tareas , user, cantidadU, cantidadT));
     }
 
 }

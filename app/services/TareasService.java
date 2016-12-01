@@ -56,4 +56,23 @@ public class TareasService {
             return false;
         }
     }
+
+    public static List<Tarea> busquedaTarea(String param) {
+        List<Tarea> lista = TareaDAO.busquedaTarea(param);
+            
+
+            return lista;
+    }
+    
+    public static Integer CantidadTareasBusqueda(String param) {
+        List<Tarea> lista = TareaDAO.busquedaTarea(param);
+            
+            if (lista==null){
+                return 0;
+            }
+
+            Integer cantidad = lista.size();
+            return cantidad;
+        }
+
 }

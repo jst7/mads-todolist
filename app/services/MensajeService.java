@@ -16,7 +16,6 @@ public class MensajeService {
 		} else {
 			return false;
 		}
-		
 	}
 
 	public static List<Mensaje> findAll() {
@@ -44,8 +43,7 @@ public class MensajeService {
     	return mensaje;
 	}
 
-	public static Boolean leerMensaje(Integer idMensaje) {
-		Logger.debug("mensaje service");
+	/*public static Boolean leerMensaje(Integer idMensaje) {
 		Boolean result = false;
 		Mensaje mensaje = findMensaje(idMensaje);
 		if (mensaje.body != "") {
@@ -57,7 +55,6 @@ public class MensajeService {
 	}
 
 	public static Boolean borrarMensaje(Integer idMensaje) {
-		Logger.debug("mensaje service");
 		Boolean result = false;
 		Mensaje mensaje = findMensaje(idMensaje);
 		if (mensaje.body != "") {
@@ -66,5 +63,5 @@ public class MensajeService {
 			result = true;
 		}
 		return result;
-	}
+	}*/
 }

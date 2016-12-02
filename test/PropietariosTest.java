@@ -55,14 +55,15 @@ public class PropietariosTest {
           Usuario user = new Usuario("pepote","12345");
           UsuarioDAO.create(user);
           Usuario ur = UsuarioDAO.ExisteLogin(user);
-          Proyecto p = new Proyecto("miproyectotest",user);
+          Proyecto p = new Proyecto("miproyectotestnuevo",user);
           Proyecto aux = ProyectoDAO.create(p);
 
           ur.proyectos.add(aux);
-          Proyecto pr = new Proyecto("miproyectotest2");
+          Proyecto pr = new Proyecto("miproyectotest2",user);
 
+          Usuario user1 = pr.propietario;
 
-          assertEquals(true,true);
+          assertEquals(user.id,user1.id);
 
         });
 

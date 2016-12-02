@@ -23,8 +23,14 @@
             <td>@mensaje.subject</td>
             <td>@mensaje.body</td>
             <td>
-                <a class="btn btn-warning leerMsg" data-id="@mensaje.id" data-url="/mensajes/@usuario.id/@mensaje.id" href="javascript:;">
-                    <span class="leidoTxt-@mensaje.id">Marcar como leído</span>
+                <a class="btn @if(mensaje.leido == false) { btn-warning } else { btn-success } leerMsg" data-id="@mensaje.id" data-url="/mensajes/@usuario.id/@mensaje.id" href="javascript:;">
+                    <span class="leidoTxt-@mensaje.id">
+                        @if(mensaje.leido == false) {
+                            Marcar como leído
+                        } else {
+                            Marcar como no leído
+                        }
+                    </span>
                 </a>
             </td>
             <td>

@@ -85,10 +85,13 @@ public class MensajeTest {
 
     @Test
     public void BuscarMensaje(){
-        jpa.withTransaction(() -> {
+        String cad = jpa.withTransaction(() -> {
             Mensaje msg = MensajeService.findMensaje(1);
             String login = msg.usuarioFrom;
-            assertEquals(login, "juan");
+            return login;
+        });
+        jpa.withTransaction(() -> {
+            assertEquals(cad, "juan");
         });
     }
 }

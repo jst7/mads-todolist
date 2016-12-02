@@ -17,4 +17,31 @@ public class MensajeDAO {
         Logger.debug(mensaje.toString());
         return true;
     }
+
+    public static List<Mensaje> findAll() {
+        TypedQuery<Mensaje> query = JPA.em().createQuery(
+                  "SELECT u FROM Mensaje u WHERE borrado = 0 ORDER BY id ASC", Mensaje.class);
+        return query.getResultList();
+    }
+
+    public static List<Mensaje> findAllReceived(String login) {
+        TypedQuery<Mensaje> query = JPA.em().createQuery(
+                  "SELECT u FROM Mensaje u WHERE borrado = 0 AND :login = usuarioTo ORDER BY id ASC", Mensaje.class);
+        return query.setParameter("login", login).getResultList();
+    }
+
+    public static List<Mensaje> findAllSended(String login) {
+        TypedQuery<Mensaje> query = JPA.em().createQuery(
+                  "SELECT u FROM Mensaje u WHERE borrado = 0 AND :login = usuarioFrom ORDER BY id ASC", Mensaje.class);
+        return query.setParameter("login", login).getResultList();
+    }
+
+    public static Mensaje find(Integer idMensaje) {
+        return JPA.em().find(Mensaje.class, idMensaje);
+    }
+
+    public static Mensaje update(Mensaje mensaje) {
+        Logger.debug("mensaje dao");
+        return JPA.em().merge(mensaje);
+    }
 }

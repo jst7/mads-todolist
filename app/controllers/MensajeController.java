@@ -46,4 +46,34 @@ public class MensajeController extends Controller {
             return ok(enviarMensajeView.render(mensajeForm, "Mensaje no enviado", usuarios, user));                   
         }     
     }
+
+    @Transactional
+    public Result listarMensajesEnviados(Integer idUsuario) {
+        List<Mensaje> mensajes = MensajeService.findAllSended(idUsuario);
+        Usuario user = UsuariosService.findUsuario(idUsuario);
+        return ok(listarMensajesEnviados.render(mensajes, "", user));
+    }
+
+    @Transactional
+    public Result listarMensajesRecibidos(Integer idUsuario) {
+        List<Mensaje> mensajes = MensajeService.findAllReceived(idUsuario);
+        Usuario user = UsuariosService.findUsuario(idUsuario);
+        return ok(listarMensajesRecibidos.render(mensajes, "", user));
+    }
+
+    /*@Transactional
+    public Result leerMensaje(Integer idMensaje, Integer idUsuario) {
+        Boolean leido = MensajeService.leerMensaje(idMensaje);
+        List<Mensaje> mensajes = MensajeService.findAll();
+        Usuario user = UsuariosService.findUsuario(idUsuario);
+        return ok(listarMensajesEnviados.render(mensajes, "", user));
+    }
+
+    @Transactional
+    public Result borrarMensaje(Integer idMensaje, Integer idUsuario) {
+        Boolean leido = MensajeService.borrarMensaje(idMensaje);
+        List<Mensaje> mensajes = MensajeService.findAll();
+        Usuario user = UsuariosService.findUsuario(idUsuario);
+        return ok(listarMensajesEnviados            .render(mensajes, "", user));
+    }*/
 }

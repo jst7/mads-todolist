@@ -43,7 +43,7 @@ public class MensajeService {
     	return mensaje;
 	}
 
-	/*public static Boolean leerMensaje(Integer idMensaje) {
+	public static Boolean leerMensaje(Integer idMensaje) {
 		Boolean result = false;
 		Mensaje mensaje = findMensaje(idMensaje);
 		if (mensaje.body != "") {
@@ -63,5 +63,5 @@ public class MensajeService {
 			result = true;
 		}
 		return result;
-	}*/
+	}
 }

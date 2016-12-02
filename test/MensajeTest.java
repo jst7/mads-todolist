@@ -94,4 +94,28 @@ public class MensajeTest {
             assertEquals(cad, "juan");
         });
     }
+
+    @Test
+    public void BorrarMensaje(){
+        jpa.withTransaction(() -> {
+            Boolean res = MensajeService.borrarMensaje(1);
+        });
+
+        jpa.withTransaction(() -> {
+            Mensaje msg = MensajeService.findMensaje(1);
+            assertTrue(msg.borrado);
+        });
+    }
+
+    @Test
+    public void LeerMensaje(){
+        jpa.withTransaction(() -> {
+            Boolean res = MensajeService.leerMensaje(1);
+        });
+
+        jpa.withTransaction(() -> {
+            Mensaje msg = MensajeService.findMensaje(1);
+            assertTrue(msg.leido);
+        });
+    }
 }

@@ -11,7 +11,7 @@ public class UsuarioDAO {
     public static boolean create (Usuario usuario) {
 
         List<Usuario> result = (List<Usuario>) JPA.em().createQuery(
-            "select u from Usuario u WHERE login = '" 
+            "select u from Usuario u WHERE login = '"
             + usuario.login + "'", Usuario.class).getResultList();
         if(result.size() > 0){
             return false;
@@ -36,6 +36,9 @@ public class UsuarioDAO {
     }
 
     public static void delete(Integer idUsuario) {
+      for(Proyecto proyecto:find(idUsuario).proyectos){
+        ProyectoDAO.delete(proyecto.id);
+      }
         Usuario usuario = JPA.em().getReference(Usuario.class, idUsuario);
         JPA.em().remove(usuario);
     }
@@ -48,7 +51,7 @@ public class UsuarioDAO {
     public static Usuario ExisteLoginConPass(Usuario user) {
         TypedQuery<Usuario> result = JPA.em().createQuery(
             "select u from Usuario u WHERE login = :login AND password IS NOT NULL ", Usuario.class);
-        
+
         return result.setParameter("login", user.login).getSingleResult();
     }
     public static Usuario ExisteLogin(Usuario user) {
@@ -58,14 +61,14 @@ public class UsuarioDAO {
     }
     public static boolean LoginUsuario(Usuario user) {
         List<Usuario> result = (List<Usuario>) JPA.em().createQuery(
-            "select u from Usuario u WHERE login = '" 
+            "select u from Usuario u WHERE login = '"
             + user.login + "' AND password ='"+ user.password + "'", Usuario.class).getResultList();
         return (result.size() == 1);
     }
     public static List<Usuario> busquedaUsuario(String param){
         TypedQuery<Usuario> query = JPA.em().createQuery(
                   "select u from Usuario u where login like '%"
-                  + param 
+                  + param
                   +"%' ORDER BY id", Usuario.class);
         return query.getResultList();
     }

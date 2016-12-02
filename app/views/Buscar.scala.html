@@ -23,20 +23,28 @@
             if(document.getElementById("idUsuario").checked==true){
               document.getElementById("usuarioZona").className="col-xs-6";
               document.getElementById("tareaZona").className="col-xs-6";
+              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success hide";
+
             }
             else{
               document.getElementById("usuarioZona").className="hidden";
-              document.getElementById("tareaZona").className="col-xs-12";          
+              document.getElementById("tareaZona").className="col-xs-12";
+              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-successhide hide";
+          
             }
           }
           else{
             if(document.getElementById("idUsuario").checked==true){
               document.getElementById("usuarioZona").className="col-xs-12";
               document.getElementById("tareaZona").className="hidden";
+              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success hide";
+
             }
             else{
               document.getElementById("usuarioZona").className="hidden";
-              document.getElementById("tareaZona").className="hidden";             
+              document.getElementById("tareaZona").className="hidden"; 
+              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success";
+            
             }
           }
         }
@@ -46,20 +54,24 @@
             if(document.getElementById("idTarea").checked==true){
               document.getElementById("usuarioZona").className="col-xs-6";
               document.getElementById("tareaZona").className="col-xs-6";
+              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success hide";
             }
             else{
               document.getElementById("usuarioZona").className="col-xs-12";
-              document.getElementById("tareaZona").className="hidden";          
+              document.getElementById("tareaZona").className="hidden";
+              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success hide";          
             }
           }
           else{
             if(document.getElementById("idTarea").checked==true){
               document.getElementById("usuarioZona").className="hidden";
               document.getElementById("tareaZona").className="col-xs-12";
+              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success hide";
             }
             else{
               document.getElementById("usuarioZona").className="hidden";
-              document.getElementById("tareaZona").className="hidden";             
+              document.getElementById("tareaZona").className="hidden";
+              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success";             
             }
           }
         }
@@ -70,8 +82,12 @@
 
 @main("Buscador", scripts) {
 
-	<h1>Buscador</h1>
+<br>
+<br>
+<br>
 
+<nav class="navbar navbar-fixed-top">
+  <div class="container">
   <div class="row" style="background-color: #333; height: 50px">
         <div class="col-xs-8" style=" position: relative; top: 7px;">
             <div class="input-group col-xs-12">
@@ -94,6 +110,12 @@
 			<input type="checkbox" id="idUsuario" checked onchange="BUsuario(this)"">
 		</div>		
   </div>
+  </div>
+  </nav>
+
+<div class = "col-xs-12 alert alert-success hide" id="mensajeVacio">
+<h1>Seleccione que quiere ver</h1>
+</div>
 
 <div class="col-xs-6" id="usuarioZona">
 
@@ -102,8 +124,8 @@
 	</div>
 
 @for(user <- ListaUsers) {
-<br>
-  <div class="row">
+
+  <div class="row well">
   	<div class="col-xs-4">
   		    <div class="col-xs-1 bg-primary">
   				@user.id
@@ -134,22 +156,23 @@
   </div>
 
 @for(task <- ListaTask) {
-<br>
-  <div class="row">
-    <div class="col-xs-4">
-          <div class="col-xs-1" style="background-color: orange">
+  <div class="row well">
+    <div class="col-xs-6">
+        <div class="col-xs-2" style="background-color: orange">
           @task.id
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-10">
           @task.descripcion 
         </div>
     </div>
 
     <div class="col-xs-4">
-
+      <a class="btn btn-primary" href="">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+      </a>
     </div>
 
-    <div class="col-xs-4">
+    <div class="col-xs-2">
         @task.tamano
     </div>
 

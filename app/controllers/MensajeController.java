@@ -61,7 +61,7 @@ public class MensajeController extends Controller {
         return ok(listarMensajesRecibidos.render(mensajes, "", user));
     }
 
-    /*@Transactional
+    @Transactional
     public Result leerMensaje(Integer idMensaje, Integer idUsuario) {
         Boolean leido = MensajeService.leerMensaje(idMensaje);
         List<Mensaje> mensajes = MensajeService.findAll();
@@ -75,5 +75,5 @@ public class MensajeController extends Controller {
         List<Mensaje> mensajes = MensajeService.findAll();
         Usuario user = UsuariosService.findUsuario(idUsuario);
         return ok(listarMensajesEnviados            .render(mensajes, "", user));
-    }*/
+    }
 }

@@ -11,8 +11,8 @@
                 <th>Para</th>
                 <th>Asunto</th>
                 <th>Mensaje</th>
-                <!--<th>Leer</th>
-                <th>Borrar</th>-->
+                <th>Leer</th>
+                <th>Borrar</th>
             </thead>
         </tr>
     @for(mensaje <- mensajes) {
@@ -22,7 +22,7 @@
             <td>@mensaje.usuarioTo</td>
             <td>@mensaje.subject</td>
             <td>@mensaje.body</td>
-            <!--<td>
+            <td>
                 <a class="btn btn-warning leerMsg" data-id="@mensaje.id" data-url="/mensajes/@usuario.id/@mensaje.id" href="javascript:;">
                     <span class="leidoTxt-@mensaje.id">Marcar como leído</span>
                 </a>
@@ -31,7 +31,7 @@
                 <a class="btn btn-danger eliminarMsg" data-id="@mensaje.id" data-url="/mensajes/@usuario.id/@mensaje.id" href="javascript:;">
                     <span>Eliminar mensaje</span>
                 </a>
-            </td>-->
+            </td>
         </tr>
     }
     </table>

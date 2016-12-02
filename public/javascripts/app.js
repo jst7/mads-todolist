@@ -12,11 +12,11 @@ jQuery(document).ready(function($) {
 
 	// triggers
 	/* Esto son los triggers, (eventos onALGO), onclick, onchange, mouseover etc) */
-	/*$($leerMsg).on("click", function() {
+	$($leerMsg).on("click", function() {
 		var url 		= $(this).data("url")
 		var id  		= $(this).data("id")
 		leerMensaje(url, id);
-	})*/
+	})
 
 	$($borrarMsg).on("click", function() {
 		var url 		= $(this).data("url")
@@ -26,7 +26,7 @@ jQuery(document).ready(function($) {
 
 	// functions
 	/* Aquí abajo van las funciones */
-	/*function leerMensaje(url, id) {
+	function leerMensaje(url, id) {
 		$.ajax({
                 url: url,
                 type: 'PUT',
@@ -34,14 +34,14 @@ jQuery(document).ready(function($) {
                     var parent = $($leidoTxt+"-"+id).parent()
                     if(parent.hasClass("btn-warning")) {
                     	parent.removeClass("btn-warning").addClass("btn-success")
-                    	$($leidoTxt).html("Marcar como no leído")
+                    	parent.html("Marcar como no leído")
                     } else {
                     	parent.removeClass("btn-success").addClass("btn-warning")
-                    	$($leidoTxt).html("Marcar como leído")
+                    	parent.html("Marcar como leído")
                     }
                 }
             })
-	}*/
+	}
 
 	function borrarMensaje(url, id) {
 		$.ajax({

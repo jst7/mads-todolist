@@ -41,7 +41,6 @@ public class MensajeDAO {
     }
 
     public static Mensaje update(Mensaje mensaje) {
-        Logger.debug("mensaje dao");
         return JPA.em().merge(mensaje);
     }
 }

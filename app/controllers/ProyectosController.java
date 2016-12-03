@@ -18,29 +18,20 @@ public class ProyectosController extends Controller {
 
     @Inject FormFactory formFactory;
     @Transactional
-<<<<<<< d69b61599f9f6d57ab2b3bbabc81feb49c12426d
+
     public Result crearProyectoFormulario(Integer idUsuario) {
         return ok(crearProyectoFormulario.render(formFactory.form(Proyecto.class),idUsuario,""));
-=======
-    public Result crearProyectoFormulario() {
-        List<Usuario> listaUsuarios = UsuariosService.findAllUsuarios();
-        return ok(crearProyectoFormulario.render(formFactory.form(Proyecto.class),listaUsuarios,""));
->>>>>>> TIC5-1 Cambios en agregar usuario vista
+
     }
 
     @Transactional
     public Result crearProyecto(Integer idUsuario) {
         Form<Proyecto> proyecto = formFactory.form(Proyecto.class).bindFromRequest();
         String msg = "";
-<<<<<<< d69b61599f9f6d57ab2b3bbabc81feb49c12426d
+
         Usuario user = UsuariosService.findUsuario(idUsuario);
         if(proyecto.hasErrors()){
             return badRequest(crearProyectoFormulario.render(proyecto,idUsuario, "Los datos del formulario contienen errores"));
-=======
-        List<Usuario> listaUsuarios = UsuariosService.findAllUsuarios();
-        if(proyecto.hasErrors()){
-            return badRequest(crearProyectoFormulario.render(proyecto,listaUsuarios, "Los datos del formulario contienen errores"));
->>>>>>> TIC5-1 Cambios en agregar usuario vista
         } else {
             try {
                 Proyecto proyectoNew    = proyecto.get();
@@ -48,7 +39,6 @@ public class ProyectosController extends Controller {
                 Proyecto pAux = ProyectosService.crearProyecto(proyectoNew);
                 if (pAux != null) {
                     msg = "Proyecto creado correctamente";
-<<<<<<< d69b61599f9f6d57ab2b3bbabc81feb49c12426d
                     return ok(crearProyectoFormulario.render(formFactory.form(Proyecto.class),idUsuario, msg));
                 } else {
                     msg = "Proyecto repetido. Por favor, introduzca otro nombre";
@@ -57,16 +47,7 @@ public class ProyectosController extends Controller {
             } catch (Exception e) {
                 msg = "Proyecto no creado";
                 return badRequest(crearProyectoFormulario.render(proyecto,idUsuario, msg));
-=======
-                    return ok(crearProyectoFormulario.render(formFactory.form(Proyecto.class),listaUsuarios, msg));
-                } else {
-                    msg = "Proyecto repetido. Por favor, introduzca otro nombre";
-                    return badRequest(crearProyectoFormulario.render(proyecto,listaUsuarios, msg));
-                }
-            } catch (Exception e) {
-                msg = "Proyecto no creado";
-                return badRequest(crearProyectoFormulario.render(proyecto,listaUsuarios, msg));
->>>>>>> TIC5-1 Cambios en agregar usuario vista
+
             }
         }
     }

@@ -182,7 +182,6 @@ public class UsuarioController extends Controller {
     }
 
     @Transactional
-<<<<<<< 68f9e84cfb9bfcab242ca8df57863c47757b4f2b
     public Result BuscarDetalle(Integer id, Integer idB) {
 
         try{
@@ -195,15 +194,15 @@ public class UsuarioController extends Controller {
             return badRequest("Recurso inexistente");
         }
     }
-=======
+
+    @Transactional
     public Result DashBoard(Integer id) {
 
-        Usuario user = UsuariosService.findUsuario(id);
+        Usuario user = UsuariosService.findUsuarioSinPass(id);
 
 
         return ok(DashBoard.render(user));
     }
 
 
->>>>>>> Esqueleto visual Dashboard
 }

@@ -1,6 +1,26 @@
 @(usuario: Usuario)
 
-@main("Dash"){
+@scripts = {
+	
+	<script type="text/javascript">
+	
+		function buscaDass(){
+			var termino = $("#TextoBuscador").val();
+			var URL = "/buscador?id="+ @usuario.id+"&busqueda="+termino
+			$.ajax({
+				url: URL,
+                type: 'GET',
+                success: function(results) {
+                	location = URL
+                    location.load();
+                }
+            });
+		}
+	</script>
+
+}
+
+@main("Dash", scripts){
 	
 	<div class="col-xs-12 well" >
 		<div class="row">
@@ -64,8 +84,8 @@
 
 			<div class="row">
 				<div class="col-xs-12">
-					<input type="text" name="buscar">
-					<input type="submit" name="botonBuscar" value="Buscar">
+					<input type="text" name="buscar" placeholder="Tareas y Usaurios" id="TextoBuscador">
+					<a class="btn btn-info" onclick="buscaDass()"><span class="glyphicon glyphicon-search" onclick=""> </span></a>
 				</div>
 			</div>
 

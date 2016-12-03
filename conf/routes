@@ -66,6 +66,8 @@ POST	/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoActio
 
 # Buscador
 GET 	/buscador			controllers.UsuarioController.Buscar(id: Integer, busqueda: String)
+GET 	/buscador/usuario			controllers.UsuarioController.BuscarDetalle(id: Integer, idB: Integer)
+GET 	/buscador/tarea			controllers.TareasController.BuscarDetalle(id: Integer, idB: Integer)
 
 # Mensajes
 GET		/mensaje/nuevo/:id				controllers.MensajeController.crearMensajeFormulario(id: Integer)

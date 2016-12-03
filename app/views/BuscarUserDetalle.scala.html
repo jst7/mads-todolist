@@ -1,0 +1,56 @@
+@(user: Usuario, usuario: Usuario)
+
+@main("Buscador") {
+<div class="col-xs-push-1 col-xs-9">
+            <table>
+            <td>
+                <a class="btn btn-primary"  href='@routes.UsuarioController.Buscar(usuario.id,"" )'>
+                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+            </td>
+            <td>
+                <h1>Detalle Usuario</h1>
+            </td>
+        </table>
+    <table class="table table-inverse">
+
+    <tr>
+    <thead class="thead-inverse bg-primary">
+    	<th>
+    	Login
+    	</th>
+    	<th>
+    	Nombre
+    	</th>
+    	<th>
+    	Apellidos
+    	</th>
+    	<th>
+    	eMail
+    	</th>
+    	<th>
+    	Fecha de Nacimiento
+    	</th>
+    </thead>
+    </tr>
+    <tr>
+    	<td>
+    	@user.login
+    	</td>
+    	<td>
+    	@user.nombre
+    	</td>
+    	<td>
+    	@user.apellidos
+    	</td>
+    	<td>
+    	@user.eMail
+    	</td>
+    	<td>
+    	@user.fechaNacimiento
+    	</td>
+    </tr>
+
+    </table>
+    </div>
+}

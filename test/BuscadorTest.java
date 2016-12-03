@@ -92,4 +92,14 @@ public class BuscadorTest {
         });
     }
 
+    @Test
+    public void BuscarUsuarioDetalle(){
+        jpa.withTransaction(() -> {
+          Usuario a = UsuariosService.findUsuarioSinPass(1);
+
+          assertEquals(a.login,"juan");
+          assertNull(a.password);
+        });
+    }
+
 }

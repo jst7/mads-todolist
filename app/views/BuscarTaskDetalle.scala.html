@@ -1,0 +1,39 @@
+@(task: Tarea, user: Usuario)
+
+@main("Buscador") {
+<div class="col-xs-push-1 col-xs-9">
+            <table>
+            <td>
+                <a class="btn btn-primary"  href='@routes.UsuarioController.Buscar(user.id,"" )'>
+                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+            </td>
+            <td>
+                <h1>Detalle Tarea</h1>
+            </td>
+        </table>
+    <table class="table table-inverse">
+
+    <tr>
+    <thead class="thead-inverse bg-primary">
+    	<th>
+    	Descripcion
+    	</th>
+    	<th>
+    	Tamaño
+    	</th>
+    </thead>
+    </tr>
+    <tr>
+    	<td>
+    	@task.descripcion
+    	</td>
+    	<td>
+    	@task.tamano
+    	</td>
+    	
+    </tr>
+
+    </table>
+    </div>
+}

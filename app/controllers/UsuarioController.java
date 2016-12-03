@@ -165,15 +165,33 @@ public class UsuarioController extends Controller {
     @Transactional
     public Result Buscar(Integer id, String busqueda) {
 
-        Usuario user = UsuariosService.findUsuario(id);
+        try{
+            Usuario user = UsuariosService.findUsuario(id);
 
-        List<Usuario> usuarios = UsuariosService.busquedaUsuario(busqueda);
-        List<Tarea> tareas = TareasService.busquedaTarea(busqueda);
+            List<Usuario> usuarios = UsuariosService.busquedaUsuario(busqueda);
+            List<Tarea> tareas = TareasService.busquedaTarea(busqueda);
 
-        int cantidadU = UsuariosService.CantidadUsuariosBusqueda(busqueda);
-        int cantidadT = TareasService.CantidadTareasBusqueda(busqueda);
+            int cantidadU = UsuariosService.CantidadUsuariosBusqueda(busqueda);
+            int cantidadT = TareasService.CantidadTareasBusqueda(busqueda);
 
         return ok(Buscar.render(usuarios, tareas , user, cantidadU, cantidadT));
+        }
+        catch(Exception e){
+            return badRequest("No puedes acceder a este recurso");
+        }
     }
 
+    @Transactional
+    public Result BuscarDetalle(Integer id, Integer idB) {
+
+        try{
+            Usuario user = UsuariosService.findUsuarioSinPass(id);
+            Usuario userBuscador = UsuariosService.findUsuarioSinPass(idB);
+
+            return ok(BuscarUserDetalle.render(user, userBuscador));
+        }
+        catch(Exception e){
+            return badRequest("Recurso inexistente");
+        }
+    }
 }

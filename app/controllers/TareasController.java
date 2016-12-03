@@ -166,12 +166,13 @@ public class TareasController extends Controller {
     }
 
     @Transactional
-    public Result BuscarDetalle(Integer id) {
+    public Result BuscarDetalle(Integer id, Integer idB) {
 
         Tarea task = TareasService.findTarea(id);
+        Usuario userBuscador = UsuariosService.findUsuarioSinPass(idB);
 
-        return ok(BuscarTaskDetalle.render(task));
+
+        return ok(BuscarTaskDetalle.render(task, userBuscador));
     }
-
 
 }

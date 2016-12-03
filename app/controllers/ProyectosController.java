@@ -19,30 +19,31 @@ public class ProyectosController extends Controller {
     @Inject FormFactory formFactory;
     @Transactional
     public Result crearProyectoFormulario() {
-        return ok(crearProyectoFormulario.render(formFactory.form(Proyecto.class),""));
+        List<Usuario> listaUsuarios = UsuariosService.findAllUsuarios();
+        return ok(crearProyectoFormulario.render(formFactory.form(Proyecto.class),listaUsuarios,""));
     }
 
     @Transactional
     public Result crearProyecto() {
         Form<Proyecto> proyecto = formFactory.form(Proyecto.class).bindFromRequest();
         String msg = "";
-
+        List<Usuario> listaUsuarios = UsuariosService.findAllUsuarios();
         if(proyecto.hasErrors()){
-            return badRequest(crearProyectoFormulario.render(proyecto, "Los datos del formulario contienen errores"));
+            return badRequest(crearProyectoFormulario.render(proyecto,listaUsuarios, "Los datos del formulario contienen errores"));
         } else {
             try {
                 Proyecto proyectoNew    = proyecto.get();
                 Proyecto pAux = ProyectosService.crearProyecto(proyectoNew);
                 if (pAux != null) {
                     msg = "Proyecto creado correctamente";
-                    return ok(crearProyectoFormulario.render(formFactory.form(Proyecto.class), msg));
+                    return ok(crearProyectoFormulario.render(formFactory.form(Proyecto.class),listaUsuarios, msg));
                 } else {
                     msg = "Proyecto repetido. Por favor, introduzca otro nombre";
-                    return badRequest(crearProyectoFormulario.render(proyecto, msg));
+                    return badRequest(crearProyectoFormulario.render(proyecto,listaUsuarios, msg));
                 }
             } catch (Exception e) {
                 msg = "Proyecto no creado";
-                return badRequest(crearProyectoFormulario.render(proyecto, msg));
+                return badRequest(crearProyectoFormulario.render(proyecto,listaUsuarios, msg));
             }
         }
     }

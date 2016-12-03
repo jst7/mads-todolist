@@ -136,9 +136,9 @@
   	</div>
 
   	<div class="col-xs-4">
-  		<a class="btn btn-primary" href="@routes.UsuarioController.detalleUsuario(user.id)">
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                </a>
+  		<a class="btn btn-primary" href="@routes.UsuarioController.BuscarDetalle(user.id, usuario.id)">
+      <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+      </a>
   	</div>
 
   	<div class="col-xs-4">
@@ -167,7 +167,7 @@
     </div>
 
     <div class="col-xs-4">
-      <a class="btn btn-primary" href="">
+      <a class="btn btn-warning" href="@routes.TareasController.BuscarDetalle(task.id, usuario.id)">
         <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
       </a>
     </div>

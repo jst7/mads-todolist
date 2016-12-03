@@ -168,11 +168,17 @@ public class TareasController extends Controller {
     @Transactional
     public Result BuscarDetalle(Integer id, Integer idB) {
 
-        Tarea task = TareasService.findTarea(id);
-        Usuario userBuscador = UsuariosService.findUsuarioSinPass(idB);
+        try{
+            Tarea task = TareasService.findTarea(id);
+            Usuario userBuscador = UsuariosService.findUsuarioSinPass(idB);
 
 
         return ok(BuscarTaskDetalle.render(task, userBuscador));
+        }
+        catch(Exception e){
+            return badRequest("Recurso inexistente");
+        }
+
     }
 
 }

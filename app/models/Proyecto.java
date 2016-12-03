@@ -25,6 +25,11 @@ public class Proyecto {
         this.nombre = nombre;
     }
 
+    public Proyecto(String nombre,Usuario propietario) {
+        this.nombre = nombre;
+        this.propietario = propietario;
+    }
+
     public String toString() {
         //return String.format("Proyecto id: %s nombre: %s", id, nombre);
         return String.format("%s", nombre);
@@ -61,4 +66,9 @@ public class Proyecto {
 
     @OneToMany(mappedBy="proyecto")
     public List<Tarea> tareas = new ArrayList<Tarea>();
+
+    @ManyToOne
+    @JoinColumn(name="propietarioId")
+    public Usuario propietario;
+
 }

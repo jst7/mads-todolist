@@ -55,7 +55,6 @@ public class PropietariosTest {
           Usuario user = new Usuario("pepote","12345");
           UsuarioDAO.create(user);
           Usuario ur = UsuarioDAO.ExisteLogin(user);
-<<<<<<< a5d809dbb2fdf8a037bcf82130aeb2d3d0a25e40
           Proyecto p = new Proyecto("miproyectotestnuevo",user);
           Proyecto aux = ProyectoDAO.create(p);
           Proyecto pr = new Proyecto("miproyectotest2",user);
@@ -63,16 +62,6 @@ public class PropietariosTest {
           Usuario user1 = pr.propietario;
 
           assertEquals(user.id,user1.id);
-=======
-          Proyecto p = new Proyecto("miproyectotest",user);
-          Proyecto aux = ProyectoDAO.create(p);
-
-          ur.proyectos.add(aux);
-          Proyecto pr = new Proyecto("miproyectotest2");
-
-
-          assertEquals(true,true);
->>>>>>> Arreglados algunos test a falta de comprobar el borrado
 
 
         });

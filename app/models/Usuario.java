@@ -109,8 +109,5 @@ public class Usuario {
 
     @OneToMany(mappedBy="propietario")
     public List<Proyecto> proyectos = new ArrayList<Proyecto>();
-<<<<<<< a5d809dbb2fdf8a037bcf82130aeb2d3d0a25e40
 
-=======
->>>>>>> Arreglados algunos test a falta de comprobar el borrado
 }

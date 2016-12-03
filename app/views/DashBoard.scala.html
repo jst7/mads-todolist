@@ -1,4 +1,4 @@
-@(usuario: Usuario)
+@(usuario: Usuario, contador: String)
 
 @scripts = {
 	
@@ -51,31 +51,6 @@
 						</div>					
 					</div>
 				</div>
-				<nav class=" row navbar navbar-inverse">
-					<ul class="nav navbar-nav  col-xs-12">
-
-						<li class="col-xs-4">
-							<button class="btn btn-warning navbar-btn">
-								<span class="glyphicon glyphicon-pencil"> Tareas</span> 
-							</button> 
-						</li>
-
-						<li class="col-xs-4">
-
-							<button class="btn btn-info navbar-btn">
-								<span class="glyphicon glyphicon-list"> Proyectos</span> 
-							</button> 
-						</li>
-
-
-						<li class="col-xs-4">
-
-							<button class="btn btn-danger navbar-btn">
-								<span class="glyphicon glyphicon-comment"> Mensajes</span> 
-							</button> 
-						</li>
-					</ul>						
-				</nav>
 			</div>
 
 
@@ -141,6 +116,29 @@
 		</div>
 
 		</div>
+			<div class=" row navbar navbar-inverse">
+				<ul class="nav navbar-nav  col-xs-12">
+					<li class="col-xs-4">
+						<a class="btn btn-warning navbar-btn">
+							<span class="glyphicon glyphicon-pencil" style="font-size: 20px; color:white"> 
+								Tareas</span> 
+						</a> 
+					</li>
+					<li class="col-xs-4">
+						<a class="btn btn-info navbar-btn">
+							<span class="glyphicon glyphicon-list" style="font-size: 20px; color:white"> Proyectos</span> 
+						</a> 
+					</li>
+					<li class="col-xs-4">
+						<a class="btn btn-danger navbar-btn" href="@routes.MensajeController.listarMensajesRecibidos(usuario.id)">
+							<span class="glyphicon glyphicon-comment" style="font-size: 20px; color:white "> Mensajes 
+								<span id="contadorMensajes">@contador</span> 
+							</span> 
+						</a> 
+					</li>
+					</ul>						
+				</div>
+		
 	</div>
 
 }

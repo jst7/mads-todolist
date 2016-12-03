@@ -43,4 +43,16 @@ public class MensajeDAO {
     public static Mensaje update(Mensaje mensaje) {
         return JPA.em().merge(mensaje);
     }
+
+    public static List<Mensaje> findAllPorLeer(String usuario) {
+        TypedQuery<Mensaje> query = JPA.em().createQuery(
+                  "SELECT u FROM Mensaje u WHERE borrado = 0 AND leido=0 AND usuarioTo='"+usuario+"' ORDER BY id ASC", Mensaje.class);
+        return query.getResultList();
+    }
+
+    public static List<Mensaje> findAllTotal(String usuario) {
+        TypedQuery<Mensaje> query = JPA.em().createQuery(
+                  "SELECT u FROM Mensaje u WHERE borrado = 0 AND usuarioTo='"+usuario+"' ORDER BY id ASC", Mensaje.class);
+        return query.getResultList();
+    }
 }

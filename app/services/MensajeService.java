@@ -64,4 +64,20 @@ public class MensajeService {
 		}
 		return result;
 	}
+
+	public static Integer mensajesSinleer(Integer id){
+		Usuario user = new Usuario();
+		user = UsuariosService.findUsuario(id);
+		List<Mensaje> lista = MensajeDAO.findAllPorLeer(user.login);
+
+    	return lista.size();
+	}
+
+	public static Integer mensajesTotalesEntrada(Integer id){
+		Usuario user = new Usuario();
+		user = UsuariosService.findUsuario(id);
+		List<Mensaje> lista = MensajeDAO.findAllTotal(user.login);
+
+    	return lista.size();
+	}
 }

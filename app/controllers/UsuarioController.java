@@ -148,7 +148,7 @@ public class UsuarioController extends Controller {
 
                 List<Tarea> tareas = TareasService.listaTareasUsuario(userRecu.id);
 
-                return ok(DashBoard.render(userRecu));
+                return ok(DashBoard.render(userRecu,"0/0"));
             }
             else{
                 return badRequest(paginaInicioLR.render(user, "Login incorrecto"));  
@@ -199,9 +199,12 @@ public class UsuarioController extends Controller {
     public Result DashBoard(Integer id) {
 
         Usuario user = UsuariosService.findUsuarioSinPass(id);
+        Integer total = MensajeService.mensajesTotalesEntrada(id);
+        Integer noleido = MensajeService.mensajesSinleer(id);
 
+        String contador = noleido+"/"+total;
 
-        return ok(DashBoard.render(user));
+        return ok(DashBoard.render(user,contador));
     }
 
 

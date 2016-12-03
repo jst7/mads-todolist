@@ -90,4 +90,12 @@ public class UsuariosService {
             return cantidad;
         }
 
+        public static Usuario findUsuarioSinPass(Integer id) {
+            Usuario user = UsuarioDAO.find(id);
+
+            Usuario usuario = user.SinPass();
+
+            return usuario;
+        }
+
 }

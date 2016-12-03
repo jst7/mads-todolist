@@ -165,5 +165,13 @@ public class TareasController extends Controller {
         }
     }
 
+    @Transactional
+    public Result BuscarDetalle(Integer id) {
+
+        Tarea task = TareasService.findTarea(id);
+
+        return ok(BuscarTaskDetalle.render(task));
+    }
+
 
 }

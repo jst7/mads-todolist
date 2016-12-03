@@ -176,4 +176,12 @@ public class UsuarioController extends Controller {
         return ok(Buscar.render(usuarios, tareas , user, cantidadU, cantidadT));
     }
 
+    @Transactional
+    public Result BuscarDetalle(Integer id, Integer idB) {
+
+        Usuario user = UsuariosService.findUsuarioSinPass(id);
+        Usuario userBuscador = UsuariosService.findUsuarioSinPass(idB);
+
+        return ok(BuscarUserDetalle.render(user, userBuscador));
+    }
 }

@@ -21,20 +21,14 @@ public class ProyectosController extends Controller {
 
     public Result crearProyectoFormulario(Integer idUsuario) {
         return ok(crearProyectoFormulario.render(formFactory.form(Proyecto.class),idUsuario,""));
-<<<<<<< HEAD
 
-=======
->>>>>>> c40e4aa804faa2b588cb273592378333b1b08f7f
     }
 
     @Transactional
     public Result crearProyecto(Integer idUsuario) {
         Form<Proyecto> proyecto = formFactory.form(Proyecto.class).bindFromRequest();
         String msg = "";
-<<<<<<< HEAD
 
-=======
->>>>>>> c40e4aa804faa2b588cb273592378333b1b08f7f
         Usuario user = UsuariosService.findUsuario(idUsuario);
         if(proyecto.hasErrors()){
             return badRequest(crearProyectoFormulario.render(proyecto,idUsuario, "Los datos del formulario contienen errores"));
@@ -53,10 +47,7 @@ public class ProyectosController extends Controller {
             } catch (Exception e) {
                 msg = "Proyecto no creado";
                 return badRequest(crearProyectoFormulario.render(proyecto,idUsuario, msg));
-<<<<<<< HEAD
 
-=======
->>>>>>> c40e4aa804faa2b588cb273592378333b1b08f7f
             }
         }
     }

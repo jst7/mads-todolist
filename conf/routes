@@ -51,18 +51,18 @@ GET  /acercade               controllers.ApplicationController.AcercaDe()
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 # Crear proyecto
-GET 	/proyectos/crear			controllers.ProyectosController.crearProyectoFormulario()
-POST 	/proyectos/crear 			controllers.ProyectosController.crearProyecto()
+GET 	/usuarios/:id/proyectos/crear			controllers.ProyectosController.crearProyectoFormulario(id: Integer)
+POST 	/usuarios/:id/proyectos/crear 			controllers.ProyectosController.crearProyecto(id: Integer)
 
 # Listar Proyectos
-GET   /proyectos            controllers.ProyectosController.listaProyectos()
+GET   /usuarios/:id/proyectos            controllers.ProyectosController.listaProyectos(id: Integer)
 
 #Borrar proyecto
 DELETE  /proyectos/:id/ProyectoBorrar               controllers.ProyectosController.borraProyecto(id: Integer)
 
 # Editar proyecto
-GET		/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(id: Integer)
-POST	/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(id: Integer)
+GET		/usuarios/:id/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(idUsuario: Integer,id: Integer)
+POST	/usuarios/:id/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(idUsuario: Integer,id: Integer)
 
 # Buscador
 GET 	/buscador			controllers.UsuarioController.Buscar(id: Integer, busqueda: String)

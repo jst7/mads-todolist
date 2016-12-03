@@ -7,16 +7,16 @@
         </div>
     }    
     <div class="col-xs-push-1 col-xs-11">
-        <table>
-            <td>
-                <a class="btn btn-primary"  href="@routes.UsuarioController.detalleUsuario(user.id)">
-                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                </a>
-            </td>
-            <td>
-                <h1>Enviar mensaje</h1>
-            </td>
-        </table>
+    <table>
+        <td>
+            <a class="btn btn-info" href="@routes.MensajeController.listarMensajesRecibidos(user.id)">
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+            </a>
+        </td>
+        <td>
+            <h2>Enviar Mensaje</h2>
+        </td>
+    </table>
 
         @helper.form(action = routes.MensajeController.enviarMensajeAction(user.id)) {
             <fieldset>

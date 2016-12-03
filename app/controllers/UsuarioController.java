@@ -145,10 +145,12 @@ public class UsuarioController extends Controller {
             if(entra){
                 //Recupero el usuario 
                 Usuario userRecu = UsuariosService.existeLogin(usuario);
+                Integer total = MensajeService.mensajesTotalesEntrada(userRecu.id);
+                Integer noleido = MensajeService.mensajesSinleer(userRecu.id);
 
-                List<Tarea> tareas = TareasService.listaTareasUsuario(userRecu.id);
+                String contador = noleido+"/"+total;
 
-                return ok(DashBoard.render(userRecu,"0/0"));
+                return ok(DashBoard.render(userRecu,contador));
             }
             else{
                 return badRequest(paginaInicioLR.render(user, "Login incorrecto"));  

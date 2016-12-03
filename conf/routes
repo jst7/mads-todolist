@@ -76,3 +76,5 @@ GET		/mensajes/salida/:id			controllers.MensajeController.listarMensajesEnviados
 GET		/mensajes/entrada/:id			controllers.MensajeController.listarMensajesRecibidos(id: Integer)
 PUT		/mensajes/:id/:idMensaje 		controllers.MensajeController.leerMensaje(idMensaje: Integer, id: Integer)
 DELETE	/mensajes/:id/:idMensaje		controllers.MensajeController.borrarMensaje(idMensaje: Integer, id: Integer)
+
+GET		/dashboard			controllers.UsuarioController.DashBoard(id: Integer)

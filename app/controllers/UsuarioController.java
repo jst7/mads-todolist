@@ -148,7 +148,7 @@ public class UsuarioController extends Controller {
 
                 List<Tarea> tareas = TareasService.listaTareasUsuario(userRecu.id);
 
-                return ok(listaTareas.render(tareas, userRecu));
+                return ok(DashBoard.render(userRecu));
             }
             else{
                 return badRequest(paginaInicioLR.render(user, "Login incorrecto"));  
@@ -194,4 +194,15 @@ public class UsuarioController extends Controller {
             return badRequest("Recurso inexistente");
         }
     }
+
+    @Transactional
+    public Result DashBoard(Integer id) {
+
+        Usuario user = UsuariosService.findUsuarioSinPass(id);
+
+
+        return ok(DashBoard.render(user));
+    }
+
+
 }

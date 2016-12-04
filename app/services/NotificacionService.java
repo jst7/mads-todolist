@@ -23,7 +23,7 @@ public class NotificacionService {
 			Usuario usuario = UsuariosService.findUsuario(idUsuario);
 			List<Notificacion> lista = NotificacionDAO.findAll(usuario.login);
     		Logger.debug("Numero de notificacions: " + lista.size());
-    		return lista;
+    		return null;
 		} else {
 			return null;
 		}
@@ -36,11 +36,11 @@ public class NotificacionService {
 
 	public static Boolean leerNotificacion(Integer idNotificacion) {
 		Boolean result = false;
-		Notificacion notificacion = find(idNotificacion);
-		if (notificacion.usuario != "" && notificacion.tipo != "" && notificacion.descripcion != "") {
+		Notificacion notificacion = NotificacionDAO.find(idNotificacion);
+		if (notificacion.user != "" && notificacion.tipo != "" && notificacion.descripcion != "") {
 			notificacion.leido = true;
-			notificacion = ;	
-			if (NotificacionDAO.update(notificacion)) {
+			Notificacion not = NotificacionDAO.update(notificacion);
+			if (not.leido) {
 				return true;
 			} else {
 				return false;

@@ -19,7 +19,7 @@ public class Notificacion {
     @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer id;
     @Constraints.Required
-    public String usuario;
+    public String user;
     @Constraints.Required
     public String tipo;
     @Constraints.Required
@@ -31,8 +31,8 @@ public class Notificacion {
     public Notificacion() {}
 
     // El campos obligatorios del constructor
-    public Notificacion(String tipo, String tipo, String descripcion) {
-        this.usuario        = usuario;
+    public Notificacion(String user, String tipo, String descripcion) {
+        this.user          = user;
         this.tipo           = tipo;
         this.descripcion    = descripcion;
     }
@@ -40,7 +40,7 @@ public class Notificacion {
     public Notificacion copy() {
         Notificacion nuevo  = new Notificacion();
         nuevo.id            = this.id;
-        nuevo.usuario       = this.usuario;
+        nuevo.user         = this.user;
         nuevo.tipo          = this.tipo;
         nuevo.descripcion   = this.descripcion;
         nuevo.fecha         = this.fecha;
@@ -49,7 +49,7 @@ public class Notificacion {
         }
 
     public String toString() {
-        return String.format("Notificacion id: %s usuario: %s tipo: %s descripcion: %s fecha: %s leido: %s",
-                      id, usuario, tipo, descripcion, fecha, leido);
+        return String.format("Notificacion id: %s user: %s tipo: %s descripcion: %s fecha: %s leido: %s",
+                      id, user, tipo, descripcion, fecha, leido);
     }    
 }

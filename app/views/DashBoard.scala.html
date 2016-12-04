@@ -23,12 +23,15 @@
 		}
 
 		function modificaUser(){
+			var date = '@usuario.fechaNacimiento'
+			var dateFin= date.split("-")[2]+'-'+ date.split("-")[1] +'-'+ date.split("-")[0]
+
 			document.getElementById("FormMostrar").innerHTML = 
 			'<div class="row hide">id:<br> '+
-				'<input type="text" name="id" id="loginChange" value=@usuario.id>'+
+				'<a> @usuario.id </a>'+
 			'</div>'+
 			'<div class="row">Login:<br> '+
-				'<input type="text" name="Login" id="loginChange" value=@usuario.login>'+
+				'<a> @usuario.login </a>'+
 			'</div>'+
 			'<div class="row">Email:<br> '+
 				'<input type="text" name="eMail" id="emailChange" value=@usuario.eMail>'+
@@ -40,7 +43,7 @@
 				'<input type="text" name="Apellidos" id="apellidosChange" value=@usuario.apellidos>'+
 			'</div>'+
 			'<div class="row">fechaNacimiento dd-mm-aaaa:<br> '+
-				'<input type="text" name="fechaNacimiento" id="apellidosChange" value=@usuario.fechaNacimiento>'+
+				'<input type="text" name="fechaNacimiento" id="apellidosChange" value='+dateFin+'>'+
 			'</div>'+
 			'<div class="row" >Contraseña: <br> '+
 				'<input type="password" name="password" id="contraseñaChange" value=@usuario.password>'+
@@ -65,6 +68,9 @@
 		}
 
 		function modificarImagen(){
+			var date = '@usuario.fechaNacimiento'
+			var dateFin= date.split("-")[2]+'-'+ date.split("-")[1] +'-'+ date.split("-")[0]
+
 			document.getElementById("FormImagen").innerHTML = 
 			'<div class="col-xs-12 col-lg-push-1">'+
 				'<IMG class="img-thumbnail img-responsive" SRC="@usuario.imagen" >'+
@@ -86,8 +92,8 @@
 				'<div class="row hide">Apellidos:<br> '+
 					'<input type="text" name="Apellidos" id="apellidosChange" value=@usuario.apellidos>'+
 				'</div>'+
-				'<div class="row">fechaNacimiento dd-mm-aaaa:<br> '+
-					'<input type="text" name="fechaNacimiento" id="apellidosChange" value=@usuario.fechaNacimiento>'+
+				'<div class="row hide">fechaNacimiento dd-mm-aaaa:<br> '+
+					'<input type="text" name="fechaNacimiento" id="apellidosChange" value='+dateFin+'>'+
 				'</div>'+
 				'<div class="row hide" >Contraseña: <br> '+
 					'<input type="text" name="password" id="contraseñaChange" value=@usuario.password>'+

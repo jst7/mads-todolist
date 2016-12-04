@@ -25,6 +25,7 @@ public class Usuario {
     @Formats.DateTime(pattern="dd-MM-yyyy")
     @Temporal(TemporalType.DATE)
     public Date fechaNacimiento;
+    public String imagen;
 
     // necesario un constructor vacío para JPA
     public Usuario() {}
@@ -44,6 +45,7 @@ public class Usuario {
         nuevo.apellidos = this.apellidos;
         nuevo.eMail = this.eMail;
         nuevo.fechaNacimiento = this.fechaNacimiento;
+        nuevo.imagen = this.imagen;
         return nuevo;
         }
 
@@ -64,6 +66,7 @@ public class Usuario {
         if (nombre != null && nombre.isEmpty()) nombre = null;
         if (apellidos != null && apellidos.isEmpty()) apellidos = null;
         if (eMail != null && eMail.isEmpty()) eMail = null;
+        if (imagen != null && imagen.isEmpty()) imagen = null;
     }
 
     public String toString() {
@@ -73,8 +76,8 @@ public class Usuario {
             fechaStr = formateador.format(fechaNacimiento);
         }
         return String.format("Usuario id: %s login: %s passworld: %s nombre: %s " +
-                      "apellidos: %s eMail: %s fechaNacimiento: %s",
-                      id, login, password, nombre, apellidos, eMail, fechaStr);
+                      "apellidos: %s eMail: %s fechaNacimiento: %s imagen %s",
+                      id, login, password, nombre, apellidos, eMail, fechaStr, imagen);
     }
 
     @Override

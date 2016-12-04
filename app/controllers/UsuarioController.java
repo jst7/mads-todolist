@@ -11,6 +11,8 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.db.jpa.*;
 
+import java.io.File;
+
 import services.*;
 import models.*;
 
@@ -229,6 +231,22 @@ public class UsuarioController extends Controller {
             flash("modificar", "El usuario se ha modificado correctamente");
             return ok(DashBoard.render(Userdash,contador,"usuario modificado"));        
    }
-   
 
+    @Transactional
+    public Result modificarImagenDashboard(Integer idUsuario) {
+        Usuario Userdash    = UsuariosService.findUsuarioSinPass(idUsuario);
+        Integer total       = MensajeService.mensajesTotalesEntrada(idUsuario);
+        Integer noleido     = MensajeService.mensajesSinleer(idUsuario);
+        String contador     = noleido + "/" + total;
+        Form<Usuario> user  = formFactory.form(Usuario.class).bindFromRequest();
+
+        if(user.hasErrors()){
+            return badRequest(DashBoard.render(Userdash, contador, "Imagen actualizada"));                   
+        }
+        
+        Usuario usuario = user.get();
+        UsuariosService.modificaUsuario(usuario);
+
+        return ok(DashBoard.render(Userdash, contador, "Imagen actualizada"));                   
+    }
 }

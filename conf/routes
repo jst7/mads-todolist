@@ -77,6 +77,8 @@ GET		/mensajes/entrada/:id			controllers.MensajeController.listarMensajesRecibid
 PUT		/mensajes/:id/:idMensaje 		controllers.MensajeController.leerMensaje(idMensaje: Integer, id: Integer)
 DELETE	/mensajes/:id/:idMensaje		controllers.MensajeController.borrarMensaje(idMensaje: Integer, id: Integer)
 
-
 GET		/dashboard			controllers.UsuarioController.DashBoard(id: Integer)
 POST    /dashboard/modifica          controllers.UsuarioController.escribirUsuarioModificadoDashBoard(id: Integer)
+
+# Imagen de perfil
+POST	/usuarios/imagen/:id 			controllers.UsuarioController.modificarImagenDashboard(id: Integer)

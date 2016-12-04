@@ -51,6 +51,7 @@ public class Usuario {
         Usuario nuevo = new Usuario();
         nuevo.id = this.id;
         nuevo.login = this.login;
+        nuevo.nombre = this.nombre;
         nuevo.apellidos = this.apellidos;
         nuevo.eMail = this.eMail;
         nuevo.fechaNacimiento = this.fechaNacimiento;

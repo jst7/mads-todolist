@@ -79,3 +79,4 @@ DELETE	/mensajes/:id/:idMensaje		controllers.MensajeController.borrarMensaje(idM
 
 
 GET		/dashboard			controllers.UsuarioController.DashBoard(id: Integer)
+POST    /dashboard/modifica          controllers.UsuarioController.escribirUsuarioModificadoDashBoard(id: Integer)

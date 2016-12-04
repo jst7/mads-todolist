@@ -150,7 +150,7 @@ public class UsuarioController extends Controller {
 
                 String contador = noleido+"/"+total;
 
-                return ok(DashBoard.render(userRecu,contador));
+                return ok(DashBoard.render(userRecu,contador,"Bienvenido "+userRecu.login));
             }
             else{
                 return badRequest(paginaInicioLR.render(user, "Login incorrecto"));  
@@ -206,8 +206,29 @@ public class UsuarioController extends Controller {
 
         String contador = noleido+"/"+total;
 
-        return ok(DashBoard.render(user,contador));
+        return ok(DashBoard.render(user,contador,""));
     }
 
+    @Transactional
+    public Result escribirUsuarioModificadoDashBoard(Integer id) {
+        Form<Usuario> user = formFactory.form(Usuario.class).bindFromRequest();
+
+            Usuario Userdash = UsuariosService.findUsuarioSinPass(id);
+            Integer total = MensajeService.mensajesTotalesEntrada(id);
+            Integer noleido = MensajeService.mensajesSinleer(id);
+
+            String contador = noleido+"/"+total;
+
+        if(user.hasErrors()){
+            return badRequest(DashBoard.render(Userdash,contador,"Usuario no modificado"));
+        }
+        
+            Usuario usuario = user.get();
+            Logger.debug("Usuario modificado: " + usuario.toString());
+            usuario = UsuariosService.modificaUsuario(usuario);
+            flash("modificar", "El usuario se ha modificado correctamente");
+            return ok(DashBoard.render(Userdash,contador,"usuario modificado"));        
+   }
+   
 
 }

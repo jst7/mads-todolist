@@ -7,11 +7,17 @@ import java.util.List;
 import java.util.Date;
 import java.util.ArrayList;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import models.*;
 
 public class NotificacionService {
 	public static boolean crearNotificacion(Notificacion notificacion) {
 		if (notificacion != null && notificacion.tipo != "" && notificacion.descripcion != "") {
+			notificacion.fecha = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new Date());
+			notificacion.leido = false;
 			return NotificacionDAO.create(notificacion);
 		} else {
 			return false;

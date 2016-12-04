@@ -145,10 +145,12 @@ public class UsuarioController extends Controller {
             if(entra){
                 //Recupero el usuario 
                 Usuario userRecu = UsuariosService.existeLogin(usuario);
+                Integer total = MensajeService.mensajesTotalesEntrada(userRecu.id);
+                Integer noleido = MensajeService.mensajesSinleer(userRecu.id);
 
-                List<Tarea> tareas = TareasService.listaTareasUsuario(userRecu.id);
+                String contador = noleido+"/"+total;
 
-                return ok(DashBoard.render(userRecu));
+                return ok(DashBoard.render(userRecu,contador));
             }
             else{
                 return badRequest(paginaInicioLR.render(user, "Login incorrecto"));  
@@ -199,9 +201,12 @@ public class UsuarioController extends Controller {
     public Result DashBoard(Integer id) {
 
         Usuario user = UsuariosService.findUsuarioSinPass(id);
+        Integer total = MensajeService.mensajesTotalesEntrada(id);
+        Integer noleido = MensajeService.mensajesSinleer(id);
 
+        String contador = noleido+"/"+total;
 
-        return ok(DashBoard.render(user));
+        return ok(DashBoard.render(user,contador));
     }
 
 

@@ -2,8 +2,30 @@
 @main("Listado de mensajes") {
 
 <div class="col-xs-push-1 col-xs-11">
-    <h2>Bandeja de entrada</h2>
-    <table class="table table-striped">
+    <table>
+        <td>
+            <a class="btn btn-info" href="@routes.UsuarioController.DashBoard(usuario.id)">
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+            </a>
+        </td>
+        <td>
+            <h2>Bandeja de entrada</h2>
+        </td>
+    </table>
+
+    <div class="col-xs-2">
+        <div class="row">
+             <a class="btn btn-danger btn-lg" href="@routes.MensajeController.listarMensajesRecibidos(usuario.id)">Mens. Entranda</a>
+        </div>
+        <div class="row">
+             <a class="btn btn-success btn-lg" href="@routes.MensajeController.listarMensajesEnviados(usuario.id)">Mens. Enviados</a>
+        </div>
+        <div class="row">
+            <a class="btn btn-success btn-lg" href="@routes.MensajeController.crearMensajeFormulario(usuario.id)">Nuevo mensaje</a>
+        </div>
+    </div>
+    <div class="col-xs-10">
+        <table class="table table-striped">
         <tr>
             <thead class="thead-inverse bg-primary">
                 <th>Id</th>
@@ -41,12 +63,14 @@
         </tr>
     }
     </table>
-    <a class="btn btn-success" href="@routes.UsuarioController.detalleUsuario(usuario.id)"><span>Volver</span></a>
-
-    @if(mensaje != null) {
-        <div class="alert alert-success">
-            @mensaje
-        </div>
-    }
+    <div class="row">
+        @if(mensaje != null) {
+            <div class="alert alert-success">
+                @mensaje
+            </div>
+        }
     </div>
+    </div>
+</div>
+
 }

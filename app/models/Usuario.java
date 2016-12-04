@@ -26,6 +26,7 @@ public class Usuario {
     @Temporal(TemporalType.DATE)
     public Date fechaNacimiento;
     public String imagen;
+    public String colordash="white";
 
     // necesario un constructor vacío para JPA
     public Usuario() {}
@@ -46,6 +47,7 @@ public class Usuario {
         nuevo.eMail = this.eMail;
         nuevo.fechaNacimiento = this.fechaNacimiento;
         nuevo.imagen = this.imagen;
+        nuevo.colordash=this.colordash;
         return nuevo;
         }
 
@@ -102,5 +104,12 @@ public class Usuario {
 
     @OneToMany(mappedBy="propietario")
     public List<Proyecto> proyectos = new ArrayList<Proyecto>();
+
+    @ManyToMany
+    @JoinTable(
+      name="EMP_PROJ",
+      joinColumns=@JoinColumn(name="EMP_ID", referencedColumnName="id"),
+      inverseJoinColumns=@JoinColumn(name="PROJ_ID", referencedColumnName="id"))
+    public List<Proyecto> proyectoscolabora = new ArrayList<Proyecto>();
 
 }

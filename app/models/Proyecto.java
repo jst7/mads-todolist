@@ -22,6 +22,8 @@ public class Proyecto {
     public Usuario propietario;
     @ElementCollection(targetClass=String.class)
     public List<String> estados = new ArrayList<String>();
+    @ManyToMany(mappedBy="proyectoscolabora",cascade = CascadeType.PERSIST)
+    public List<Usuario> usuariosColaboradores = new ArrayList<Usuario>();
 
     // Un constructor vacío necesario para JPA
     public Proyecto() {
@@ -79,5 +81,4 @@ public class Proyecto {
         }
         return true;
     }
-
 }

@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.List;
 import javax.inject.*;
+import java.util.ArrayList;
 
 import play.*;
 import play.mvc.*;
@@ -11,7 +12,13 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.db.jpa.*;
 
+import static play.mvc.Http.MultipartFormData;
+import play.mvc.Http.MultipartFormData.FilePart;
+import play.Play;
+
+import java.io.*;
 import java.io.File;
+import java.io.IOException;
 
 import services.*;
 import models.*;
@@ -147,12 +154,13 @@ public class UsuarioController extends Controller {
             if(entra){
                 //Recupero el usuario 
                 Usuario userRecu = UsuariosService.existeLogin(usuario);
-                Integer total = MensajeService.mensajesTotalesEntrada(userRecu.id);
-                Integer noleido = MensajeService.mensajesSinleer(userRecu.id);
+                String mensajes = mensajesDash(userRecu.id);
+                String proyectos = proyectosDash(userRecu.id);
+                List<Notificacion> notificaciones = NotificacionService.findAll(userRecu.id);
 
-                String contador = noleido+"/"+total;
 
-                return ok(DashBoard.render(userRecu,contador,"Bienvenido "+userRecu.login));
+
+                return ok(DashBoard.render(userRecu,mensajes, proyectos,"Bienvenido "+userRecu.login, notificaciones));
             }
             else{
                 return badRequest(paginaInicioLR.render(user, "Login incorrecto"));  
@@ -167,16 +175,42 @@ public class UsuarioController extends Controller {
     }
 
     @Transactional
-    public Result Buscar(Integer id, String busqueda) {
+    public Result Buscar(Integer id, String busqueda, Integer caso) {
 
         try{
             Usuario user = UsuariosService.findUsuario(id);
 
-            List<Usuario> usuarios = UsuariosService.busquedaUsuario(busqueda);
-            List<Tarea> tareas = TareasService.busquedaTarea(busqueda);
+            List<Usuario> usuarios = new ArrayList<Usuario>();
+            List<Tarea> tareas = new ArrayList<Tarea>();
+            int cantidadU = 0;
+            int cantidadT = 0;            
 
-            int cantidadU = UsuariosService.CantidadUsuariosBusqueda(busqueda);
-            int cantidadT = TareasService.CantidadTareasBusqueda(busqueda);
+            if(caso==0){
+                usuarios = UsuariosService.busquedaUsuario(busqueda);
+                tareas = TareasService.busquedaTarea(busqueda);
+                cantidadU = UsuariosService.CantidadUsuariosBusqueda(busqueda);
+                cantidadT = TareasService.CantidadTareasBusqueda(busqueda);
+            }
+            else if(caso==1){
+                usuarios = UsuariosService.busquedaUsuario(busqueda);
+                tareas = new ArrayList<Tarea>();
+                cantidadU = UsuariosService.CantidadUsuariosBusqueda(busqueda);
+                cantidadT = 0;            
+
+            }
+            else if(caso==2){
+                usuarios = new ArrayList<Usuario>();
+                tareas = TareasService.busquedaTarea(busqueda);
+                cantidadU = 0;
+                cantidadT = TareasService.CantidadTareasBusqueda(busqueda);
+            }else{
+                usuarios = new ArrayList<Usuario>();
+                tareas = new ArrayList<Tarea>();
+                cantidadU = 0;
+                cantidadT = 0;
+            }
+
+
 
         return ok(Buscar.render(usuarios, tareas , user, cantidadU, cantidadT));
         }
@@ -203,50 +237,108 @@ public class UsuarioController extends Controller {
     public Result DashBoard(Integer id) {
 
         Usuario user = UsuariosService.findUsuarioSinPass(id);
-        Integer total = MensajeService.mensajesTotalesEntrada(id);
-        Integer noleido = MensajeService.mensajesSinleer(id);
+        
+        List<Notificacion> notificaciones = NotificacionService.findAll(id);
+        String mensajes = mensajesDash(id);
+        String proyectos = proyectosDash(id);
 
-        String contador = noleido+"/"+total;
-
-        return ok(DashBoard.render(user,contador,""));
+        return ok(DashBoard.render(user,mensajes, proyectos,"", notificaciones));
     }
+
 
     @Transactional
     public Result escribirUsuarioModificadoDashBoard(Integer id) {
         Form<Usuario> user = formFactory.form(Usuario.class).bindFromRequest();
 
             Usuario Userdash = UsuariosService.findUsuarioSinPass(id);
-            Integer total = MensajeService.mensajesTotalesEntrada(id);
-            Integer noleido = MensajeService.mensajesSinleer(id);
+            List<Notificacion> notificaciones = NotificacionService.findAll(id);
 
-            String contador = noleido+"/"+total;
+            String mensajes = mensajesDash(id);
+            String proyectos = proyectosDash(id);
 
         if(user.hasErrors()){
-            return badRequest(DashBoard.render(Userdash,contador,"Usuario no modificado"));
+            return badRequest(DashBoard.render(Userdash,mensajes, proyectos,"Usuario no modificado", notificaciones));
         }
         
             Usuario usuario = user.get();
             Logger.debug("Usuario modificado: " + usuario.toString());
             usuario = UsuariosService.modificaUsuario(usuario);
             flash("modificar", "El usuario se ha modificado correctamente");
-            return ok(DashBoard.render(Userdash,contador,"usuario modificado"));        
+            return ok(DashBoard.render(Userdash,mensajes, proyectos,"usuario modificado", notificaciones));        
    }
 
     @Transactional
     public Result modificarImagenDashboard(Integer idUsuario) {
         Usuario Userdash    = UsuariosService.findUsuarioSinPass(idUsuario);
-        Integer total       = MensajeService.mensajesTotalesEntrada(idUsuario);
-        Integer noleido     = MensajeService.mensajesSinleer(idUsuario);
-        String contador     = noleido + "/" + total;
+        String mensajes = mensajesDash(idUsuario);
+        String proyectos = proyectosDash(idUsuario);
         Form<Usuario> user  = formFactory.form(Usuario.class).bindFromRequest();
+        List<Notificacion> notificaciones = NotificacionService.findAll(idUsuario);
 
         if(user.hasErrors()){
-            return badRequest(DashBoard.render(Userdash, contador, "Imagen no actualizada"));                   
+            return badRequest(DashBoard.render(Userdash, mensajes, proyectos, "Imagen no actualizada", notificaciones));                   
         }
         
         Usuario usuario = user.get();
         Userdash= UsuariosService.modificaUsuario(usuario);
 
-        return ok(DashBoard.render(Userdash, contador, "Imagen actualizada"));                   
+        return ok(DashBoard.render(Userdash, mensajes, proyectos, "Imagen actualizada", notificaciones));                   
+    }
+
+    @Transactional
+    public Result CambiarColor() {
+        Form<Usuario> user  = formFactory.form(Usuario.class).bindFromRequest();
+        Usuario usuario = user.get();
+
+        Boolean cambioColor = UsuariosService.cambiarColor(usuario.id, usuario.colordash);
+
+        Usuario Userdash    = UsuariosService.findUsuarioSinPass(usuario.id);
+        String mensajes = mensajesDash(usuario.id);
+        String proyectos = proyectosDash(usuario.id);
+        List<Notificacion> notificaciones = NotificacionService.findAll(usuario.id);
+
+
+        if(cambioColor){
+            return ok(DashBoard.render(Userdash, mensajes, proyectos, "Color Actualizado", notificaciones));
+        }
+        else{
+            return badRequest(DashBoard.render(Userdash, mensajes, proyectos, "Color No Actualizado", notificaciones));
+        }
+        
+    }
+
+    //Auxiliares
+    public String mensajesDash(Integer id){
+        Integer total = MensajeService.mensajesTotalesEntrada(id);
+        Integer noleido = MensajeService.mensajesSinleer(id);
+        String contador = noleido+"/"+total;
+
+        return contador;
+    }
+
+    public String proyectosDash(Integer id){
+        Integer proPropiedad = ProyectosService.cantidadProyectosPropietario(id);
+        Integer proColaborar = ProyectosService.cantidadProyectosColabora(id);
+
+        String contador = "p:" + proPropiedad + " c:" + proColaborar;
+
+        return contador;
+    }
+
+    @Transactional
+    public Result subirImagen(Integer idUsuario) {
+        return ok(subirImagen.render(formFactory.form(Usuario.class),"", idUsuario));
+    }
+
+    @Transactional
+    public Result subirImagenAction(Integer idUsuario) {
+        MultipartFormData<File> body = request().body().asMultipartFormData();
+        FilePart<File> picture = body.getFile("picture");
+        if (UsuariosService.subirImagen(picture, idUsuario)) {
+            return badRequest(subirImagen.render(formFactory.form(Usuario.class),"Imagen subida correctamente", idUsuario));
+        } else {
+            flash("error", "Missing file");
+            return badRequest(subirImagen.render(formFactory.form(Usuario.class),"Error al subir la imagen", idUsuario));
+        }    
     }
 }

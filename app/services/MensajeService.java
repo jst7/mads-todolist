@@ -12,6 +12,7 @@ import models.*;
 public class MensajeService {
 	public static boolean crearMensaje(Mensaje mensaje) {
 		if (mensaje != null && mensaje.body != "") {
+			NotificacionService.crearNotificacion(new Notificacion(mensaje.usuarioTo, "Mensaje", "Nuevo mensaje"));
 			return MensajeDAO.create(mensaje);
 		} else {
 			return false;
@@ -59,6 +60,7 @@ public class MensajeService {
 		Mensaje mensaje = findMensaje(idMensaje);
 		if (mensaje.body != "") {
 			mensaje.borrado = true;
+			NotificacionService.crearNotificacion(new Notificacion(mensaje.usuarioTo, "Mensaje", "Mensaje: " + idMensaje + " eliminado"));
 			mensaje = MensajeDAO.update(mensaje);	
 			result = true;
 		}

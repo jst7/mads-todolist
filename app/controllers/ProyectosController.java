@@ -21,7 +21,6 @@ public class ProyectosController extends Controller {
 
     public Result crearProyectoFormulario(Integer idUsuario) {
         return ok(crearProyectoFormulario.render(formFactory.form(Proyecto.class),idUsuario,""));
-
     }
 
     @Transactional
@@ -57,7 +56,21 @@ public class ProyectosController extends Controller {
         // Obtenemos el mensaje flash guardado en la petición por el controller crearUsuario
         String mensaje = flash("crearProyecto");
         List<Proyecto> proyectos = ProyectosService.findAllProyectos();
-        return ok(listaProyectos.render(proyectos,idUsuario));
+        Usuario user = UsuariosService.findUsuario(idUsuario); 
+        return ok(listaProyectos.render(proyectos,user,"todos"));
+    }
+
+    @Transactional(readOnly = true)
+    public Result listaProyectosPropietario(Integer idUsuario) {
+        List<Proyecto> proyectos = ProyectosService.findAllProyectosPropietario(idUsuario);
+        Usuario user = UsuariosService.findUsuario(idUsuario); 
+        return ok(listaProyectos.render(proyectos,user,"participa"));
+    }
+
+    @Transactional(readOnly = true)
+    public Result listaProyectosPropietario(Integer idUsuario) {
+        List<Proyecto> proyectos = ProyectosService.findAllProyectosPropietario(idUsuario);
+        return ok(listaProyectos.render(proyectos,idUsuario,"participa"));
     }
 
     @Transactional
@@ -76,6 +89,30 @@ public class ProyectosController extends Controller {
         Proyecto proyecto           = ProyectosService.find(idProyecto);
         proyectoForm                = proyectoForm.fill(proyecto);
         return ok(editarProyecto.render(proyectoForm, "",idUsuario,idProyecto));
+    }
+
+    @Transactional
+    public Result AddColaboradorView(Integer idUsuario,Integer idProyecto) {
+
+
+      Proyecto proyecto           = ProyectosService.find(idProyecto);
+
+        List<Usuario> usuarios = UsuariosService.findAllUsuarios();
+        usuarios=ProyectosService.filtraUsuarios(proyecto,usuarios);
+        return ok(AddColaborador.render(proyecto,usuarios, "",idUsuario,idProyecto));
+    }
+
+    @Transactional
+    public Result AddColaborador(Integer idUsuario,Integer id,Integer idColaborador) {
+
+      try{
+        Proyecto proyecto = ProyectosService.find(id);
+        Proyecto pr = ProyectosService.addColaborador(proyecto,idColaborador);
+        return ok();
+      }catch(Exception ex){
+        return badRequest();
+      }
+
     }
 
     @Transactional

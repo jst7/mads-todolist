@@ -11,6 +11,8 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.db.jpa.*;
 
+import java.io.File;
+
 import services.*;
 import models.*;
 
@@ -231,4 +233,26 @@ public class UsuarioController extends Controller {
    }
    
 
+    public Result subirImagenPerfil(Integer idUsuario) {
+        return ok(subirImagenPerfil.render(formFactory.form(Usuario.class), "", idUsuario));
+    }
+
+    @Transactional
+    public Result upload(Integer idUsuario) {
+
+        Form<Usuario> user = formFactory.form(Usuario.class).bindFromRequest();
+
+        if(user.hasErrors()){
+            return badRequest(subirImagenPerfil.render(formFactory.form(Usuario.class), "error!", idUsuario));
+        }
+        
+        Usuario usuario = user.get();
+        File file = usuario.imagen;
+
+        Logger.debug("Usuario nuevo: " + usuario.toString());
+
+        Logger.debug("ok!");
+
+        return ok(subirImagenPerfil.render(formFactory.form(Usuario.class), "ok!", idUsuario));                   
+    }
 }

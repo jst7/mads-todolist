@@ -1,9 +1,14 @@
-@(usuario: Usuario, contador: String)
+@(usuario: Usuario, contador: String, mensaje: String)
 
 @scripts = {
 	
 	<script type="text/javascript">
-	
+		
+		$(document).ready(function(){
+            setTimeout(function(){$("#temporal").hide();  }, 3000)
+        });
+
+
 		function buscaDass(){
 			var termino = $("#TextoBuscador").val();
 			var URL = "/buscador?id="+ @usuario.id+"&busqueda="+termino
@@ -34,30 +39,25 @@
 			'<div class="row">Apellidos:<br> '+
 				'<input type="text" name="Apellidos" id="apellidosChange" value=@usuario.apellidos>'+
 			'</div>'+
-			'<div class="row">fechaNacimiento:<br> '+
+			'<div class="row">fechaNacimiento dd-mm-aaaa:<br> '+
 				'<input type="text" name="fechaNacimiento" id="apellidosChange" value=@usuario.fechaNacimiento>'+
 			'</div>'+
 			'<div class="row">'+
 			'<input type="submit" class="btn btn-primary btn-lg" value="Cambiar">'+
+			'<a class="btn btn-danger btn-lg" onclick="nomodificaUser()" >Cancelar </a>'+
 			'</div>'
 
 
 		}
 
-		function buscaDass(){
-			var login = $("#TextoBuscador").val();
-			var email = $("#TextoBuscador").val();
-			var Contraseña = $("#TextoBuscador").val();
-			var URL = "/buscador?id="+ @usuario.id+"&busqueda="+termino
-			$.ajax({
-				url: URL,
-                type: 'GET',
-                success: function(results) {
-                	location = URL
-                    location.load();
-                }
-            });
+		function nomodificaUser(){
+			document.getElementById("FormMostrar").innerHTML = 
+							'<h4> id:	@usuario.id</h4>'+
+							'<h4>login:	@usuario.login</h4>'+
+							'<h4>email: 	@usuario.eMail </h4>'
+
 		}
+
 	</script>
 
 }
@@ -66,6 +66,11 @@
 	<div class="col-xs-12 well" >
 		<div class="row">
 
+			    @if(mensaje != "") {
+        			<div class="alert alert-danger" id="temporal">
+           				 @mensaje
+       				 </div>
+    			}
 
 			<div class="col-xs-8">
 				<h1> DashBoard</h1>
@@ -74,7 +79,7 @@
 						<div class="col-xs-6">
 							<IMG class="img-thumbnail img-responsive" SRC="http://icon-icons.com/icons2/317/PNG/512/profile-group-icon_34379.png"  >
 						</div>
-				@helper.form(action = routes.UsuarioController.escribirUsuarioModificado()) {
+				@helper.form(action = routes.UsuarioController.escribirUsuarioModificadoDashBoard(usuario.id)){
 
 						<div class="col-xs-6 text-info" id="FormMostrar">
 							<h4> id:	@usuario.id</h4>

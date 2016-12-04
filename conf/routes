@@ -81,5 +81,4 @@ GET		/dashboard			controllers.UsuarioController.DashBoard(id: Integer)
 POST    /dashboard/modifica          controllers.UsuarioController.escribirUsuarioModificadoDashBoard(id: Integer)
 
 # Imagen de perfil
-GET		/usuarios/imagen/:id 			controllers.UsuarioController.subirImagenPerfil(id: Integer)
-POST	/usuarios/imagen/:id 			controllers.UsuarioController.upload(id: Integer)
+POST	/usuarios/imagen/:id 			controllers.UsuarioController.modificarImagenDashboard(id: Integer)

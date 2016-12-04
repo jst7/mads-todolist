@@ -231,28 +231,22 @@ public class UsuarioController extends Controller {
             flash("modificar", "El usuario se ha modificado correctamente");
             return ok(DashBoard.render(Userdash,contador,"usuario modificado"));        
    }
-   
-
-    public Result subirImagenPerfil(Integer idUsuario) {
-        return ok(subirImagenPerfil.render(formFactory.form(Usuario.class), "", idUsuario));
-    }
 
     @Transactional
-    public Result upload(Integer idUsuario) {
-
-        Form<Usuario> user = formFactory.form(Usuario.class).bindFromRequest();
+    public Result modificarImagenDashboard(Integer idUsuario) {
+        Usuario Userdash    = UsuariosService.findUsuarioSinPass(idUsuario);
+        Integer total       = MensajeService.mensajesTotalesEntrada(idUsuario);
+        Integer noleido     = MensajeService.mensajesSinleer(idUsuario);
+        String contador     = noleido + "/" + total;
+        Form<Usuario> user  = formFactory.form(Usuario.class).bindFromRequest();
 
         if(user.hasErrors()){
-            return badRequest(subirImagenPerfil.render(formFactory.form(Usuario.class), "error!", idUsuario));
+            return badRequest(DashBoard.render(Userdash, contador, "Imagen actualizada"));                   
         }
         
         Usuario usuario = user.get();
-        File file = usuario.imagen;
+        UsuariosService.modificaUsuario(usuario);
 
-        Logger.debug("Usuario nuevo: " + usuario.toString());
-
-        Logger.debug("ok!");
-
-        return ok(subirImagenPerfil.render(formFactory.form(Usuario.class), "ok!", idUsuario));                   
+        return ok(DashBoard.render(Userdash, contador, "Imagen actualizada"));                   
     }
 }

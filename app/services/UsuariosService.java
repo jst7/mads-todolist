@@ -33,6 +33,7 @@ public class UsuariosService {
             if (antes != null && usuario.id != antes.id){
                 throw new UsuariosException("Login ya existe:" + usuario.login);
             }
+            NotificacionService.crearNotificacion(new Notificacion(usuario.login, "Usuario", "Modificación de usuario: " + usuario.id));
             UsuarioDAO.update(usuario);
             return usuario;
         }

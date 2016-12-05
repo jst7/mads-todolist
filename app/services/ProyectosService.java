@@ -3,8 +3,8 @@ package services;
 import play.*;
 import play.mvc.*;
 import play.db.jpa.*;
-
 import java.util.List;
+import java.util.Date;
 import java.util.ArrayList;
 
 import models.*;
@@ -15,12 +15,14 @@ public class ProyectosService {
             findByName(proyecto);
             return null;
         } catch (Exception e) {
+            NotificacionService.crearNotificacion(new Notificacion("allUsers", "Proyecto", "Nuevo proyecto"));
             return ProyectoDAO.create(proyecto);
         }
     }
 
     public static boolean deleteProyecto(Integer id) {
         try {
+            NotificacionService.crearNotificacion(new Notificacion("allUsers", "Proyecto", "Proyecto " + id));
             ProyectoDAO.delete(id);
             return true;
         } catch(Exception e){
@@ -43,6 +45,7 @@ public class ProyectosService {
     }
 
 	public static Proyecto modificar(Proyecto proyecto) {
+        NotificacionService.crearNotificacion(new Notificacion("allUsers", "Proyecto", "Modificación de proyecto: " + proyecto.id + " por: " + proyecto.propietario .login));
         ProyectoDAO.update(proyecto);
         return proyecto;
     }

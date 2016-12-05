@@ -60,6 +60,11 @@
 
   </table>
   <a class="btn btn-success" href="@routes.ProyectosController.crearProyectoFormulario(idUsuario)"> <span class="glyphicon glyphicon-plus" aria-hidden="true"</span></a>
+  <span>Agregar proyecto</span>
+  <a class="btn btn-success" href="@routes.ProyectosController.listaProyectos(idUsuario)"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a>
+    <span>Todos los proyectos</span>
+  <a class="btn btn-info" href="@routes.ProyectosController.listaProyectosPropietario(idUsuario)"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a>
+    <span>Solo mis proyectos</span>
 </ul>
 </div>
 }

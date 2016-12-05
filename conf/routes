@@ -55,8 +55,8 @@ GET 	/usuarios/:id/proyectos/crear			controllers.ProyectosController.crearProyec
 POST 	/usuarios/:id/proyectos/crear 			controllers.ProyectosController.crearProyecto(id: Integer)
 
 # Listar Proyectos
-GET   /usuarios/:id/proyectos            controllers.ProyectosController.listaProyectos(id: Integer)
-GET   /usuarios/:id/proyectos            controllers.ProyectosController.listaProyectosPropietario(id: Integer)
+GET   /usuarios/:id/proyectostodos            controllers.ProyectosController.listaProyectos(id: Integer)
+GET   /usuarios/:id/proyectosParticipante            controllers.ProyectosController.listaProyectosPropietario(id: Integer)
 
 #Borrar proyecto
 DELETE  /proyectos/:id/ProyectoBorrar               controllers.ProyectosController.borraProyecto(id: Integer)

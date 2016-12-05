@@ -62,7 +62,7 @@ public class ProyectosController extends Controller {
 
     @Transactional(readOnly = true)
     public Result listaProyectosPropietario(Integer idUsuario) {
-        List<Proyecto> proyectos = ProyectosService.findAllProyectosPropietario();
+        List<Proyecto> proyectos = ProyectosService.findAllProyectosPropietario(idUsuario);
         return ok(listaProyectos.render(proyectos,idUsuario));
     }
 

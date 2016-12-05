@@ -48,8 +48,9 @@ public class ProyectosService {
     }
 
 		public static List<Proyecto> findAllProyectosPropietario(Integer id) {
+			Logger.debug("entro : ");
 			List<Proyecto> lista = ProyectoDAO.findAllPropietario(id);
-			Logger.debug("Numero de proyectos: " + lista.size());
+			Logger.debug("Numero de proyectos propietario: " + lista.size());
 			return lista;
 		}
 

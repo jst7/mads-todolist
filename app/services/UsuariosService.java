@@ -93,7 +93,7 @@ public class UsuariosService {
         public static Usuario findUsuarioSinPass(Integer id) {
             Usuario user = UsuarioDAO.find(id);
 
-            Usuario usuario = user.SinPass();
+            Usuario usuario = user.copy();
 
             return usuario;
         }

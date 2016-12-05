@@ -241,11 +241,11 @@ public class UsuarioController extends Controller {
         Form<Usuario> user  = formFactory.form(Usuario.class).bindFromRequest();
 
         if(user.hasErrors()){
-            return badRequest(DashBoard.render(Userdash, contador, "Imagen actualizada"));                   
+            return badRequest(DashBoard.render(Userdash, contador, "Imagen no actualizada"));                   
         }
         
         Usuario usuario = user.get();
-        UsuariosService.modificaUsuario(usuario);
+        Userdash= UsuariosService.modificaUsuario(usuario);
 
         return ok(DashBoard.render(Userdash, contador, "Imagen actualizada"));                   
     }

@@ -49,17 +49,6 @@ public class Usuario {
         return nuevo;
         }
 
-    public Usuario SinPass() {
-        Usuario nuevo = new Usuario();
-        nuevo.id = this.id;
-        nuevo.login = this.login;
-        nuevo.nombre = this.nombre;
-        nuevo.apellidos = this.apellidos;
-        nuevo.eMail = this.eMail;
-        nuevo.fechaNacimiento = this.fechaNacimiento;
-        return nuevo;
-        }
-
     // Sustituye por null todas las cadenas vacías que pueda tener
     // un usuario en sus atributos
     public void nulificaAtributos() {

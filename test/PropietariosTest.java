@@ -68,4 +68,23 @@ public class PropietariosTest {
 
       }
 
+      @Test
+      public void DevolverProyectosPropietario(){
+
+        jpa.withTransaction(() -> {
+
+          Usuario user = new Usuario("prueba","12345");
+          UsuarioDAO.create(user);
+          Usuario ur = UsuarioDAO.ExisteLogin(user);
+          Proyecto p = new Proyecto("miproyectotestnuevo",user);
+          Proyecto aux = ProyectoDAO.create(p);
+
+
+          assertEquals(ur.proyectos.get(0),aux);
+
+
+        });
+
+      }
+
     }

@@ -3,8 +3,8 @@ package services;
 import play.*;
 import play.mvc.*;
 import play.db.jpa.*;
-
 import java.util.List;
+import java.util.Date;
 import java.util.ArrayList;
 
 import models.*;
@@ -15,7 +15,7 @@ public class ProyectosService {
             findByName(proyecto);
             return null;
         } catch (Exception e) {
-            NotificacionService.crearNotificacion(new Notificacion(proyecto.propietario.login, "Proyecto", "Nuevo proyecto"));
+            NotificacionService.crearNotificacion(new Notificacion("allUsers", "Proyecto", "Nuevo proyecto"));
             return ProyectoDAO.create(proyecto);
         }
     }
@@ -24,7 +24,7 @@ public class ProyectosService {
         try {
             Proyecto proyecto     = find(id);
             Usuario usuario = UsuariosService.findUsuario(proyecto.propietario.id);
-            NotificacionService.crearNotificacion(new Notificacion(usuario.login, "Proyecto", "Proyecto " + id + " eliminado"));
+            NotificacionService.crearNotificacion(new Notificacion("allUsers", "Proyecto", "Proyecto " + id + " eliminado por: " + usuario.login));
             ProyectoDAO.delete(id);
             return true;
         } catch(Exception e){
@@ -47,7 +47,7 @@ public class ProyectosService {
     }
 
 	public static Proyecto modificar(Proyecto proyecto) {
-        NotificacionService.crearNotificacion(new Notificacion(proyecto.propietario .login, "Proyecto", "Modificación de proyecto: " + proyecto.id));
+        NotificacionService.crearNotificacion(new Notificacion("allUsers", "Proyecto", "Modificación de proyecto: " + proyecto.id + " por: " + proyecto.propietario .login));
         ProyectoDAO.update(proyecto);
         return proyecto;
     }

@@ -15,6 +15,7 @@ public class ProyectosService {
             findByName(proyecto);
             return null;
         } catch (Exception e) {
+            NotificacionService.crearNotificacion(new Notificacion(proyecto.propietario.login, "Proyecto", "Nuevo proyecto"));
             return ProyectoDAO.create(proyecto);
         }
     }

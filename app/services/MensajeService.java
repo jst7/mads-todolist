@@ -12,8 +12,7 @@ import models.*;
 public class MensajeService {
 	public static boolean crearMensaje(Mensaje mensaje) {
 		if (mensaje != null && mensaje.body != "") {
-			Notificacion notificacion = new Notificacion(mensaje.usuarioTo, "Mensaje", "Nuevo mensaje");
-			NotificacionService.crearNotificacion(notificacion);
+			NotificacionService.crearNotificacion(new Notificacion(mensaje.usuarioTo, "Mensaje", "Nuevo mensaje"));
 			return MensajeDAO.create(mensaje);
 		} else {
 			return false;

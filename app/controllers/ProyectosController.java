@@ -57,13 +57,13 @@ public class ProyectosController extends Controller {
         // Obtenemos el mensaje flash guardado en la petición por el controller crearUsuario
         String mensaje = flash("crearProyecto");
         List<Proyecto> proyectos = ProyectosService.findAllProyectos();
-        return ok(listaProyectos.render(proyectos,idUsuario));
+        return ok(listaProyectos.render(proyectos,idUsuario,"todos"));
     }
 
     @Transactional(readOnly = true)
     public Result listaProyectosPropietario(Integer idUsuario) {
         List<Proyecto> proyectos = ProyectosService.findAllProyectosPropietario(idUsuario);
-        return ok(listaProyectos.render(proyectos,idUsuario));
+        return ok(listaProyectos.render(proyectos,idUsuario,"participa"));
     }
 
     @Transactional

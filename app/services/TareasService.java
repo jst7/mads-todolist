@@ -48,6 +48,8 @@ public class TareasService {
         try{
             tarea.proyecto = proyecto;
             TareaDAO.update(tarea);
+            Usuario usuario = UsuariosService.findUsuario(tarea.usuario.id);
+            NotificacionService.crearNotificacion(new Notificacion(usuario.login, "Tarea", "Tarea " + tarea.id + " asignada al proyecto: " + proyecto.id));
             return true;
         } catch (Exception e) {
             return false;

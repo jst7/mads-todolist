@@ -22,6 +22,9 @@ public class ProyectosService {
 
     public static boolean deleteProyecto(Integer id) {
         try {
+            Proyecto proyecto     = find(id);
+            Usuario usuario = UsuariosService.findUsuario(proyecto.propietario.id);
+            NotificacionService.crearNotificacion(new Notificacion(usuario.login, "Proyecto", "Proyecto " + id + " eliminado"));
             ProyectoDAO.delete(id);
             return true;
         } catch(Exception e){
@@ -44,6 +47,7 @@ public class ProyectosService {
     }
 
 	public static Proyecto modificar(Proyecto proyecto) {
+        NotificacionService.crearNotificacion(new Notificacion(proyecto.propietario .login, "Proyecto", "Modificación de proyecto: " + proyecto.id));
         ProyectoDAO.update(proyecto);
         return proyecto;
     }

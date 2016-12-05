@@ -60,6 +60,7 @@ public class MensajeService {
 		Mensaje mensaje = findMensaje(idMensaje);
 		if (mensaje.body != "") {
 			mensaje.borrado = true;
+			NotificacionService.crearNotificacion(new Notificacion(mensaje.usuarioTo, "Mensaje", "Mensaje: " + idMensaje + " eliminado"));
 			mensaje = MensajeDAO.update(mensaje);	
 			result = true;
 		}

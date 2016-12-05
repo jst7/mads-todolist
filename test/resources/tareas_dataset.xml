@@ -8,4 +8,5 @@
     <Tarea id="3" usuarioId="1" duracion="1" tamano="pequeña" descripcion="Leer el libro de inglés" />
     <Tarea id="4" usuarioId="2" duracion="1" tamano="pequeña" descripcion="Salir a correr" />
     <Mensaje id="1" usuarioFrom="juan" usuarioTo="jorge" subject="asuntest" body="bodytest" leido="0" borrado="0" />
+    <Notificacion id="1" user="juan" tipo="Mensaje" descripcion="mi desc" />
 </dataset>

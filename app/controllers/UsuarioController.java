@@ -149,10 +149,12 @@ public class UsuarioController extends Controller {
                 Usuario userRecu = UsuariosService.existeLogin(usuario);
                 Integer total = MensajeService.mensajesTotalesEntrada(userRecu.id);
                 Integer noleido = MensajeService.mensajesSinleer(userRecu.id);
+                List<Notificacion> notificaciones = NotificacionService.findAll(userRecu.id);
+
 
                 String contador = noleido+"/"+total;
 
-                return ok(DashBoard.render(userRecu,contador,"Bienvenido "+userRecu.login));
+                return ok(DashBoard.render(userRecu,contador,"Bienvenido "+userRecu.login, notificaciones));
             }
             else{
                 return badRequest(paginaInicioLR.render(user, "Login incorrecto"));  
@@ -205,10 +207,11 @@ public class UsuarioController extends Controller {
         Usuario user = UsuariosService.findUsuarioSinPass(id);
         Integer total = MensajeService.mensajesTotalesEntrada(id);
         Integer noleido = MensajeService.mensajesSinleer(id);
+        List<Notificacion> notificaciones = NotificacionService.findAll(id);
 
         String contador = noleido+"/"+total;
 
-        return ok(DashBoard.render(user,contador,""));
+        return ok(DashBoard.render(user,contador,"", notificaciones));
     }
 
     @Transactional
@@ -218,18 +221,19 @@ public class UsuarioController extends Controller {
             Usuario Userdash = UsuariosService.findUsuarioSinPass(id);
             Integer total = MensajeService.mensajesTotalesEntrada(id);
             Integer noleido = MensajeService.mensajesSinleer(id);
+            List<Notificacion> notificaciones = NotificacionService.findAll(id);
 
             String contador = noleido+"/"+total;
 
         if(user.hasErrors()){
-            return badRequest(DashBoard.render(Userdash,contador,"Usuario no modificado"));
+            return badRequest(DashBoard.render(Userdash,contador,"Usuario no modificado", notificaciones));
         }
         
             Usuario usuario = user.get();
             Logger.debug("Usuario modificado: " + usuario.toString());
             usuario = UsuariosService.modificaUsuario(usuario);
             flash("modificar", "El usuario se ha modificado correctamente");
-            return ok(DashBoard.render(Userdash,contador,"usuario modificado"));        
+            return ok(DashBoard.render(Userdash,contador,"usuario modificado", notificaciones));        
    }
 
     @Transactional
@@ -239,14 +243,15 @@ public class UsuarioController extends Controller {
         Integer noleido     = MensajeService.mensajesSinleer(idUsuario);
         String contador     = noleido + "/" + total;
         Form<Usuario> user  = formFactory.form(Usuario.class).bindFromRequest();
+        List<Notificacion> notificaciones = NotificacionService.findAll(idUsuario);
 
         if(user.hasErrors()){
-            return badRequest(DashBoard.render(Userdash, contador, "Imagen no actualizada"));                   
+            return badRequest(DashBoard.render(Userdash, contador, "Imagen no actualizada", notificaciones));                   
         }
         
         Usuario usuario = user.get();
         Userdash= UsuariosService.modificaUsuario(usuario);
 
-        return ok(DashBoard.render(Userdash, contador, "Imagen actualizada"));                   
+        return ok(DashBoard.render(Userdash, contador, "Imagen actualizada", notificaciones));                   
     }
 }

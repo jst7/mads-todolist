@@ -29,7 +29,7 @@ public class NotificacionService {
 			Usuario usuario = UsuariosService.findUsuario(idUsuario);
 			List<Notificacion> lista = NotificacionDAO.findAll(usuario.login);
     		Logger.debug("Numero de notificacions: " + lista.size());
-    		return null;
+    		return lista;
 		} else {
 			return null;
 		}

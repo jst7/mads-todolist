@@ -105,7 +105,7 @@ public class Usuario {
     @OneToMany(mappedBy="propietario")
     public List<Proyecto> proyectos = new ArrayList<Proyecto>();
 
-    @OneToMany
-    public List<Colaboradores> proyectoColabora = new ArrayList<Colaboradores>();
+    @OneToMany(mappedBy="proyectoscolaborador")
+    public List<Colaboradores> proyectoscolabora = new ArrayList<Colaboradores>();
 
 }

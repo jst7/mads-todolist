@@ -71,7 +71,7 @@ public class Proyecto {
     @JoinColumn(name="propietarioId")
     public Usuario propietario;
 
-    @OneToMany
+    @OneToMany(mappedBy="colaborador")
     public List<Colaboradores> usuariosColaboradores = new ArrayList<Colaboradores>();
 
 }

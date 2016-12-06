@@ -16,9 +16,11 @@ public class Colaboradores{
   public Integer id;
 
   @ManyToOne
-  public Proyecto proyectos;
+  @JoinColumn(name="proyectoscolaboradorID")
+  public Proyecto proyectoscolaborador;
 
   @ManyToOne
-  public Usuario propietario;
+  @JoinColumn(name="colaboradorID")
+  public Usuario colaborador;
 
 }

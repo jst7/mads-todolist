@@ -24,10 +24,18 @@ public class ProyectoDAO {
         return query.getResultList();
     }
 
+    public static List<Proyecto> findAllPropietario(Integer id) {
+
+        TypedQuery<Proyecto> query = JPA.em().createQuery(
+                  "select p from Proyecto p where propietario = " + id
+                  + " ", Proyecto.class);
+        return query.getResultList();
+    }
+
     public static void delete(Integer idProyecto) {
         Proyecto proyecto = JPA.em().getReference(Proyecto.class, idProyecto);
         JPA.em().remove(proyecto);
-    }    
+    }
 
     public static Proyecto find(Integer id) {
         return JPA.em().find(Proyecto.class, id);

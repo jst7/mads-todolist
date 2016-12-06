@@ -8,6 +8,17 @@
             setTimeout(function(){$("#temporal").hide();  }, 3000)
         });
 
+		function leerNotificacion(URLNotifica){ 
+			console.log('hola');
+            $.ajax({
+                url: URLNotifica,
+                type: 'POST',
+                success: function(results) {
+                    //refresh the page
+                    location.reload();
+                }
+            });
+        }
 
 		function buscaDass(){
 			var termino = $("#TextoBuscador").val();
@@ -174,7 +185,7 @@
 			</div>
 
 			<div class="row">
-			<h1>Notificaciones</h1>
+			<h1>Notificaciones @notificaciones.size()</h1>
 			</div>
 			<div class="row">
 			<div class="col-xs-12 pre-scrollable" style="background-color: gray;max-height: 425px">
@@ -189,9 +200,9 @@
 					@if(notificacion.leido == false){
 					<div class="row well">
 						<div class="col-xs-2">
-							<button class="btn btn-primary">
+							<a href="javascript:;" class="btn btn-primary" onclick="leerNotificacion('@routes.NotificacionController.leerNotificacion(notificacion.id)')">
 								<span class="glyphicon glyphicon-check">  </span>
-							</button>
+							</a>
 						</div>
 						<div class="col-xs-10">
 							<span class="row">@notificacion.fecha</span>
@@ -207,9 +218,16 @@
 				@for(notificacion <- notificaciones){
 					@if(notificacion.leido == true){
 					<div class="row well">
-						<button class="btn btn-primary">
-							<span class="glyphicon glyphicon-info-sign"> @notificacion.fecha </span>
-						</button>
+						<div class="col-xs-2">
+							
+						</div>
+						<div class="col-xs-10">
+							<span class="row">@notificacion.fecha</span>
+							<div class="row">
+								<span >@notificacion.tipo</span>:
+								<span >@notificacion.descripcion</span>								
+							</div>						
+						</div>
 					</div>
 					}
 				}

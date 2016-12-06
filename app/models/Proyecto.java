@@ -71,4 +71,7 @@ public class Proyecto {
     @JoinColumn(name="propietarioId")
     public Usuario propietario;
 
+    @OneToMany
+    public List<Colaboradores> usuariosColaboradores = new ArrayList<Colaboradores>();
+
 }

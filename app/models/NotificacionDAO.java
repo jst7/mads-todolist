@@ -20,7 +20,7 @@ public class NotificacionDAO {
 
     public static List<Notificacion> findAll(String login) {
         TypedQuery<Notificacion> query = JPA.em().createQuery(
-                  "SELECT u FROM Notificacion u WHERE user = :login AND leido = 0 ORDER BY id ASC", Notificacion.class);
+                  "SELECT u FROM Notificacion u WHERE user = :login ORDER BY id ASC", Notificacion.class);
         return query.setParameter("login", login).getResultList();
     }
 

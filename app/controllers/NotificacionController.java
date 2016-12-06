@@ -25,11 +25,9 @@ public class NotificacionController extends Controller {
         return ok();
     }
 
-    /*@Transactional
-    public Result leerNotificacion(Integer idNotificacion, Integer idUsuario) {
+    @Transactional
+    public Result leerNotificacion(Integer idNotificacion) {
         Boolean leido = NotificacionService.leerNotificacion(idNotificacion);
-        List<Notificacion> notificacions = NotificacionService.findAll();
-        Usuario user = UsuariosService.findUsuario(idUsuario);
-        return ok(listarNotificacionsEnviados.render(notificacions, "", user));
-    }*/
+        return ok();
+    }
 }

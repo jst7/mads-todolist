@@ -83,3 +83,6 @@ POST    /dashboard/modifica          controllers.UsuarioController.escribirUsuar
 
 # Imagen de perfil
 POST	/usuarios/imagen/:id 			controllers.UsuarioController.modificarImagenDashboard(id: Integer)
+
+#Notificacion
+POST	/dashboard/notificacion/:idN 			controllers.NotificacionController.leerNotificacion(idN: Integer)

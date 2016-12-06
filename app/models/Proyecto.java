@@ -15,19 +15,35 @@ public class Proyecto {
     public Integer id;
     @Constraints.Required
     public String nombre;
+    @OneToMany(mappedBy="proyecto")
+    public List<Tarea> tareas = new ArrayList<Tarea>();
+    @ManyToOne
+    @JoinColumn(name="propietarioId")
+    public Usuario propietario;
+    @ElementCollection(targetClass=String.class)
+    public List<String> estados = new ArrayList<String>();
 
     // Un constructor vacío necesario para JPA
     public Proyecto() {
+        estados.add("pequeño");
+        estados.add("mediano");
+        estados.add("grande");
     }
 
     // El constructor principal con los campos obligatorios
     public Proyecto(String nombre) {
         this.nombre = nombre;
+        estados.add("pequeño");
+        estados.add("mediano");
+        estados.add("grande");
     }
 
     public Proyecto(String nombre,Usuario propietario) {
         this.nombre = nombre;
         this.propietario = propietario;
+        estados.add("pequeño");
+        estados.add("mediano");
+        estados.add("grande");
     }
 
     public String toString() {
@@ -63,12 +79,5 @@ public class Proyecto {
         }
         return true;
     }
-
-    @OneToMany(mappedBy="proyecto")
-    public List<Tarea> tareas = new ArrayList<Tarea>();
-
-    @ManyToOne
-    @JoinColumn(name="propietarioId")
-    public Usuario propietario;
 
 }

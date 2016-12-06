@@ -93,4 +93,11 @@ public class ProyectosController extends Controller {
             return ok(editarProyecto.render(project, "Proyecto modificado",idUsuario,idProyecto));
         }
    }
+
+   @Transactional
+   public Result estadosProyectoView(Integer idProyecto) {
+        Proyecto proyecto = ProyectosService.find(idProyecto);
+
+        return ok(estadosProyecto.render(proyecto, proyecto.propietario.id));
+   }
 }

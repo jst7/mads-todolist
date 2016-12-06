@@ -64,6 +64,9 @@ DELETE  /proyectos/:id/ProyectoBorrar               controllers.ProyectosControl
 GET		/usuarios/:id/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(idUsuario: Integer,id: Integer)
 POST	/usuarios/:id/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(idUsuario: Integer,id: Integer)
 
+# Estados proyecto
+GET   /proyectos/:idProyecto/estados        controllers.ProyectosController.estadosProyectoView(idProyecto: Integer)
+
 # Buscador
 GET 	/buscador			controllers.UsuarioController.Buscar(id: Integer, busqueda: String)
 GET 	/buscador/usuario			controllers.UsuarioController.BuscarDetalle(id: Integer, idB: Integer)

@@ -1,0 +1,51 @@
+@(proyecto: Proyecto, idUsuario: Integer)
+
+@scripts = {
+    <script type="text/javascript">
+        function del(urlBorrar) {
+            $.ajax({
+                url: urlBorrar,
+                type: 'DELETE',
+                success: function(results) {
+                    //refresh the page
+                    location.reload();
+                }
+            });
+        }
+    </script>
+}
+
+@main("Proyectos", scripts) {
+
+<div class="col-xs-push-1 col-xs-11">
+        <table>
+            <td>
+                <a class="btn btn-primary"  href="@routes.ProyectosController.listaProyectos(idUsuario)">
+                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+            </td>
+            <td>
+                <h1>Listado de estados</h1>
+            </td>
+        </table>
+
+
+
+        <ul class="list-group">
+            <table class="table table-striped">
+                <tr>
+                <thead class="thead-inverse bg-primary">
+                    <th>Estado</th>
+                </thead>
+                </tr>
+            @for(estado <- proyecto.estados) {
+                <tr>
+                    <td>@estado</td>
+                </tr>
+              }
+
+          </table>
+          <a class="btn btn-success" href="@routes.ProyectosController.crearProyectoFormulario(idUsuario)"> <span class="glyphicon glyphicon-plus" aria-hidden="true"</span></a>
+        </ul>
+</div>
+}

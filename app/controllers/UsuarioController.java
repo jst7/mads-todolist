@@ -332,10 +332,17 @@ public class UsuarioController extends Controller {
 
     @Transactional
     public Result subirImagenAction(Integer idUsuario) {
+        Usuario Userdash    = UsuariosService.findUsuarioSinPass(idUsuario);
+        Integer total       = MensajeService.mensajesTotalesEntrada(idUsuario);
+        Integer noleido     = MensajeService.mensajesSinleer(idUsuario);
+        String contador     = noleido + "/" + total;
+        List<Notificacion> notificaciones = NotificacionService.findAll(idUsuario);
+
         MultipartFormData<File> body = request().body().asMultipartFormData();
         FilePart<File> picture = body.getFile("picture");
+        
         if (UsuariosService.subirImagen(picture, idUsuario)) {
-            return ok(subirImagen.render(formFactory.form(Usuario.class),"Imagen subida correctamente", idUsuario));          
+            return ok(DashBoard.render(Userdash, contador, "Imagen subida correctamente", notificaciones));
         } else {
             flash("error", "Missing file");
             return badRequest(subirImagen.render(formFactory.form(Usuario.class),"Error al subir la imagen", idUsuario));

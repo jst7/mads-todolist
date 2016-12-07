@@ -57,4 +57,13 @@ public class ProyectosService {
 			return lista;
 		}
 
+		public static addColaborador(Proyecto proyecto,Integer id){
+
+			Usuario user = UsuariosService.findUsuario(id);
+			proyecto.usuariosColaboradores.add(user);
+
+			ProyectoDAO.update(proyecto);
+			
+		}
+
 }

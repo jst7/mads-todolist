@@ -101,7 +101,6 @@ public class ProyectosController extends Controller {
       try{
         Proyecto proyecto = ProyectosService.find(id);
         Proyecto pr = ProyectosService.addColaborador(proyecto,idColaborador);
-        
         return ok();
       }catch(Exception ex){
         return badRequest();

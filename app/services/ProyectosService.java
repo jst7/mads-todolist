@@ -51,7 +51,7 @@ public class ProyectosService {
     }
 
 		public static List<Proyecto> findAllProyectosPropietario(Integer id) {
-			Logger.debug("entro : ");
+
 			List<Proyecto> lista = ProyectoDAO.findAllPropietario(id);
 			Logger.debug("Numero de proyectos propietario: " + lista.size());
 			return lista;
@@ -70,9 +70,10 @@ public class ProyectosService {
 
 		public static List<Usuario> filtraUsuarios(Proyecto proyecto,List<Usuario> users){
 
-			boolean esta = false;
+
 			List<Usuario> usuarios = new ArrayList<Usuario>();
 			for(Usuario usuario : users){
+				boolean esta = false;
 				for (Usuario usuarioCol: proyecto.usuariosColaboradores) {
 					if(usuarioCol == usuario){
 						esta = true;

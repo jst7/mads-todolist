@@ -45,8 +45,11 @@
 			'<div class="row hide">id:<br> '+
 				'<a> @usuario.id </a>'+
 			'</div>'+
-			'<div class="row">Login:<br> '+
+			'<div class="row hide">Login:<br> '+
 				'<a> @usuario.login </a>'+
+			'</div>'+
+			'<div class="row">Login:<br> '+
+				'<input type="text" name="login" id="loginnoChange" value=@usuario.login>'+
 			'</div>'+
 			'<div class="row">Email:<br> '+
 				'<input type="text" name="eMail" id="emailChange" value=@usuario.eMail>'+
@@ -62,6 +65,9 @@
 			'</div>'+
 			'<div class="row" >Contraseña: <br> '+
 				'<input type="password" name="password" id="contraseñaChange" value=@usuario.password>'+
+			'</div>'+
+			'<div class="row hide" >color: <br> '+
+			'<input type="text" name="colordash" id="colorDash" value=@usuario.colordash>'+
 			'</div>'+
 			'<div class="row hide" >imagen: <br> '+
 				'<input type="text" name="imagen" id="imagenChange" value=@usuario.imagen>'+
@@ -116,6 +122,9 @@
 				'<div class="row hide" >imagen: <br> '+
 				'<input type="text" name="imagen" id="imagenChange" value=@usuario.imagen>'+
 				'</div>'+
+				'<div class="row hide" >color: <br> '+
+				'<input type="text" name="colordash" id="colorDash" value=@usuario.colordash>'+
+				'</div>'+
 				'<div class="row">'+
 					'<input type="submit" class="btn btn-primary btn-lg" value="Cambiar">'+
 					'<a class="btn btn-danger btn-lg" onclick="nomodificaImagen()" >Cancelar </a>'+
@@ -133,7 +142,7 @@
 }
 
 @main("Dash", scripts){
-	<div class="col-xs-12 well" id="contenedorPrincipal" style="background-color: white " >
+	<div class="col-xs-12 well" id="contenedorPrincipal" style="background-color: @usuario.colordash " >
 		<div class="row">
 
 			    @if(mensaje != "") {
@@ -148,14 +157,36 @@
 						<h1> DashBoard</h1>
 					</div>
 					<div class="col-xs-1">
-						<a class="btn btn-primary btn-xs" onclick="colorInterfaz('black')" style="background-color: black">negro</a>
+
+					@helper.form(action = routes.UsuarioController.CambiarColor()){
+						<div class="hide">
+							<input type="text" name="id" value="@usuario.id">
+							<input type="text" name="login" value="@usuario.login">
+							<input type="text" name="colordash" value="black">
+						</div>
+						<input class="btn btn-primary btn-xs" style="background-color: black" type="submit" name="submit" value="negro">						
+						}
 					</div>
 					<div class="col-xs-1">
-						<a class="btn btn-primary btn-xs" onclick="colorInterfaz('white')"  style="background-color: white;"><font style="color: black"> Blanco</font> </a>
+					@helper.form(action = routes.UsuarioController.CambiarColor()){
+						<div class="hide">
+							<input type="text" name="id" value="@usuario.id">
+							<input type="text" name="login" value="@usuario.login">
+							<input type="text" name="colordash" value="pink">
+						</div>
+						<input class="btn btn-primary btn-xs" style="background-color: pink" type="submit" name="submit" value="Rosa">						
+						}
 					</div>
 					<div class="col-xs-1">
-						<a class="btn btn-primary btn-xs"onclick="colorInterfaz('pink')" style="background-color: pink"> Rosa</a>
-					</div>
+					@helper.form(action = routes.UsuarioController.CambiarColor()){
+						<div class="hide">
+							<input type="text" name="id" value="@usuario.id">
+							<input type="text" name="login" value="@usuario.login">
+							<input type="text" name="colordash" value="white">
+						</div>
+						<input class="btn btn-primary btn-xs" style="background-color: grey" type="submit" name="submit" value="blanco">						
+						}
+					</div>											
 				</div>
 				
 				<div class="row">

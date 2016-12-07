@@ -99,4 +99,23 @@ public class UsuariosService {
             return usuario;
         }
 
+        public static boolean cambiarColor(Integer idUsuario, String ColorDash){
+            Usuario user = UsuarioDAO.find(idUsuario);
+            
+            try{
+                user.colordash=ColorDash;
+                return true;
+            }
+            catch(Exception e){
+                return false;
+            }
+
+        }
+
+        public static String colorUsuario (Integer idUsuario){
+            Usuario user = UsuarioDAO.find(idUsuario);
+
+            return user.colordash;
+        }
+
 }

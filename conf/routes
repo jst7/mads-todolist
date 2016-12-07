@@ -80,6 +80,8 @@ DELETE	/mensajes/:id/:idMensaje		controllers.MensajeController.borrarMensaje(idM
 
 GET		/dashboard			controllers.UsuarioController.DashBoard(id: Integer)
 POST    /dashboard/modifica          controllers.UsuarioController.escribirUsuarioModificadoDashBoard(id: Integer)
+POST    /dashboard/modificacolor          controllers.UsuarioController.CambiarColor()
+
 
 # Imagen de perfil
 POST	/usuarios/imagen/:id 			controllers.UsuarioController.modificarImagenDashboard(id: Integer)

@@ -45,8 +45,11 @@
 			'<div class="row hide">id:<br> '+
 				'<a> @usuario.id </a>'+
 			'</div>'+
-			'<div class="row">Login:<br> '+
+			'<div class="row hide">Login:<br> '+
 				'<a> @usuario.login </a>'+
+			'</div>'+
+			'<div class="row">Login:<br> '+
+				'<input type="text" name="login" id="loginnoChange" value=@usuario.login>'+
 			'</div>'+
 			'<div class="row">Email:<br> '+
 				'<input type="text" name="eMail" id="emailChange" value=@usuario.eMail>'+
@@ -62,6 +65,9 @@
 			'</div>'+
 			'<div class="row" >Contraseña: <br> '+
 				'<input type="password" name="password" id="contraseñaChange" value=@usuario.password>'+
+			'</div>'+
+			'<div class="row hide" >color: <br> '+
+			'<input type="text" name="colordash" id="colorDash" value=@usuario.colordash>'+
 			'</div>'+
 			'<div class="row hide" >imagen: <br> '+
 				'<input type="text" name="imagen" id="imagenChange" value=@usuario.imagen>'+
@@ -115,6 +121,9 @@
 				'</div>'+
 				'<div class="row hide" >imagen: <br> '+
 				'<input type="text" name="imagen" id="imagenChange" value=@usuario.imagen>'+
+				'</div>'+
+				'<div class="row hide" >color: <br> '+
+				'<input type="text" name="colordash" id="colorDash" value=@usuario.colordash>'+
 				'</div>'+
 				'<div class="row">'+
 					'<input type="submit" class="btn btn-primary btn-lg" value="Cambiar">'+

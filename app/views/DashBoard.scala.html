@@ -21,7 +21,7 @@
 
 		function buscaDass(){
 			var termino = $("#TextoBuscador").val();
-			var URL = "/buscador?id="+ @usuario.id+"&busqueda="+termino
+			var URL = "/buscador?id="+ @usuario.id+"&busqueda="+termino+"&caso=0"
 			$.ajax({
 				url: URL,
                 type: 'GET',
@@ -229,7 +229,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<input type="text" name="buscar" placeholder="Tareas y Usaurios" id="TextoBuscador">
-					<a class="btn btn-info" onclick="buscaDass()"><span class="glyphicon glyphicon-search" onclick=""> </span></a>
+					<a class="btn btn-info" onclick="buscaDass()"><span class="glyphicon glyphicon-search"> </span></a>
 				</div>
 			</div>
 

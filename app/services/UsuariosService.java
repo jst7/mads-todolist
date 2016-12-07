@@ -99,7 +99,7 @@ public class UsuariosService {
             return usuario;
         }
 
-        public static boolean CambiarColor(Integer idUsuario, String ColorDash){
+        public static boolean cambiarColor(Integer idUsuario, String ColorDash){
             Usuario user = UsuarioDAO.find(idUsuario);
             
             try{
@@ -110,6 +110,12 @@ public class UsuariosService {
                 return false;
             }
 
+        }
+
+        public static String colorUsuario (Integer idUsuario){
+            Usuario user = UsuarioDAO.find(idUsuario);
+
+            return user.colordash;
         }
 
 }

@@ -105,7 +105,11 @@ public class Usuario {
     @OneToMany(mappedBy="propietario")
     public List<Proyecto> proyectos = new ArrayList<Proyecto>();
 
-    @OneToMany(mappedBy="proyectoscolaborador")
-    public List<Colaboradores> proyectoscolabora = new ArrayList<Colaboradores>();
+    @ManyToMany
+    @JoinTable(
+      name="EMP_PROJ",
+      joinColumns=@JoinColumn(name="EMP_ID", referencedColumnName="id"),
+      inverseJoinColumns=@JoinColumn(name="PROJ_ID", referencedColumnName="id"))
+    public List<Proyecto> proyectoscolabora = new ArrayList<Proyecto>();
 
 }

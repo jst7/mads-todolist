@@ -62,7 +62,30 @@ public class ColaboradoresTest {
           Proyecto aux = ProyectoDAO.create(p);
 
           p.usuariosColaboradores.add(ur2);
-          //assertEquals(user.id,user1.id);
+          assertEquals(p.usuariosColaboradores.get(0),ur2);
+
+
+        });
+
+      }
+
+      @Test
+      public void ColaboradorSegundoTest(){
+
+        jpa.withTransaction(() -> {
+
+          Usuario user = new Usuario("prueba1","12345");
+          UsuarioDAO.create(user);
+          Usuario usuario1 = new Usuario("prueba2","12345");
+          UsuarioDAO.create(usuario1);
+          Usuario ur = UsuarioDAO.ExisteLogin(user);
+          Usuario ur2 = UsuarioDAO.ExisteLogin(usuario1);
+          Proyecto p = new Proyecto("miproyectotestnuevo",user);
+          Proyecto aux = ProyectoDAO.create(p);
+
+          p.usuariosColaboradores.add(ur2);
+          p.usuariosColaboradores.add(ur);
+          assertEquals(p.usuariosColaboradores.get(1),ur);
 
 
         });

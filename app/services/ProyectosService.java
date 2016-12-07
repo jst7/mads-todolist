@@ -60,7 +60,10 @@ public class ProyectosService {
 		public static Proyecto addColaborador(Proyecto proyecto,Integer id){
 
 			Usuario user = UsuariosService.findUsuario(id);
-			proyecto.usuariosColaboradores.add(user);
+			if(proyecto.usuariosColaboradores.add(user)){
+				user.proyectoscolabora.add(proyecto);
+			}
+
 			return ProyectoDAO.update(proyecto);
 
 		}

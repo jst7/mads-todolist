@@ -1,7 +1,27 @@
-@(ProyectoForm: Form[Proyecto],usuarios: List[Usuario] ,mensaje: String,idUsuario: Integer ,idProyecto: Integer)
+@(proyecto: Proyecto,usuarios: List[Usuario] ,mensaje: String,idUsuario: Integer ,idProyecto: Integer)
 
 
-@main("Añadir Colaboradores") {
+@scripts = {
+    <script type="text/javascript">
+        function edi(urlEditar) {
+            $.ajax({
+                url: urlEditar,
+                type: 'POST',
+                success: function(results) {
+                  window.location.assign("@routes.ProyectosController.AddColaboradorView(idUsuario,idProyecto)");
+                }
+            });
+        }
+    </script>
+}
+
+@main("Añadir Colaboradores",scripts) {
+
+  @if(mensaje != "") {
+      <div class="alert alert-danger" id="temporal">
+          @mensaje
+      </div>
+  }
 
   <div class="col-xs-push-1 col-xs-11">
     <h2 align="center"> Asignar Usuario </h2>
@@ -18,18 +38,20 @@
               </thead>
           </tr>
       @for(usuario <- usuarios) {
+
           <tr>
             <td>
               Usuario @usuario.id: @usuario.login
             </td>
             <td>
-              <a class="btn btn-danger" href="">
-                <i class="fa fa-check-circle fa-2x" aria-hidden="true"></i>
+              <a class="btn btn-primary"  onclick="edi('@routes.ProyectosController.AddColaborador(idUsuario,idProyecto,usuario.id)')">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
               </a>
             </td>
 
           </tr>
       }
+
       </table>
 
 

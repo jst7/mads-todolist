@@ -62,8 +62,12 @@ GET   /usuarios/:id/proyectosContribuidor            controllers.ProyectosContro
 DELETE  /proyectos/:id/ProyectoBorrar               controllers.ProyectosController.borraProyecto(id: Integer)
 
 # Editar proyecto
-GET		/usuarios/:id/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(idUsuario: Integer,id: Integer)
-POST	/usuarios/:id/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(idUsuario: Integer,id: Integer)
+GET		/usuarios/:idUsuario/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(idUsuario: Integer,id: Integer)
+POST	/usuarios/:idUsuario/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(idUsuario: Integer,id: Integer)
+
+# Añadir Colaboradores
+GET		/usuarios/:idUsuario/proyectos/:id/AddColaboradorView 		controllers.ProyectosController.AddColaboradorView(idUsuario: Integer,id: Integer)
+POST		/usuarios/:idUsuario/proyectos/:id/AddColaborador 	controllers.ProyectosController.AddColaborador(idUsuario: Integer,id: Integer, idColaborador: Integer)
 
 # Buscador
 GET 	/buscador			controllers.UsuarioController.Buscar(id: Integer, busqueda: String,caso: Integer)

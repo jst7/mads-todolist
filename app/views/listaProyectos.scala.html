@@ -39,6 +39,7 @@
             <th>Nombre</th>
             <th>Editar</th>
             <th>Borrar</th>
+            <th>Añadir colaboradores</th>
         </thead>
         </tr>
     @for(proyecto <- proyectos) {
@@ -53,6 +54,11 @@
             <td>
                 <a class="btn btn-danger" onclick="del('@routes.ProyectosController.borraProyecto(proyecto.id)')">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </a>
+            </td>
+            <td>
+                <a class="btn btn-info" href="@routes.ProyectosController.AddColaboradorView(idUsuario,proyecto.id)">
+                  <i class="fa fa-user-plus" aria-hidden="true"></i></span>
                 </a>
             </td>
         </tr>

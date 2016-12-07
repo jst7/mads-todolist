@@ -51,10 +51,41 @@ public class ProyectosService {
     }
 
 		public static List<Proyecto> findAllProyectosPropietario(Integer id) {
-			Logger.debug("entro : ");
+
 			List<Proyecto> lista = ProyectoDAO.findAllPropietario(id);
 			Logger.debug("Numero de proyectos propietario: " + lista.size());
 			return lista;
+		}
+
+		public static Proyecto addColaborador(Proyecto proyecto,Integer id){
+
+			Usuario user = UsuariosService.findUsuario(id);
+			if(proyecto.usuariosColaboradores.add(user)){
+				user.proyectoscolabora.add(proyecto);
+			}
+
+			return ProyectoDAO.update(proyecto);
+
+		}
+
+		public static List<Usuario> filtraUsuarios(Proyecto proyecto,List<Usuario> users){
+
+
+			List<Usuario> usuarios = new ArrayList<Usuario>();
+			for(Usuario usuario : users){
+				boolean esta = false;
+				for (Usuario usuarioCol: proyecto.usuariosColaboradores) {
+					if(usuarioCol == usuario){
+						esta = true;
+					}
+				}
+				if(!esta && proyecto.propietario != usuario){
+					usuarios.add(usuario);
+				}
+			}
+
+			return usuarios;
+
 		}
 
 }

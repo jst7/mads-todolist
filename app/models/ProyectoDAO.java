@@ -50,4 +50,5 @@ public class ProyectoDAO {
         TypedQuery<Proyecto> result = JPA.em().createQuery(query, Proyecto.class);
         return result.setParameter("nombre", proyecto.nombre).getSingleResult();
     }
+
 }

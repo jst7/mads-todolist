@@ -71,4 +71,7 @@ public class Proyecto {
     @JoinColumn(name="propietarioId")
     public Usuario propietario;
 
+    @ManyToMany(mappedBy="proyectoscolabora",cascade = CascadeType.PERSIST)
+    public List<Usuario> usuariosColaboradores = new ArrayList<Usuario>();
+
 }

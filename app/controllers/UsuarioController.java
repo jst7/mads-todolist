@@ -254,4 +254,27 @@ public class UsuarioController extends Controller {
 
         return ok(DashBoard.render(Userdash, contador, "Imagen actualizada", notificaciones));                   
     }
+
+    @Transactional
+    public Result CambiarColor() {
+        Form<Usuario> user  = formFactory.form(Usuario.class).bindFromRequest();
+        Usuario usuario = user.get();
+
+        Boolean cambioColor = UsuariosService.CambiarColor(usuario.id, usuario.colordash);
+
+        Usuario Userdash    = UsuariosService.findUsuarioSinPass(usuario.id);
+        Integer total       = MensajeService.mensajesTotalesEntrada(usuario.id);
+        Integer noleido     = MensajeService.mensajesSinleer(usuario.id);
+        String contador     = noleido + "/" + total;
+        List<Notificacion> notificaciones = NotificacionService.findAll(usuario.id);
+        
+
+        if(cambioColor){
+            return ok(DashBoard.render(Userdash, contador, "Color Actualizado", notificaciones));
+        }
+        else{
+            return badRequest(DashBoard.render(Userdash, contador, "Color No Actualizado", notificaciones));
+        }
+        
+    }
 }

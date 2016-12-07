@@ -26,6 +26,7 @@ public class Usuario {
     @Temporal(TemporalType.DATE)
     public Date fechaNacimiento;
     public String imagen;
+    public String colordash="white";
 
     // necesario un constructor vacío para JPA
     public Usuario() {}
@@ -46,6 +47,7 @@ public class Usuario {
         nuevo.eMail = this.eMail;
         nuevo.fechaNacimiento = this.fechaNacimiento;
         nuevo.imagen = this.imagen;
+        nuevo.colordash=this.colordash;
         return nuevo;
         }
 

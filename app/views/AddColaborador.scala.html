@@ -1,0 +1,27 @@
+@(ProyectoForm: Form[Proyecto],usuarios: List[Usuario] ,mensaje: String,idUsuario: Integer ,idProyecto: Integer)
+
+
+@main("Añadir Colaboradores") {
+
+  <div class="col-xs-push-1 col-xs-11">
+      <h2> Listado de usuarios </h2>
+      <table class="table table-striped">
+          <tr>
+              <thead class="thead-inverse bg-primary">
+                  <th>
+                      ID: Login
+                  </th>
+              </thead>
+          </tr>
+      @for(usuario <- usuarios) {
+          <tr>
+            <td>
+              Usuario @usuario.id: @usuario.login
+            </td>
+
+          </tr>
+      }
+      </table>
+
+
+}

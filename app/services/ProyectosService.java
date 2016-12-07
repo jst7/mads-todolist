@@ -75,7 +75,7 @@ public class ProyectosService {
 						esta = true;
 					}
 				}
-				if(!esta){
+				if(!esta && proyecto.propietario != usuario){
 					usuarios.add(usuario);
 				}
 			}

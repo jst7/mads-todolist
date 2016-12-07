@@ -92,4 +92,27 @@ public class ColaboradoresTest {
 
       }
 
+      @Test
+      public void ColaboradorTamest(){
+
+        jpa.withTransaction(() -> {
+
+          Usuario user = new Usuario("prueba3","12345");
+          UsuarioDAO.create(user);
+          Usuario usuario1 = new Usuario("prueba4","12345");
+          UsuarioDAO.create(usuario1);
+          Usuario ur = UsuarioDAO.ExisteLogin(user);
+          Usuario ur2 = UsuarioDAO.ExisteLogin(usuario1);
+          Proyecto p = new Proyecto("miproyectotestnuevo",user);
+          Proyecto aux = ProyectoDAO.create(p);
+
+          p.usuariosColaboradores.add(ur2);
+          p.usuariosColaboradores.add(ur);
+          assertEquals(p.usuariosColaboradores.size(),2);
+
+
+        });
+
+      }
+
     }

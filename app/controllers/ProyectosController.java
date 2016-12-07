@@ -85,6 +85,18 @@ public class ProyectosController extends Controller {
     }
 
     @Transactional
+    public Result ADDColaborador(Integer idUsuario,Integer idProyecto) {
+
+        Form<Proyecto> proyectoForm = formFactory.form(Proyecto.class);
+        Proyecto proyecto           = ProyectosService.find(idProyecto);
+        proyectoForm                = proyectoForm.fill(proyecto);
+
+        List<Usuario> usuarios = UsuariosService.findAllUsuarios();
+        usuarios=ProyectosService.filtraUsuarios(proyecto,usuarios);
+        return ok(editarProyecto.render(proyectoForm, "",idUsuario,idProyecto));
+    }
+
+    @Transactional
     public Result editarProyectoAction(Integer idUsuario,Integer idProyecto) {
         Form<Proyecto> project = formFactory.form(Proyecto.class).bindFromRequest();
         if (project.hasErrors()) {

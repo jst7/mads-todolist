@@ -57,13 +57,31 @@ public class ProyectosService {
 			return lista;
 		}
 
-		public static addColaborador(Proyecto proyecto,Integer id){
+		public static Proyecto addColaborador(Proyecto proyecto,Integer id){
 
 			Usuario user = UsuariosService.findUsuario(id);
 			proyecto.usuariosColaboradores.add(user);
+			return ProyectoDAO.update(proyecto);
 
-			ProyectoDAO.update(proyecto);
-			
+		}
+
+		public static List<Usuario> filtraUsuarios(Proyecto proyecto,List<Usuario> users){
+
+			boolean esta = false;
+			List<Usuario> usuarios = new ArrayList<Usuario>();
+			for(Usuario usuario : users){
+				for (Usuario usuarioCol: proyecto.usuariosColaboradores) {
+					if(usuarioCol == usuario){
+						esta = true;
+					}
+				}
+				if(!esta){
+					usuarios.add(usuario);
+				}
+			}
+
+			return usuarios;
+
 		}
 
 }

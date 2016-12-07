@@ -1,0 +1,34 @@
+@(usuarioForm: Form[Usuario], mensaje: String, idUsuario: Integer)
+@main("Subir imagen de usuario") {
+    @if(mensaje != "") {
+        <div class="alert alert-danger">
+            @mensaje
+        </div>
+    }    
+    
+    <div class="col-xs-push-1 col-xs-11">
+        <table>
+            <td>
+                <a class="btn btn-primary"  href="@routes.UsuarioController.detalleUsuario(idUsuario)">
+                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+            </td>
+            <td>
+                <h1>Nueva imagen</h1>
+            </td>
+        </table>
+
+        <form action="@routes.UsuarioController.subirImagenAction(idUsuario)" method="POST" enctype="multipart/form-data">
+            <input type="file" name="picture">
+            <p>
+                <input type="submit">
+            </p>
+        </form> 
+        <fieldset>
+            <legend>Imagen de perfil nueva</legend>
+        </fieldset>
+        <div>
+            <a class="btn btn-danger btn-xs" href="@routes.UsuarioController.detalleUsuario(idUsuario)">Cancelar</a>
+        </div>
+    </div>  
+}

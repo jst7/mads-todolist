@@ -301,7 +301,6 @@ public class UsuarioController extends Controller {
         
     }
 
-
     //Auxiliares
     public String mensajesDash(Integer id){
         Integer total = MensajeService.mensajesTotalesEntrada(id);
@@ -320,4 +319,13 @@ public class UsuarioController extends Controller {
         return contador;
     }
 
+    @Transactional
+    public Result subirImagen(Integer idUsuario) {
+        return ok(subirImagen.render(formFactory.form(Usuario.class),"", idUsuario));
+    }
+
+    @Transactional
+    public Result subirImagenAction(Integer idUsuario) {
+        return ok();
+    }
 }

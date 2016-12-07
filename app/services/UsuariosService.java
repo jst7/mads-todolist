@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Date;
 import java.util.ArrayList;
 
+import static play.mvc.Http.MultipartFormData;
+import play.mvc.Http.MultipartFormData.FilePart;
+import play.Play;
+
 import models.*;
 
 public class UsuariosService {
@@ -116,6 +120,20 @@ public class UsuariosService {
             Usuario user = UsuarioDAO.find(idUsuario);
 
             return user.colordash;
+        }
+
+        public static Boolean subirImagen(File file) {
+            if (picture != null) {
+                File file           = picture.getFile();
+                String fileName     = picture.getFilename();
+                String contentType  = picture.getContentType();
+                String fullPath     = Play.application().path().getPath() + "/public/images";
+                String extension    = fileName.substring(fileName.length() - 4);
+                String fileNameNew  = randomWord(10);
+                file.renameTo(new File(fullPath, fileNameNew + extension));
+            }
+
+            return true;
         }
 
 }

@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.List;
 import javax.inject.*;
+import java.util.ArrayList;
 
 import play.*;
 import play.mvc.*;
@@ -169,16 +170,42 @@ public class UsuarioController extends Controller {
     }
 
     @Transactional
-    public Result Buscar(Integer id, String busqueda) {
+    public Result Buscar(Integer id, String busqueda, Integer caso) {
 
         try{
             Usuario user = UsuariosService.findUsuario(id);
 
-            List<Usuario> usuarios = UsuariosService.busquedaUsuario(busqueda);
-            List<Tarea> tareas = TareasService.busquedaTarea(busqueda);
+            List<Usuario> usuarios = new ArrayList<Usuario>();
+            List<Tarea> tareas = new ArrayList<Tarea>();
+            int cantidadU = 0;
+            int cantidadT = 0;            
 
-            int cantidadU = UsuariosService.CantidadUsuariosBusqueda(busqueda);
-            int cantidadT = TareasService.CantidadTareasBusqueda(busqueda);
+            if(caso==0){
+                usuarios = UsuariosService.busquedaUsuario(busqueda);
+                tareas = TareasService.busquedaTarea(busqueda);
+                cantidadU = UsuariosService.CantidadUsuariosBusqueda(busqueda);
+                cantidadT = TareasService.CantidadTareasBusqueda(busqueda);
+            }
+            else if(caso==1){
+                usuarios = UsuariosService.busquedaUsuario(busqueda);
+                tareas = new ArrayList<Tarea>();
+                cantidadU = UsuariosService.CantidadUsuariosBusqueda(busqueda);
+                cantidadT = 0;            
+
+            }
+            else if(caso==2){
+                usuarios = new ArrayList<Usuario>();
+                tareas = TareasService.busquedaTarea(busqueda);
+                cantidadU = 0;
+                cantidadT = TareasService.CantidadTareasBusqueda(busqueda);
+            }else{
+                usuarios = new ArrayList<Usuario>();
+                tareas = new ArrayList<Tarea>();
+                cantidadU = 0;
+                cantidadT = 0;
+            }
+
+
 
         return ok(Buscar.render(usuarios, tareas , user, cantidadU, cantidadT));
         }

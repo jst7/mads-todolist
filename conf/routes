@@ -66,7 +66,7 @@ GET		/usuarios/:id/proyectos/:id/editar 		controllers.ProyectosController.editar
 POST	/usuarios/:id/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(idUsuario: Integer,id: Integer)
 
 # Buscador
-GET 	/buscador			controllers.UsuarioController.Buscar(id: Integer, busqueda: String)
+GET 	/buscador			controllers.UsuarioController.Buscar(id: Integer, busqueda: String,caso: Integer)
 GET 	/buscador/usuario			controllers.UsuarioController.BuscarDetalle(id: Integer, idB: Integer)
 GET 	/buscador/tarea			controllers.TareasController.BuscarDetalle(id: Integer, idB: Integer)
 

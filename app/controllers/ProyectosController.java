@@ -97,6 +97,11 @@ public class ProyectosController extends Controller {
     }
 
     @Transactional
+    public Result AddColaboradorView(Integer idUsuario,Integer idProyecto) {
+        Form<Proyecto> project = formFactory.form(Proyecto.class).bindFromRequest();
+    }
+
+    @Transactional
     public Result editarProyectoAction(Integer idUsuario,Integer idProyecto) {
         Form<Proyecto> project = formFactory.form(Proyecto.class).bindFromRequest();
         if (project.hasErrors()) {

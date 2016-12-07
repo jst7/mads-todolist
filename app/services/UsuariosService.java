@@ -134,9 +134,17 @@ public class UsuariosService {
                 String contentType  = picture.getContentType();
                 String fullPath     = Play.application().path().getPath() + "/public/images";
                 String extension    = fileName.substring(fileName.length() - 4);
+                
                 Helper helper       = new Helper();
-                String fileNameNew  = helper.randomWord(10);
-                file.renameTo(new File(fullPath, fileNameNew + idUsuario + extension));
+                String fileNameNew  = idUsuario + "-" + helper.randomWord(10) + extension;
+                
+                file.renameTo(new File(fullPath, fileNameNew));
+                String fullPathBBDD = controllers.routes.Assets.versioned(new controllers.Assets.Asset("images/" + fileNameNew)).toString();
+                
+                Usuario usuario     = findUsuario(idUsuario);
+                usuario.imagen      = fullPathBBDD;
+                UsuariosService.modificaUsuario(usuario);
+
                 return true;
             } else {
                 return false;

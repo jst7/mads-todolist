@@ -11,7 +11,12 @@ import static play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.Play;
 
+import java.io.*;
+import java.io.File;
+import java.io.IOException;
+
 import models.*;
+import helpers.*;
 
 public class UsuariosService {
 
@@ -122,18 +127,19 @@ public class UsuariosService {
             return user.colordash;
         }
 
-        public static Boolean subirImagen(File file) {
+        public static Boolean subirImagen(FilePart<File> picture, Integer idUsuario) {
             if (picture != null) {
                 File file           = picture.getFile();
                 String fileName     = picture.getFilename();
                 String contentType  = picture.getContentType();
                 String fullPath     = Play.application().path().getPath() + "/public/images";
                 String extension    = fileName.substring(fileName.length() - 4);
-                String fileNameNew  = randomWord(10);
-                file.renameTo(new File(fullPath, fileNameNew + extension));
+                Helper helper       = new Helper();
+                String fileNameNew  = helper.randomWord(10);
+                file.renameTo(new File(fullPath, fileNameNew + idUsuario + extension));
+                return true;
+            } else {
+                return false;
             }
-
-            return true;
         }
-
 }

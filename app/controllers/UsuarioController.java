@@ -20,8 +20,6 @@ import java.io.*;
 import java.io.File;
 import java.io.IOException;
 
-import java.util.Random;
-
 import services.*;
 import models.*;
 
@@ -336,22 +334,11 @@ public class UsuarioController extends Controller {
     public Result subirImagenAction(Integer idUsuario) {
         MultipartFormData<File> body = request().body().asMultipartFormData();
         FilePart<File> picture = body.getFile("picture");
-        if (UsuariosService.subirImagen(picture)) {
-            return ok("ok");            
+        if (UsuariosService.subirImagen(picture, idUsuario)) {
+            return ok(subirImagen.render(formFactory.form(Usuario.class),"Imagen subida correctamente", idUsuario));          
         } else {
             flash("error", "Missing file");
-            return badRequest("fail");
+            return badRequest(subirImagen.render(formFactory.form(Usuario.class),"Error al subir la imagen", idUsuario));
         }
-    }
-
-    public String randomWord(Integer length) {
-        String randomStrings = "";
-        Random random = new Random();
-        char[] word = new char[10];
-        for(int i = 0; i < word.length; i++)
-        {
-            word[i] = (char)('a' + random.nextInt(26));
-        }
-        return new String(word);
     }
 }

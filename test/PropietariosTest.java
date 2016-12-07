@@ -25,43 +25,53 @@ public class PropietariosTest {
     JndiDatabaseTester databaseTester;
 
 
-@BeforeClass
-      static public void initDatabase() {
-          db = Databases.inMemoryWith("jndiName", "DefaultDS");
+    @BeforeClass
+          static public void initDatabase() {
+              db = Databases.inMemoryWith("jndiName", "DefaultDS");
+              // Necesario para inicializar el nombre JNDI de la BD
+              db.getConnection();
+              // Se activa la compatibilidad MySQL en la BD H2
+              db.withConnection(connection -> {
+                  connection.createStatement().execute("SET MODE MySQL;");
+              });
+              jpa = JPA.createFor("memoryPersistenceUnit");
+          }
 
-          db.getConnection();
+          @Before
+          public void initData() throws Exception {
+              databaseTester = new JndiDatabaseTester("DefaultDS");
+              IDataSet initialDataSet = new FlatXmlDataSetBuilder().build(new
+              FileInputStream("test/resources/proyectos_dataset.xml"));
+              databaseTester.setTearDownOperation(DatabaseOperation.DELETE);
+              databaseTester.setDataSet(initialDataSet);
+              databaseTester.onSetup();
+          }
 
-          db.withConnection(connection -> {
-              connection.createStatement().execute("SET MODE MySQL;");
-          });
-          jpa = JPA.createFor("memoryPersistenceUnit");
-      }
+          @After
+          public void clearData() throws Exception {
+              databaseTester.onTearDown();
+          }
 
-
-
-      @AfterClass
-      static public void shutdownDatabase() {
-          jpa.shutdown();
-          db.shutdown();
-      }
-
+          @AfterClass
+          static public void shutdownDatabase() {
+              jpa.shutdown();
+              db.shutdown();
+          }
 
 
       @Test
-      public void PropietarioTest(){
+      public void DevolverProyectosPropietarioDAO(){
 
         jpa.withTransaction(() -> {
 
-          Usuario user = new Usuario("pepote","12345");
-          UsuarioDAO.create(user);
-          Usuario ur = UsuarioDAO.ExisteLogin(user);
-          Proyecto p = new Proyecto("miproyectotestnuevo",user);
-          Proyecto aux = ProyectoDAO.create(p);
-          Proyecto pr = new Proyecto("miproyectotest2",user);
-           pr = ProyectoDAO.create(pr);
-          Usuario user1 = pr.propietario;
 
-          assertEquals(user.id,user1.id);
+          Usuario ur = UsuarioDAO.find(1);
+          Proyecto aux = ProyectoDAO.find(1);
+
+          ur.proyectos.add(aux);
+          aux.propietario = ur;
+
+          assertEquals(ur,aux.propietario);
 
 
         });
@@ -69,15 +79,16 @@ public class PropietariosTest {
       }
 
       @Test
-      public void DevolverProyectosPropietarioDAO(){
+      public void DevolverProyectosPropietarioDAO2(){
 
         jpa.withTransaction(() -> {
 
-          Usuario user = new Usuario("prueba","12345");
-          UsuarioDAO.create(user);
-          Usuario ur = UsuarioDAO.ExisteLogin(user);
-          Proyecto p = new Proyecto("miproyectotestnuevo",user);
-          Proyecto aux = ProyectoDAO.create(p);
+
+          Usuario ur = UsuarioDAO.find(1);
+          Proyecto aux = ProyectoDAO.find(1);
+
+          ur.proyectos.add(aux);
+          aux.propietario = ur;
 
           assertEquals(ur.proyectos.get(0),aux);
 
@@ -86,19 +97,19 @@ public class PropietariosTest {
       }
 
       @Test
-      public void DevolverProyectosPropietarioService(){
+      public void DevolverProyectosPropietarioDAO3(){
 
         jpa.withTransaction(() -> {
 
-          Usuario usuario = new Usuario("preuba2","12345");
-          UsuarioDAO.create(usuario);
-          Usuario usr = UsuarioDAO.ExisteLogin(usuario);
-          Proyecto pry = new Proyecto("miproyectotestnuevo",usuario);
-          Proyecto auxiliar = ProyectoDAO.create(pry);
 
+          Usuario ur = UsuarioDAO.find(1);
+          Proyecto aux = ProyectoDAO.find(1);
+          Proyecto aux2 = ProyectoDAO.find(2);
+          ur.proyectos.add(aux);
+          ur.proyectos.add(aux2);
+          aux.propietario = ur;
 
-          List<Proyecto> proyectos = ProyectoDAO.findAllPropietario(usr.id);
-          assertEquals(proyectos.get(0),auxiliar);
+          assertEquals(ur.proyectos.get(1),aux2);
 
         });
 

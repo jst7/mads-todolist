@@ -24,26 +24,38 @@ public class ColaboradoresTest {
     static JPAApi jpa;
     JndiDatabaseTester databaseTester;
 
+    @BeforeClass
+          static public void initDatabase() {
+              db = Databases.inMemoryWith("jndiName", "DefaultDS");
+              // Necesario para inicializar el nombre JNDI de la BD
+              db.getConnection();
+              // Se activa la compatibilidad MySQL en la BD H2
+              db.withConnection(connection -> {
+                  connection.createStatement().execute("SET MODE MySQL;");
+              });
+              jpa = JPA.createFor("memoryPersistenceUnit");
+          }
 
-@BeforeClass
-      static public void initDatabase() {
-          db = Databases.inMemoryWith("jndiName", "DefaultDS");
+          @Before
+          public void initData() throws Exception {
+              databaseTester = new JndiDatabaseTester("DefaultDS");
+              IDataSet initialDataSet = new FlatXmlDataSetBuilder().build(new
+              FileInputStream("test/resources/proyectosColaboradores_dataset.xml"));
+              databaseTester.setTearDownOperation(DatabaseOperation.DELETE);
+              databaseTester.setDataSet(initialDataSet);
+              databaseTester.onSetup();
+          }
 
-          db.getConnection();
+          @After
+          public void clearData() throws Exception {
+              databaseTester.onTearDown();
+          }
 
-          db.withConnection(connection -> {
-              connection.createStatement().execute("SET MODE MySQL;");
-          });
-          jpa = JPA.createFor("memoryPersistenceUnit");
-      }
-
-
-
-      @AfterClass
-      static public void shutdownDatabase() {
-          jpa.shutdown();
-          db.shutdown();
-      }
+          @AfterClass
+          static public void shutdownDatabase() {
+              jpa.shutdown();
+              db.shutdown();
+          }
 
 
 
@@ -52,67 +64,20 @@ public class ColaboradoresTest {
 
         jpa.withTransaction(() -> {
 
-          Usuario user = new Usuario("pepote","12345");
-          UsuarioDAO.create(user);
-          Usuario usuario1 = new Usuario("juanito","12345");
-          UsuarioDAO.create(usuario1);
-          Usuario ur = UsuarioDAO.ExisteLogin(user);
-          Usuario ur2 = UsuarioDAO.ExisteLogin(usuario1);
-          Proyecto p = new Proyecto("miproyectotestnuevo",user);
-          Proyecto aux = ProyectoDAO.create(p);
 
-          p.usuariosColaboradores.add(ur2);
-          assertEquals(p.usuariosColaboradores.get(0),ur2);
+            Usuario ur = UsuarioDAO.find(1);
+            Proyecto aux = ProyectoDAO.find(1);
+
+            aux.usuariosColaboradores.add(ur);
+
+            assertEquals(ur,aux.usuariosColaboradores.get(0));
 
 
         });
 
       }
 
-      @Test
-      public void ColaboradorSegundoTest(){
-
-        jpa.withTransaction(() -> {
-
-          Usuario user = new Usuario("prueba1","12345");
-          UsuarioDAO.create(user);
-          Usuario usuario1 = new Usuario("prueba2","12345");
-          UsuarioDAO.create(usuario1);
-          Usuario ur = UsuarioDAO.ExisteLogin(user);
-          Usuario ur2 = UsuarioDAO.ExisteLogin(usuario1);
-          Proyecto p = new Proyecto("miproyectotestnuevo",user);
-          Proyecto aux = ProyectoDAO.create(p);
-
-          p.usuariosColaboradores.add(ur2);
-          p.usuariosColaboradores.add(ur);
-          assertEquals(p.usuariosColaboradores.get(1),ur);
 
 
-        });
-
-      }
-
-      @Test
-      public void ColaboradorTamest(){
-
-        jpa.withTransaction(() -> {
-
-          Usuario user = new Usuario("prueba3","12345");
-          UsuarioDAO.create(user);
-          Usuario usuario1 = new Usuario("prueba4","12345");
-          UsuarioDAO.create(usuario1);
-          Usuario ur = UsuarioDAO.ExisteLogin(user);
-          Usuario ur2 = UsuarioDAO.ExisteLogin(usuario1);
-          Proyecto p = new Proyecto("miproyectotestnuevo",user);
-          Proyecto aux = ProyectoDAO.create(p);
-
-          p.usuariosColaboradores.add(ur2);
-          p.usuariosColaboradores.add(ur);
-          assertEquals(p.usuariosColaboradores.size(),2);
-
-
-        });
-
-      }
 
     }

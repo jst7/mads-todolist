@@ -9,4 +9,6 @@
     <Tarea id="4" usuarioId="2" duracion="1" tamano="pequeña" descripcion="Salir a correr" />
     <Mensaje id="1" usuarioFrom="juan" usuarioTo="anabel" subject="asuntest" body="bodytest" leido="1" borrado="0" />
     <Mensaje id="2" usuarioFrom="juan" usuarioTo="anabel" subject="asuntest" body="bodytest" leido="0" borrado="0" />
+    <Proyecto id="1" nombre="proyectoUno" propietarioId="1"/>
+    <Proyecto id="2" nombre="proyectoDos" propietarioId="1"/>
 </dataset>

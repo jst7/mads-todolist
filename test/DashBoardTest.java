@@ -90,6 +90,15 @@ public class DashBoardTest {
 
           assertEquals("pink",colorUser);
         });
+    } 
+
+    @Test
+    public void RecuperarProyectosPropios(){
+        jpa.withTransaction(() -> {
+          int cantidad = ProyectosService.cantidadProyectosPropietario(1);
+
+          assertEquals(cantidad,2);
+        });
     }    
 
 }

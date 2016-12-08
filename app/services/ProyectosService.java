@@ -50,42 +50,55 @@ public class ProyectosService {
         return proyecto;
     }
 
-		public static List<Proyecto> findAllProyectosPropietario(Integer id) {
+	public static List<Proyecto> findAllProyectosPropietario(Integer id) {
 
-			List<Proyecto> lista = ProyectoDAO.findAllPropietario(id);
-			Logger.debug("Numero de proyectos propietario: " + lista.size());
-			return lista;
+		List<Proyecto> lista = ProyectoDAO.findAllPropietario(id);
+
+		return lista;
 		}
 
-		public static Proyecto addColaborador(Proyecto proyecto,Integer id){
+	public static Integer cantidadProyectosPropietario(Integer id) {
 
-			Usuario user = UsuariosService.findUsuario(id);
-			if(proyecto.usuariosColaboradores.add(user)){
-				user.proyectoscolabora.add(proyecto);
-			}
+		List<Proyecto> lista = ProyectoDAO.findAllPropietario(id);
+		
+		return lista.size();
+	}
 
-			return ProyectoDAO.update(proyecto);
+	public static Integer cantidadProyectosColabora(Integer id){
+		//Javi falta rellenarlo
+		return 1;
+	}
 
+	public static Proyecto addColaborador(Proyecto proyecto,Integer id){
+
+		Usuario user = UsuariosService.findUsuario(id);
+		if(proyecto.usuariosColaboradores.add(user)){
+			user.proyectoscolabora.add(proyecto);
 		}
 
-		public static List<Usuario> filtraUsuarios(Proyecto proyecto,List<Usuario> users){
+		return ProyectoDAO.update(proyecto);
+
+	}
 
 
-			List<Usuario> usuarios = new ArrayList<Usuario>();
-			for(Usuario usuario : users){
-				boolean esta = false;
-				for (Usuario usuarioCol: proyecto.usuariosColaboradores) {
-					if(usuarioCol == usuario){
-						esta = true;
-					}
+
+	public static List<Usuario> filtraUsuarios(Proyecto proyecto,List<Usuario> users){
+
+
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		for(Usuario usuario : users){
+			boolean esta = false;
+			for (Usuario usuarioCol: proyecto.usuariosColaboradores) {
+				if(usuarioCol == usuario){
+					esta = true;
 				}
-				if(!esta && proyecto.propietario != usuario){
-					usuarios.add(usuario);
-				}
 			}
-
-			return usuarios;
-
+			if(!esta && proyecto.propietario != usuario){
+				usuarios.add(usuario);
+			}
 		}
+
+		return usuarios;
+	}
 
 }

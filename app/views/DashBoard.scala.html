@@ -1,4 +1,4 @@
-@(usuario: Usuario, contador: String, mensaje: String, notificaciones: List[Notificacion])
+@(usuario: Usuario, contador: String, contadorProyec: String, mensaje: String, notificaciones: List[Notificacion])
 
 @scripts = {
 	
@@ -297,7 +297,9 @@
 					</li>
 					<li class="col-xs-4">
 						<a class="btn btn-info navbar-btn" href="@routes.ProyectosController.listaProyectosPropietario(usuario.id)">
-							<span class="glyphicon glyphicon-list" style="font-size: 20px; color:white"> Proyectos</span> 
+							<span class="glyphicon glyphicon-list" style="font-size: 20px; color:white"> Proyectos
+							<span id="proyectosLinea">@contadorProyec</span> 
+							</span> 
 						</a> 
 					</li>
 					<li class="col-xs-4">

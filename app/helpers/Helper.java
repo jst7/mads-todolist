@@ -43,6 +43,9 @@ public class Helper {
         }
     }
 
+    /*
+    * Función para generar palabras aleatorias a partir de una longitud dada
+    */
     public String randomWord(Integer length) {
         String randomStrings = "";
         Random random = new Random();

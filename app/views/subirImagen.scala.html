@@ -18,10 +18,10 @@
             </td>
         </table>
 
-        <form action="@routes.UsuarioController.subirImagenAction(idUsuario)" method="POST" enctype="multipart/form-data">
-            <input type="file" name="picture">
+        <form class="formUploadImage" action="@routes.UsuarioController.subirImagenAction(idUsuario)" method="POST" enctype="multipart/form-data">
+            <input type="file" class="picture" name="picture">
             <p>
-                <input type="submit">
+                <input type="button" class="btn-submit-img" value="Enviar">
             </p>
         </form> 
         <fieldset>

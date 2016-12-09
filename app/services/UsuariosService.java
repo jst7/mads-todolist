@@ -129,14 +129,14 @@ public class UsuariosService {
 
         public static Boolean subirImagen(FilePart<File> picture, Integer idUsuario) {
             if (picture != null) {
+                Usuario user        = findUsuario(idUsuario);
                 File file           = picture.getFile();
                 String fileName     = picture.getFilename();
                 String contentType  = picture.getContentType();
                 String fullPath     = Play.application().path().getPath() + "/public/images";
                 String extension    = fileName.substring(fileName.length() - 4);
                 
-                Helper helper       = new Helper();
-                String fileNameNew  = idUsuario + "-" + helper.randomWord(10) + extension;
+                String fileNameNew  = idUsuario + "-" + user.login + extension;
                 
                 file.renameTo(new File(fullPath, fileNameNew));
                 String fullPathBBDD = controllers.routes.Assets.versioned(new controllers.Assets.Asset("images/" + fileNameNew)).toString();

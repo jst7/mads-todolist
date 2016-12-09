@@ -12,7 +12,13 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.db.jpa.*;
 
+import static play.mvc.Http.MultipartFormData;
+import play.mvc.Http.MultipartFormData.FilePart;
+import play.Play;
+
+import java.io.*;
 import java.io.File;
+import java.io.IOException;
 
 import services.*;
 import models.*;
@@ -301,7 +307,6 @@ public class UsuarioController extends Controller {
         
     }
 
-
     //Auxiliares
     public String mensajesDash(Integer id){
         Integer total = MensajeService.mensajesTotalesEntrada(id);
@@ -320,4 +325,20 @@ public class UsuarioController extends Controller {
         return contador;
     }
 
+    @Transactional
+    public Result subirImagen(Integer idUsuario) {
+        return ok(subirImagen.render(formFactory.form(Usuario.class),"", idUsuario));
+    }
+
+    @Transactional
+    public Result subirImagenAction(Integer idUsuario) {
+        MultipartFormData<File> body = request().body().asMultipartFormData();
+        FilePart<File> picture = body.getFile("picture");
+        if (UsuariosService.subirImagen(picture, idUsuario)) {
+            return badRequest(subirImagen.render(formFactory.form(Usuario.class),"Imagen subida correctamente", idUsuario));
+        } else {
+            flash("error", "Missing file");
+            return badRequest(subirImagen.render(formFactory.form(Usuario.class),"Error al subir la imagen", idUsuario));
+        }    
+    }
 }

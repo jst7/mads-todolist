@@ -92,3 +92,7 @@ POST	/usuarios/imagen/:id 			controllers.UsuarioController.modificarImagenDashbo
 
 #Notificacion
 POST	/dashboard/notificacion/:idN 			controllers.NotificacionController.leerNotificacion(idN: Integer)
+
+# Imagen
+GET		/usuarios/:id/imagen 			controllers.UsuarioController.subirImagen(id: Integer)
+POST 	/usuarios/:id/imagen 			controllers.UsuarioController.subirImagenAction(id: Integer)

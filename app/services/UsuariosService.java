@@ -7,7 +7,16 @@ import java.util.List;
 import java.util.Date;
 import java.util.ArrayList;
 
+import static play.mvc.Http.MultipartFormData;
+import play.mvc.Http.MultipartFormData.FilePart;
+import play.Play;
+
+import java.io.*;
+import java.io.File;
+import java.io.IOException;
+
 import models.*;
+import helpers.*;
 
 public class UsuariosService {
 
@@ -118,4 +127,27 @@ public class UsuariosService {
             return user.colordash;
         }
 
+        public static Boolean subirImagen(FilePart<File> picture, Integer idUsuario) {
+            if (picture != null) {
+                Usuario user        = findUsuario(idUsuario);
+                File file           = picture.getFile();
+                String fileName     = picture.getFilename();
+                String contentType  = picture.getContentType();
+                String fullPath     = Play.application().path().getPath() + "/public/images";
+                String extension    = fileName.substring(fileName.length() - 4);
+                
+                String fileNameNew  = idUsuario + "-" + user.login + extension;
+                
+                file.renameTo(new File(fullPath, fileNameNew));
+                String fullPathBBDD = controllers.routes.Assets.versioned(new controllers.Assets.Asset("images/" + fileNameNew)).toString();
+                
+                Usuario usuario     = findUsuario(idUsuario);
+                usuario.imagen      = fullPathBBDD;
+                UsuariosService.modificaUsuario(usuario);
+
+                return true;
+            } else {
+                return false;
+            }
+        }
 }

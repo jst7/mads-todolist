@@ -64,4 +64,55 @@ public class NotificacionTest {
         assertTrue(resultado);
       });
     }
+
+    @Test
+    public void LeerNotificacion(){
+      jpa.withTransaction(() -> {
+        List<Notificacion> lista = NotificacionService.findAll(1);
+        Integer tam = lista.size();
+        Boolean res = false;
+        if (tam > 0) {
+            res = true;
+        } else {
+            res = false;
+        }
+        assertTrue(res);
+      });
+    }
+
+    @Test
+    public void LeerNotificacionSimple(){
+      jpa.withTransaction(() -> {
+        Notificacion newNot = new Notificacion("adrian", "miTipo", "miDesc");
+        Boolean resCreate = NotificacionService.crearNotificacion(newNot);
+    });
+      jpa.withTransaction(() -> {
+        Notificacion not = NotificacionService.findNotificacion(2);
+        Boolean res = false;
+        if (not.tipo == "miTipo") {
+            res = true;
+        } else {
+            res = false;
+        }
+        assertTrue(res);
+      });
+    }
+
+    @Test
+    public void ComprobarLeerNotificacion(){
+      jpa.withTransaction(() -> {
+        Boolean resCreate = NotificacionService.leerNotificacion(1);
+    });
+      jpa.withTransaction(() -> {
+        List<Notificacion> lista = NotificacionService.findAll(1);
+        Integer tam = lista.size();
+        Boolean res = false;
+        if (tam > 1) {
+            res = true;
+        } else {
+            res = false;
+        }
+        assertFalse(res);
+      });
+    }
 }

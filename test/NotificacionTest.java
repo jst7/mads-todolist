@@ -80,10 +80,10 @@ public class NotificacionTest {
       });
     }
 
-    @Test
+    /*@Test
     public void LeerNotificacionSimple(){
       jpa.withTransaction(() -> {
-        Notificacion newNot = new Notificacion("adrian", "miTipo", "miDesc");
+        Notificacion newNot = new Notificacion("juan", "miTipo", "miDesc");
         Boolean resCreate = NotificacionService.crearNotificacion(newNot);
         Notificacion not = NotificacionService.findNotificacion(2);
         Boolean res = false;
@@ -94,7 +94,7 @@ public class NotificacionTest {
         }
         assertTrue(res);
       });
-    }
+    }*/
 
     @Test
     public void ComprobarLeerNotificacion(){

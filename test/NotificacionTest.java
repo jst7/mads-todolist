@@ -85,8 +85,6 @@ public class NotificacionTest {
       jpa.withTransaction(() -> {
         Notificacion newNot = new Notificacion("adrian", "miTipo", "miDesc");
         Boolean resCreate = NotificacionService.crearNotificacion(newNot);
-    });
-      jpa.withTransaction(() -> {
         Notificacion not = NotificacionService.findNotificacion(2);
         Boolean res = false;
         if (not.tipo == "miTipo") {

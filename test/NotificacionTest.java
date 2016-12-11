@@ -68,28 +68,9 @@ public class NotificacionTest {
     @Test
     public void LeerNotificacion(){
       jpa.withTransaction(() -> {
-        List<Notificacion> lista = NotificacionService.findAll(1);
-        Integer tam = lista.size();
+        Notificacion notif = NotificacionService.findNotificacion(1);
         Boolean res = false;
-        if (tam > 0) {
-            res = true;
-        } else {
-            res = false;
-        }
-        assertTrue(res);
-      });
-    }
-
-    @Test
-    public void LeerNotificacionSimple(){
-      jpa.withTransaction(() -> {
-        Notificacion newNot = new Notificacion("adrian", "miTipo", "miDesc");
-        Boolean resCreate = NotificacionService.crearNotificacion(newNot);
-      });
-      jpa.withTransaction(() -> {
-        Notificacion not = NotificacionService.findNotificacion(2);
-        Boolean res = false;
-        if (not.tipo == "miTipo") {
+        if (notif.tipo.equals("Mensaje")) {
             res = true;
         } else {
             res = false;

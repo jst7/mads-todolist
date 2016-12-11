@@ -23,38 +23,38 @@ public class NotificacionTest {
     static JPAApi jpa;
     JndiDatabaseTester databaseTester;
 
-    @BeforeClass
-    static public void initDatabase() {
-        db = Databases.inMemoryWith("jndiName", "DefaultDS");
-        // Necesario para inicializar el nombre JNDI de la BD
-        db.getConnection();
-        // Se activa la compatibilidad MySQL en la BD H2
-        db.withConnection(connection -> {
-            connection.createStatement().execute("SET MODE MySQL;");
-        });
-        jpa = JPA.createFor("memoryPersistenceUnit");
-    }
+@BeforeClass
+      static public void initDatabase() {
+          db = Databases.inMemoryWith("jndiName", "DefaultDS");
+          // Necesario para inicializar el nombre JNDI de la BD
+          db.getConnection();
+          // Se activa la compatibilidad MySQL en la BD H2
+          db.withConnection(connection -> {
+              connection.createStatement().execute("SET MODE MySQL;");
+          });
+          jpa = JPA.createFor("memoryPersistenceUnit");
+      }
 
-    @Before
-    public void initData() throws Exception {
-        databaseTester = new JndiDatabaseTester("DefaultDS");
-        IDataSet initialDataSet = new FlatXmlDataSetBuilder().build(new
-        FileInputStream("test/resources/tareas_dataset.xml"));
-        databaseTester.setTearDownOperation(DatabaseOperation.DELETE);
-        databaseTester.setDataSet(initialDataSet);
-        databaseTester.onSetup();
-    }
+      @Before
+      public void initData() throws Exception {
+          databaseTester = new JndiDatabaseTester("DefaultDS");
+          IDataSet initialDataSet = new FlatXmlDataSetBuilder().build(new
+          FileInputStream("test/resources/tareas_dataset.xml"));
+          databaseTester.setTearDownOperation(DatabaseOperation.DELETE);
+          databaseTester.setDataSet(initialDataSet);
+          databaseTester.onSetup();
+      }
 
-    @After
-    public void clearData() throws Exception {
-        databaseTester.onTearDown();
-    }
+      @After
+      public void clearData() throws Exception {
+          databaseTester.onTearDown();
+      }
 
-    @AfterClass
-    static public void shutdownDatabase() {
-        jpa.shutdown();
-        db.shutdown();
-    }
+      @AfterClass
+      static public void shutdownDatabase() {
+          jpa.shutdown();
+          db.shutdown();
+      }
 
     @Test
     public void CrearNotificacion(){
@@ -80,11 +80,13 @@ public class NotificacionTest {
       });
     }
 
-    /*@Test
+    @Test
     public void LeerNotificacionSimple(){
       jpa.withTransaction(() -> {
-        Notificacion newNot = new Notificacion("juan", "miTipo", "miDesc");
+        Notificacion newNot = new Notificacion("adrian", "miTipo", "miDesc");
         Boolean resCreate = NotificacionService.crearNotificacion(newNot);
+      });
+      jpa.withTransaction(() -> {
         Notificacion not = NotificacionService.findNotificacion(2);
         Boolean res = false;
         if (not.tipo == "miTipo") {
@@ -94,7 +96,7 @@ public class NotificacionTest {
         }
         assertTrue(res);
       });
-    }*/
+    }
 
     @Test
     public void ComprobarLeerNotificacion(){

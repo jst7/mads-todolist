@@ -18,12 +18,11 @@ import services.*;
 import models.*;
 
 
-public class PropietariosTest {
+public class BorrarColaboradorTest {
 
     static Database db;
     static JPAApi jpa;
     JndiDatabaseTester databaseTester;
-
 
     @BeforeClass
           static public void initDatabase() {
@@ -41,7 +40,7 @@ public class PropietariosTest {
           public void initData() throws Exception {
               databaseTester = new JndiDatabaseTester("DefaultDS");
               IDataSet initialDataSet = new FlatXmlDataSetBuilder().build(new
-              FileInputStream("test/resources/proyectos_dataset.xml"));
+              FileInputStream("test/resources/proyectosColaboradores_dataset.xml"));
               databaseTester.setTearDownOperation(DatabaseOperation.DELETE);
               databaseTester.setDataSet(initialDataSet);
               databaseTester.onSetup();
@@ -59,22 +58,28 @@ public class PropietariosTest {
           }
 
 
+
       @Test
-      public void DevolverProyectosPropietarioDAO(){
+      public void ColaboradorTest(){
 
         jpa.withTransaction(() -> {
 
 
-          Usuario ur = UsuarioDAO.find(1);
-          Proyecto aux = ProyectoDAO.find(1);
+            Usuario ur = UsuarioDAO.find(1);
+            Proyecto aux = ProyectoDAO.find(1);
 
-          ur.proyectos.add(aux);
-          aux.propietario = ur;
+            aux.usuariosColaboradores.add(ur);
 
-          assertEquals(ur,aux.propietario);
+            ProyectosService.BorrarColaborador(aux,ur);
+
+            assertEquals(0,aux.usuariosColaboradores.size());
+
 
         });
 
       }
+
+
+
 
     }

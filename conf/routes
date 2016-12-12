@@ -62,14 +62,18 @@ GET   /usuarios/:id/proyectosContribuidor            controllers.ProyectosContro
 DELETE  /proyectos/:id/ProyectoBorrar               controllers.ProyectosController.borraProyecto(id: Integer)
 
 # Editar proyecto
-GET		/usuarios/:id/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(idUsuario: Integer,id: Integer)
-POST	/usuarios/:id/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(idUsuario: Integer,id: Integer)
+GET		/usuarios/:idUsuario/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(idUsuario: Integer,id: Integer)
+POST	/usuarios/:idUsuario/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(idUsuario: Integer,id: Integer)
+
+# Añadir Colaboradores
+GET		/usuarios/:idUsuario/proyectos/:id/AddColaboradorView 		controllers.ProyectosController.AddColaboradorView(idUsuario: Integer,id: Integer)
+POST		/usuarios/:idUsuario/proyectos/:id/AddColaborador 	controllers.ProyectosController.AddColaborador(idUsuario: Integer,id: Integer, idColaborador: Integer)
 
 # Estados proyecto
 GET   /proyectos/:idProyecto/estados        controllers.ProyectosController.estadosProyectoView(idProyecto: Integer)
 
 # Buscador
-GET 	/buscador			controllers.UsuarioController.Buscar(id: Integer, busqueda: String)
+GET 	/buscador			controllers.UsuarioController.Buscar(id: Integer, busqueda: String,caso: Integer)
 GET 	/buscador/usuario			controllers.UsuarioController.BuscarDetalle(id: Integer, idB: Integer)
 GET 	/buscador/tarea			controllers.TareasController.BuscarDetalle(id: Integer, idB: Integer)
 
@@ -83,6 +87,15 @@ DELETE	/mensajes/:id/:idMensaje		controllers.MensajeController.borrarMensaje(idM
 
 GET		/dashboard			controllers.UsuarioController.DashBoard(id: Integer)
 POST    /dashboard/modifica          controllers.UsuarioController.escribirUsuarioModificadoDashBoard(id: Integer)
+POST    /dashboard/modificacolor          controllers.UsuarioController.CambiarColor()
+
 
 # Imagen de perfil
 POST	/usuarios/imagen/:id 			controllers.UsuarioController.modificarImagenDashboard(id: Integer)
+
+#Notificacion
+POST	/dashboard/notificacion/:idN 			controllers.NotificacionController.leerNotificacion(idN: Integer)
+
+# Imagen
+GET		/usuarios/:id/imagen 			controllers.UsuarioController.subirImagen(id: Integer)
+POST 	/usuarios/:id/imagen 			controllers.UsuarioController.subirImagenAction(id: Integer)

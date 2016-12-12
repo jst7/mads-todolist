@@ -20,21 +20,21 @@ public class ProyectosService {
 	      }
 	  }
 
-	  public static boolean deleteProyecto(Integer id) {
-	      try {
-	          NotificacionService.crearNotificacion(new Notificacion("allUsers", "Proyecto", "Proyecto " + id));
-	          ProyectoDAO.delete(id);
-	          return true;
-	      } catch(Exception e){
-	          return false;
-	      }
-	  }
+    public static boolean deleteProyecto(Integer id) {
+        try {
+            NotificacionService.crearNotificacion(new Notificacion("allUsers", "Proyecto", "Proyecto " + id));
+            ProyectoDAO.delete(id);
+            return true;
+        } catch(Exception e){
+            return false;
+        }
+    }
 
-		public static List<Proyecto> findAllProyectos() {
-				List<Proyecto> lista = ProyectoDAO.findAll();
-				Logger.debug("Numero de proyectos: " + lista.size());
-				return lista;
-		}
+	public static List<Proyecto> findAllProyectos() {
+		List<Proyecto> lista = ProyectoDAO.findAll();
+		Logger.debug("Numero de proyectos: " + lista.size());
+		return lista;
+	}
 
 		public static Proyecto find(Integer id) {
 	      return ProyectoDAO.find(id);
@@ -60,7 +60,6 @@ public class ProyectosService {
 		public static Integer cantidadProyectosPropietario(Integer id) {
 
 			List<Proyecto> lista = ProyectoDAO.findAllPropietario(id);
-
 			return lista.size();
 		}
 

@@ -73,11 +73,20 @@
   </table>
   <a class="btn btn-success" href="@routes.ProyectosController.crearProyectoFormulario(usuario.id)"> <span class="glyphicon glyphicon-plus" aria-hidden="true"</span></a>
   <span>Agregar proyecto</span>
+<<<<<<< HEAD
       @if(tiposalida == "participa"){
         <a class="btn btn-success" href="@routes.ProyectosController.listaProyectos(idUsuario)"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a><span>Todos los proyectos</span>
       }else{
         <a class="btn btn-info" href="@routes.ProyectosController.listaProyectosPropietario(idUsuario)"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a><span>Solo mis proyectos</span>
       }
+=======
+  @if(tiposalida == "participa"){
+    <a class="btn btn-success" href="@routes.ProyectosController.listaProyectos(usuario.id)"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a><span>Todos los proyectos</span>
+  }else{
+    <a class="btn btn-info" href="@routes.ProyectosController.listaProyectosPropietario(usuario.id)"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a><span>Solo mis proyectos</span>
+  }
+
+>>>>>>> master
 </ul>
 </div>
 }

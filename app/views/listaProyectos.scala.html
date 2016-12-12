@@ -39,7 +39,8 @@
             <th>Nombre</th>
             <th>Editar</th>
             <th>Borrar</th>
-            <th>Añadir colaboradores</th>
+            <!--<th>Añadir colaboradores</th>-->
+            <th>Listar Colaboradores</th>
         </thead>
         </tr>
     @for(proyecto <- proyectos) {
@@ -56,9 +57,14 @@
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                 </a>
             </td>
-            <td>
+            <!--<td>
                 <a class="btn btn-info" href="@routes.ProyectosController.AddColaboradorView(usuario.id,proyecto.id)">
                   <i class="fa fa-user-plus" aria-hidden="true"></i></span>
+                </a>
+            </td>-->
+            <td>
+                <a class="btn btn-success" href="@routes.ProyectosController.listarColaboradores(usuario.id,proyecto.id)">
+                  <i class="fa fa-users" aria-hidden="true"></i></span>
                 </a>
             </td>
         </tr>

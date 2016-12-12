@@ -133,7 +133,7 @@ public class ProyectosController extends Controller {
 
        List<Usuario> usuarios = UsuariosService.findAllUsuarios();
        usuarios=ProyectosService.listarColaboradores(proyecto,usuarios);
-       return ok(listarColaboradores.render(usuarios,idUsuario,idProyecto,""));
-       
+       return ok(listarColaboradores.render(usuarios,idUsuario,proyecto,""));
+
    }
 }

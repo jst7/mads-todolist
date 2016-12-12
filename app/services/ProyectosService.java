@@ -129,7 +129,7 @@ public class ProyectosService {
 					esta = true;
 				}
 			}
-			if(!esta && proyecto.propietario != usuario){
+			if(esta || proyecto.propietario == usuario){
 				usuarios.add(usuario);
 			}
 		}

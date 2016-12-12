@@ -62,21 +62,8 @@ GET   /usuarios/:id/proyectosContribuidor            controllers.ProyectosContro
 DELETE  /proyectos/:id/ProyectoBorrar               controllers.ProyectosController.borraProyecto(id: Integer)
 
 # Editar proyecto
-GET		/usuarios/:idUsuario/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(idUsuario: Integer,id: Integer)
-POST	/usuarios/:idUsuario/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(idUsuario: Integer,id: Integer)
-
-<<<<<<< HEAD
-# Estados proyecto
-GET   /proyectos/:idProyecto/estados        controllers.ProyectosController.estadosProyectoView(idProyecto: Integer)
-=======
-# Añadir Colaboradores
-<<<<<<< HEAD
-GET		/usuarios/:id/proyectos/:id/AddColaborador 		controllers.ProyectosController.AddColaboradorView(idUsuario: Integer,id: Integer)
->>>>>>> e9cc7ef... Vista inicial add proyectos
-=======
-GET		/usuarios/:idUsuario/proyectos/:id/AddColaboradorView 		controllers.ProyectosController.AddColaboradorView(idUsuario: Integer,id: Integer)
-POST		/usuarios/:idUsuario/proyectos/:id/AddColaborador 	controllers.ProyectosController.AddColaborador(idUsuario: Integer,id: Integer, idColaborador: Integer)
->>>>>>> c03bd32... Add de de proyectos a usuarios con cascada
+GET		/usuarios/:id/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(idUsuario: Integer,id: Integer)
+POST	/usuarios/:id/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(idUsuario: Integer,id: Integer)
 
 # Estados proyecto
 GET   /proyectos/:idProyecto/estados        controllers.ProyectosController.estadosProyectoView(idProyecto: Integer)
@@ -99,16 +86,3 @@ POST    /dashboard/modifica          controllers.UsuarioController.escribirUsuar
 
 # Imagen de perfil
 POST	/usuarios/imagen/:id 			controllers.UsuarioController.modificarImagenDashboard(id: Integer)
-<<<<<<< HEAD
-=======
-
-#Notificacion
-POST	/dashboard/notificacion/:idN 			controllers.NotificacionController.leerNotificacion(idN: Integer)
-<<<<<<< HEAD
->>>>>>> e9cc7ef... Vista inicial add proyectos
-=======
-
-# Imagen
-GET		/usuarios/:id/imagen 			controllers.UsuarioController.subirImagen(id: Integer)
-POST 	/usuarios/:id/imagen 			controllers.UsuarioController.subirImagenAction(id: Integer)
->>>>>>> 9bee528... Vista y formulario para subir imagen

@@ -69,6 +69,10 @@ POST	/usuarios/:idUsuario/proyectos/:id/editar 		controllers.ProyectosController
 GET		/usuarios/:idUsuario/proyectos/:id/AddColaboradorView 		controllers.ProyectosController.AddColaboradorView(idUsuario: Integer,id: Integer)
 POST		/usuarios/:idUsuario/proyectos/:id/AddColaborador 	controllers.ProyectosController.AddColaborador(idUsuario: Integer,id: Integer, idColaborador: Integer)
 
+# Listar Colaboradores
+
+GET		/usuarios/:idUsuario/proyectos/:id/listarColaboradores 		controllers.ProyectosController.listarColaboradores(idUsuario: Integer,id: Integer)
+
 # Buscador
 GET 	/buscador			controllers.UsuarioController.Buscar(id: Integer, busqueda: String,caso: Integer)
 GET 	/buscador/usuario			controllers.UsuarioController.BuscarDetalle(id: Integer, idB: Integer)

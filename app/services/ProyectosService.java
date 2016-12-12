@@ -119,7 +119,7 @@ public class ProyectosService {
 	}
 
 
-	public static List<Usuario> listaCOlab(Proyecto proyecto,List<Usuario> users){
+	public static List<Usuario> listarColaboradores(Proyecto proyecto,List<Usuario> users){
 
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		for(Usuario usuario : users){

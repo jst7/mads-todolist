@@ -16,17 +16,17 @@
 @main("Listado de Colaboradores", scripts) {
 
   @if(mensaje != null) {
-      <div class="alert alert-success">
-          @mensaje
-      </div>
+
   }
 
 <div class="col-xs-push-1 col-xs-11">
-  <a class="btn btn-primary"  href="@routes.ProyectosController.listaProyectosPropietario(usuarioID)">
-  <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-  </a>
+
   <h1 align="center">Gestion Colaboradores</h1>
-    <h2> Listado de usuarios </h2>
+  <div>
+    <a class="btn btn-primary"  href="@routes.ProyectosController.listaProyectosPropietario(usuarioID)">
+    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+    </a>
+    <h2> Listado de usuarios </h2> </div>
     <table class="table table-striped">
         <tr>
             <thead class="thead-inverse bg-primary">

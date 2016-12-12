@@ -137,4 +137,17 @@ public class ProyectosService {
 		return usuarios;
 	}
 
+	public static boolean BorrarColaborador(Proyecto proyecto,Usuario colaborador){
+
+		try{
+				proyecto.usuariosColaboradores.remove(colaborador);
+				colaborador.proyectoscolabora.remove(proyecto);
+				ProyectoDAO.update(proyecto);
+				return true;
+			}catch(Exception ex){
+			return false;
+		}
+
+	}
+
 }

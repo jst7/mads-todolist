@@ -25,6 +25,7 @@
   <a class="btn btn-primary"  href="@routes.ProyectosController.listaProyectosPropietario(usuarioID)">
   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
   </a>
+  <h1 align="center">Gestion Colaboradores</h1>
     <h2> Listado de usuarios </h2>
     <table class="table table-striped">
         <tr>
@@ -44,9 +45,9 @@
             </td>
             <td>
               @if(usuario.id == proyecto.propietario.id){
-                <i class="fa fa-lock fa-2x" aria-hidden="true" style="color:red"></i>
+                <a title="Propietario"><i class="fa fa-lock fa-2x" aria-hidden="true" style="color:red" ></i></a>
               }else{
-                <a class="btn btn-danger" onclick="del('')">
+                <a class="btn btn-danger" onclick="del('@routes.ProyectosController.borraColaborador(proyecto.id,usuario.id)')">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                 </a>
               }

@@ -60,7 +60,7 @@ public class ProyectosService {
 	public static Integer cantidadProyectosPropietario(Integer id) {
 
 		List<Proyecto> lista = ProyectoDAO.findAllPropietario(id);
-		
+
 		return lista.size();
 	}
 
@@ -84,6 +84,42 @@ public class ProyectosService {
 
 	public static List<Usuario> filtraUsuarios(Proyecto proyecto,List<Usuario> users){
 
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		for(Usuario usuario : users){
+			boolean esta = false;
+			for (Usuario usuarioCol: proyecto.usuariosColaboradores) {
+				if(usuarioCol == usuario){
+					esta = true;
+				}
+			}
+			if(!esta && proyecto.propietario != usuario){
+				usuarios.add(usuario);
+			}
+		}
+
+		return usuarios;
+	}
+
+	public static List<Usuario> listaCOlab(Proyecto proyecto,List<Usuario> users){
+
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		for(Usuario usuario : users){
+			boolean esta = false;
+			for (Usuario usuarioCol: proyecto.usuariosColaboradores) {
+				if(usuarioCol == usuario){
+					esta = true;
+				}
+			}
+			if(!esta && proyecto.propietario != usuario){
+				usuarios.add(usuario);
+			}
+		}
+
+		return usuarios;
+	}
+
+
+	public static List<Usuario> listaCOlab(Proyecto proyecto,List<Usuario> users){
 
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		for(Usuario usuario : users){

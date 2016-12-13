@@ -53,8 +53,30 @@ public class ProyectosService {
 	public static List<Proyecto> findAllProyectosPropietario(Integer id) {
 
 		List<Proyecto> lista = ProyectoDAO.findAllPropietario(id);
+		lista.addAll(findAllProyectosColaborador(id));
 
 		return lista;
+		}
+
+		public static List<Proyecto> findAllProyectosColaborador(Integer id){
+			List<Proyecto> lista = ProyectoDAO.findAll();
+			List<Proyecto> listaTotal = new ArrayList<Proyecto>();
+			for(Proyecto proyecto: lista){
+				if(ComprobarColabora(proyecto,id)){
+					listaTotal.add(proyecto);
+				}
+			}
+			return listaTotal;
+		}
+
+		public static boolean ComprobarColabora(Proyecto proyecto,Integer idUsuario){
+
+			for(Usuario colaborador: proyecto.usuariosColaboradores){
+				if(colaborador.id == idUsuario){
+					return true;
+				}
+			}
+			return false;
 		}
 
 	public static Integer cantidadProyectosPropietario(Integer id) {
@@ -64,10 +86,14 @@ public class ProyectosService {
 		return lista.size();
 	}
 
+
 	public static Integer cantidadProyectosColabora(Integer id){
-		//Javi falta rellenarlo
-		return 1;
+
+	List<Proyecto> lista = findAllProyectosColaborador(id);
+	return lista.size();
 	}
+
+
 
 	public static Proyecto addColaborador(Proyecto proyecto,Integer id){
 

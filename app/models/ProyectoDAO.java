@@ -27,7 +27,7 @@ public class ProyectoDAO {
     public static List<Proyecto> findAllPropietario(Integer id) {
 
         TypedQuery<Proyecto> query = JPA.em().createQuery(
-                  "select p from Proyecto p where propietario = " + id
+                  "select p from Proyecto p  where propietario = " + id
                   + " ", Proyecto.class);
         return query.getResultList();
     }

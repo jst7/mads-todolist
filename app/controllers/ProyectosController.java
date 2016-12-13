@@ -136,4 +136,17 @@ public class ProyectosController extends Controller {
        return ok(listarColaboradores.render(usuarios,idUsuario,proyecto,""));
 
    }
+
+   @Transactional
+   public Result borraColaborador(Integer idProyecto,Integer idColaborador) {
+
+       Proyecto proyecto           = ProyectosService.find(idProyecto);
+       Usuario colaborador         = UsuariosService.findUsuario(idColaborador);
+       boolean termina = ProyectosService.BorrarColaborador(proyecto,colaborador);
+       if(termina){
+           return ok();
+       }else{
+           return badRequest();
+       }
+   }
 }

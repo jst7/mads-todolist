@@ -88,8 +88,9 @@ public class ProyectosService {
 
 
 	public static Integer cantidadProyectosColabora(Integer id){
-		//Javi falta rellenarlo
-		return 1;
+
+	List<Proyecto> lista = findAllProyectosColaborador(id);
+	return lista.size();
 	}
 
 

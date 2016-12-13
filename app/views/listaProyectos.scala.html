@@ -57,11 +57,14 @@
                 <a class="btn btn-danger" onclick="del('@routes.ProyectosController.borraProyecto(proyecto.id)')">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                 </a>
-              }else{
-                <a title="Solo permisos de propietario">
-                  <i class="fa fa-ban fa-2x" aria-hidden="true" style="#848484"></i>
+              }else {
+                @if(tiposalida == "participa"){
+
+                <a title="Cancelar suscripción" class="btn btn-danger" onclick="del('@routes.ProyectosController.borraColaborador(proyecto.id,usuario.id)')">
+                  <i class="fa fa-sign-out" aria-hidden="true"></i>
                 </a>
               }
+            }
             </td>
             <!--<td>
                 <a class="btn btn-info" href="@routes.ProyectosController.AddColaboradorView(usuario.id,proyecto.id)">

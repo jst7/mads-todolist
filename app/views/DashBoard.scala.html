@@ -88,55 +88,6 @@
 
 		}
 
-		function modificarImagen(){
-			var date = '@usuario.fechaNacimiento'
-			var dateFin= date.split("-")[2]+'-'+ date.split("-")[1] +'-'+ date.split("-")[0]
-
-			document.getElementById("FormImagen").innerHTML = 
-			'<div class="col-xs-12 col-lg-push-1">'+
-				'<IMG class="img-thumbnail img-responsive" SRC="@usuario.imagen" >'+
-				'<div class="row" >URL: <br> '+
-					'<input type="text" name="imagen" id="imagenChange" value="@usuario.imagen">'+
-				'</div>'+
-				'<div class="row hide">id:<br> '+
-					'<input type="text" name="id" id="loginChange" value=@usuario.id>'+
-				'</div>'+
-				'<div class="row hide">Login:<br> '+
-					'<input type="text" name="Login" id="loginChange" value=@usuario.login>'+
-				'</div>'+
-				'<div class="row hide">Email:<br> '+
-					'<input type="text" name="eMail" id="emailChange" value=@usuario.eMail>'+
-				'</div>'+
-				'<div class="row hide">Nombre:<br> '+
-					'<input type="text" name="Nombre" id="nombreChange" value=@usuario.nombre>'+
-				'</div>'+
-				'<div class="row hide">Apellidos:<br> '+
-					'<input type="text" name="Apellidos" id="apellidosChange" value=@usuario.apellidos>'+
-				'</div>'+
-				'<div class="row hide">fechaNacimiento dd-mm-aaaa:<br> '+
-					'<input type="text" name="fechaNacimiento" id="apellidosChange" value='+dateFin+'>'+
-				'</div>'+
-				'<div class="row hide" >Contraseña: <br> '+
-					'<input type="text" name="password" id="contraseñaChange" value=@usuario.password>'+
-				'</div>'+
-				'<div class="row hide" >imagen: <br> '+
-				'<input type="text" name="imagen" id="imagenChange" value=@usuario.imagen>'+
-				'</div>'+
-				'<div class="row hide" >color: <br> '+
-				'<input type="text" name="colordash" id="colorDash" value=@usuario.colordash>'+
-				'</div>'+
-				'<div class="row">'+
-					'<input type="submit" class="btn btn-primary btn-lg" value="Cambiar">'+
-					'<a class="btn btn-danger btn-lg" onclick="nomodificaImagen()" >Cancelar </a>'+
-				'</div>'+
-			'</div>'
-		}
-
-		function nomodificaImagen(){
-			document.getElementById("FormImagen").innerHTML = 
-							'<IMG class="img-thumbnail img-responsive" SRC="@usuario.imagen" >'
-		}
-
 	</script>
 
 }
@@ -192,11 +143,10 @@
 				<div class="row">
 					<div class="row">
 						<div class="col-xs-6">
-				@helper.form(action = routes.UsuarioController.modificarImagenDashboard(usuario.id)){
 							<div id="FormImagen">
 								<IMG class="img-thumbnail img-responsive" SRC="@usuario.imagen"  >
 							</div>
-							}
+							
 						</div>
 				@helper.form(action = routes.UsuarioController.escribirUsuarioModificadoDashBoard(usuario.id)){
 

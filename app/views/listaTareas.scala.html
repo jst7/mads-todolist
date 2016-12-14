@@ -18,7 +18,13 @@
 @main("Tareas del usuario ", scripts) {
 
 <div class="col-xs-push-1 col-xs-11">
-        <table>
+
+          <table>
+            <td>
+                <a class="btn btn-primary"  href='@routes.UsuarioController.DashBoard(usuario.id)'>
+                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+            </td>
             <td>
                 <h1>Listado de tareas de usuario id: @usuario.id</h1>
             </td>

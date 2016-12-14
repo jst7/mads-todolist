@@ -175,7 +175,11 @@ public class UsuarioController extends Controller {
     }
 
     @Transactional
-    public Result Buscar(Integer id, String busqueda, Integer caso) {
+    public Result Buscar(Integer id, String busqueda, String caso) {
+
+        if(busqueda.equals(":all")){
+            busqueda="";
+        }
 
         try{
             Usuario user = UsuariosService.findUsuario(id);
@@ -185,20 +189,20 @@ public class UsuarioController extends Controller {
             int cantidadU = 0;
             int cantidadT = 0;            
 
-            if(caso==0){
+            if(caso.equals("c0")){
                 usuarios = UsuariosService.busquedaUsuario(busqueda);
                 tareas = TareasService.busquedaTarea(busqueda);
                 cantidadU = UsuariosService.CantidadUsuariosBusqueda(busqueda);
                 cantidadT = TareasService.CantidadTareasBusqueda(busqueda);
             }
-            else if(caso==1){
+            else if(caso.equals("c1")){
                 usuarios = UsuariosService.busquedaUsuario(busqueda);
                 tareas = new ArrayList<Tarea>();
                 cantidadU = UsuariosService.CantidadUsuariosBusqueda(busqueda);
                 cantidadT = 0;            
 
             }
-            else if(caso==2){
+            else if(caso.equals("c2")){
                 usuarios = new ArrayList<Usuario>();
                 tareas = TareasService.busquedaTarea(busqueda);
                 cantidadU = 0;
@@ -211,6 +215,52 @@ public class UsuarioController extends Controller {
             }
 
 
+
+        return ok(Buscar.render(usuarios, tareas , user, cantidadU, cantidadT));
+        }
+        catch(Exception e){
+            return badRequest("No puedes acceder a este recurso");
+        }
+    }
+
+    @Transactional
+    public Result BuscarVacio(Integer id, String caso) {
+
+        String busqueda="";
+        
+
+        try{
+            Usuario user = UsuariosService.findUsuario(id);
+
+            List<Usuario> usuarios = new ArrayList<Usuario>();
+            List<Tarea> tareas = new ArrayList<Tarea>();
+            int cantidadU = 0;
+            int cantidadT = 0;            
+
+            if(caso.equals("c0")){
+                usuarios = UsuariosService.busquedaUsuario(busqueda);
+                tareas = TareasService.busquedaTarea(busqueda);
+                cantidadU = UsuariosService.CantidadUsuariosBusqueda(busqueda);
+                cantidadT = TareasService.CantidadTareasBusqueda(busqueda);
+            }
+            else if(caso.equals("c1")){
+                usuarios = UsuariosService.busquedaUsuario(busqueda);
+                tareas = new ArrayList<Tarea>();
+                cantidadU = UsuariosService.CantidadUsuariosBusqueda(busqueda);
+                cantidadT = 0;            
+
+            }
+            else if(caso.equals("c2")){
+                usuarios = new ArrayList<Usuario>();
+                tareas = TareasService.busquedaTarea(busqueda);
+                cantidadU = 0;
+                cantidadT = TareasService.CantidadTareasBusqueda(busqueda);
+            }else{
+                usuarios = new ArrayList<Usuario>();
+                tareas = new ArrayList<Tarea>();
+                cantidadU = 0;
+                cantidadT = 0;
+            }
 
         return ok(Buscar.render(usuarios, tareas , user, cantidadU, cantidadT));
         }

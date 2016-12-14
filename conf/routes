@@ -76,7 +76,8 @@ GET		/usuarios/:idUsuario/proyectos/:id/listarColaboradores 		controllers.Proyec
 DELETE /proyectos/:idProyecto/BorrarColaborador/:idColaborador                     controllers.ProyectosController.borraColaborador(idProyecto: Integer,idColaborador: Integer)
 
 # Buscador
-GET 	/buscador			controllers.UsuarioController.Buscar(id: Integer, busqueda: String,caso: Integer)
+GET 	/buscador/:id/:caso/:busqueda		controllers.UsuarioController.Buscar(id: Integer, busqueda: String,caso: String)
+GET 	/buscador/:id/:caso/	controllers.UsuarioController.BuscarVacio(id: Integer, caso: String)
 GET 	/buscador/usuario			controllers.UsuarioController.BuscarDetalle(id: Integer, idB: Integer)
 GET 	/buscador/tarea			controllers.TareasController.BuscarDetalle(id: Integer, idB: Integer)
 
@@ -88,7 +89,7 @@ GET		/mensajes/entrada/:id			controllers.MensajeController.listarMensajesRecibid
 PUT		/mensajes/:id/:idMensaje 		controllers.MensajeController.leerMensaje(idMensaje: Integer, id: Integer)
 DELETE	/mensajes/:id/:idMensaje		controllers.MensajeController.borrarMensaje(idMensaje: Integer, id: Integer)
 
-GET		/dashboard/:id			controllers.UsuarioController.DashBoard(id: Integer)
+GET		/usuarios/:id/dashboard		controllers.UsuarioController.DashBoard(id: Integer)
 POST    /dashboard/modifica          controllers.UsuarioController.escribirUsuarioModificadoDashBoard(id: Integer)
 POST    /dashboard/modificacolor          controllers.UsuarioController.CambiarColor()
 

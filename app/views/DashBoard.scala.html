@@ -22,7 +22,7 @@
 		function buscaDass(){
 			var termino = $("#TextoBuscador").val();
 			if(termino.length==0){
-				termino=":all"
+				termino=""
 			}
 			var URL = "/buscador/"+ @usuario.id+"/c0/"+termino
 			$.ajax({

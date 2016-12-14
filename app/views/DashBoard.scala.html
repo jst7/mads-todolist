@@ -21,7 +21,10 @@
 
 		function buscaDass(){
 			var termino = $("#TextoBuscador").val();
-			var URL = "/buscador?id="+ @usuario.id+"&busqueda="+termino+"&caso=0"
+			if(termino.length==0){
+				termino=""
+			}
+			var URL = "/buscador/"+ @usuario.id+"/c0/"+termino
 			$.ajax({
 				url: URL,
                 type: 'GET',

@@ -3,13 +3,13 @@
 @scripts = {
     <script type="text/javascript">
         $(document).ready(function(){
-            if(window.location.search.toString().includes("&caso=0") == true){
+            if(window.location.toString().includes("/c0/") == true){
               document.getElementById("idUsuario").checked=true
               document.getElementById("idTarea").checked=true
-            }else if(window.location.search.toString().includes("&caso=1") == true){
+            }else if(window.location.toString().includes("/c1/") == true){
               document.getElementById("idUsuario").checked=true
               document.getElementById("idTarea").checked=false
-            }else if(window.location.search.toString().includes("&caso=2") == true){
+            }else if(window.location.toString().includes("/c2/") == true){
               document.getElementById("idUsuario").checked=false
               document.getElementById("idTarea").checked=true              
             }else{
@@ -46,18 +46,18 @@
         });
 
         function search() {
-          var caso=3;
+          var caso="c3";
           if(document.getElementById("idUsuario").checked==true && document.getElementById("idTarea").checked==true){
-            caso=0;
+            caso="c0";
           }else if(document.getElementById("idUsuario").checked==true && document.getElementById("idTarea").checked==false){
-            caso=1;
+            caso="c1";
           }else if(document.getElementById("idUsuario").checked==false && document.getElementById("idTarea").checked==true){
-            caso=2;
+            caso="c2";
           }else {
-            caso=3;
+            caso="c3";
           }
         	var termino = $("#buscar").val();
-        	var URL = "/buscador?id="+ @usuario.id+"&busqueda="+termino+"&caso="+caso
+        	var URL = "/buscador/"+ @usuario.id+"/"+caso+"/"+termino
         
             $.ajax({
                 url: URL,
@@ -68,8 +68,7 @@
 
                 }
             });
-        }
-        
+        }   
 
     </script>
 }

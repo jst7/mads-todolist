@@ -21,6 +21,7 @@ public class ProyectosController extends Controller {
 
     public Result crearProyectoFormulario(Integer idUsuario) {
         return ok(crearProyectoFormulario.render(formFactory.form(Proyecto.class),idUsuario,""));
+
     }
 
     @Transactional
@@ -56,24 +57,15 @@ public class ProyectosController extends Controller {
         // Obtenemos el mensaje flash guardado en la petición por el controller crearUsuario
         String mensaje = flash("crearProyecto");
         List<Proyecto> proyectos = ProyectosService.findAllProyectos();
-        Usuario user = UsuariosService.findUsuario(idUsuario); 
+        Usuario user = UsuariosService.findUsuario(idUsuario);
         return ok(listaProyectos.render(proyectos,user,"todos"));
     }
 
     @Transactional(readOnly = true)
     public Result listaProyectosPropietario(Integer idUsuario) {
         List<Proyecto> proyectos = ProyectosService.findAllProyectosPropietario(idUsuario);
-        Usuario user = UsuariosService.findUsuario(idUsuario); 
+        Usuario user = UsuariosService.findUsuario(idUsuario);
         return ok(listaProyectos.render(proyectos,user,"participa"));
-<<<<<<< HEAD
-    }
-
-    @Transactional(readOnly = true)
-    public Result listaProyectosPropietario(Integer idUsuario) {
-        List<Proyecto> proyectos = ProyectosService.findAllProyectosPropietario(idUsuario);
-        return ok(listaProyectos.render(proyectos,idUsuario,"participa"));
-=======
->>>>>>> master
     }
 
     @Transactional
@@ -132,6 +124,30 @@ public class ProyectosController extends Controller {
             List<Proyecto> proyectos    = ProyectosService.findAllProyectos();
             return ok(editarProyecto.render(project, "Proyecto modificado",idUsuario,idProyecto));
         }
+   }
+
+   @Transactional
+   public Result listarColaboradores(Integer idUsuario,Integer idProyecto) {
+
+     Proyecto proyecto           = ProyectosService.find(idProyecto);
+
+       List<Usuario> usuarios = UsuariosService.findAllUsuarios();
+       usuarios=ProyectosService.listarColaboradores(proyecto,usuarios);
+       return ok(listarColaboradores.render(usuarios,idUsuario,proyecto,""));
+
+   }
+
+   @Transactional
+   public Result borraColaborador(Integer idProyecto,Integer idColaborador) {
+
+       Proyecto proyecto           = ProyectosService.find(idProyecto);
+       Usuario colaborador         = UsuariosService.findUsuario(idColaborador);
+       boolean termina = ProyectosService.BorrarColaborador(proyecto,colaborador);
+       if(termina){
+           return ok();
+       }else{
+           return badRequest();
+       }
    }
 
    @Transactional

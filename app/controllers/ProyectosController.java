@@ -9,6 +9,7 @@ import views.html.*;
 import static play.libs.Json.*;
 import play.data.Form;
 import play.data.FormFactory;
+import play.data.DynamicForm;
 import play.db.jpa.*;
 
 import services.*;
@@ -57,7 +58,15 @@ public class ProyectosController extends Controller {
         // Obtenemos el mensaje flash guardado en la petición por el controller crearUsuario
         String mensaje = flash("crearProyecto");
         List<Proyecto> proyectos = ProyectosService.findAllProyectos();
-        return ok(listaProyectos.render(proyectos,idUsuario));
+        Usuario user = UsuariosService.findUsuario(idUsuario);
+        return ok(listaProyectos.render(proyectos,user,"todos"));
+    }
+
+    @Transactional(readOnly = true)
+    public Result listaProyectosPropietario(Integer idUsuario) {
+        List<Proyecto> proyectos = ProyectosService.findAllProyectosPropietario(idUsuario);
+        Usuario user = UsuariosService.findUsuario(idUsuario);
+        return ok(listaProyectos.render(proyectos,user,"participa"));
     }
 
     @Transactional
@@ -79,6 +88,30 @@ public class ProyectosController extends Controller {
     }
 
     @Transactional
+    public Result AddColaboradorView(Integer idUsuario,Integer idProyecto) {
+
+
+      Proyecto proyecto           = ProyectosService.find(idProyecto);
+
+        List<Usuario> usuarios = UsuariosService.findAllUsuarios();
+        usuarios=ProyectosService.filtraUsuarios(proyecto,usuarios);
+        return ok(AddColaborador.render(proyecto,usuarios, "",idUsuario,idProyecto));
+    }
+
+    @Transactional
+    public Result AddColaborador(Integer idUsuario,Integer id,Integer idColaborador) {
+
+      try{
+        Proyecto proyecto = ProyectosService.find(id);
+        Proyecto pr = ProyectosService.addColaborador(proyecto,idColaborador);
+        return ok();
+      }catch(Exception ex){
+        return badRequest();
+      }
+
+    }
+
+    @Transactional
     public Result editarProyectoAction(Integer idUsuario,Integer idProyecto) {
         Form<Proyecto> project = formFactory.form(Proyecto.class).bindFromRequest();
         if (project.hasErrors()) {
@@ -92,5 +125,43 @@ public class ProyectosController extends Controller {
             List<Proyecto> proyectos    = ProyectosService.findAllProyectos();
             return ok(editarProyecto.render(project, "Proyecto modificado",idUsuario,idProyecto));
         }
+   }
+
+   @Transactional
+   public Result listarColaboradores(Integer idUsuario,Integer idProyecto) {
+
+     Proyecto proyecto           = ProyectosService.find(idProyecto);
+
+       List<Usuario> usuarios = UsuariosService.findAllUsuarios();
+       usuarios=ProyectosService.listarColaboradores(proyecto,usuarios);
+       return ok(listarColaboradores.render(usuarios,idUsuario,proyecto,""));
+
+   }
+
+   @Transactional
+   public Result borraColaborador(Integer idProyecto,Integer idColaborador) {
+
+       Proyecto proyecto           = ProyectosService.find(idProyecto);
+       Usuario colaborador         = UsuariosService.findUsuario(idColaborador);
+       boolean termina = ProyectosService.BorrarColaborador(proyecto,colaborador);
+       if(termina){
+           return ok();
+       }else{
+           return badRequest();
+       }
+   }
+
+   @Transactional
+   public Result estadosProyectoView(Integer idProyecto, Integer idUsuario) {
+        Proyecto proyecto = ProyectosService.find(idProyecto);
+        return ok(estadosProyecto.render(proyecto, idUsuario));
+   }
+
+   @Transactional
+   public Result crearEstado(Integer idProyecto){
+        Proyecto proyecto = ProyectosService.find(idProyecto);
+        DynamicForm requestData = formFactory.form().bindFromRequest();
+        proyecto = ProyectosService.AddEstado(proyecto, requestData.get("estado"));
+        return ok(estadosProyecto.render(proyecto, proyecto.propietario.id));
    }
 }

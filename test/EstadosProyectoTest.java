@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import services.*;
 import models.*;
 
-public class BorrarTareasTest {
+public class EstadosProyectoTest {
 
     static Database db;
     static JPAApi jpa;
@@ -39,7 +39,7 @@ public class BorrarTareasTest {
       public void initData() throws Exception {
           databaseTester = new JndiDatabaseTester("DefaultDS");
           IDataSet initialDataSet = new FlatXmlDataSetBuilder().build(new
-          FileInputStream("test/resources/tareas_dataset.xml"));
+          FileInputStream("test/resources/proyectos_dataset.xml"));
           databaseTester.setTearDownOperation(DatabaseOperation.DELETE);
           databaseTester.setDataSet(initialDataSet);
           databaseTester.onSetup();
@@ -56,38 +56,15 @@ public class BorrarTareasTest {
           db.shutdown();
       }
 
-    @Test
-    public void DeleteTareaTestDAO(){
-        jpa.withTransaction(() -> {
-          boolean fin=true;
-            try{
-              TareaDAO.delete(71);
-              fin=false;
-            }catch(Exception e){
-
-            }
-            assertTrue(fin);
-
-            boolean findos=true;
-            try{
-              TareaDAO.delete(1);
-
-            }catch(Exception e){
-              fin=false;
-            }
-            assertTrue(findos);
-        });
-    }
-
-    @Test
-    public void DeleteTareaTestService(){
-        jpa.withTransaction(() -> {
-            boolean encontrado = TareasService.deleteTarea(71);
-            assertFalse(encontrado);
-            encontrado = TareasService.deleteTarea(1);
-            assertTrue(encontrado);
-        });
-    }
-
-
+      @Test
+      public void CrearEstadoTest() {
+          jpa.withTransaction(() -> {
+              Proyecto p = ProyectosService.find(1);
+              List<String> l = p.estados;
+              String estado = "nuevo estado";
+              l.add(estado);
+              p = ProyectosService.AddEstado(p, estado);
+              assertEquals(l, p.estados);
+          });
+      }
 }

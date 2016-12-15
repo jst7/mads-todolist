@@ -74,5 +74,31 @@ public class DashBoardTest {
         });
     }
 
+    @Test
+    public void cambiarColor(){
+        jpa.withTransaction(() -> {
+          boolean cambioColor = UsuariosService.cambiarColor(1, "black");
+
+          assertEquals(cambioColor,true);
+        });
+    }
+
+    @Test
+    public void RecuperarColor(){
+        jpa.withTransaction(() -> {
+          String colorUser = UsuariosService.colorUsuario(2);
+
+          assertEquals("pink",colorUser);
+        });
+    } 
+
+    @Test
+    public void RecuperarProyectosPropios(){
+        jpa.withTransaction(() -> {
+          int cantidad = ProyectosService.cantidadProyectosPropietario(1);
+
+          assertEquals(cantidad,2);
+        });
+    }    
 
 }

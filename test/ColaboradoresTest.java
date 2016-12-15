@@ -18,12 +18,11 @@ import services.*;
 import models.*;
 
 
-public class PropietariosTest {
+public class ColaboradoresTest {
 
     static Database db;
     static JPAApi jpa;
     JndiDatabaseTester databaseTester;
-
 
     @BeforeClass
           static public void initDatabase() {
@@ -41,7 +40,7 @@ public class PropietariosTest {
           public void initData() throws Exception {
               databaseTester = new JndiDatabaseTester("DefaultDS");
               IDataSet initialDataSet = new FlatXmlDataSetBuilder().build(new
-              FileInputStream("test/resources/proyectos_dataset.xml"));
+              FileInputStream("test/resources/proyectosColaboradores_dataset.xml"));
               databaseTester.setTearDownOperation(DatabaseOperation.DELETE);
               databaseTester.setDataSet(initialDataSet);
               databaseTester.onSetup();
@@ -59,60 +58,26 @@ public class PropietariosTest {
           }
 
 
+
       @Test
-      public void DevolverProyectosPropietarioDAO(){
+      public void ColaboradorTest(){
 
         jpa.withTransaction(() -> {
 
 
-          Usuario ur = UsuarioDAO.find(1);
-          Proyecto aux = ProyectoDAO.find(1);
+            Usuario ur = UsuarioDAO.find(1);
+            Proyecto aux = ProyectoDAO.find(1);
 
-          ur.proyectos.add(aux);
-          aux.propietario = ur;
+            aux.usuariosColaboradores.add(ur);
 
-          assertEquals(ur,aux.propietario);
+            assertEquals(ur,aux.usuariosColaboradores.get(0));
 
 
         });
 
       }
 
-      @Test
-      public void DevolverProyectosPropietarioDAO2(){
-
-        jpa.withTransaction(() -> {
 
 
-          Usuario ur = UsuarioDAO.find(1);
-          Proyecto aux = ProyectoDAO.find(1);
-
-          ur.proyectos.add(aux);
-          aux.propietario = ur;
-
-          assertEquals(ur.proyectos.get(0),aux);
-
-        });
-
-      }
-
-      @Test
-      public void DevolverProyectosPropietarioDAO3(){
-
-        jpa.withTransaction(() -> {
-
-
-          Usuario ur = UsuarioDAO.find(1);
-          Proyecto aux = ProyectoDAO.find(1);
-          Proyecto aux2 = ProyectoDAO.find(2);
-          ur.proyectos.add(aux);
-          ur.proyectos.add(aux2);
-          aux.propietario = ur;
-
-          assertEquals(ur.proyectos.get(1),aux2);
-
-        });
-
-      }
 
     }

@@ -72,5 +72,4 @@ public class UsuarioDAO {
                   +"%' ORDER BY id", Usuario.class);
         return query.getResultList();
     }
-
 }

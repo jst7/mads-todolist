@@ -2,9 +2,12 @@ jQuery(document).ready(function($) {
 
 	// selectors
 	/* Selectores de css para javsacript */
-	var $leerMsg 	= ".leerMsg",
-		$borrarMsg 	= ".eliminarMsg",
-		$leidoTxt	= ".leidoTxt"
+	var $leerMsg 			= ".leerMsg",
+		$borrarMsg 			= ".eliminarMsg",
+		$leidoTxt			= ".leidoTxt",
+		$btnSubmitImg 		= ".btn-submit-img",
+		$picture			= ".picture",
+		$formUploadImage 	= ".formUploadImage"
 
 	// init
 	/* Funcionalidades que se ejecutarán siempre al iniciar */
@@ -22,6 +25,15 @@ jQuery(document).ready(function($) {
 		var url 		= $(this).data("url")
 		var id  		= $(this).data("id")
 		borrarMensaje(url, id);
+	})
+
+	$($btnSubmitImg).on("click", function() {
+		if($($picture).val() == "") {
+			alert("Debe seleccionar una imagen")
+			return false;
+		} else {
+			$($formUploadImage).submit()
+		}
 	})
 
 	// functions

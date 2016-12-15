@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import services.*;
 import models.*;
 
-public class BorrarTareasTest {
+public class NotificacionTest {
 
     static Database db;
     static JPAApi jpa;
@@ -57,37 +57,43 @@ public class BorrarTareasTest {
       }
 
     @Test
-    public void DeleteTareaTestDAO(){
-        jpa.withTransaction(() -> {
-          boolean fin=true;
-            try{
-              TareaDAO.delete(71);
-              fin=false;
-            }catch(Exception e){
-
-            }
-            assertTrue(fin);
-
-            boolean findos=true;
-            try{
-              TareaDAO.delete(1);
-
-            }catch(Exception e){
-              fin=false;
-            }
-            assertTrue(findos);
-        });
+    public void CrearNotificacion(){
+      jpa.withTransaction(() -> {
+        Notificacion not = new Notificacion("Juan", "Mensaje", "Mi nuevo mensaje");
+        Boolean resultado = NotificacionService.crearNotificacion(not);
+        assertTrue(resultado);
+      });
     }
 
     @Test
-    public void DeleteTareaTestService(){
-        jpa.withTransaction(() -> {
-            boolean encontrado = TareasService.deleteTarea(71);
-            assertFalse(encontrado);
-            encontrado = TareasService.deleteTarea(1);
-            assertTrue(encontrado);
-        });
+    public void LeerNotificacion(){
+      jpa.withTransaction(() -> {
+        Notificacion notif = NotificacionService.findNotificacion(1);
+        Boolean res = false;
+        if (notif.tipo.equals("Mensaje")) {
+            res = true;
+        } else {
+            res = false;
+        }
+        assertTrue(res);
+      });
     }
 
-
+    @Test
+    public void ComprobarLeerNotificacion(){
+      jpa.withTransaction(() -> {
+        Boolean resCreate = NotificacionService.leerNotificacion(1);
+    });
+      jpa.withTransaction(() -> {
+        List<Notificacion> lista = NotificacionService.findAll(1);
+        Integer tam = lista.size();
+        Boolean res = false;
+        if (tam > 1) {
+            res = true;
+        } else {
+            res = false;
+        }
+        assertFalse(res);
+      });
+    }
 }

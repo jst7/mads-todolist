@@ -2,9 +2,62 @@
 
 @scripts = {
     <script type="text/javascript">
+        $(document).ready(function(){
+            if(window.location.toString().includes("/c0/") == true){
+              document.getElementById("idUsuario").checked=true
+              document.getElementById("idTarea").checked=true
+            }else if(window.location.toString().includes("/c1/") == true){
+              document.getElementById("idUsuario").checked=true
+              document.getElementById("idTarea").checked=false
+            }else if(window.location.toString().includes("/c2/") == true){
+              document.getElementById("idUsuario").checked=false
+              document.getElementById("idTarea").checked=true              
+            }else{
+              document.getElementById("idUsuario").checked=false
+              document.getElementById("idTarea").checked=false              
+            }
+
+            if(document.getElementById("idTarea").checked == true){
+                if(document.getElementById("idUsuario").checked==true){
+                  document.getElementById("usuarioZona").className="col-xs-6";
+                  document.getElementById("tareaZona").className="col-xs-6";
+                  document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success hide";
+                }
+                else{
+                  document.getElementById("usuarioZona").className="hidden";
+                  document.getElementById("tareaZona").className="col-xs-12";
+                  document.getElementById("mensajeVacio").className="col-xs-12 alert alert-successhide hide";
+              
+                }
+              }
+            else{
+              if(document.getElementById("idUsuario").checked==true){
+                document.getElementById("usuarioZona").className="col-xs-12";
+                document.getElementById("tareaZona").className="hidden";
+                document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success hide";
+
+              }
+              else{
+                document.getElementById("usuarioZona").className="hidden";
+                document.getElementById("tareaZona").className="hidden"; 
+                document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success";  
+                }
+              }
+        });
+
         function search() {
+          var caso="c3";
+          if(document.getElementById("idUsuario").checked==true && document.getElementById("idTarea").checked==true){
+            caso="c0";
+          }else if(document.getElementById("idUsuario").checked==true && document.getElementById("idTarea").checked==false){
+            caso="c1";
+          }else if(document.getElementById("idUsuario").checked==false && document.getElementById("idTarea").checked==true){
+            caso="c2";
+          }else {
+            caso="c3";
+          }
         	var termino = $("#buscar").val();
-        	var URL = "/buscador?id="+ @usuario.id+"&busqueda="+termino
+        	var URL = "/buscador/"+ @usuario.id+"/"+caso+"/"+termino
         
             $.ajax({
                 url: URL,
@@ -12,76 +65,17 @@
                 success: function(results) {
                     //refresh the page
                     location = URL
-                    location.load()
-                    
+
                 }
             });
-        }
-
-        function BTarea(input) {
-          if(input.checked == true){
-            if(document.getElementById("idUsuario").checked==true){
-              document.getElementById("usuarioZona").className="col-xs-6";
-              document.getElementById("tareaZona").className="col-xs-6";
-              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success hide";
-
-            }
-            else{
-              document.getElementById("usuarioZona").className="hidden";
-              document.getElementById("tareaZona").className="col-xs-12";
-              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-successhide hide";
-          
-            }
-          }
-          else{
-            if(document.getElementById("idUsuario").checked==true){
-              document.getElementById("usuarioZona").className="col-xs-12";
-              document.getElementById("tareaZona").className="hidden";
-              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success hide";
-
-            }
-            else{
-              document.getElementById("usuarioZona").className="hidden";
-              document.getElementById("tareaZona").className="hidden"; 
-              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success";
-            
-            }
-          }
-        }
-
-        function BUsuario(input) {
-          if(input.checked == true){
-            if(document.getElementById("idTarea").checked==true){
-              document.getElementById("usuarioZona").className="col-xs-6";
-              document.getElementById("tareaZona").className="col-xs-6";
-              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success hide";
-            }
-            else{
-              document.getElementById("usuarioZona").className="col-xs-12";
-              document.getElementById("tareaZona").className="hidden";
-              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success hide";          
-            }
-          }
-          else{
-            if(document.getElementById("idTarea").checked==true){
-              document.getElementById("usuarioZona").className="hidden";
-              document.getElementById("tareaZona").className="col-xs-12";
-              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success hide";
-            }
-            else{
-              document.getElementById("usuarioZona").className="hidden";
-              document.getElementById("tareaZona").className="hidden";
-              document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success";             
-            }
-          }
-        }
-        
+        }   
 
     </script>
 }
 
 @main("Buscador", scripts) {
 
+<div class="col-xs-12" style="background-color: @usuario.colordash">
 <br>
 <br>
 <br>
@@ -107,12 +101,12 @@
 	
 	  	<div class="col-xs-2">
 			<span style="color: white">Tarea</span>
-			<input type="checkbox" id="idTarea" checked onchange="BTarea(this)">		 
+			<input type="checkbox" id="idTarea" >		 
 	  	</div>
 
 	  	<div class="col-xs-2">
 	  		<span style="color: white">Ususario</span>
-			<input type="checkbox" id="idUsuario" checked onchange="BUsuario(this)"">
+			<input type="checkbox" id="idUsuario">
 		</div>		
   </div>
   </div>
@@ -125,7 +119,7 @@
 <div class="col-xs-6" id="usuarioZona">
 
 	<div class="row bg-primary">
-	USUARIOS  Cantidad= @cantidadU
+	Usuarios  Cantidad= @cantidadU
 	</div>
 
 @for(user <- ListaUsers) {
@@ -185,5 +179,5 @@
   }
   </div>
 
-
+</div>
 }

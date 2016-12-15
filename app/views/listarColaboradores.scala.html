@@ -1,0 +1,63 @@
+@(usuarios: List[Usuario],usuarioID: Integer,proyecto: Proyecto, mensaje: String)
+@scripts = {
+    <script type="text/javascript">
+        function del(urlBorrar) {
+            $.ajax({
+                url: urlBorrar,
+                type: 'DELETE',
+                success: function(results) {
+                    //refresh the page
+                    location.reload();
+                }
+            });
+        }
+    </script>
+}
+@main("Listado de Colaboradores", scripts) {
+
+  @if(mensaje != null) {
+
+  }
+
+<div class="col-xs-push-1 col-xs-11">
+
+  <h1 align="center">Gestion Colaboradores</h1>
+  <div>
+    <a class="btn btn-primary"  href="@routes.ProyectosController.listaProyectosPropietario(usuarioID)">
+    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+    </a>
+    <h2> Listado de usuarios </h2> </div>
+    <table class="table table-striped">
+        <tr>
+            <thead class="thead-inverse bg-primary">
+                <th>
+                    ID: Login
+                </th>
+                <th>
+                    Eliminar
+                </th>
+            </thead>
+        </tr>
+    @for(usuario <- usuarios) {
+        <tr>
+            <td>
+                Usuario @usuario.id: @usuario.login
+            </td>
+            <td>
+              @if(usuario.id == proyecto.propietario.id){
+                <a title="Propietario"><i class="fa fa-lock fa-2x" aria-hidden="true" style="color:red" ></i></a>
+              }else{
+                <a class="btn btn-danger" onclick="del('@routes.ProyectosController.borraColaborador(proyecto.id,usuario.id)')">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </a>
+              }
+
+            </td>
+        </tr>
+    }
+    </table>
+    <a class="btn btn-success" href="@routes.ProyectosController.AddColaboradorView(usuarioID,proyecto.id)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+    <span>Nuevo colaborador</span>
+
+    </div>
+}

@@ -149,4 +149,12 @@ public class ProyectosController extends Controller {
            return badRequest();
        }
    }
+
+   @Transactional
+   public Result estadosProyectoView(Integer idProyecto) {
+        Proyecto proyecto = ProyectosService.find(idProyecto);
+
+        return ok(estadosProyecto.render(proyecto, proyecto.propietario.id));
+   }
+
 }

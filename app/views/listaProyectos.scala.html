@@ -38,6 +38,7 @@
             <th>Id</th>
             <th>Nombre</th>
             <th>Editar</th>
+            <th>Estados</th>
             <th>Borrar</th>
             <!--<th>Añadir colaboradores</th>-->
             <th>Listar Colaboradores</th>
@@ -59,6 +60,12 @@
               }
             </td>
             <td>
+                <a class="btn btn-info" href="@routes.ProyectosController.estadosProyectoView(proyecto.id)">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </a>
+            </td>
+            <td>
+
               @if(proyecto.propietario == usuario){
                 <a class="btn btn-danger" onclick="del('@routes.ProyectosController.borraProyecto(proyecto.id)')">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>

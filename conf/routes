@@ -65,6 +65,9 @@ DELETE  /proyectos/:id/ProyectoBorrar               controllers.ProyectosControl
 GET		/usuarios/:idUsuario/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(idUsuario: Integer,id: Integer)
 POST	/usuarios/:idUsuario/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(idUsuario: Integer,id: Integer)
 
+# Estados proyecto
+GET   /proyectos/:idProyecto/estados        controllers.ProyectosController.estadosProyectoView(idProyecto: Integer)
+
 # Añadir Colaboradores
 GET		/usuarios/:idUsuario/proyectos/:id/AddColaboradorView 		controllers.ProyectosController.AddColaboradorView(idUsuario: Integer,id: Integer)
 POST		/usuarios/:idUsuario/proyectos/:id/AddColaborador 	controllers.ProyectosController.AddColaborador(idUsuario: Integer,id: Integer, idColaborador: Integer)

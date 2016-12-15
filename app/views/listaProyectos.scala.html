@@ -65,6 +65,7 @@
                 </a>
             </td>
             <td>
+
               @if(proyecto.propietario == usuario){
                 <a class="btn btn-danger" onclick="del('@routes.ProyectosController.borraProyecto(proyecto.id)')">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>

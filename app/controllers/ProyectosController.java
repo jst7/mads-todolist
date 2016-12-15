@@ -156,4 +156,5 @@ public class ProyectosController extends Controller {
 
         return ok(estadosProyecto.render(proyecto, proyecto.propietario.id));
    }
+
 }

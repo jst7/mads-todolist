@@ -47,6 +47,13 @@ public class EstadosProyectoTest {
 
       @After
       public void clearData() throws Exception {
+          jpa.withTransaction(() ->{
+              List<Proyecto> pro = ProyectoDAO.findAll();
+              for(int i=0;i<pro.size();i++) {
+                  pro.get(i).estados = new ArrayList<String>();
+                  ProyectoDAO.update(pro.get(i));
+              }
+          });
           databaseTester.onTearDown();
       }
 

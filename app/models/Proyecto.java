@@ -15,6 +15,7 @@ public class Proyecto {
     public Integer id;
     @Constraints.Required
     public String nombre;
+
     @ElementCollection(targetClass=String.class)
     public List<String> estados = new ArrayList<String>();
 
@@ -32,16 +33,19 @@ public class Proyecto {
 
     // Un constructor vacío necesario para JPA
     public Proyecto() {
+        inicializarEstados();
     }
 
     // El constructor principal con los campos obligatorios
     public Proyecto(String nombre) {
         this.nombre = nombre;
+        inicializarEstados();
     }
 
     public Proyecto(String nombre,Usuario propietario) {
         this.nombre = nombre;
         this.propietario = propietario;
+        inicializarEstados();
     }
 
     public void inicializarEstados() {
@@ -83,7 +87,6 @@ public class Proyecto {
         }
         return true;
     }
-
 
 
 }

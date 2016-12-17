@@ -20,7 +20,7 @@
 <div class="col-xs-push-1 col-xs-11">
         <table>
             <td>
-                <a class="btn btn-primary"  href="@routes.ProyectosController.listaProyectos(idUsuario)">
+                <a class="btn btn-primary"  href="@routes.UsuarioController.DashBoard(idUsuario)">
                 <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                 </a>
             </td>
@@ -40,12 +40,21 @@
                 </tr>
             @for(estado <- proyecto.estados) {
                 <tr>
-                    <td>@estado</td>
+                    <td>@estado.nombre</td>
                 </tr>
               }
+              <tr>
+                  <td>
+                      @if(proyecto.propietario.id == idUsuario){
+                          @helper.form(action = routes.ProyectosController.crearEstado(idUsuario, proyecto.id)) {
+                              <input type="text" name="estado">
+                              <input type="submit" id="crearEstadoBtn" class="btn-success" value ="+">
+                          }
+                      }
+                  </td>
+              </tr>
 
           </table>
-          <a class="btn btn-success" href="@routes.ProyectosController.crearProyectoFormulario(idUsuario)"> <span class="glyphicon glyphicon-plus" aria-hidden="true"</span></a>
         </ul>
 </div>
 }

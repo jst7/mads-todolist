@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import services.*;
 import models.*;
 
-public class CrearProyectoTest {
+public class EstadosProyectoTest {
 
     static Database db;
     static JPAApi jpa;
@@ -56,43 +56,15 @@ public class CrearProyectoTest {
           db.shutdown();
       }
 
-    @Test
-    public void CreateProyectoDAO(){
-        jpa.withTransaction(() -> {
-          Proyecto p = new Proyecto("miproyectotest");
-          Proyecto aux = ProyectoDAO.create(p);
-        });
-
-        jpa.withTransaction(() -> {
-          boolean finded = false;
-          try {
-            Proyecto p = new Proyecto("miproyectotest");
-            Proyecto aux = ProyectoDAO.findByName(p);
-            finded = true;
-          } catch (Exception e) {
-            finded = false;
-          }
-          assertTrue(finded);
-        });
-    }
-
-    @Test
-    public void CreateProyectoService(){
-        jpa.withTransaction(() -> {
-          Proyecto p = new Proyecto("miproyectotest");
-          Proyecto aux = ProyectosService.crearProyecto(p);
-        });
-
-        jpa.withTransaction(() -> {
-          boolean finded = false;
-          try {
-            Proyecto p = new Proyecto("miproyectotest");
-            Proyecto aux = ProyectosService.findByName(p);
-            finded = true;
-          } catch (Exception e) {
-            finded = false;
-          }
-          assertTrue(finded);
-        });
-    }
+      @Test
+      public void CrearEstadoTest() {
+          jpa.withTransaction(() -> {
+              Proyecto p = ProyectosService.find(1);
+              List<Estado> l = p.estados;
+              String estado = "nuevo estado";
+              l.add(new Estado(estado));
+              p = ProyectosService.AddEstado(p, estado);
+              assertEquals(l, p.estados);
+          });
+      }
 }

@@ -9,6 +9,7 @@ import views.html.*;
 import static play.libs.Json.*;
 import play.data.Form;
 import play.data.FormFactory;
+import play.data.DynamicForm;
 import play.db.jpa.*;
 
 import services.*;
@@ -151,9 +152,16 @@ public class ProyectosController extends Controller {
    }
 
    @Transactional
-   public Result estadosProyectoView(Integer idProyecto) {
+   public Result estadosProyectoView(Integer idProyecto, Integer idUsuario) {
         Proyecto proyecto = ProyectosService.find(idProyecto);
+        return ok(estadosProyecto.render(proyecto, idUsuario));
+   }
 
+   @Transactional
+   public Result crearEstado(Integer idUsuario, Integer idProyecto){
+        Proyecto proyecto = ProyectosService.find(idProyecto);
+        DynamicForm requestData = formFactory.form().bindFromRequest();
+        proyecto = ProyectosService.AddEstado(proyecto, requestData.get("estado"));
         return ok(estadosProyecto.render(proyecto, proyecto.propietario.id));
    }
 

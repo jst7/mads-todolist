@@ -51,4 +51,12 @@ public class ProyectoDAO {
         return result.setParameter("nombre", proyecto.nombre).getSingleResult();
     }
 
+    public static Estado addEstado(Estado estado) {
+        JPA.em().persist(estado);
+        JPA.em().flush();
+        JPA.em().refresh(estado);
+        Logger.debug(estado.toString());
+        return estado;
+    }
+
 }

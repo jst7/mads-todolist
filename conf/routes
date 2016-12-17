@@ -66,8 +66,8 @@ GET		/usuarios/:idUsuario/proyectos/:id/editar 		controllers.ProyectosController
 POST	/usuarios/:idUsuario/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(idUsuario: Integer,id: Integer)
 
 # Estados proyecto
-GET   /proyectos/:idProyecto/estados        controllers.ProyectosController.estadosProyectoView(idProyecto: Integer, idUsuario: Integer)
-POST  /proyecyos/:idProyecto/estados        controllers.ProyectosController.crearEstado(idProyecto: Integer)
+GET   /usuarios/:idUsuario/proyectos/:idProyecto/estados        controllers.ProyectosController.estadosProyectoView(idProyecto: Integer, idUsuario: Integer)
+POST  /usuarios/:idUsuario/proyectos/:idProyecto/estados        controllers.ProyectosController.crearEstado(idUsuario: Integer, idProyecto: Integer)
 
 # Añadir Colaboradores
 GET		/usuarios/:idUsuario/proyectos/:id/AddColaboradorView 		controllers.ProyectosController.AddColaboradorView(idUsuario: Integer,id: Integer)

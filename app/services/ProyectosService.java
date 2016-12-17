@@ -176,14 +176,18 @@ public class ProyectosService {
 					int size = proyecto.estados.size();
 					for(int i=0;i<size;i++)
 					{
-							if(proyecto.estados.get(i).equals(estado)) {
+							if(proyecto.estados.get(i).nombre.equals(estado)) {
 									comprobador = false;
 									i = size;
 							}
 					}
 					if(comprobador){
-						proyecto.estados.add(new Estado(estado));
-						ProyectoDAO.update(proyecto);
+						Estado est = new Estado(estado);
+						proyecto.estados.add(est);
+						est.proyecto = proyecto;
+						est = ProyectoDAO.addEstado(est);
+						proyecto = ProyectoDAO.update(proyecto);
+
 					}
 			}
 			return proyecto;

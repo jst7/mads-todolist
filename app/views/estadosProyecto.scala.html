@@ -40,13 +40,13 @@
                 </tr>
             @for(estado <- proyecto.estados) {
                 <tr>
-                    <td>@estado</td>
+                    <td>@estado.nombre</td>
                 </tr>
               }
               <tr>
                   <td>
                       @if(proyecto.propietario.id == idUsuario){
-                          @helper.form(action = routes.ProyectosController.crearEstado(proyecto.id)) {
+                          @helper.form(action = routes.ProyectosController.crearEstado(idUsuario, proyecto.id)) {
                               <input type="text" name="estado">
                               <input type="submit" id="crearEstadoBtn" class="btn-success" value ="+">
                           }

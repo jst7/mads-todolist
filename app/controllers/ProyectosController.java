@@ -158,7 +158,7 @@ public class ProyectosController extends Controller {
    }
 
    @Transactional
-   public Result crearEstado(Integer idProyecto){
+   public Result crearEstado(Integer idUsuario, Integer idProyecto){
         Proyecto proyecto = ProyectosService.find(idProyecto);
         DynamicForm requestData = formFactory.form().bindFromRequest();
         proyecto = ProyectosService.AddEstado(proyecto, requestData.get("estado"));

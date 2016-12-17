@@ -164,4 +164,5 @@ public class ProyectosController extends Controller {
         proyecto = ProyectosService.AddEstado(proyecto, requestData.get("estado"));
         return ok(estadosProyecto.render(proyecto, proyecto.propietario.id));
    }
+
 }

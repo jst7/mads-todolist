@@ -54,7 +54,7 @@ public class ProyectosService {
 			List<Proyecto> lista = ProyectoDAO.findAllPropietario(id);
 			lista.addAll(findAllProyectosColaborador(id));
 			return lista;
-			}
+	}
 
 	public static List<Proyecto> findAllProyectosColaborador(Integer id){
 			List<Proyecto> lista = ProyectoDAO.findAll();
@@ -75,7 +75,7 @@ public class ProyectosService {
 					}
 			}
 			return false;
-		}
+	}
 
 	public static Integer cantidadProyectosPropietario(Integer id) {
 			List<Proyecto> lista = ProyectoDAO.findAllPropietario(id);
@@ -188,5 +188,4 @@ public class ProyectosService {
 			}
 			return proyecto;
 	}
-
 }

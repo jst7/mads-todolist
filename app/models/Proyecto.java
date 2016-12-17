@@ -1,4 +1,4 @@
- package models;
+package models;
 
 import java.util.Date;
 import javax.persistence.*;
@@ -16,8 +16,9 @@ public class Proyecto {
     @Constraints.Required
     public String nombre;
 
-    @ElementCollection(targetClass=String.class)
-    public List<String> estados = new ArrayList<String>();
+    //@ElementCollection(targetClass=String.class)
+    @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE)
+    public List<Estado> estados = new ArrayList<Estado>();
 
     @OneToMany(mappedBy="proyecto")
     public List<Tarea> tareas = new ArrayList<Tarea>();
@@ -49,9 +50,9 @@ public class Proyecto {
     }
 
     public void inicializarEstados() {
-        estados.add("pequeño");
-        estados.add("mediano");
-        estados.add("grande");
+        estados.add(new Estado("pequeño"));
+        estados.add(new Estado("mediano"));
+        estados.add(new Estado("grande"));
     }
 
     public String toString() {

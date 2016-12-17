@@ -47,13 +47,6 @@ public class EstadosProyectoTest {
 
       @After
       public void clearData() throws Exception {
-          jpa.withTransaction(() ->{
-              List<Proyecto> pro = ProyectoDAO.findAll();
-              for(int i=0;i<pro.size();i++) {
-                  pro.get(i).estados = new ArrayList<String>();
-                  ProyectoDAO.update(pro.get(i));
-              }
-          });
           databaseTester.onTearDown();
       }
 
@@ -67,9 +60,9 @@ public class EstadosProyectoTest {
       public void CrearEstadoTest() {
           jpa.withTransaction(() -> {
               Proyecto p = ProyectosService.find(1);
-              List<String> l = p.estados;
+              List<Estado> l = p.estados;
               String estado = "nuevo estado";
-              l.add(estado);
+              l.add(new Estado(estado));
               p = ProyectosService.AddEstado(p, estado);
               assertEquals(l, p.estados);
           });

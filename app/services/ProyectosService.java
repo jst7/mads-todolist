@@ -179,10 +179,10 @@ public class ProyectosService {
 							if(proyecto.estados.get(i).equals(estado)) {
 									comprobador = false;
 									i = size;
-							}		
+							}
 					}
 					if(comprobador){
-						proyecto.estados.add(estado);
+						proyecto.estados.add(new Estado(estado));
 						ProyectoDAO.update(proyecto);
 					}
 			}

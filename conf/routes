@@ -65,9 +65,14 @@ DELETE  /proyectos/:id/ProyectoBorrar               controllers.ProyectosControl
 GET		/usuarios/:idUsuario/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(idUsuario: Integer,id: Integer)
 POST	/usuarios/:idUsuario/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(idUsuario: Integer,id: Integer)
 
-# Estados proyecto
+# Listar Estados proyecto
 GET   /usuarios/:idUsuario/proyectos/:idProyecto/estados        controllers.ProyectosController.estadosProyectoView(idProyecto: Integer, idUsuario: Integer)
+
+# Añadir Estados proyecto
 POST  /usuarios/:idUsuario/proyectos/:idProyecto/estados        controllers.ProyectosController.crearEstado(idUsuario: Integer, idProyecto: Integer)
+
+# Borrar Estados proyecto
+DELETE  /usuarios/:idUsuario/proyectos/:idProyecto/estados/:idEstado        controllers.ProyectosController.borrarEstado(idUsuario: Integer, idProyecto: Integer, idEstado: Integer)
 
 # Añadir Colaboradores
 GET		/usuarios/:idUsuario/proyectos/:id/AddColaboradorView 		controllers.ProyectosController.AddColaboradorView(idUsuario: Integer,id: Integer)

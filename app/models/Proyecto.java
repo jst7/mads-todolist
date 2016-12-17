@@ -33,25 +33,16 @@ public class Proyecto {
 
     // Un constructor vacío necesario para JPA
     public Proyecto() {
-        inicializarEstados();
     }
 
     // El constructor principal con los campos obligatorios
     public Proyecto(String nombre) {
         this.nombre = nombre;
-        inicializarEstados();
     }
 
     public Proyecto(String nombre,Usuario propietario) {
         this.nombre = nombre;
         this.propietario = propietario;
-        inicializarEstados();
-    }
-
-    public void inicializarEstados() {
-        estados.add(new Estado("pequeño"));
-        estados.add(new Estado("mediano"));
-        estados.add(new Estado("grande"));
     }
 
     public String toString() {

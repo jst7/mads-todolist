@@ -67,4 +67,19 @@ public class EstadosProyectoTest {
               assertEquals(l, p.estados);
           });
       }
+
+      @Test
+      public void EliminarEstadoTest() {
+          jpa.withTransaction(() -> {
+              Proyecto p = ProyectosService.find(1);
+              List<Estado> l = p.estados;
+              l.add(new Estado("nuevo estado"));
+              p = ProyectosService.AddEstado(p, "nuevo estado");
+              p = ProyectosService.AddEstado(p, "nuevo estado2");
+              Estado estado = p.estados.get(1);
+              p = ProyectosService.DeleteEstado(estado.id);
+
+              assertEquals(l, p.estados);
+          });
+      }
 }

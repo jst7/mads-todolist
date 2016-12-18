@@ -113,5 +113,146 @@ https://trello.com/b/oXhIBL9Y/todolist-equipo-2
 
 # Funcionalidades implementadas
 # Informe sobre la metodología seguida
+
+#####Hemos seguido la metodología Scrum y seguido el siguiente orden para la realización de las caracteristicas de la aplicación:
+
+- Planificación de las caracteristicas necesarias para la implementación
+- Desarrollo del código de programación
+- Pruebas funcionales o test de código
+- Revisión de código (pull request)
+- Integración (Pruebas automatizadas con Travis)
+- Integración con la rama principal del proyecto
+
 # Informes sobre las reuniones de Scrum
+
+En cuanto a las reuniones `dailys`, hemos realizado tres reuniones:
+
+1. 03-12-2016
+
+Features completadas:
+
+- Feature 3
+
+Features en dearrollo:
+
+- Feature 4
+- Feature 5
+- Feature 6
+- Feature 7
+- Feature 8
+
+![1](capturas/reunion3.jpeg "Reunión 3-12-16")
+
+#####Estado del proyecto
+
+######Features sin comenzar
+- Feature 10, 11
+
+######Features en desarrollo
+- Features 4, 5, 6, 7, 8, 9
+
+######Features completadas
+- Features 3
+
+2. 10-12-2016
+
+Features completadas:
+
+- Feature 3
+- Feature 4
+
+Features en dearrollo:
+
+- Feature 5
+- Feature 6
+- Feature 7
+- Feature 8
+- Feature 9
+
+![2](capturas/reunion10.jpeg "Reunión 10-12-16")
+
+#####Estado del proyecto
+
+######Features sin comenzar
+- Feature 10, 11
+
+######Features en desarrollo
+- Features 5, 6, 7, 8, 9
+
+######Features completadas
+- Features 3, 4
+
+3. 17-12-2016
+
+Features completadas:
+
+- Feature 3
+- Feature 4
+- Feature 5
+- Feature 7
+- Feature 8
+- Feature 9
+
+Features en dearrollo:
+
+- Feature 6
+
+Features sobreestiadas
+
+- Feature 10 (Se explicará en la retrospectiva)
+
+![3](capturas/reunion17.jpeg "Reunión 17-12-16")
+
+#####Estado del proyecto
+
+######Features sin comenzar
+- Feature 11
+
+######Features en desarrollo
+- Feature 6
+
+######Features completadas
+- Feature 3, 4, 5, 7, 8 y 9
+
+######Features HOTFIX
+- Url: Cambiar el formato de url eliminando las querystring por formato REST
+- Color de interfaz: Hacer permanente el color de la interfaz de usuario
+- Integración imagen: Cambiar en el dashboard el poder subir la imagen con fichero físico
+- Cambio de color: Cambiar el color negro por el azul
+
+#####Pruebas funcionales
+
+######TICs que no tienen tests
+
+- 3: Mensajes
+- 4: Buscador
+		TIC4.5 Separar la búsqueda de usuario y tareas en interfaz
+- 5: 
+- 6: Estado de proyecto
+		TIC6.5 No tiene test debido a que es la creación de una vista
+- 7: Imagen de usuario
+- 8: Dashboard
+		TIC8.1, TIC8.2, TIC8.4, TIC8.6, TIC8.8 No tienen pruebas debido a que son interfaz
+- 9: Notificaciones
+- 10: Compartir tarea - FEATURE SOBREESTIMADA (No tiene pruebas)
+- 11: 
+
 # Retrospectiva
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

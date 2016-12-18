@@ -166,6 +166,12 @@ public class ProyectosController extends Controller {
    }
 
    @Transactional
+   public Result editarEstado(Integer idUsuario, Integer idProyecto, Integer idEstado) {
+        Proyecto proyecto = ProyectosService.find(idProyecto);
+        return ok(estadosProyecto.render(proyecto, proyecto.propietario.id));
+   }
+
+   @Transactional
    public Result borrarEstado(Integer idUsuario, Integer idProyecto, Integer idEstado){
         Proyecto proyecto = ProyectosService.find(idProyecto);
         proyecto = ProyectosService.DeleteEstado(idEstado);

@@ -71,6 +71,9 @@ GET   /usuarios/:idUsuario/proyectos/:idProyecto/estados        controllers.Proy
 # Añadir Estados proyecto
 POST  /usuarios/:idUsuario/proyectos/:idProyecto/estados        controllers.ProyectosController.crearEstado(idUsuario: Integer, idProyecto: Integer)
 
+# Modificar Estados proyecto
+POST  /usuarios/:idUsuario/proyectos/:idProyecto/estados/:idEstado/editar       controllers.ProyectosController.editarEstado(idUsuario: Integer, idProyecto: Integer, idEstado: Integer)
+
 # Borrar Estados proyecto
 DELETE  /usuarios/:idUsuario/proyectos/:idProyecto/estados/:idEstado        controllers.ProyectosController.borrarEstado(idUsuario: Integer, idProyecto: Integer, idEstado: Integer)
 

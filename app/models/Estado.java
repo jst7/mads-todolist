@@ -11,7 +11,7 @@ public class Estado {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     public Integer id;
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name="proyectoId")
     public Proyecto proyecto;
     public String nombre;

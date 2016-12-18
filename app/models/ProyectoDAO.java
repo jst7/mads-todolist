@@ -59,4 +59,13 @@ public class ProyectoDAO {
         return estado;
     }
 
+    public static Estado findEstado(Integer idEstado) {
+        return JPA.em().find(Estado.class, idEstado);
+    }
+
+    public static void deleteEstado(Integer idEstado) {
+        Estado estado = JPA.em().getReference(Estado.class, idEstado);
+        JPA.em().remove(estado);
+    }
+
 }

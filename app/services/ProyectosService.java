@@ -192,4 +192,12 @@ public class ProyectosService {
 			}
 			return proyecto;
 	}
+
+	public static Proyecto DeleteEstado(Integer idEstado) {
+			Estado estado = ProyectoDAO.findEstado(idEstado);
+			Proyecto proyecto = ProyectoDAO.find(estado.proyecto.id);
+			ProyectoDAO.deleteEstado(idEstado);
+			proyecto.estados.remove(estado);
+			return proyecto;
+	}
 }

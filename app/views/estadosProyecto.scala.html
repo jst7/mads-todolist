@@ -36,11 +36,21 @@
                 <tr>
                 <thead class="thead-inverse bg-primary">
                     <th>Estado</th>
+                    @if(proyecto.propietario.id == idUsuario) {
+                        <th>Borrar</th>
+                    }
                 </thead>
                 </tr>
             @for(estado <- proyecto.estados) {
                 <tr>
                     <td>@estado.nombre</td>
+                    @if(proyecto.propietario.id == idUsuario) {
+                        <td>
+                            <a class="btn btn-danger" onclick="del('@routes.ProyectosController.borrarEstado(proyecto.id, idUsuario, estado.id)')">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    }
                 </tr>
               }
               <tr>

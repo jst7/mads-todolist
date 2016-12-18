@@ -187,9 +187,19 @@ public class ProyectosService {
 						est.proyecto = proyecto;
 						est = ProyectoDAO.addEstado(est);
 						proyecto = ProyectoDAO.update(proyecto);
-
 					}
 			}
+			return proyecto;
+	}
+
+	public static Proyecto UpdateEstado(Integer idEstado, String nuevoNombre) {
+			Estado estado = ProyectoDAO.findEstado(idEstado);
+			Proyecto proyecto = ProyectoDAO.find(estado.proyecto.id);
+			Estado estadoNuevo = estado;
+			estadoNuevo.nombre = nuevoNombre;
+			int i = proyecto.estados.indexOf(estado);
+			proyecto.estados.set(i, estadoNuevo);
+			ProyectoDAO.updateEstado(estadoNuevo);
 			return proyecto;
 	}
 

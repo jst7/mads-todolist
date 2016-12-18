@@ -63,6 +63,10 @@ public class ProyectoDAO {
         return JPA.em().find(Estado.class, idEstado);
     }
 
+    public static Estado updateEstado(Estado estado) {
+        return JPA.em().merge(estado);
+    }
+
     public static void deleteEstado(Integer idEstado) {
         Estado estado = JPA.em().getReference(Estado.class, idEstado);
         JPA.em().remove(estado);

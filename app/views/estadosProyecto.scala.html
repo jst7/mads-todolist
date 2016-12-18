@@ -20,7 +20,7 @@
 <div class="col-xs-push-1 col-xs-11">
         <table>
             <td>
-                <a class="btn btn-primary"  href="@routes.UsuarioController.DashBoard(idUsuario)">
+                <a class="btn btn-primary"  href="@routes.ProyectosController.listaProyectosPropietario(idUsuario)">
                 <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                 </a>
             </td>
@@ -43,13 +43,21 @@
                 </tr>
             @for(estado <- proyecto.estados) {
                 <tr>
-                    <td>@estado.nombre</td>
+
                     @if(proyecto.propietario.id == idUsuario) {
+                        <td>
+                            @helper.form(action = routes.ProyectosController.editarEstado(idUsuario, proyecto.id, estado.id)) {
+                            <input type="text" name="estadoMod" value="@estado.nombre">
+                            <input type="submit" id="editarEstadoBtn" class="btn-info" value ="editar">
+                          }
+                        </td>
                         <td>
                             <a class="btn btn-danger" onclick="del('@routes.ProyectosController.borrarEstado(proyecto.id, idUsuario, estado.id)')">
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                             </a>
                         </td>
+                    } else {
+                        <td>@estado.nombre</td>
                     }
                 </tr>
               }

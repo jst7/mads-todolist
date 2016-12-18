@@ -112,6 +112,77 @@ https://trello.com/b/oXhIBL9Y/todolist-equipo-2
     2. Poder archivar la tarea.
 
 # Funcionalidades implementadas
+
+#Gestión de propietarios y colaboradores de proyectos
+
+## Para el desarrollador
+
+En esta funcionalidad se implementa el comportamiento de los usuarios con los proyectos.Los usuarios interactuan con los proyectos a modo de propietario o de colaborador.
+
+Los proyectos tienen 1 solo propietario, este será el único que podrá borrar y editar el proyecto, además solo el propietario podrá listar los colaboradores y añadir o borrar estos.
+
+Por otro lado los usuarios pueden listar tanto los proyectos existentes en toda la página, como los proyectos de los cuales es propietario o colaborador.Solo podrá interactuar con estos últimos.
+
+Se controlan estos comporatamientos con el siguiente código:
+
+-devolviendo las listas de proyectos.
+
+-propietario
+```java
+	public static Integer cantidadProyectosPropietario(Integer id) {
+
+		List<Proyecto> lista = ProyectoDAO.findAllPropietario(id);
+
+		return lista.size();
+	}
+```
+-Colaborador
+
+```java
+	public static Integer cantidadProyectosColabora(Integer id){
+
+	List<Proyecto> lista = findAllProyectosColaborador(id);
+	return lista.size();
+	}
+```
+
+Añadir colaborador.
+
+```java
+
+	public static Proyecto addColaborador(Proyecto proyecto,Integer id){
+
+		Usuario user = UsuariosService.findUsuario(id);
+		if(proyecto.usuariosColaboradores.add(user)){
+			user.proyectoscolabora.add(proyecto);
+		}
+
+		return ProyectoDAO.update(proyecto);
+
+```
+
+## Para el Cliente
+
+Como usuario podrá tener acceso a proyectos, podrá listar todos los proyectos existentes.
+
+![1](Listaproyectostotal.png "Lista de pryectos totales")
+
+![2](listaproyectospc.png "Lista de proyectos colaboradores")
+
+Como usuario al ser propietario de un proyecto podrá modificar,borrar y listar colaboradores, si no es propietario y es colaborador solo podra cancelar su suscripción.
+
+Como usuario propietario de un proyecto se podrá visualizar a los usuarios colaboradores y gestionarlos(borrar y añadir nuevos).
+
+![3](colaboradoreslist.png "Lista de proyectos colaboradores")
+
+
+#Compartir tarea
+
+Esta funcionalidad ha sido sobreestimada.
+
+
+Esta tarea pasa a ser sobreestimada ya que al realizar la comparticion de proyectos no tiene sentido que las tareas tengan una lista de colaboradores también puesto que es redundante y causa problemas de consistencia, dando a los usuarios un comportamiento no deseado.
+
 # Informe sobre la metodología seguida
 
 #####Hemos seguido la metodología Scrum y seguido el siguiente orden para la realización de las caracteristicas de la aplicación:

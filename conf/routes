@@ -44,6 +44,9 @@ GET     /Tareas/:id/Asignar                controllers.TareasController.AsignarP
 POST    /Tareas/:idt/Proyecto/:idp          controllers.TareasController.RealizarAsignacion(idt: Integer,idp: Integer)
 POST    /Tareas/:id/DesAsignar            controllers.TareasController.DesAsignarProyecto(id : Integer)
 
+# Cambiar estado tareas
+POST    /usuarios/:idUsuario/Tareas/:idTarea/CambiarEstado          controllers.TareasController.CambiarEstado(idUsuario: Integer, idTarea: Integer, estado:String)
+
 #Acerca de
 GET  /acercade               controllers.ApplicationController.AcercaDe()
 

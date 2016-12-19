@@ -16,6 +16,7 @@ public class Tarea implements Comparable<Tarea>{
 
     public Integer duracion=0;
     public String tamano="Sin tamaño";
+    public String estado="";
 
     // Un constructor vacío necesario para JPA
     public Tarea() {}

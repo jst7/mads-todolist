@@ -190,4 +190,13 @@ public class TareasController extends Controller {
         return ok(listaTareas.render(usuario.tareas, usuario));
     }
 
+    @Transactional
+    public Result CambiarColor(Integer idUsuario, Integer idTarea, String color) {
+        Tarea tarea = TareasService.findTarea(idTarea);
+        tarea.color = color;
+        tarea = TareasService.modificaTarea(tarea);
+        Usuario usuario = UsuariosService.findUsuario(idUsuario);
+        return ok(listaTareas.render(usuario.tareas, usuario));
+    }
+
 }

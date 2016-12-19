@@ -48,6 +48,7 @@
         </thead>
         </tr>
     @for(tarea <- tareas) {
+      @if(tarea.archivada) {
         <tr>
             <td>@tarea.id</td>
             <td>@tarea.descripcion</td>
@@ -64,6 +65,7 @@
             </td>
         </tr>
       }
+    }
   </table>
 </ul>
 

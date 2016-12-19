@@ -208,5 +208,13 @@ public class TareasController extends Controller {
             return ok(tareasArchivadas.render(tareas, usuario));
         }
     }
+    @Transactional
+    public Result ArchivarTarea(Integer idUsuario, Integer idTarea) {
+        Tarea tarea = TareasService.findTarea(idTarea);
+        tarea.archivada = true;
+        TareasService.modificaTarea(tarea);
+        Usuario usuario = UsuariosService.findUsuario(idUsuario);
+        return ok(listaTareas.render(usuario.tareas, usuario));
+    }
 
 }

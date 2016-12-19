@@ -21,6 +21,7 @@ public class Tarea implements Comparable<Tarea>{
     @Formats.DateTime(pattern="dd-MM-yyyy")
     @Temporal(TemporalType.DATE)
     public Date fecha;
+    public boolean archivada = false;
 
     // Un constructor vacío necesario para JPA
     public Tarea() {}

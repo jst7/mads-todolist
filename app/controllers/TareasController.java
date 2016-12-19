@@ -181,4 +181,13 @@ public class TareasController extends Controller {
 
     }
 
+    @Transactional
+    public Result CambiarEstado(Integer idUsuario, Integer idTarea, String estado) {
+        Tarea tarea = TareasService.findTarea(idTarea);
+        tarea.estado = estado;
+        tarea = TareasService.modificaTarea(tarea);
+        Usuario usuario = UsuariosService.findUsuario(idUsuario);
+        return ok(listaTareas.render(usuario.tareas, usuario));
+    }
+
 }

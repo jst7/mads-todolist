@@ -59,13 +59,15 @@
                     <div class="btn-group">
                         <button type="button" class="btn btn-info dropdown-toggle"
                                 data-toggle="dropdown">
-                                Título del botón <span class="caret"></span>
+                                @tarea.estado <span class="caret"></span>
                         </button>
 
                         <ul class="dropdown-menu" role="menu">
                             @for(estado <- tarea.proyecto.estados) {
-                                @if(estado != tarea.estado) {
-                                    <li><a href="#">@estado</a></li>
+                                @if(estado.nombre != tarea.estado) {
+                                    @helper.form(action = routes.TareasController.CambiarEstado(usuario.id, tarea.id, estado.nombre)) {
+                                        <li><a href=""><input id="nuevoEstado" class="btn btn-link" role="link" type="submit" value="@estado"></a></li>
+                                    }
                                 }
                             }
                         </ul>

@@ -45,6 +45,7 @@
             <th>Borrar</th>
             <th>Duracion</th>
             <th>Estado</th>
+            <th>Fecha</th>
             <th>Asignar Proyecto</th>
         </thead>
         </tr>
@@ -101,6 +102,7 @@
                     </div>
                 }
             </td>
+            <td>@tarea.fecha</td>
             <td><a class="btn btn-success" href="@routes.TareasController.AsignarProyecto(tarea.id)">
               <input type="hidden" id="tareaproyecto" value ="" ></input>
               <script type="text/javascript">

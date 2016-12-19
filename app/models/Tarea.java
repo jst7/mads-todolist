@@ -18,6 +18,9 @@ public class Tarea implements Comparable<Tarea>{
     public String tamano="Sin tamaño";
     public String estado="";
     public String color="#FFFFFF";
+    @Formats.DateTime(pattern="dd-MM-yyyy")
+    @Temporal(TemporalType.DATE)
+    public Date fecha;
 
     // Un constructor vacío necesario para JPA
     public Tarea() {}
@@ -26,10 +29,11 @@ public class Tarea implements Comparable<Tarea>{
           this.descripcion = descripcion;
           this.duracion = duracion;
     }
-    public Tarea(String descripcion,int duracion, String tamano) {
+    public Tarea(String descripcion,int duracion, String tamano, Date fecha) {
           this.descripcion = descripcion;
           this.duracion = duracion;
           this.tamano = tamano;
+          this.fecha = fecha;
     }
     // El constructor principal con los campos obligatorios
     public Tarea(String descripcion) {
@@ -42,18 +46,19 @@ public class Tarea implements Comparable<Tarea>{
         this.usuario = usuario;
     }
 
-    public Tarea(String descripcion, Usuario usuario,int duracion, String tamano) {
+    public Tarea(String descripcion, Usuario usuario,int duracion, String tamano, Date fecha) {
         this.descripcion = descripcion;
         this.usuario = usuario;
         this.duracion = duracion;
         this.tamano = tamano;
+        this.fecha = fecha;
     }
 
     public String toString() {
         return String.format("Tarea id: %s descripcion: %s duracion %s ", id, descripcion,duracion);
     }
     public Tarea copy() {
-        Tarea nueva = new Tarea(this.descripcion,this.duracion, this.tamano);
+        Tarea nueva = new Tarea(this.descripcion,this.duracion, this.tamano, this.fecha);
         nueva.id = this.id;
         return nueva;
     }

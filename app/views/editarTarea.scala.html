@@ -39,13 +39,13 @@
             <input type="hidden" id="id" name="id" value='@tareaForm("id").value' >
             <input type="hidden" id="usuarioId" name="usuario.id" value='@tareaForm("usuario.id").value' >
             @helper.inputText(tareaForm("descripcion"), '_label -> "Descripcion")
-
             <select id="duracion" name="duracion" class="form-group">
                 <option id="0select" value="0">Pequeña</option>
                 <option id="1select" value="1">Mediana</option>
                 <option id="2select" value="2">Grande</option>
                 <option id="3select" value="3">Sin tamaño</option>
             </select>
+            @helper.inputText(tareaForm("fecha"), '_label -> "Fecha (dd-mm-aaaa)")
             </fieldset>
 
             <div>

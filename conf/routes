@@ -52,6 +52,7 @@ POST    /usuarios/:idUsuario/tareas/:idTarea/CambiarColor           controllers.
 
 # Archivar tareas
 GET     /usuarios/:idUsuario/tareasArchivadas                       controllers.TareasController.ArchivadasView(idUsuario: Integer)
+POST    /usuarios/:idUsuario/archivar/:idTarea                      controllers.TareasController.ArchivarTarea(idUsuario: Integer, idTarea: Integer)
 
 #Acerca de
 GET  /acercade               controllers.ApplicationController.AcercaDe()

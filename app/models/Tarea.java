@@ -35,6 +35,11 @@ public class Tarea implements Comparable<Tarea>{
           this.tamano = tamano;
           this.fecha = fecha;
     }
+    public Tarea(String descripcion,int duracion, String tamano) {
+          this.descripcion = descripcion;
+          this.duracion = duracion;
+          this.tamano = tamano;
+    }
     // El constructor principal con los campos obligatorios
     public Tarea(String descripcion) {
         this.descripcion = descripcion;
@@ -52,6 +57,12 @@ public class Tarea implements Comparable<Tarea>{
         this.duracion = duracion;
         this.tamano = tamano;
         this.fecha = fecha;
+    }
+    public Tarea(String descripcion, Usuario usuario,int duracion, String tamano) {
+        this.descripcion = descripcion;
+        this.usuario = usuario;
+        this.duracion = duracion;
+        this.tamano = tamano;
     }
 
     public String toString() {

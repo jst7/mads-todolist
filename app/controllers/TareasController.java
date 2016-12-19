@@ -198,4 +198,15 @@ public class TareasController extends Controller {
         return ok(listaTareas.render(usuario.tareas, usuario));
     }
 
+    @Transactional
+    public Result ArchivadasView(Integer idUsuario) {
+        Usuario usuario = UsuariosService.findUsuario(idUsuario);
+        if (usuario == null) {
+            return notFound("Usuario no encontrado");
+        } else {
+            List<Tarea> tareas = TareasService.listaTareasUsuario(idUsuario);
+            return ok(tareasArchivadas.render(tareas, usuario));
+        }
+    }
+
 }

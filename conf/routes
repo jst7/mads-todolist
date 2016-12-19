@@ -50,6 +50,9 @@ POST    /usuarios/:idUsuario/tareas/:idTarea/CambiarEstado          controllers.
 # Cambiar color tareas
 POST    /usuarios/:idUsuario/tareas/:idTarea/CambiarColor           controllers.TareasController.CambiarColor(idUsuario: Integer, idTarea: Integer, color:String)
 
+# Archivar tareas
+GET     /usuarios/:idUsuario/tareasArchivadas                       controllers.TareasController.ArchivadasView(idUsuario: Integer)
+
 #Acerca de
 GET  /acercade               controllers.ApplicationController.AcercaDe()
 

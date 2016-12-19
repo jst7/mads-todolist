@@ -43,6 +43,7 @@
             <th>Editar</th>
             <th>Borrar</th>
             <th>Duracion</th>
+            <th>Estado</th>
             <th>Asignar Proyecto</th>
         </thead>
         </tr>
@@ -53,6 +54,24 @@
             <td><a class="btn btn-warning" href="@routes.TareasController.editarTarea(tarea.id)"> <span class="glyphicon glyphicon-pencil" aria-hidden="true"</span></a> </td>
             <td><a class="btn btn-danger" onclick="del('@routes.TareasController.borraTarea(tarea.id)')"> <span class="glyphicon glyphicon-trash" aria-hidden="true"</span></a> </td>
             <td> @tarea.tamano</td>
+            <td>
+                @if(tarea.proyecto != null) {
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info dropdown-toggle"
+                                data-toggle="dropdown">
+                                Título del botón <span class="caret"></span>
+                        </button>
+
+                        <ul class="dropdown-menu" role="menu">
+                            @for(estado <- tarea.proyecto.estados) {
+                                @if(estado != tarea.estado) {
+                                    <li><a href="#">@estado</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                }
+            </td>
             <td><a class="btn btn-success" href="@routes.TareasController.AsignarProyecto(tarea.id)">
               <input type="hidden" id="tareaproyecto" value ="" ></input>
               <script type="text/javascript">

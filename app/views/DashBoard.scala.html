@@ -40,49 +40,6 @@
 			document.getElementById("contenedorPrincipal").style="background-color:"+color
         }
 
-		function modificaUser(){
-			var date = '@usuario.fechaNacimiento'
-			var dateFin= date.split("-")[2]+'-'+ date.split("-")[1] +'-'+ date.split("-")[0]
-
-			document.getElementById("FormMostrar").innerHTML = 
-			'<div class="row hide">id:<br> '+
-				'<a> @usuario.id </a>'+
-			'</div>'+
-			'<div class="row hide">Login:<br> '+
-				'<a> @usuario.login </a>'+
-			'</div>'+
-			'<div class="row">Login:<br> '+
-				'<input type="text" name="login" id="loginnoChange" value=@usuario.login>'+
-			'</div>'+
-			'<div class="row">Email:<br> '+
-				'<input type="text" name="eMail" id="emailChange" value=@usuario.eMail>'+
-			'</div>'+
-			'<div class="row">Nombre:<br> '+
-				'<input type="text" name="Nombre" id="nombreChange" value=@usuario.nombre>'+
-			'</div>'+
-			'<div class="row">Apellidos:<br> '+
-				'<input type="text" name="Apellidos" id="apellidosChange" value=@usuario.apellidos>'+
-			'</div>'+
-			'<div class="row">fechaNacimiento dd-mm-aaaa:<br> '+
-				'<input type="text" name="fechaNacimiento" id="apellidosChange" value='+dateFin+'>'+
-			'</div>'+
-			'<div class="row" >Contraseña: <br> '+
-				'<input type="password" name="password" id="contraseñaChange" value=@usuario.password>'+
-			'</div>'+
-			'<div class="row hide" >color: <br> '+
-			'<input type="text" name="colordash" id="colorDash" value=@usuario.colordash>'+
-			'</div>'+
-			'<div class="row hide" >imagen: <br> '+
-				'<input type="text" name="imagen" id="imagenChange" value=@usuario.imagen>'+
-			'</div>'+
-			'<div class="row">'+
-			'<input type="submit" class="btn btn-primary btn-lg" value="Cambiar">'+
-			'<a class="btn btn-danger btn-lg" onclick="nomodificaUser()" >Cancelar </a>'+
-			'</div>'
-
-
-		}
-
 		function nomodificaUser(){
 			document.getElementById("FormMostrar").innerHTML = 
 							'<h4> id:	@usuario.id</h4>'+
@@ -100,7 +57,7 @@
 		<div class="row">
 
 			    @if(mensaje != "") {
-        			<div class="alert alert-danger" id="temporal">
+        			<div class="alert alert-success" id="temporal">
            				 @mensaje
        				 </div>
     			}
@@ -116,9 +73,9 @@
 						<div class="hide">
 							<input type="text" name="id" value="@usuario.id">
 							<input type="text" name="login" value="@usuario.login">
-							<input type="text" name="colordash" value="#42AAF4">
+							<input type="text" name="colordash" value="#f4f3a6">
 						</div>
-						<input class="btn btn-primary btn-xs" style="background-color: #42C8F4" type="submit" name="submit" value="Azul">						
+						<input class="btn btn-primary btn-xs" style="color: #000; background-color: #f4f3a6" type="submit" name="submit" value="Yellow">						
 						}
 					</div>
 					<div class="col-xs-1">
@@ -126,9 +83,9 @@
 						<div class="hide">
 							<input type="text" name="id" value="@usuario.id">
 							<input type="text" name="login" value="@usuario.login">
-							<input type="text" name="colordash" value="pink">
+							<input type="text" name="colordash" value="#cca5ca">
 						</div>
-						<input class="btn btn-primary btn-xs" style="background-color: pink" type="submit" name="submit" value="Rosa">						
+						<input class="btn btn-primary btn-xs" style="color: #fff; background-color: #cca5ca" type="submit" name="submit" value="Purple">						
 						}
 					</div>
 					<div class="col-xs-1">
@@ -136,9 +93,9 @@
 						<div class="hide">
 							<input type="text" name="id" value="@usuario.id">
 							<input type="text" name="login" value="@usuario.login">
-							<input type="text" name="colordash" value="white">
+							<input type="text" name="colordash" value="#fff">
 						</div>
-						<input class="btn btn-primary btn-xs" style="background-color: grey" type="submit" name="submit" value="Blanco">						
+						<input class="btn btn-primary btn-xs" style="background-color: grey" type="submit" name="submit" value="White">						
 						}
 					</div>											
 				</div>
@@ -167,7 +124,7 @@
 					      	</a>
 						</div>
 						<div class="col-xs-6 text-center panel-body">
-					      <a onclick="modificaUser()" class="btn btn-info btn-lg" >
+					      <a href="/usuarios/@usuario.id/editar" class="btn btn-info btn-lg" >
 					          <span class="glyphicon glyphicon-cog"></span> Modificar Usuario
 					      </a>
 						</div>					
@@ -197,7 +154,7 @@
 						No hay notificaciones.
 					</div>
 				}
-				<h3> NO LEIDAS </h3>
+				<h3 style="color: #ffffff"> NO LEIDAS </h3>
 				@for(notificacion <- notificaciones){
 					@if(notificacion.leido == false){
 					<div class="row well">
@@ -216,7 +173,7 @@
 					</div>
 					}
 				}
-				<h3> LEIDAS </h3>
+				<h3 style="color: #ffffff"> LEIDAS </h3>
 				@for(notificacion <- notificaciones){
 					@if(notificacion.leido == true){
 					<div class="row well">

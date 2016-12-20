@@ -34,7 +34,7 @@
         @helper.form(action = routes.TareasController.crearTarea(usuario.id)) {
             <fieldset>
             <legend>Usuario nuevo</legend>
-            @helper.inputText(tareaForm("descripcion"), '_label -> "descripcion")
+            @helper.inputText(tareaForm("descripcion"), '_label -> "Descripción")
             <select id="duracion" name="duracion" class="form-group">
                 <option value="0">Pequeña</option>
                 <option value="1">Mediana</option>

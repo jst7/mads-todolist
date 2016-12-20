@@ -112,7 +112,7 @@ PUT		/mensajes/:id/:idMensaje 		controllers.MensajeController.leerMensaje(idMens
 DELETE	/mensajes/:id/:idMensaje		controllers.MensajeController.borrarMensaje(idMensaje: Integer, id: Integer)
 
 GET		/usuarios/:id/dashboard		controllers.UsuarioController.DashBoard(id: Integer)
-POST    /dashboard/modifica          controllers.UsuarioController.escribirUsuarioModificadoDashBoard(id: Integer)
+POST    /dashboard/modifica/:id          controllers.UsuarioController.escribirUsuarioModificadoDashBoard(id: Integer)
 POST    /dashboard/modificacolor          controllers.UsuarioController.CambiarColor()
 
 

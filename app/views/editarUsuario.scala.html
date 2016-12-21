@@ -24,6 +24,7 @@
             <fieldset>
             <legend>Usuario a Modificar</legend>
             <input type="hidden" name="id" value='@usuarioForm("id").value' >
+            <input type="hidden" name="imagen" value='@usuarioForm("imagen").value' >
             @helper.inputText(usuarioForm("login"), '_label -> "Login")
             @helper.inputText(usuarioForm("nombre"), '_label -> "Nombre")
             @helper.inputText(usuarioForm("apellidos"), '_label -> "Apellidos")

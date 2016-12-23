@@ -233,7 +233,7 @@ También un servicio para conseguir la cantidad de tareas:
 El cliente podrá buscar por usuario o por tarea o por ambos a la vez en la misma vista.
 Pordrá comenzar la busqueda desde el Dashboard o desde su propia página.
 
--
+![1](buscador.png "Buscador")
 
 #DashBoard
 ##Para el desarrollador
@@ -282,7 +282,194 @@ El cliente tiene un acceso directo a su perfil, modificar sus datos, la foto y s
 
 Es un centro de mandos para el usuario.
 
--
+![1](dashboard.png "Dashboard")
+
+# Mensajes
+
+## Para el desarrollador
+
+Tenemos una entidad Mensaje mediante la cual nos servimos para crear una lógica de mensajes internos entre usuarios.
+
+Aquí vemos el codigo para crear, buscar, leer y borrar mensajes
+
+```java
+public static boolean crearMensaje(Mensaje mensaje) {
+		if (mensaje != null && mensaje.body != "") {
+			NotificacionService.crearNotificacion(new Notificacion(mensaje.usuarioTo, "Mensaje", "Nuevo mensaje"));
+			return MensajeDAO.create(mensaje);
+		} else {
+			return false;
+		}
+	}
+
+	public static List<Mensaje> findAll() {
+    	List<Mensaje> lista = MensajeDAO.findAll();
+    	Logger.debug("Numero de mensajes: " + lista.size());
+    	return lista;
+	}
+
+	public static List<Mensaje> findAllReceived(Integer idUsuario) {
+		Usuario user = UsuariosService.findUsuario(idUsuario);
+    	List<Mensaje> lista = MensajeDAO.findAllReceived(user.login);
+    	Logger.debug("Numero de mensajes: " + lista.size());
+    	return lista;
+	}
+
+	public static List<Mensaje> findAllSended(Integer idUsuario) {
+		Usuario user = UsuariosService.findUsuario(idUsuario);
+    	List<Mensaje> lista = MensajeDAO.findAllSended(user.login);
+    	Logger.debug("Numero de mensajes: " + lista.size());
+    	return lista;
+	}
+
+	public static Mensaje findMensaje(Integer idMensaje) {
+    	Mensaje mensaje = MensajeDAO.find(idMensaje);
+    	return mensaje;
+	}
+
+	public static Boolean leerMensaje(Integer idMensaje) {
+		Boolean result = false;
+		Mensaje mensaje = findMensaje(idMensaje);
+		if (mensaje.body != "") {
+			mensaje.leido = !mensaje.leido;
+			mensaje = MensajeDAO.update(mensaje);	
+			result = true;
+		}
+		return result;
+	}
+
+	public static Boolean borrarMensaje(Integer idMensaje) {
+		Boolean result = false;
+		Mensaje mensaje = findMensaje(idMensaje);
+		if (mensaje.body != "") {
+			mensaje.borrado = true;
+			NotificacionService.crearNotificacion(new Notificacion(mensaje.usuarioTo, "Mensaje", "Mensaje: " + idMensaje + " eliminado"));
+			mensaje = MensajeDAO.update(mensaje);	
+			result = true;
+		}
+		return result;
+	}
+
+	public static Integer mensajesSinleer(Integer id){
+		Usuario user = new Usuario();
+		user = UsuariosService.findUsuario(id);
+		List<Mensaje> lista = MensajeDAO.findAllPorLeer(user.login);
+
+    	return lista.size();
+	}
+
+	public static Integer mensajesTotalesEntrada(Integer id){
+		Usuario user = new Usuario();
+		user = UsuariosService.findUsuario(id);
+		List<Mensaje> lista = MensajeDAO.findAllTotal(user.login);
+
+    	return lista.size();
+	}
+```
+
+## Para el cliente
+
+El cliente puede mandar y leer los mensajes recibidos que le aparezcan en la pantalla de mensajes.
+
+![1](mensajes.png "Lista de notificaciones")
+
+# Notificaciones
+
+## Para el desarrollador
+
+Tenemos una entidad Notificación y por cada evento que ocurre en la plataforma se crea una notificación que le aparecerá al usuario (indicado en un atributo de la Notifiación) en su dashboard.
+
+Aquí vemos el codigo para crear, buscar y leer notificaciones
+
+```java
+public static boolean crearNotificacion(Notificacion notificacion) {
+		if (notificacion != null && notificacion.tipo != "" && notificacion.descripcion != "") {
+			notificacion.fecha = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new Date());
+			notificacion.leido = false;
+			return NotificacionDAO.create(notificacion);
+		} else {
+			return false;
+		}
+	}
+
+	public static List<Notificacion> findAll(Integer idUsuario) {
+		if (idUsuario > 0 && idUsuario != null) {
+			Usuario usuario = UsuariosService.findUsuario(idUsuario);
+			List<Notificacion> lista = NotificacionDAO.findAll(usuario.login);
+    		Logger.debug("Numero de notificacions: " + lista.size());
+    		return lista;
+		} else {
+			return null;
+		}
+	}
+
+	public static Notificacion findNotificacion(Integer idNotificacion) {
+    	Notificacion notificacion = NotificacionDAO.find(idNotificacion);
+    	return notificacion;
+	}
+
+	public static Boolean leerNotificacion(Integer idNotificacion) {
+		Boolean result = false;
+		Notificacion notificacion = NotificacionDAO.find(idNotificacion);
+		if (notificacion.user != "" && notificacion.tipo != "" && notificacion.descripcion != "") {
+			notificacion.leido = true;
+			Notificacion not = NotificacionDAO.update(notificacion);
+			if (not.leido) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+```
+
+## Para el cliente
+
+El cliente puede leer las notificaciones que le aparezcan en el dashboard
+
+![1](notificaciones.png "Lista de notificaciones")
+
+# Foto de perfil
+
+## Para el desarrollador
+
+Añadimos un atributo a la entidad Usuario donde se almacena la ruta de la imagen de perfil.
+
+Aquí vemos el codigo para subir una imagen de perfil
+
+```java
+        public static Boolean subirImagen(FilePart<File> picture, Integer idUsuario) {
+            if (picture != null) {
+                Usuario user        = findUsuario(idUsuario);
+                File file           = picture.getFile();
+                String fileName     = picture.getFilename();
+                String contentType  = picture.getContentType();
+                String fullPath     = Play.application().path().getPath() + "/public/images";
+                String extension    = fileName.substring(fileName.length() - 4);
+                
+                String fileNameNew  = idUsuario + "-" + user.login + extension;
+                
+                file.renameTo(new File(fullPath, fileNameNew));
+                String fullPathBBDD = controllers.routes.Assets.versioned(new controllers.Assets.Asset("images/" + fileNameNew)).toString();
+                
+                Usuario usuario     = findUsuario(idUsuario);
+                usuario.imagen      = fullPathBBDD;
+                UsuariosService.modificaUsuario(usuario);
+
+                return true;
+            } else {
+                return false;
+            }
+        }
+```
+
+## Para el cliente
+
+![1](foto1.png "Foto de perfil")
+
+![1](foto2.png "Foto de perfil 2")
 
 # Informe sobre la metodología seguida
 
@@ -410,6 +597,23 @@ Features sobreestiadas
 - 11: 
 
 # Retrospectiva
+
+Pensamos que los puntos a desarrollar han sido los correctos y con ello nos hemos dado cuenta de las posibles ampliaciones y errores a corregir, que podemos hacer e integrar con el proyecto actual en próximos sprints o iteraciones.
+
+### Ampliaciones
+
+- Buscar por proyecto
+- Listar las tareas de un proyecto
+- Dividir las tareas en curso por porcentaje, para saber el estado real de la mismma
+- Añadir sesión por cookies
+- Añadir un administrador de la aplicación, para poder diferencia correctamente los roles de usuarios
+- Mejorar los colores de la interfaz, la interfaz no es del todo amigable
+- Mejorar el responsive design
+
+### Errores
+
+- Escogimos una tarea que parecía que iba a encajar perfectamente pero una vez integradas las demás, vimos que se producía un ciclo en el modelo relacional, por tanto, se solapaba "Compartir proyecto" con "Compartir tarea" y por temas de tiempo, ya que el sprint estaba ya definido, hemos tenido que ponerla como sobreestimada.
+- Al eliminar un mensaje enviado se le elimina al receptor también
 
 
 

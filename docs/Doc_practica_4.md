@@ -471,6 +471,75 @@ Aquí vemos el codigo para subir una imagen de perfil
 
 ![1](foto2.png "Foto de perfil 2")
 
+# Añadir estado a una tarea
+
+## Para el desarrollador
+Con estos métodos se manejan el creado, editado y borrado de los estados personalizados en el proyecto.
+```java
+   @Transactional
+   public Result crearEstado(Integer idUsuario, Integer idProyecto){
+        Proyecto proyecto = ProyectosService.find(idProyecto);
+        DynamicForm requestData = formFactory.form().bindFromRequest();
+        proyecto = ProyectosService.AddEstado(proyecto, requestData.get("estado"));
+        return ok(estadosProyecto.render(proyecto, proyecto.propietario.id));
+   }
+
+   @Transactional
+   public Result editarEstado(Integer idUsuario, Integer idProyecto, Integer idEstado) {
+        Proyecto proyecto = ProyectosService.find(idProyecto);
+        DynamicForm requestData = formFactory.form().bindFromRequest();
+        proyecto = ProyectosService.UpdateEstado(idEstado, requestData.get("estadoMod"));
+        return ok(estadosProyecto.render(proyecto, proyecto.propietario.id));
+   }
+
+   @Transactional
+   public Result borrarEstado(Integer idUsuario, Integer idProyecto, Integer idEstado){
+        Proyecto proyecto = ProyectosService.find(idProyecto);
+        proyecto = ProyectosService.DeleteEstado(idEstado);
+        return ok(estadosProyecto.render(proyecto, proyecto.propietario.id));
+}
+```
+Y con este código se cambia el estado en la tarea.
+```java
+@Transactional
+    public Result CambiarEstado(Integer idUsuario, Integer idTarea, String estado) {
+        Tarea tarea = TareasService.findTarea(idTarea);
+        tarea.estado = estado;
+        tarea = TareasService.modificaTarea(tarea);
+        Usuario usuario = UsuariosService.findUsuario(idUsuario);
+        return ok(listaTareas.render(usuario.tareas, usuario));
+}
+```
+
+## Para el cliente
+
+# Ampliar información, color y archivado de una tarea
+
+## Para el desarrollador
+Con este código se cambia el color de una tarea.
+```java
+    @Transactional
+    public Result CambiarColor(Integer idUsuario, Integer idTarea, String color) {
+        Tarea tarea = TareasService.findTarea(idTarea);
+        tarea.color = color;
+        tarea = TareasService.modificaTarea(tarea);
+        Usuario usuario = UsuariosService.findUsuario(idUsuario);
+        return ok(listaTareas.render(usuario.tareas, usuario));
+	}
+```
+Este es el método usado para archivar una tarea.
+```java
+    @Transactional
+    public Result ArchivarTarea(Integer idUsuario, Integer idTarea) {
+        Tarea tarea = TareasService.findTarea(idTarea);
+        tarea.archivada = true;
+        TareasService.modificaTarea(tarea);
+        Usuario usuario = UsuariosService.findUsuario(idUsuario);
+        return ok(listaTareas.render(usuario.tareas, usuario));
+	}
+```
+## Para el cliente
+
 # Informe sobre la metodología seguida
 
 #####Hemos seguido la metodología Scrum y seguido el siguiente orden para la realización de las caracteristicas de la aplicación:
@@ -594,7 +663,8 @@ Features sobreestiadas
 		TIC8.1, TIC8.2, TIC8.4, TIC8.6, TIC8.8 No tienen pruebas debido a que son interfaz
 - 9: Notificaciones
 - 10: Compartir tarea - FEATURE SOBREESTIMADA (No tiene pruebas)
-- 11: 
+- 11: Ampliar info tarea y archivar tarea
+ 		TIC11-1, TIC11.2, TIC11.3, TIC.4 No tienen pruebas debido a que se usan funciones ya testeadas 		anteriormente
 
 # Retrospectiva
 

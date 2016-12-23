@@ -183,6 +183,107 @@ Esta funcionalidad ha sido sobreestimada.
 
 Esta tarea pasa a ser sobreestimada ya que al realizar la comparticion de proyectos no tiene sentido que las tareas tengan una lista de colaboradores también puesto que es redundante y causa problemas de consistencia, dando a los usuarios un comportamiento no deseado.
 
+#Buscador de Usuarios y Tareas
+##Para el desarrollador
+Tenemos un servicio para la busqueda de usuarios o de tareas independientes por si fuera necesario realizar un buscador independiente pero en la vista esta junto.
+
+```java
+        public static List<Usuario> busquedaUsuario(String param) {
+            List<Usuario> lista = UsuarioDAO.busquedaUsuario(param);
+            //param termino a buscar
+            
+            return lista;
+        }
+```
+También un servicio para conseguir la cantidad de usuarios:
+```java
+        public static Integer CantidadUsuariosBusqueda(String param) {
+            List<Usuario> lista = UsuarioDAO.busquedaUsuario(param);
+            
+            if (lista==null){
+                return 0;
+            }
+
+            Integer cantidad = lista.size();
+            return cantidad;
+        }
+```
+
+```java
+    public static List<Tarea> busquedaTarea(String param) {
+        List<Tarea> lista = TareaDAO.busquedaTarea(param);
+        //param termino a buscar
+        
+        return lista;
+    }
+```
+También un servicio para conseguir la cantidad de tareas:
+```java    
+    public static Integer CantidadTareasBusqueda(String param) {
+        List<Tarea> lista = TareaDAO.busquedaTarea(param);
+        if (lista == null) { 
+            return 0;
+        }
+        Integer cantidad = lista.size();
+        return cantidad;
+    }
+```
+
+##Para el cliente
+El cliente podrá buscar por usuario o por tarea o por ambos a la vez en la misma vista.
+Pordrá comenzar la busqueda desde el Dashboard o desde su propia página.
+
+-
+
+#DashBoard
+##Para el desarrollador
+En el dashboard encontramos un conjunto de servicios como el contador de de mensajes o el contador de a proyectos propios o compartidos.
+
+El contador de mensajes por ejemplo:
+
+```java
+	public static Integer mensajesSinleer(Integer id){
+		Usuario user = new Usuario();
+		user = UsuariosService.findUsuario(id);
+		List<Mensaje> lista = MensajeDAO.findAllPorLeer(user.login);
+
+    	return lista.size();
+	}
+
+	public static Integer mensajesTotalesEntrada(Integer id){
+		Usuario user = new Usuario();
+		user = UsuariosService.findUsuario(id);
+		List<Mensaje> lista = MensajeDAO.findAllTotal(user.login);
+
+    	return lista.size();
+	}
+```
+Y los proyectos:
+
+```java
+	public static Integer cantidadProyectosPropietario(Integer id) {
+
+		List<Proyecto> lista = ProyectoDAO.findAllPropietario(id);
+
+		return lista.size();
+	}
+
+
+	public static Integer cantidadProyectosColabora(Integer id){
+
+	List<Proyecto> lista = findAllProyectosColaborador(id);
+	return lista.size();
+	}
+```
+
+
+##Para el cliente
+El cliente tiene un acceso directo a su perfil, modificar sus datos, la foto y su reemplazo, sus tareas, sus proyectos, las notificaciones...
+
+Es un centro de mandos para el usuario.
+
+-
+
 # Informe sobre la metodología seguida
 
 #####Hemos seguido la metodología Scrum y seguido el siguiente orden para la realización de las caracteristicas de la aplicación:

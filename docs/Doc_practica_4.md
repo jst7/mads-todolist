@@ -512,6 +512,7 @@ Y con este código se cambia el estado en la tarea.
 ```
 
 ## Para el cliente
+![1](EstadosProyecto.png "View de estados de proyecto")
 
 # Ampliar información, color y archivado de una tarea
 
@@ -539,7 +540,10 @@ Este es el método usado para archivar una tarea.
 	}
 ```
 ## Para el cliente
+![1](AmpliacionTareas.png "Nueva view de tareas")
 
+Tareas archivadas.
+![1](Archivadas.png "Tareas archivadas")
 # Informe sobre la metodología seguida
 
 #####Hemos seguido la metodología Scrum y seguido el siguiente orden para la realización de las caracteristicas de la aplicación:

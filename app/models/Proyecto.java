@@ -1,4 +1,4 @@
- package models;
+package models;
 
 import java.util.Date;
 import javax.persistence.*;
@@ -16,6 +16,21 @@ public class Proyecto {
     @Constraints.Required
     public String nombre;
 
+    @OneToMany(mappedBy="proyecto", cascade = CascadeType.REMOVE)
+    public List<Estado> estados = new ArrayList<Estado>();
+
+    @OneToMany(mappedBy="proyecto")
+    public List<Tarea> tareas = new ArrayList<Tarea>();
+
+    @ManyToOne
+    @JoinColumn(name="propietarioId")
+    public Usuario propietario;
+
+    @ManyToMany(mappedBy="proyectoscolabora",cascade = CascadeType.PERSIST)
+    public List<Usuario> usuariosColaboradores = new ArrayList<Usuario>();
+
+
+
     // Un constructor vacío necesario para JPA
     public Proyecto() {
     }
@@ -23,6 +38,11 @@ public class Proyecto {
     // El constructor principal con los campos obligatorios
     public Proyecto(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Proyecto(String nombre,Usuario propietario) {
+        this.nombre = nombre;
+        this.propietario = propietario;
     }
 
     public String toString() {
@@ -58,7 +78,4 @@ public class Proyecto {
         }
         return true;
     }
-
-    @OneToMany(mappedBy="proyecto")
-    public List<Tarea> tareas = new ArrayList<Tarea>();
 }

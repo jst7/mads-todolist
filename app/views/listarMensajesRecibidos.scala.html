@@ -1,0 +1,76 @@
+@(mensajes: List[Mensaje], mensaje: String, usuario: Usuario)
+@main("Listado de mensajes") {
+
+<div class="col-xs-push-1 col-xs-11" style="background-color: @usuario.colordash">
+    <table>
+        <td>
+            <a class="btn btn-info" href="@routes.UsuarioController.DashBoard(usuario.id)">
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+            </a>
+        </td>
+        <td>
+            <h2>Bandeja de entrada</h2>
+        </td>
+    </table>
+
+    <div class="col-xs-2">
+        <div class="row">
+             <a class="btn btn-danger btn-lg" href="@routes.MensajeController.listarMensajesRecibidos(usuario.id)">Mens. Entranda</a>
+        </div>
+        <div class="row">
+             <a class="btn btn-success btn-lg" href="@routes.MensajeController.listarMensajesEnviados(usuario.id)">Mens. Enviados</a>
+        </div>
+        <div class="row">
+            <a class="btn btn-success btn-lg" href="@routes.MensajeController.crearMensajeFormulario(usuario.id)">Nuevo mensaje</a>
+        </div>
+    </div>
+    <div class="col-xs-10">
+        <table class="table table-striped">
+        <tr>
+            <thead class="thead-inverse bg-primary">
+                <th>Id</th>
+                <th>De</th>
+                <th>Para</th>
+                <th>Asunto</th>
+                <th>Mensaje</th>
+                <th>Leer</th>
+                <th>Borrar</th>
+            </thead>
+        </tr>
+    @for(mensaje <- mensajes) {
+        <tr class="msg-@mensaje.id">
+            <td>@mensaje.id</td>
+            <td>@mensaje.usuarioFrom</td>
+            <td>@mensaje.usuarioTo</td>
+            <td>@mensaje.subject</td>
+            <td>@mensaje.body</td>
+            <td>
+                <a class="btn @if(mensaje.leido == false) { btn-warning } else { btn-success } leerMsg" data-id="@mensaje.id" data-url="/mensajes/@usuario.id/@mensaje.id" href="javascript:;">
+                    <span class="leidoTxt-@mensaje.id">
+                        @if(mensaje.leido == false) {
+                            Marcar como leído
+                        } else {
+                            Marcar como no leído
+                        }
+                    </span>
+                </a>
+            </td>
+            <td>
+                <a class="btn btn-danger eliminarMsg" data-id="@mensaje.id" data-url="/mensajes/@usuario.id/@mensaje.id" href="javascript:;">
+                    <span>Eliminar mensaje</span>
+                </a>
+            </td>
+        </tr>
+    }
+    </table>
+    <div class="row">
+        @if(mensaje != null) {
+            <div class="alert alert-success">
+                @mensaje
+            </div>
+        }
+    </div>
+    </div>
+</div>
+
+}

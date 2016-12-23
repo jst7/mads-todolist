@@ -49,7 +49,7 @@ public class TareasController extends Controller {
             return badRequest(crearTareaFormulario.render(formFactory.form(Tarea.class), "Errores en los campos de Tarea", usuario));
         }
         Tarea tarea = task.get();
-
+        System.out.println("AAAAAAAAAAAAA: "+tarea.fecha);
             try{
                 switch(tarea.duracion){
                     case 0: tarea.tamano ="pequeña";
@@ -60,7 +60,7 @@ public class TareasController extends Controller {
                     break;
                     default: tarea.tamano ="Sin tamaño";
                 }
-            Tarea tareaMas = new Tarea(tarea.descripcion, usuario,tarea.duracion, tarea.tamano);
+            Tarea tareaMas = new Tarea(tarea.descripcion, usuario,tarea.duracion, tarea.tamano, tarea.fecha);
             tareaMas = TareasService.crearTarea(tareaMas);
             usuario.tareas.add(tareaMas);
 
@@ -89,16 +89,15 @@ public class TareasController extends Controller {
 
             if(task.hasErrors()){
                 Form<Tarea> tareaFormbad = formFactory.form(Tarea.class);
-                return badRequest(editarTarea.render(task,"Necesita descripcion para ser Modificada"));
+                return badRequest(editarTarea.render(task,"Hay errores en los campos"));
             }
             else{
                 int idTarea = task.get().id;
                 Tarea tareaAnterior = TareasService.findTarea(idTarea);
                 Tarea tarea = task.get();
                 tareaAnterior.descripcion =tarea.descripcion;
-
                 tareaAnterior.duracion = tarea.duracion;
-
+                tareaAnterior.fecha = tarea.fecha;
                 switch(tareaAnterior.duracion){
                     case 0: tareaAnterior.tamano ="pequeña";
                     break;
@@ -165,5 +164,57 @@ public class TareasController extends Controller {
         }
     }
 
+    @Transactional
+    public Result BuscarDetalle(Integer id, Integer idB) {
+
+        try{
+            Tarea task = TareasService.findTarea(id);
+            Usuario userBuscador = UsuariosService.findUsuarioSinPass(idB);
+
+
+        return ok(BuscarTaskDetalle.render(task, userBuscador));
+        }
+        catch(Exception e){
+            return badRequest("Recurso inexistente");
+        }
+
+    }
+
+    @Transactional
+    public Result CambiarEstado(Integer idUsuario, Integer idTarea, String estado) {
+        Tarea tarea = TareasService.findTarea(idTarea);
+        tarea.estado = estado;
+        tarea = TareasService.modificaTarea(tarea);
+        Usuario usuario = UsuariosService.findUsuario(idUsuario);
+        return ok(listaTareas.render(usuario.tareas, usuario));
+    }
+
+    @Transactional
+    public Result CambiarColor(Integer idUsuario, Integer idTarea, String color) {
+        Tarea tarea = TareasService.findTarea(idTarea);
+        tarea.color = color;
+        tarea = TareasService.modificaTarea(tarea);
+        Usuario usuario = UsuariosService.findUsuario(idUsuario);
+        return ok(listaTareas.render(usuario.tareas, usuario));
+    }
+
+    @Transactional
+    public Result ArchivadasView(Integer idUsuario) {
+        Usuario usuario = UsuariosService.findUsuario(idUsuario);
+        if (usuario == null) {
+            return notFound("Usuario no encontrado");
+        } else {
+            List<Tarea> tareas = TareasService.listaTareasUsuario(idUsuario);
+            return ok(tareasArchivadas.render(tareas, usuario));
+        }
+    }
+    @Transactional
+    public Result ArchivarTarea(Integer idUsuario, Integer idTarea) {
+        Tarea tarea = TareasService.findTarea(idTarea);
+        tarea.archivada = true;
+        TareasService.modificaTarea(tarea);
+        Usuario usuario = UsuariosService.findUsuario(idUsuario);
+        return ok(listaTareas.render(usuario.tareas, usuario));
+    }
 
 }

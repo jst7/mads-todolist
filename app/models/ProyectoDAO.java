@@ -24,10 +24,18 @@ public class ProyectoDAO {
         return query.getResultList();
     }
 
+    public static List<Proyecto> findAllPropietario(Integer id) {
+
+        TypedQuery<Proyecto> query = JPA.em().createQuery(
+                  "select p from Proyecto p  where propietario = " + id
+                  + " ", Proyecto.class);
+        return query.getResultList();
+    }
+
     public static void delete(Integer idProyecto) {
         Proyecto proyecto = JPA.em().getReference(Proyecto.class, idProyecto);
         JPA.em().remove(proyecto);
-    }    
+    }
 
     public static Proyecto find(Integer id) {
         return JPA.em().find(Proyecto.class, id);
@@ -42,4 +50,26 @@ public class ProyectoDAO {
         TypedQuery<Proyecto> result = JPA.em().createQuery(query, Proyecto.class);
         return result.setParameter("nombre", proyecto.nombre).getSingleResult();
     }
+
+    public static Estado addEstado(Estado estado) {
+        JPA.em().persist(estado);
+        JPA.em().flush();
+        JPA.em().refresh(estado);
+        Logger.debug(estado.toString());
+        return estado;
+    }
+
+    public static Estado findEstado(Integer idEstado) {
+        return JPA.em().find(Estado.class, idEstado);
+    }
+
+    public static Estado updateEstado(Estado estado) {
+        return JPA.em().merge(estado);
+    }
+
+    public static void deleteEstado(Integer idEstado) {
+        Estado estado = JPA.em().getReference(Estado.class, idEstado);
+        JPA.em().remove(estado);
+    }
+
 }

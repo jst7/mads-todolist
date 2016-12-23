@@ -1,0 +1,183 @@
+@(ListaUsers: List[Usuario],ListaTask: List[Tarea], usuario: Usuario, cantidadU: Integer, cantidadT: Integer)
+
+@scripts = {
+    <script type="text/javascript">
+        $(document).ready(function(){
+            if(window.location.toString().includes("/c0/") == true){
+              document.getElementById("idUsuario").checked=true
+              document.getElementById("idTarea").checked=true
+            }else if(window.location.toString().includes("/c1/") == true){
+              document.getElementById("idUsuario").checked=true
+              document.getElementById("idTarea").checked=false
+            }else if(window.location.toString().includes("/c2/") == true){
+              document.getElementById("idUsuario").checked=false
+              document.getElementById("idTarea").checked=true              
+            }else{
+              document.getElementById("idUsuario").checked=false
+              document.getElementById("idTarea").checked=false              
+            }
+
+            if(document.getElementById("idTarea").checked == true){
+                if(document.getElementById("idUsuario").checked==true){
+                  document.getElementById("usuarioZona").className="col-xs-6";
+                  document.getElementById("tareaZona").className="col-xs-6";
+                  document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success hide";
+                }
+                else{
+                  document.getElementById("usuarioZona").className="hidden";
+                  document.getElementById("tareaZona").className="col-xs-12";
+                  document.getElementById("mensajeVacio").className="col-xs-12 alert alert-successhide hide";
+              
+                }
+              }
+            else{
+              if(document.getElementById("idUsuario").checked==true){
+                document.getElementById("usuarioZona").className="col-xs-12";
+                document.getElementById("tareaZona").className="hidden";
+                document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success hide";
+
+              }
+              else{
+                document.getElementById("usuarioZona").className="hidden";
+                document.getElementById("tareaZona").className="hidden"; 
+                document.getElementById("mensajeVacio").className="col-xs-12 alert alert-success";  
+                }
+              }
+        });
+
+        function search() {
+          var caso="c3";
+          if(document.getElementById("idUsuario").checked==true && document.getElementById("idTarea").checked==true){
+            caso="c0";
+          }else if(document.getElementById("idUsuario").checked==true && document.getElementById("idTarea").checked==false){
+            caso="c1";
+          }else if(document.getElementById("idUsuario").checked==false && document.getElementById("idTarea").checked==true){
+            caso="c2";
+          }else {
+            caso="c3";
+          }
+        	var termino = $("#buscar").val();
+        	var URL = "/buscador/"+ @usuario.id+"/"+caso+"/"+termino
+        
+            $.ajax({
+                url: URL,
+                type: 'GET',
+                success: function(results) {
+                    //refresh the page
+                    location = URL
+
+                }
+            });
+        }   
+
+    </script>
+}
+
+@main("Buscador", scripts) {
+
+<div class="col-xs-12" style="background-color: @usuario.colordash">
+<br>
+<br>
+<br>
+
+<nav class="navbar navbar-fixed-top">
+  <div class="container">
+  <div class="row" style="background-color: #333; height: 50px">
+    <div class="col-xs-1">
+      <a class="btn btn-info" href="@routes.UsuarioController.DashBoard(usuario.id)">
+      <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+      </a>
+    </div>
+        <div class="col-xs-7" style=" position: relative; top: 7px;">
+            <div class="input-group col-xs-12">
+                <input type="text" id="buscar" class="form-control input-md" placeholder="Buscar" />
+                <span class="input-group-btn">
+                    <button class="btn btn-success btn-md" type="button" onclick="search()">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+	
+	  	<div class="col-xs-2">
+			<span style="color: white">Tarea</span>
+			<input type="checkbox" id="idTarea" >		 
+	  	</div>
+
+	  	<div class="col-xs-2">
+	  		<span style="color: white">Ususario</span>
+			<input type="checkbox" id="idUsuario">
+		</div>		
+  </div>
+  </div>
+  </nav>
+
+<div class = "col-xs-12 alert alert-success hide" id="mensajeVacio">
+<h1>Seleccione que quiere ver</h1>
+</div>
+
+<div class="col-xs-6" id="usuarioZona">
+
+	<div class="row bg-primary">
+	Usuarios  Cantidad= @cantidadU
+	</div>
+
+@for(user <- ListaUsers) {
+
+  <div class="row well">
+  	<div class="col-xs-4">
+  		    <div class="col-xs-1 bg-primary">
+  				@user.id
+  			</div>
+  			<div class="col-xs-3">
+  				@user.login	
+  			</div>
+  	</div>
+
+  	<div class="col-xs-4">
+  		<a class="btn btn-primary" href="@routes.UsuarioController.BuscarDetalle(user.id, usuario.id)">
+      <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+      </a>
+  	</div>
+
+  	<div class="col-xs-4">
+
+  	</div>
+
+  </div>
+  }
+  </div>
+
+  <div class="col-xs-6" id="tareaZona">
+
+  <div class="row" style="background-color: orange">
+  Tareas  Cantidad= @cantidadT
+  </div>
+
+@for(task <- ListaTask) {
+  <div class="row well">
+    <div class="col-xs-6">
+        <div class="col-xs-2" style="background-color: orange">
+          @task.id
+        </div>
+        <div class="col-xs-10">
+          @task.descripcion 
+        </div>
+    </div>
+
+    <div class="col-xs-4">
+      <a class="btn btn-warning" href="@routes.TareasController.BuscarDetalle(task.id, usuario.id)">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="col-xs-2">
+        @task.tamano
+    </div>
+
+  </div>
+  }
+  </div>
+
+</div>
+}

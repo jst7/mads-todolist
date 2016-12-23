@@ -25,6 +25,8 @@ public class Usuario {
     @Formats.DateTime(pattern="dd-MM-yyyy")
     @Temporal(TemporalType.DATE)
     public Date fechaNacimiento;
+    public String imagen;
+    public String colordash="white";
 
     // necesario un constructor vacío para JPA
     public Usuario() {}
@@ -44,6 +46,8 @@ public class Usuario {
         nuevo.apellidos = this.apellidos;
         nuevo.eMail = this.eMail;
         nuevo.fechaNacimiento = this.fechaNacimiento;
+        nuevo.imagen = this.imagen;
+        nuevo.colordash=this.colordash;
         return nuevo;
         }
 
@@ -53,6 +57,7 @@ public class Usuario {
         if (nombre != null && nombre.isEmpty()) nombre = null;
         if (apellidos != null && apellidos.isEmpty()) apellidos = null;
         if (eMail != null && eMail.isEmpty()) eMail = null;
+        if (imagen != null && imagen.isEmpty()) imagen = null;
     }
 
     public String toString() {
@@ -62,8 +67,8 @@ public class Usuario {
             fechaStr = formateador.format(fechaNacimiento);
         }
         return String.format("Usuario id: %s login: %s passworld: %s nombre: %s " +
-                      "apellidos: %s eMail: %s fechaNacimiento: %s",
-                      id, login, password, nombre, apellidos, eMail, fechaStr);
+                      "apellidos: %s eMail: %s fechaNacimiento: %s imagen %s",
+                      id, login, password, nombre, apellidos, eMail, fechaStr, imagen);
     }
 
     @Override
@@ -95,4 +100,16 @@ public class Usuario {
     }
     @OneToMany(mappedBy="usuario")
     public List<Tarea> tareas = new ArrayList<Tarea>();
+
+
+    @OneToMany(mappedBy="propietario")
+    public List<Proyecto> proyectos = new ArrayList<Proyecto>();
+
+    @ManyToMany
+    @JoinTable(
+      name="EMP_PROJ",
+      joinColumns=@JoinColumn(name="EMP_ID", referencedColumnName="id"),
+      inverseJoinColumns=@JoinColumn(name="PROJ_ID", referencedColumnName="id"))
+    public List<Proyecto> proyectoscolabora = new ArrayList<Proyecto>();
+
 }

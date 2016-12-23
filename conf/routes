@@ -44,6 +44,16 @@ GET     /Tareas/:id/Asignar                controllers.TareasController.AsignarP
 POST    /Tareas/:idt/Proyecto/:idp          controllers.TareasController.RealizarAsignacion(idt: Integer,idp: Integer)
 POST    /Tareas/:id/DesAsignar            controllers.TareasController.DesAsignarProyecto(id : Integer)
 
+# Cambiar estado tareas
+POST    /usuarios/:idUsuario/tareas/:idTarea/CambiarEstado          controllers.TareasController.CambiarEstado(idUsuario: Integer, idTarea: Integer, estado:String)
+
+# Cambiar color tareas
+POST    /usuarios/:idUsuario/tareas/:idTarea/CambiarColor           controllers.TareasController.CambiarColor(idUsuario: Integer, idTarea: Integer, color:String)
+
+# Archivar tareas
+GET     /usuarios/:idUsuario/tareasArchivadas                       controllers.TareasController.ArchivadasView(idUsuario: Integer)
+POST    /usuarios/:idUsuario/archivar/:idTarea                      controllers.TareasController.ArchivarTarea(idUsuario: Integer, idTarea: Integer)
+
 #Acerca de
 GET  /acercade               controllers.ApplicationController.AcercaDe()
 
@@ -51,15 +61,67 @@ GET  /acercade               controllers.ApplicationController.AcercaDe()
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 # Crear proyecto
-GET 	/proyectos/crear			controllers.ProyectosController.crearProyectoFormulario()
-POST 	/proyectos/crear 			controllers.ProyectosController.crearProyecto()
+GET 	/usuarios/:id/proyectos/crear			controllers.ProyectosController.crearProyectoFormulario(id: Integer)
+POST 	/usuarios/:id/proyectos/crear 			controllers.ProyectosController.crearProyecto(id: Integer)
 
 # Listar Proyectos
-GET   /proyectos            controllers.ProyectosController.listaProyectos()
+GET   /usuarios/:id/proyectosTodos            controllers.ProyectosController.listaProyectos(id: Integer)
+GET   /usuarios/:id/proyectosContribuidor            controllers.ProyectosController.listaProyectosPropietario(id: Integer)
 
 #Borrar proyecto
 DELETE  /proyectos/:id/ProyectoBorrar               controllers.ProyectosController.borraProyecto(id: Integer)
 
 # Editar proyecto
-GET		/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(id: Integer)
-POST	/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(id: Integer)
+GET		/usuarios/:idUsuario/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoView(idUsuario: Integer,id: Integer)
+POST	/usuarios/:idUsuario/proyectos/:id/editar 		controllers.ProyectosController.editarProyectoAction(idUsuario: Integer,id: Integer)
+
+# Listar Estados proyecto
+GET   /usuarios/:idUsuario/proyectos/:idProyecto/estados        controllers.ProyectosController.estadosProyectoView(idProyecto: Integer, idUsuario: Integer)
+
+# Añadir Estados proyecto
+POST  /usuarios/:idUsuario/proyectos/:idProyecto/estados        controllers.ProyectosController.crearEstado(idUsuario: Integer, idProyecto: Integer)
+
+# Modificar Estados proyecto
+POST  /usuarios/:idUsuario/proyectos/:idProyecto/estados/:idEstado/editar       controllers.ProyectosController.editarEstado(idUsuario: Integer, idProyecto: Integer, idEstado: Integer)
+
+# Borrar Estados proyecto
+DELETE  /usuarios/:idUsuario/proyectos/:idProyecto/estados/:idEstado        controllers.ProyectosController.borrarEstado(idUsuario: Integer, idProyecto: Integer, idEstado: Integer)
+
+# Añadir Colaboradores
+GET		/usuarios/:idUsuario/proyectos/:id/AddColaboradorView 		controllers.ProyectosController.AddColaboradorView(idUsuario: Integer,id: Integer)
+POST		/usuarios/:idUsuario/proyectos/:id/AddColaborador 	controllers.ProyectosController.AddColaborador(idUsuario: Integer,id: Integer, idColaborador: Integer)
+
+# Listar Colaboradores
+GET		/usuarios/:idUsuario/proyectos/:id/listarColaboradores 		controllers.ProyectosController.listarColaboradores(idUsuario: Integer,id: Integer)
+
+#Borrar colaborador
+DELETE /proyectos/:idProyecto/BorrarColaborador/:idColaborador                     controllers.ProyectosController.borraColaborador(idProyecto: Integer,idColaborador: Integer)
+
+# Buscador
+GET 	/buscador/:id/:caso/:busqueda		controllers.UsuarioController.Buscar(id: Integer, busqueda: String,caso: String)
+GET 	/buscador/:id/:caso/	controllers.UsuarioController.BuscarVacio(id: Integer, caso: String)
+GET 	/buscador/usuario			controllers.UsuarioController.BuscarDetalle(id: Integer, idB: Integer)
+GET 	/buscador/tarea			controllers.TareasController.BuscarDetalle(id: Integer, idB: Integer)
+
+# Mensajes
+GET		/mensaje/nuevo/:id				controllers.MensajeController.crearMensajeFormulario(id: Integer)
+POST	/mensajes/:id 					controllers.MensajeController.enviarMensajeAction(id: Integer)
+GET		/mensajes/salida/:id			controllers.MensajeController.listarMensajesEnviados(id: Integer)
+GET		/mensajes/entrada/:id			controllers.MensajeController.listarMensajesRecibidos(id: Integer)
+PUT		/mensajes/:id/:idMensaje 		controllers.MensajeController.leerMensaje(idMensaje: Integer, id: Integer)
+DELETE	/mensajes/:id/:idMensaje		controllers.MensajeController.borrarMensaje(idMensaje: Integer, id: Integer)
+
+GET		/usuarios/:id/dashboard		controllers.UsuarioController.DashBoard(id: Integer)
+POST    /dashboard/modifica/:id          controllers.UsuarioController.escribirUsuarioModificadoDashBoard(id: Integer)
+POST    /dashboard/modificacolor          controllers.UsuarioController.CambiarColor()
+
+
+# Imagen de perfil
+POST	/usuarios/imagen/:id 			controllers.UsuarioController.modificarImagenDashboard(id: Integer)
+
+#Notificacion
+POST	/dashboard/notificacion/:idN 			controllers.NotificacionController.leerNotificacion(idN: Integer)
+
+# Imagen
+GET		/usuarios/:id/imagen 			controllers.UsuarioController.subirImagen(id: Integer)
+POST 	/usuarios/:id/imagen 			controllers.UsuarioController.subirImagenAction(id: Integer)

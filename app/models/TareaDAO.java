@@ -4,6 +4,8 @@ import play.*;
 import play.mvc.*;
 import play.db.jpa.*;
 import javax.persistence.*;
+import java.util.List;
+import java.util.Date;
 
 public class TareaDAO {
     public static Tarea find(Integer idTarea) {
@@ -29,5 +31,12 @@ public class TareaDAO {
     public static void delete(Integer idTarea) {
         Tarea tarea = JPA.em().getReference(Tarea.class, idTarea);
         JPA.em().remove(tarea);
+    }
+    public static List<Tarea> busquedaTarea(String param){
+        TypedQuery<Tarea> query = JPA.em().createQuery(
+                  "select t from Tarea t where descripcion like '%"
+                  + param 
+                  +"%' ORDER BY id", Tarea.class);
+        return query.getResultList();
     }
 }

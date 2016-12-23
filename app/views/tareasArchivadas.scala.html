@@ -1,0 +1,73 @@
+@(tareas: List[Tarea], usuario: Usuario)
+
+@scripts = {
+    <script type="text/javascript">
+        function del(urlBorrar) {
+            $.ajax({
+                url: urlBorrar,
+                type: 'DELETE',
+                success: function(results) {
+                    //refresh the page
+                    location.reload();
+                }
+            });
+        }
+    </script>
+}
+
+@main("Tareas del usuario ", scripts) {
+
+<div class="col-xs-push-1 col-xs-11">
+
+          <table>
+            <td>
+                <a class="btn btn-primary"  href='@routes.TareasController.listaTareas(usuario.id)'>
+                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+            </td>
+            <td>
+                <h1>Listado de tareas de usuario id: @usuario.id</h1>
+            </td>
+        </table>
+
+    <h4>Usuario:
+        <a class="btn btn-primary" href="javascript:;">@usuario.login</a>
+    </h4>
+
+<ul class="list-group">
+    <table class="table table-striped">
+        <tr>
+        <thead class="thead-inverse bg-primary">
+            <th>Id</th>
+            <th>Descripción</th>
+            <th>Borrar</th>
+            <th>Duracion</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+            <th>Proyecto</th>
+        </thead>
+        </tr>
+    @for(tarea <- tareas) {
+      @if(tarea.archivada) {
+        <tr>
+            <td>@tarea.id</td>
+            <td>@tarea.descripcion</td>
+            <td><a class="btn btn-danger" onclick="del('@routes.TareasController.borraTarea(tarea.id)')"> <span class="glyphicon glyphicon-trash" aria-hidden="true"</span></a> </td>
+            <td>@tarea.tamano</td>
+            <td>
+                @if(tarea.proyecto != null) {
+                    @tarea.estado
+                }
+            </td>
+            <td>@tarea.fecha</td>
+            <td>
+                @if(tarea.proyecto != null) {@tarea.proyecto.nombre}
+            </td>
+        </tr>
+      }
+    }
+  </table>
+</ul>
+
+</div>
+}

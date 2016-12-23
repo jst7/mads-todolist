@@ -35,6 +35,9 @@
                 <th>
                     Tareas
                 </th>
+                <th>
+                    Proyectos
+                </th>
             </thead>
         </tr>
     @for(usuario <- usuarios) {
@@ -62,14 +65,16 @@
                     <span class="glyphicon glyphicon glyphicon-th-list" aria-hidden="true"></span>
                 </a>
             </td>
+            <td>
+              <a class="btn btn-success" href="@routes.ProyectosController.listaProyectosPropietario(usuario.id)"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a>
+            </td>
         </tr>
     }
     </table>
     <a class="btn btn-success" href="@routes.UsuarioController.crearUsuarioFormulario()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
     <span>Nuevo usuario</span>
-    <a class="btn btn-success" href="@routes.ProyectosController.listaProyectos()"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a>
-    <span>Proyectos</span>
 
+    
     @if(mensaje != null) {
         <div class="alert alert-success">
             @mensaje

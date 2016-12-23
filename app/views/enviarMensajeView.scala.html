@@ -1,0 +1,44 @@
+@(mensajeForm: Form[Mensaje], mensaje: String, usuarios: List[Usuario], user: Usuario)
+
+@main("Envair mensaje") {
+    @if(mensaje != "") {
+        <div class="alert alert-danger">
+            @mensaje
+        </div>
+    }    
+    <div class="col-xs-push-1 col-xs-11" style="background-color: @user.colordash">
+    <table>
+        <td>
+            <a class="btn btn-info" href="@routes.MensajeController.listarMensajesRecibidos(user.id)">
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+            </a>
+        </td>
+        <td>
+            <h2>Enviar Mensaje</h2>
+        </td>
+    </table>
+
+        @helper.form(action = routes.MensajeController.enviarMensajeAction(user.id)) {
+            <fieldset>
+            <legend>Mensaje nuevo</legend>
+                <label>De: </label>
+                <label>@user.login</label><br />
+                <input type="hidden" name="usuarioFrom" value="@user.login">
+                <label>Para:</label>
+                <select name="usuarioTo">
+                    @for(usuario <- usuarios) {
+                        @if(user.id != usuario.id) {
+                            <option value="@usuario.login">@usuario.login</option>
+                        }
+                    }
+                </select>
+                @helper.inputText(mensajeForm("subject"), '_label -> "Asunto")
+                @helper.inputText(mensajeForm("body"), '_label -> "Mensaje")
+            </fieldset>
+            <div>
+                <input type="submit" class="btn btn-success btn-lg" value="Guardar">
+                <a class="btn btn-danger btn-xs" href="@routes.UsuarioController.detalleUsuario(user.id)">Cancelar</a>
+            </div>
+        }
+    </div>
+}

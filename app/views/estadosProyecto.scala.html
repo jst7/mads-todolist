@@ -1,0 +1,78 @@
+@(proyecto: Proyecto, idUsuario: Integer)
+
+@scripts = {
+    <script type="text/javascript">
+        function del(urlBorrar) {
+            $.ajax({
+                url: urlBorrar,
+                type: 'DELETE',
+                success: function(results) {
+                    //refresh the page
+                    location.reload();
+                }
+            });
+        }
+    </script>
+}
+
+@main("Proyectos", scripts) {
+
+<div class="col-xs-push-1 col-xs-11">
+        <table>
+            <td>
+                <a class="btn btn-primary"  href="@routes.ProyectosController.listaProyectosPropietario(idUsuario)">
+                <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                </a>
+            </td>
+            <td>
+                <h1>Listado de estados</h1>
+            </td>
+        </table>
+
+
+
+        <ul class="list-group">
+            <table class="table table-striped">
+                <tr>
+                <thead class="thead-inverse bg-primary">
+                    <th>Estado</th>
+                    @if(proyecto.propietario.id == idUsuario) {
+                        <th>Borrar</th>
+                    }
+                </thead>
+                </tr>
+            @for(estado <- proyecto.estados) {
+                <tr>
+
+                    @if(proyecto.propietario.id == idUsuario) {
+                        <td>
+                            @helper.form(action = routes.ProyectosController.editarEstado(idUsuario, proyecto.id, estado.id)) {
+                            <input type="text" name="estadoMod" value="@estado.nombre">
+                            <input type="submit" id="editarEstadoBtn" class="btn-info" value ="editar">
+                          }
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" onclick="del('@routes.ProyectosController.borrarEstado(proyecto.id, idUsuario, estado.id)')">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    } else {
+                        <td>@estado.nombre</td>
+                    }
+                </tr>
+              }
+              <tr>
+                  <td>
+                      @if(proyecto.propietario.id == idUsuario){
+                          @helper.form(action = routes.ProyectosController.crearEstado(idUsuario, proyecto.id)) {
+                              <input type="text" name="estado">
+                              <input type="submit" id="crearEstadoBtn" class="btn-success" value ="+">
+                          }
+                      }
+                  </td>
+              </tr>
+
+          </table>
+        </ul>
+</div>
+}
